@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiffany Tay - Product & Nonprofit Leadership</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#4F46E5',secondary:'#10B981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+scroll-behavior: smooth;
+}
+.hero-bg {
+background-image: url('https://readdy.ai/api/search-image?query=modern%20abstract%20gradient%20background%20with%20soft%20blue%20and%20purple%20tones%2C%20minimalist%20design%20with%20geometric%20shapes%2C%20perfect%20for%20a%20professional%20portfolio%20website%20hero%20section%2C%20clean%20and%20elegant%2C%20with%20space%20for%20text%20on%20the%20left%20side%20and%20visual%20elements%20on%20the%20right&width=1920&height=1080&seq=hero123&orientation=landscape');
+background-size: cover;
+background-position: center;
+}
+input:focus, textarea:focus {
+outline: none;
+border-color: #4F46E5;
+}
+.project-card:hover .project-overlay {
+opacity: 1;
+}
+.skill-bar {
+position: relative;
+height: 6px;
+border-radius: 3px;
+background: #e5e7eb;
+}
+.skill-progress {
+position: absolute;
+height: 100%;
+border-radius: 3px;
+background: #4F46E5;
+transition: width 1s ease-in-out;
+}
+.chatbot-bg {
+background-image: url('https://readdy.ai/api/search-image?query=abstract%20technology%20background%20with%20soft%20blue%20gradient%2C%20digital%20connections%20and%20nodes%20visualization%2C%20subtle%20AI%20concept%20illustration%2C%20clean%20modern%20design%20with%20space%20for%20text%20overlay%2C%20professional%20and%20minimalist&width=800&height=600&seq=chatbot456&orientation=landscape');
+background-size: cover;
+background-position: center;
+}
+input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 18px;
+height: 18px;
+background: #4F46E5;
+border-radius: 50%;
+cursor: pointer;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<!-- Header -->
+<header class="bg-white shadow-sm fixed w-full z-50">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16 items-center">
+<div class="flex-shrink-0">
+<a href="#" class="font-['Pacifico'] text-2xl text-primary">Tiffany Tay</a>
+</div>
+<div class="hidden md:block">
+<nav class="ml-10 flex items-center space-x-8">
+<a href="#home" class="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium">Home</a>
+<a href="#projects" class="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium">Projects</a>
+<a href="#skills" class="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium">Skills</a>
+<a href="#about" class="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium">About</a>
+<a href="#contact" class="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium">Contact</a>
+</nav>
+</div>
+<div class="md:hidden flex items-center">
+<button id="mobile-menu-button" class="w-10 h-10 flex items-center justify-center text-gray-500">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- Mobile menu -->
+<div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+<div class="px-2 pt-2 pb-3 space-y-1">
+<a href="#home" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-primary">Home</a>
+<a href="#projects" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-primary">Projects</a>
+<a href="#skills" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-primary">Skills</a>
+<a href="#about" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-primary">About</a>
+<a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-primary">Contact</a>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section id="home" class="hero-bg min-h-screen flex items-center pt-16">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
+<div class="flex flex-col md:flex-row items-center">
+<div class="md:w-1/2 md:pr-12 z-10">
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+Strategic Product & Nonprofit Leader
+</h1>
+<p class="text-xl md:text-2xl text-gray-100 mb-8 max-w-2xl">
+Bridging technology and social impact through innovative product management and nonprofit operations. Passionate about creating scalable solutions that drive meaningful change.
+</p>
+<div class="flex flex-wrap gap-4">
+<a href="#projects" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
+View Projects
+</a>
+<a href="#contact" class="bg-white text-primary px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
+Contact Me
+</a>
+</div>
+</div>
+<div class="md:w-1/2 mt-12 md:mt-0">
+<div class="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
+<div class="absolute inset-0 rounded-full bg-white bg-opacity-10 backdrop-blur-sm"></div>
+<img
+src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20an%20Asian%20female%20product%20manager%20in%20her%20early%2030s%2C%20wearing%20modern%20business%20attire%2C%20warm%20and%20approachable%20expression%2C%20clean%20neutral%20background%2C%20natural%20lighting%2C%20professional%20corporate%20headshot&width=400&height=400&seq=profile789&orientation=squarish"
+alt="Tiffany Tay"
+class="rounded-full w-60 h-60 md:w-72 md:h-72 object-cover object-top absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-white"
+>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Section -->
+<section id="projects" class="py-20 bg-white">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
+<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+A showcase of my most impactful work in product strategy, operational optimization, and social impact measurement.
+</p>
+</div>
+<div class="mb-8 flex justify-center">
+<div class="inline-flex rounded-full bg-gray-100 p-1">
+<button class="project-filter-btn active px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap bg-primary text-white" data-filter="all">All Projects</button>
+<button class="project-filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-filter="analytics">Analytics</button>
+<button class="project-filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-filter="visualization">Visualization</button>
+<button class="project-filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-filter="ai">AI & ML</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Project 1 -->
+<div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="analytics">
+<div class="relative h-60 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=data%20analytics%20dashboard%20showing%20financial%20metrics%2C%20KPIs%2C%20and%20charts%20with%20clean%20modern%20design%2C%20professional%20business%20intelligence%20visualization%2C%20corporate%20style%20with%20blue%20and%20white%20color%20scheme%2C%20showing%20revenue%20growth%20trends%20and%20financial%20performance%20indicators&width=600&height=400&seq=project1&orientation=landscape" alt="Financial Analytics Dashboard" class="w-full h-full object-cover object-top">
+<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<a href="#" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Financial Analytics Dashboard</h3>
+<p class="text-gray-600 mb-4">
+Comprehensive financial analytics platform for a Fortune 500 company, providing real-time insights into revenue streams and cost centers.
+</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Tableau</span>
+<span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">SQL</span>
+<span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">Python</span>
+</div>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="visualization">
+<div class="relative h-60 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=interactive%20data%20visualization%20showing%20global%20market%20trends%2C%20world%20map%20with%20data%20points%2C%20colorful%20charts%20and%20graphs%20showing%20international%20business%20metrics%2C%20professional%20corporate%20design%20with%20clean%20layout%2C%20showing%20global%20market%20share%20and%20regional%20performance&width=600&height=400&seq=project2&orientation=landscape" alt="Global Market Visualization" class="w-full h-full object-cover object-top">
+<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<a href="#" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Global Market Visualization</h3>
+<p class="text-gray-600 mb-4">
+Interactive visualization tool mapping international market trends and competitive positioning for a global retail client.
+</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">D3.js</span>
+<span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">React</span>
+<span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">GeoJSON</span>
+</div>
+</div>
+</div>
+<!-- Project 3 -->
+<div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="ai">
+<div class="relative h-60 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=artificial%20intelligence%20predictive%20model%20visualization%2C%20machine%20learning%20algorithm%20analyzing%20customer%20behavior%20patterns%2C%20futuristic%20interface%20with%20neural%20network%20visualization%2C%20professional%20tech%20design%20showing%20AI%20predictions%20and%20customer%20segmentation&width=600&height=400&seq=project3&orientation=landscape" alt="Customer Behavior AI Model" class="w-full h-full object-cover object-top">
+<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<a href="#" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Customer Behavior AI Model</h3>
+<p class="text-gray-600 mb-4">
+Predictive AI model that analyzes customer behavior patterns to forecast purchasing decisions and optimize marketing strategies.
+</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full">TensorFlow</span>
+<span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Scikit-learn</span>
+<span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">AWS</span>
+</div>
+</div>
+</div>
+<!-- Project 4 -->
+<div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="analytics">
+<div class="relative h-60 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=supply%20chain%20analytics%20dashboard%20showing%20logistics%20optimization%2C%20inventory%20management%20metrics%2C%20transportation%20routes%20visualization%2C%20professional%20business%20intelligence%20interface%20with%20graphs%20showing%20delivery%20times%20and%20inventory%20levels%2C%20corporate%20style&width=600&height=400&seq=project4&orientation=landscape" alt="Supply Chain Analytics" class="w-full h-full object-cover object-top">
+<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<a href="#" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Supply Chain Analytics</h3>
+<p class="text-gray-600 mb-4">
+End-to-end supply chain analytics solution that optimized logistics and reduced operational costs by 23% for a manufacturing client.
+</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Power BI</span>
+<span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">R</span>
+<span class="bg-orange-100 text-orange-800 text-xs px-3 py-1 rounded-full">Azure</span>
+</div>
+</div>
+</div>
+<!-- Project 5 -->
+<div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="visualization">
+<div class="relative h-60 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=healthcare%20data%20visualization%20showing%20patient%20outcomes%2C%20medical%20analytics%20dashboard%20with%20clinical%20metrics%2C%20professional%20healthcare%20interface%20with%20charts%20showing%20treatment%20effectiveness%2C%20clean%20medical%20design%20with%20patient%20journey%20visualization&width=600&height=400&seq=project5&orientation=landscape" alt="Healthcare Outcomes Visualization" class="w-full h-full object-cover object-top">
+<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<a href="#" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Healthcare Outcomes Visualization</h3>
+<p class="text-gray-600 mb-4">
+Interactive visualization platform for a healthcare provider to track patient outcomes and treatment effectiveness across multiple facilities.
+</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-teal-100 text-teal-800 text-xs px-3 py-1 rounded-full">Plotly</span>
+<span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">Django</span>
+<span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">PostgreSQL</span>
+</div>
+</div>
+</div>
+<!-- Project 6 -->
+<div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="ai">
+<div class="relative h-60 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=natural%20language%20processing%20chatbot%20interface%2C%20AI%20conversational%20assistant%20for%20customer%20service%2C%20professional%20tech%20design%20showing%20chatbot%20analytics%20and%20conversation%20flows%2C%20sentiment%20analysis%20visualization%2C%20modern%20digital%20interface&width=600&height=400&seq=project6&orientation=landscape" alt="NLP Chatbot Analytics" class="w-full h-full object-cover object-top">
+<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<a href="#" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">NLP Chatbot Analytics</h3>
+<p class="text-gray-600 mb-4">
+Natural Language Processing chatbot with integrated analytics dashboard to monitor conversation quality and customer satisfaction.
+</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">BERT</span>
+<span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Flask</span>
+<span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">MongoDB</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills Section -->
+<section id="skills" class="py-20 bg-gray-50">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
+<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+My professional toolkit includes a wide range of data analytics, visualization, and programming skills.
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div>
+<div class="mb-12">
+<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+<div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-3">
+<i class="ri-bar-chart-box-line text-primary ri-lg"></i>
+</div>
+Product & Operations Management
+</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">Strategic Planning</span>
+<span class="text-gray-500">95%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 95%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">Stakeholder Management</span>
+<span class="text-gray-500">92%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 92%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">Impact Measurement</span>
+<span class="text-gray-500">90%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 90%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">Agile Leadership</span>
+<span class="text-gray-500">88%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 88%"></div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+<div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-3">
+<i class="ri-code-box-line text-primary ri-lg"></i>
+</div>
+Programming Languages
+</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">Python</span>
+<span class="text-gray-500">98%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 98%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">R</span>
+<span class="text-gray-500">92%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 92%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">SQL</span>
+<span class="text-gray-500">95%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 95%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">JavaScript</span>
+<span class="text-gray-500">85%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 85%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div class="mb-12">
+<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+<div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-3">
+<i class="ri-pie-chart-line text-primary ri-lg"></i>
+</div>
+Data Visualization
+</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">Tableau</span>
+<span class="text-gray-500">96%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 96%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">Power BI</span>
+<span class="text-gray-500">94%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 94%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">D3.js</span>
+<span class="text-gray-500">88%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 88%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">Matplotlib/Seaborn</span>
+<span class="text-gray-500">92%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 92%"></div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+<div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-3">
+<i class="ri-ai-generate text-primary ri-lg"></i>
+</div>
+AI & Machine Learning
+</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">TensorFlow/Keras</span>
+<span class="text-gray-500">90%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 90%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">Scikit-learn</span>
+<span class="text-gray-500">95%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 95%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">Natural Language Processing</span>
+<span class="text-gray-500">85%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 85%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-700 font-medium">Computer Vision</span>
+<span class="text-gray-500">80%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 80%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Chatbot Section -->
+<section class="py-20 chatbot-bg bg-cover bg-center">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-white bg-opacity-95 rounded-lg shadow-xl p-8 md:p-12 max-w-4xl mx-auto">
+<div class="flex flex-col md:flex-row items-center">
+<div class="md:w-1/2 md:pr-8">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Ask My AI Assistant</h2>
+<p class="text-lg text-gray-600 mb-6">
+I've built an AI chatbot that can answer questions about my skills, experience, and portfolio. Feel free to ask it anything about my work!
+</p>
+<ul class="mb-8 space-y-3">
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-3 mt-0.5">
+<i class="ri-check-line"></i>
+</div>
+<span class="text-gray-700">Ask about my technical skills</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-3 mt-0.5">
+<i class="ri-check-line"></i>
+</div>
+<span class="text-gray-700">Inquire about specific projects</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-3 mt-0.5">
+<i class="ri-check-line"></i>
+</div>
+<span class="text-gray-700">Get details about my work experience</span>
+</li>
+</ul>
+<a href="#" class="inline-flex items-center bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
+<i class="ri-robot-line mr-2"></i>
+Try the AI Assistant
+</a>
+</div>
+<div class="md:w-1/2 mt-8 md:mt-0">
+<div class="bg-gray-100 rounded-lg p-4 border border-gray-200">
+<div class="flex items-center justify-between mb-4">
+<div class="text-gray-800 font-medium">AI Assistant</div>
+<div class="flex space-x-2">
+<div class="w-3 h-3 bg-red-500 rounded-full"></div>
+<div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+<div class="w-3 h-3 bg-green-500 rounded-full"></div>
+</div>
+</div>
+<div class="bg-white rounded p-4 mb-4 shadow-sm">
+<div class="flex items-start">
+<div class="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-full mr-3 flex-shrink-0">
+<i class="ri-user-line"></i>
+</div>
+<div>
+<div class="text-gray-600 text-sm mb-1">You</div>
+<div class="text-gray-800">What are Alex's strongest data visualization skills?</div>
+</div>
+</div>
+</div>
+<div class="bg-gray-200 rounded p-4 shadow-sm">
+<div class="flex items-start">
+<div class="w-8 h-8 flex items-center justify-center bg-gray-700 text-white rounded-full mr-3 flex-shrink-0">
+<i class="ri-robot-line"></i>
+</div>
+<div>
+<div class="text-gray-600 text-sm mb-1">AI Assistant</div>
+<div class="text-gray-800">
+Alex excels in Tableau and Power BI, with over 7 years of experience creating interactive dashboards. He's also highly skilled with D3.js for custom web visualizations and has expertise in Python visualization libraries like Matplotlib and Seaborn.
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 relative">
+<input type="text" placeholder="Ask a question..." class="w-full px-4 py-3 rounded-full border-none bg-white shadow-sm text-gray-800 pr-12">
+<button class="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-send-plane-fill"></i>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section id="about" class="py-20 bg-white">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">About Me</h2>
+<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+A passionate data professional with a focus on turning complex information into actionable insights.
+</p>
+</div>
+<div class="flex flex-col md:flex-row items-center">
+<div class="md:w-2/5 mb-8 md:mb-0">
+<img
+src="https://readdy.ai/api/search-image?query=professional%20data%20analyst%20working%20on%20laptop%20in%20modern%20office%20environment%2C%20business%20casual%20attire%2C%20focused%20on%20analyzing%20data%20visualizations%20on%20screen%2C%20side%20profile%2C%20high%20quality%20professional%20photography%2C%20natural%20lighting&width=600&height=800&seq=about123&orientation=portrait"
+alt="Alex Morgan working"
+class="rounded-lg shadow-md w-full max-w-md mx-auto"
+>
+</div>
+<div class="md:w-3/5 md:pl-12">
+<h3 class="text-2xl font-bold text-gray-900 mb-4">My Journey</h3>
+<p class="text-gray-700 mb-6 leading-relaxed">
+With over 10 years of experience in product and operations leadership, I've dedicated my career to building and scaling B2B SaaS solutions while making meaningful impact in the nonprofit sector. My expertise lies in translating complex data into actionable insights and launching user-centered products that drive measurable growth.
+</p>
+<p class="text-gray-700 mb-6 leading-relaxed">
+Throughout my journey, I've successfully led teams in optimizing operations and implementing data-driven strategies that have transformed organizational effectiveness. My approach combines technical expertise with strategic thinking to deliver solutions that create lasting value.
+</p>
+<p class="text-gray-700 mb-6 leading-relaxed">
+I'm passionate about bridging the gap between technology and social impact, using my skills in product management and data analytics to help organizations achieve their missions more effectively. My experience spans from early-stage startups to established nonprofits, always focusing on sustainable growth and measurable outcomes.
+</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+<div>
+<h4 class="text-lg font-bold text-gray-900 mb-2">Education</h4>
+<ul class="space-y-3">
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-2 mt-0.5">
+<i class="ri-graduation-cap-line"></i>
+</div>
+<div>
+<div class="font-medium">Master in Professional Accounting</div>
+<div class="font-medium">Bachelor of Business Administration</div>
+<div class="text-sm text-gray-600">The University of Texas at Austin</div>
+</div>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-2 mt-0.5">
+<i class="ri-graduation-cap-line"></i>
+</div>
+<div>
+<div class="font-medium">Texas Academy of Math & Science</div>
+<div class="text-sm text-gray-600">University of North Texas</div>
+<div class="text-sm text-gray-500 italic">Early entrance college program</div>
+</div>
+</li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-bold text-gray-900 mb-2">Certifications</h4>
+<ul class="space-y-3">
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-2 mt-0.5">
+<i class="ri-award-line"></i>
+</div>
+<div>
+<div class="font-medium">WorldQuant University Data Science Lab</div>
+<div class="text-sm text-gray-600">WorldQuant University, 2025</div>
+</div>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-2 mt-0.5">
+<i class="ri-award-line"></i>
+</div>
+<div>
+<div class="font-medium">Certified Public Accountant (CPA)</div>
+<div class="text-sm text-gray-600">Licensed in New York State and Texas</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-gray-50">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+Interested in working together? Feel free to reach out for collaborations or just a friendly chat.
+</p>
+</div>
+<div class="flex flex-col lg:flex-row">
+<div class="lg:w-1/2 lg:pr-12 mb-12 lg:mb-0">
+<div class="bg-white rounded-lg shadow-md p-8">
+<h3 class="text-2xl font-bold text-gray-900 mb-6">Send Me a Message</h3>
+<form id="contact-form">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div>
+<label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+<input type="text" id="name" name="name" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+</div>
+<div>
+<label for="email" class="block text-sm font-medium text-gray-700 mb-2">Your Email</label>
+<input type="email" id="email" name="email" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+</div>
+</div>
+<div class="mb-6">
+<label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+<input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+</div>
+<div class="mb-6">
+<label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+<textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required></textarea>
+</div>
+<button type="submit" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
+Send Message
+</button>
+</form>
+</div>
+</div>
+<div class="lg:w-1/2 lg:pl-12">
+<div class="bg-white rounded-lg shadow-md p-8 mb-8">
+<h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+<ul class="space-y-6">
+<li class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-primary mr-4">
+<i class="ri-mail-line ri-lg"></i>
+</div>
+<div>
+<div class="text-sm text-gray-500 mb-1">Email</div>
+<a href="mailto:alex.morgan@example.com" class="text-gray-900 hover:text-primary">alex.morgan@example.com</a>
+</div>
+</li>
+<li class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-primary mr-4">
+<i class="ri-phone-line ri-lg"></i>
+</div>
+<div>
+<div class="text-sm text-gray-500 mb-1">Phone</div>
+<a href="tel:+14155552671" class="text-gray-900 hover:text-primary">+1 (415) 555-2671</a>
+</div>
+</li>
+<li class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-primary mr-4">
+<i class="ri-map-pin-line ri-lg"></i>
+</div>
+<div>
+<div class="text-sm text-gray-500 mb-1">Location</div>
+<div class="text-gray-900">San Francisco, California</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="bg-white rounded-lg shadow-md p-8">
+<h3 class="text-2xl font-bold text-gray-900 mb-6">Follow Me</h3>
+<div class="flex space-x-4">
+<a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors">
+<i class="ri-linkedin-fill ri-lg"></i>
+</a>
+<a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors">
+<i class="ri-github-fill ri-lg"></i>
+</a>
+<a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors">
+<i class="ri-twitter-x-fill ri-lg"></i>
+</a>
+<a href="#" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors">
+<i class="ri-medium-fill ri-lg"></i>
+</a>
+</div>
+<div class="mt-8">
+<h4 class="text-lg font-bold text-gray-900 mb-4">Availability</h4>
+<div class="flex items-center mb-2">
+<div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+<span class="text-gray-700">Currently available for freelance projects</span>
+</div>
+<p class="text-gray-600 mt-2">
+I'm open to discussing new opportunities. My typical response time is within 24 hours.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-12">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between">
+<div class="mb-8 md:mb-0">
+<a href="#" class="font-['Pacifico'] text-2xl text-white mb-4 inline-block">Alex Morgan</a>
+<p class="text-gray-400 max-w-md">
+Transforming data into insights and creating impactful visualizations to drive business decisions.
+</p>
+<div class="mt-4 flex space-x-4">
+<a href="#" class="text-gray-400 hover:text-white">
+<i class="ri-linkedin-fill ri-lg"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white">
+<i class="ri-github-fill ri-lg"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white">
+<i class="ri-twitter-x-fill ri-lg"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white">
+<i class="ri-medium-fill ri-lg"></i>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+<div>
+<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+<ul class="space-y-2">
+<li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
+<li><a href="#projects" class="text-gray-400 hover:text-white">Projects</a></li>
+<li><a href="#skills" class="text-gray-400 hover:text-white">Skills</a></li>
+<li><a href="#about" class="text-gray-400 hover:text-white">About</a></li>
+<li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Services</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-white">Data Analytics</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white">Data Visualization</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white">Machine Learning</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white">Dashboard Design</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white">Consulting</a></li>
+</ul>
+</div>
+<div class="col-span-2 md:col-span-1">
+<h3 class="text-lg font-semibold mb-4">Subscribe</h3>
+<p class="text-gray-400 mb-4">Stay updated with my latest projects and insights.</p>
+<form class="flex">
+<input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-button text-gray-900 border-none">
+<button type="submit" class="bg-primary text-white px-4 py-2 rounded-r-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
+Subscribe
+</button>
+</form>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-400">© 2025 Alex Morgan. All rights reserved.</p>
+<div class="mt-4 md:mt-0 flex space-x-6">
+<a href="#" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
+<a href="#" class="text-gray-400 hover:text-white text-sm">Cookies Policy</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Back to top button -->
+<button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+<i class="ri-arrow-up-line ri-lg"></i>
+</button>
+<!-- Scripts -->
+<script id="mobile-menu-script">
+document.addEventListener('DOMContentLoaded', function() {
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+mobileMenuButton.addEventListener('click', function() {
+mobileMenu.classList.toggle('hidden');
+});
+// Close menu when clicking on a link
+const mobileLinks = mobileMenu.querySelectorAll('a');
+mobileLinks.forEach(link => {
+link.addEventListener('click', function() {
+mobileMenu.classList.add('hidden');
+});
+});
+});
+</script>
+<script id="back-to-top-script">
+document.addEventListener('DOMContentLoaded', function() {
+const backToTopButton = document.getElementById('back-to-top');
+window.addEventListener('scroll', function() {
+if (window.pageYOffset > 300) {
+backToTopButton.classList.remove('opacity-0', 'invisible');
+backToTopButton.classList.add('opacity-100', 'visible');
+} else {
+backToTopButton.classList.remove('opacity-100', 'visible');
+backToTopButton.classList.add('opacity-0', 'invisible');
+}
+});
+backToTopButton.addEventListener('click', function() {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+});
+});
+</script>
+<script id="project-filter-script">
+document.addEventListener('DOMContentLoaded', function() {
+const filterButtons = document.querySelectorAll('.project-filter-btn');
+const projectCards = document.querySelectorAll('.project-card');
+filterButtons.forEach(button => {
+button.addEventListener('click', function() {
+// Remove active class from all buttons
+filterButtons.forEach(btn => {
+btn.classList.remove('active', 'bg-primary', 'text-white');
+});
+// Add active class to clicked button
+this.classList.add('active', 'bg-primary', 'text-white');
+const filter = this.getAttribute('data-filter');
+projectCards.forEach(card => {
+if (filter === 'all' || card.getAttribute('data-category') === filter) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+});
+});
+});
+});
+</script>
+<script id="skills-animation-script">
+document.addEventListener('DOMContentLoaded', function() {
+const skillBars = document.querySelectorAll('.skill-progress');
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.style.width = entry.target.parentElement.getAttribute('data-width') || entry.target.style.width;
+}
+});
+}, { threshold: 0.5 });
+skillBars.forEach(bar => {
+// Store the width
+const width = bar.style.width;
+// Reset width to 0
+bar.style.width = '0';
+// Set data-width attribute
+bar.parentElement.setAttribute('data-width', width);
+// Observe the bar
+observer.observe(bar);
+});
+});
+</script>
+<script id="contact-form-script">
+document.addEventListener('DOMContentLoaded', function() {
+const contactForm = document.getElementById('contact-form');
+contactForm.addEventListener('submit', function(e) {
+e.preventDefault();
+// Simulate form submission
+const submitButton = this.querySelector('button[type="submit"]');
+const originalText = submitButton.innerHTML;
+submitButton.disabled = true;
+submitButton.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Sending...';
+setTimeout(() => {
+alert('Thank you for your message! I will get back to you soon.');
+contactForm.reset();
+submitButton.disabled = false;
+submitButton.innerHTML = originalText;
+}, 1500);
+});
+});
+</script>
+</body>
+</html>
