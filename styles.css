@@ -1,0 +1,17 @@
+.skill-scale {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+  width: 120px; /* fixed width for scale */
+}
+
+.skill-segment {
+  flex: 1;
+  height: 8px;
+  background-color: #e5e7eb; /* Tailwind gray-200 */
+  border-radius: 4px;
+}
+
+.skill-segment.active {
+  background-color: #3b82f6; /* Tailwind blue-500 */
+}
