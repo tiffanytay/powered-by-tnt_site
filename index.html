@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
-<link rel="stylesheet" href="styles.css" />
+<!-- <link rel="stylesheet" href="styles.css" /> -->
 <style>
 :where([class^="ri-"])::before { content: "\f3c2"; }
 body {
@@ -44,6 +44,23 @@ height: 100%;
 border-radius: 3px;
 background: #4F46E5;
 transition: width 1s ease-in-out;
+}
+.skill-scale {
+  display: flex;
+  gap: 6px;
+  width: 100%;          /* Fill the container's full width */
+  max-width: 100%;      /* Ensure it doesn't overflow */
+  margin-top: 4px;
+}
+.skill-segment {
+  flex: 1;              /* Each segment takes equal share of width */
+  height: 8px;
+  background-color: #e5e7eb; /* Tailwind gray-200 */
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+.skill-segment.active {
+  background-color: #4F46E5; /* Tailwind purple */
 }
 .chatbot-bg {
 background-image: url('https://readdy.ai/api/search-image?query=abstract%20technology%20background%20with%20soft%20blue%20gradient%2C%20digital%20connections%20and%20nodes%20visualization%2C%20subtle%20AI%20concept%20illustration%2C%20clean%20modern%20design%20with%20space%20for%20text%20overlay%2C%20professional%20and%20minimalist&width=800&height=600&seq=chatbot456&orientation=landscape');
