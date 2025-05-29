@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<link rel="stylesheet" href="styles.css" />
 <style>
 :where([class^="ri-"])::before { content: "\f3c2"; }
 body {
@@ -289,13 +290,15 @@ Product & Operations Management
 </h3>
 <div class="space-y-6">
 <div>
-<div class="flex justify-between mb-2">
-<span class="text-gray-700 font-medium">Strategic Planning</span>
-<span class="text-gray-500">90%</span>
-</div>
-<div class="skill-bar">
-<div class="skill-progress" style="width: 95%"></div>
-</div>
+  <div class="flex justify-between mb-1">
+    <span class="text-gray-700 font-medium">Strategic Planning</span>
+    <span class="text-gray-500 font-semibold">Advanced</span>
+  </div>
+  <div class="skill-scale">
+    <div class="skill-segment"></div>
+    <div class="skill-segment"></div>
+    <div class="skill-segment active"></div>
+  </div>
 </div>
 <div>
 <div class="flex justify-between mb-2">
