@@ -1171,6 +1171,163 @@ if (matrixDom) {
             });
         });
     </script>
+<script>
+/* --- Feature Data State --- */
+let features = [
+  {
+    name: "User Authentication",
+    impact: 9,
+    effort: 7,
+    cost: 6,
+    description: "Secure login and registration"
+  }
+];
+
+/* --- Utility: Render Feature List Table --- */
+function renderFeatureList() {
+  const tbody = document.getElementById('feature-list');
+  tbody.innerHTML = '';
+  features.forEach((f, idx) => {
+    const tr = document.createElement('tr');
+    tr.className = "border-b border-gray-800 hover:bg-[#252525]";
+    tr.innerHTML = `
+      <td class="py-3 px-4 text-gray-800 hover:text-white">${f.name}</td>
+      <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${f.impact}</td>
+      <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${f.effort}</td>
+      <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${f.cost}</td>
+      <td class="py-3 px-4 text-center">
+        <button class="delete-feature w-8 h-8 flex items-center justify-center text-red-600 hover:text-red-800" data-idx="${idx}" title="Delete">
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+/* --- Utility: Get Matrix Data Based on Axis Selection --- */
+function getMatrixData() {
+  const xAxis = document.getElementById('x-axis').value; // 'effort' or 'cost'
+  const yAxis = document.getElementById('y-axis').value; // 'impact'
+  return features.map(f => ({
+    value: [f[xAxis], f[yAxis]],
+    name: f.name,
+    desc: f.description || ''
+  }));
+}
+
+/* --- ECharts Matrix Chart Setup --- */
+const matrixDom = document.getElementById('matrix-chart');
+const matrixChart = echarts.init(matrixDom);
+
+function updateMatrixChart() {
+  const xAxisType = document.getElementById('x-axis').value;
+  const yAxisType = document.getElementById('y-axis').value;
+  const axisLabels = {
+    effort: "Effort",
+    cost: "Cost",
+    impact: "Impact"
+  };
+
+  const option = {
+    backgroundColor: '#181818',
+    tooltip: {
+      trigger: 'item',
+      backgroundColor: 'rgba(255,255,255,0.95)',
+      textStyle: { color: '#1f2937' },
+      formatter: function(params) {
+        return `
+          <strong>${params.data.name}</strong><br>
+          ${axisLabels[xAxisType]}: ${params.data.value[0]}<br>
+          ${axisLabels[yAxisType]}: ${params.data.value[1]}<br>
+          ${params.data.desc ? `<em>${params.data.desc}</em>` : ''}
+        `;
+      }
+    },
+    xAxis: {
+      name: axisLabels[xAxisType],
+      min: 0,
+      max: 10,
+      splitLine: { lineStyle: { color: '#444' } },
+      axisLine: { lineStyle: { color: '#888' } },
+      axisLabel: { color: '#fff' }
+    },
+    yAxis: {
+      name: axisLabels[yAxisType],
+      min: 0,
+      max: 10,
+      splitLine: { lineStyle: { color: '#444' } },
+      axisLine: { lineStyle: { color: '#888' } },
+      axisLabel: { color: '#fff' }
+    },
+    series: [{
+      type: 'scatter',
+      symbolSize: 28,
+      data: getMatrixData(),
+      itemStyle: { color: '#0000FF' }
+    }]
+  };
+  matrixChart.setOption(option);
+}
+
+/* --- Handle Add Feature Form --- */
+document.getElementById('feature-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('feature-name').value.trim();
+  const impact = parseInt(document.getElementById('impact').value, 10);
+  const effort = parseInt(document.getElementById('effort').value, 10);
+  const cost = parseInt(document.getElementById('cost').value, 10);
+  const description = document.getElementById('feature-description').value.trim();
+  if (!name) return;
+  features.push({ name, impact, effort, cost, description });
+  renderFeatureList();
+  updateMatrixChart();
+  this.reset();
+  // Reset range value displays
+  document.getElementById('impact-value').textContent = 5;
+  document.getElementById('effort-value').textContent = 5;
+  document.getElementById('cost-value').textContent = 5;
+});
+
+/* --- Handle Delete Feature --- */
+document.getElementById('feature-list').addEventListener('click', function(e) {
+  if (e.target.closest('.delete-feature')) {
+    const idx = parseInt(e.target.closest('.delete-feature').getAttribute('data-idx'), 10);
+    features.splice(idx, 1);
+    renderFeatureList();
+    updateMatrixChart();
+  }
+});
+
+/* --- Handle Clear All --- */
+document.getElementById('clear-all').addEventListener('click', function() {
+  if (confirm('Are you sure you want to clear all features?')) {
+    features = [];
+    renderFeatureList();
+    updateMatrixChart();
+  }
+});
+
+/* --- Handle Matrix Settings (X/Y Axis) --- */
+document.getElementById('update-matrix').addEventListener('click', function() {
+  updateMatrixChart();
+});
+
+/* --- Handle Range Value Displays --- */
+['impact', 'effort', 'cost'].forEach(id => {
+  const input = document.getElementById(id);
+  const valueSpan = document.getElementById(id + '-value');
+  input.addEventListener('input', function() {
+    valueSpan.textContent = this.value;
+  });
+});
+
+/* --- Initial Render --- */
+renderFeatureList();
+updateMatrixChart();
+window.addEventListener('resize', () => matrixChart.resize());
+</script>
+
     
 </body>
 </html>
