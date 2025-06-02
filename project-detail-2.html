@@ -808,9 +808,364 @@ if (matrixDom) {
         matrixChart.resize();
     });
 }
-
-    
 </script>
 
+<script id="range-slider-handlers">
+        document.addEventListener('DOMContentLoaded', function() {
+            const impactRange = document.getElementById('impact');
+            const impactValue = document.getElementById('impact-value');
+            const effortRange = document.getElementById('effort');
+            const effortValue = document.getElementById('effort-value');
+            const costRange = document.getElementById('cost');
+            const costValue = document.getElementById('cost-value');
+            
+            impactRange.addEventListener('input', function() {
+                impactValue.textContent = this.value;
+            });
+            
+            effortRange.addEventListener('input', function() {
+                effortValue.textContent = this.value;
+            });
+            
+            costRange.addEventListener('input', function() {
+                costValue.textContent = this.value;
+            });
+        });
+    </script>
+
+    <script id="input-handlers">
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input[type="text"], textarea');
+            
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('has-value');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (this.value === '') {
+                        this.parentElement.classList.remove('has-value');
+                    }
+                });
+                
+                // Check initial state
+                if (input.value !== '') {
+                    input.parentElement.classList.add('has-value');
+                }
+            });
+        });
+    </script>
+
+    <script id="matrix-chart-handler">
+        document.addEventListener('DOMContentLoaded', function() {
+            const chartDom = document.getElementById('matrix-chart');
+            const myChart = echarts.init(chartDom);
+            
+            const features = [
+                { name: 'User Authentication', impact: 9, effort: 7, cost: 6 },
+                { name: 'Payment Integration', impact: 8, effort: 8, cost: 9 },
+                { name: 'Dark Mode Support', impact: 6, effort: 4, cost: 3 },
+                { name: 'Export to PDF', impact: 5, effort: 3, cost: 2 },
+                { name: 'Multi-language Support', impact: 7, effort: 9, cost: 7 }
+            ];
+            
+            function updateChart() {
+                const xAxis = document.getElementById('x-axis').value;
+                const yAxis = document.getElementById('y-axis').value;
+                
+                const data = features.map(feature => {
+                    return [
+                        feature[xAxis],
+                        feature[yAxis],
+                        feature.name
+                    ];
+                });
+                
+                const option = {
+                    animation: false,
+                    grid: {
+                        left: 40,
+                        right: 40,
+                        top: 60,
+                        bottom: 60
+                    },
+                    xAxis: {
+                        type: 'value',
+                        name: xAxis.charAt(0).toUpperCase() + xAxis.slice(1),
+                        nameLocation: 'middle',
+                        nameGap: 30,
+                        min: 0,
+                        max: 10,
+                        splitLine: {
+                            lineStyle: {
+                                color: '#2A2A2A'
+                            }
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#6B7280'
+                            }
+                        },
+                        axisLabel: {
+                            color: '#FFFFFF'
+                        },
+                        nameTextStyle: {
+                            color: '#FFFFFF'
+                        }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: yAxis.charAt(0).toUpperCase() + yAxis.slice(1),
+                        nameLocation: 'middle',
+                        nameGap: 30,
+                        min: 0,
+                        max: 10,
+                        splitLine: {
+                            lineStyle: {
+                                color: '#2A2A2A'
+                            }
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#6B7280'
+                            }
+                        },
+                        axisLabel: {
+                            color: '#FFFFFF'
+                        },
+                        nameTextStyle: {
+                            color: '#FFFFFF'
+                        }
+                    },
+                    tooltip: {
+                        formatter: function(params) {
+                            return `<div style="font-weight:bold;margin-bottom:4px;">${params.data[2]}</div>
+                                    <div>${xAxis.charAt(0).toUpperCase() + xAxis.slice(1)}: ${params.data[0]}</div>
+                                    <div>${yAxis.charAt(0).toUpperCase() + yAxis.slice(1)}: ${params.data[1]}</div>`;
+                        },
+                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                        textStyle: {
+                            color: '#1f2937'
+                        },
+                        borderColor: 'rgba(255, 255, 255, 0.3)',
+                        borderWidth: 1
+                    },
+                    series: [
+                        {
+                            type: 'scatter',
+                            symbolSize: 20,
+                            data: data,
+                            itemStyle: {
+                                color: function(params) {
+                                    // Use our defined color palette
+                                    const colors = [
+                                        'rgba(87, 181, 231, 1)',
+                                        'rgba(141, 211, 199, 1)',
+                                        'rgba(251, 191, 114, 1)',
+                                        'rgba(252, 141, 98, 1)'
+                                    ];
+                                    return colors[params.dataIndex % colors.length];
+                                }
+                            },
+                            label: {
+                                show: true,
+                                formatter: function(params) {
+                                    // Return a short name or first letter
+                                    const words = params.data[2].split(' ');
+                                    return words.map(word => word[0]).join('');
+                                },
+                                color: '#FFFFFF',
+                                fontSize: 10
+                            }
+                        }
+                    ],
+                    // Add quadrant lines
+                    graphic: [
+                        {
+                            type: 'line',
+                            shape: { x1: 5, y1: 0, x2: 5, y2: 10 },
+                            style: {
+                                stroke: '#6B7280',
+                                lineDash: [4, 4]
+                            },
+                            z: 0
+                        },
+                        {
+                            type: 'line',
+                            shape: { x1: 0, y1: 5, x2: 10, y2: 5 },
+                            style: {
+                                stroke: '#6B7280',
+                                lineDash: [4, 4]
+                            },
+                            z: 0
+                        },
+                        // Quadrant labels
+                        {
+                            type: 'text',
+                            position: [2.5, 7.5],
+                            style: {
+                                text: 'Quick Wins',
+                                fill: '#FFFFFF',
+                                fontSize: 12
+                            },
+                            z: 100
+                        },
+                        {
+                            type: 'text',
+                            position: [7.5, 7.5],
+                            style: {
+                                text: 'Major Projects',
+                                fill: '#FFFFFF',
+                                fontSize: 12
+                            },
+                            z: 100
+                        },
+                        {
+                            type: 'text',
+                            position: [2.5, 2.5],
+                            style: {
+                                text: 'Low Priority',
+                                fill: '#FFFFFF',
+                                fontSize: 12
+                            },
+                            z: 100
+                        },
+                        {
+                            type: 'text',
+                            position: [7.5, 2.5],
+                            style: {
+                                text: 'Time Wasters',
+                                fill: '#FFFFFF',
+                                fontSize: 12
+                            },
+                            z: 100
+                        }
+                    ]
+                };
+                
+                myChart.setOption(option);
+            }
+            
+            // Initial chart render
+            updateChart();
+            
+            // Update chart when settings change
+            document.getElementById('update-matrix').addEventListener('click', updateChart);
+            document.getElementById('x-axis').addEventListener('change', updateChart);
+            document.getElementById('y-axis').addEventListener('change', updateChart);
+            
+            // Responsive chart
+            window.addEventListener('resize', function() {
+                myChart.resize();
+            });
+        });
+    </script>
+
+    <script id="feature-form-handler">
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureForm = document.getElementById('feature-form');
+            const featureList = document.getElementById('feature-list');
+            let features = [
+                { name: 'User Authentication', impact: 9, effort: 7, cost: 6 },
+                { name: 'Payment Integration', impact: 8, effort: 8, cost: 9 },
+                { name: 'Dark Mode Support', impact: 6, effort: 4, cost: 3 },
+                { name: 'Export to PDF', impact: 5, effort: 3, cost: 2 },
+                { name: 'Multi-language Support', impact: 7, effort: 9, cost: 7 }
+            ];
+            
+            featureForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const featureName = document.getElementById('feature-name').value;
+                const impact = parseInt(document.getElementById('impact').value);
+                const effort = parseInt(document.getElementById('effort').value);
+                const cost = parseInt(document.getElementById('cost').value);
+                const description = document.getElementById('feature-description').value;
+                
+                if (featureName.trim() === '') {
+                    alert('Please enter a feature name');
+                    return;
+                }
+                
+                // Add to features array
+                features.push({
+                    name: featureName,
+                    impact: impact,
+                    effort: effort,
+                    cost: cost,
+                    description: description
+                });
+                
+                // Add to table
+                addFeatureToTable({
+                    name: featureName,
+                    impact: impact,
+                    effort: effort,
+                    cost: cost
+                });
+                
+                // Reset form
+                featureForm.reset();
+                document.querySelectorAll('.input-container').forEach(container => {
+                    container.classList.remove('has-value');
+                });
+                document.getElementById('impact-value').textContent = '5';
+                document.getElementById('effort-value').textContent = '5';
+                document.getElementById('cost-value').textContent = '5';
+                
+                // Update chart
+                document.getElementById('update-matrix').click();
+            });
+            
+            function addFeatureToTable(feature) {
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-800 hover:bg-[#252525]';
+                
+                row.innerHTML = `
+                    <td class="py-3 px-4 text-white">${feature.name}</td>
+                    <td class="py-3 px-4 text-center text-white">${feature.impact}</td>
+                    <td class="py-3 px-4 text-center text-white">${feature.effort}</td>
+                    <td class="py-3 px-4 text-center text-white">${feature.cost}</td>
+                    <td class="py-3 px-4 text-center">
+                        <button class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </td>
+                `;
+                
+                featureList.appendChild(row);
+                
+                // Add event listener to delete button
+                const deleteButton = row.querySelector('.delete-feature');
+                deleteButton.addEventListener('click', function() {
+                    const featureName = row.querySelector('td').textContent;
+                    features = features.filter(f => f.name !== featureName);
+                    row.remove();
+                    document.getElementById('update-matrix').click();
+                });
+            }
+            
+            // Add event listeners to existing delete buttons
+            document.querySelectorAll('.delete-feature').forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const featureName = row.querySelector('td').textContent;
+                    features = features.filter(f => f.name !== featureName);
+                    row.remove();
+                    document.getElementById('update-matrix').click();
+                });
+            });
+            
+            // Clear all features
+            document.getElementById('clear-all').addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear all features?')) {
+                    features = [];
+                    featureList.innerHTML = '';
+                    document.getElementById('update-matrix').click();
+                }
+            });
+        });
+    </script>
+    
 </body>
 </html>
