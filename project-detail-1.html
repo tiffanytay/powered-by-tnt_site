@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Analytics Dashboard - Project Details</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#4F46E5',secondary:'#10B981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: #4F46E5;
+    z-index: 100;
+    transition: width 0.3s ease;
+}
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #4F46E5;
+}
+.sticky-nav {
+    position: sticky;
+    top: 80px;
+    z-index: 10;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Header -->
+<header class="bg-white shadow-sm fixed w-full z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <div class="flex-shrink-0">
+                <a href="#" class="font-['Pacifico'] text-2xl text-primary">Tiffany Tay</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="https://readdy.ai/home/e8d1107f-9213-4e3a-bc3b-cad8f268cbab/aebef8f1-40b1-4ea3-8cbf-3fb692ae452c" data-readdy="true" class="flex items-center text-gray-700 hover:text-primary">
+                    <i class="ri-arrow-left-line mr-1"></i>
+                    Back to Portfolio
+                </a>
+                <div class="flex items-center space-x-3">
+                    <a href="#" class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </a>
+                    <span class="text-sm text-gray-500">Project 1 of 6</span>
+                    <a href="#" class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <a href="https://readdy.ai/home/e8d1107f-9213-4e3a-bc3b-cad8f268cbab/aebef8f1-40b1-4ea3-8cbf-3fb692ae452c" data-readdy="true" class="flex items-center justify-center w-10 h-10 text-gray-700">
+                    <i class="ri-arrow-left-line ri-lg"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="pt-24 pb-12 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative h-[400px] md:h-[500px] overflow-hidden rounded-lg mb-8">
+            <img src="https://readdy.ai/api/search-image?query=professional%2520financial%2520dashboard%2520with%2520multiple%2520charts%2520and%2520graphs%2520showing%2520revenue%2520metrics%252C%2520profit%2520margins%252C%2520and%2520KPIs%252C%2520clean%2520modern%2520corporate%2520design%2520with%2520blue%2520and%2520white%2520color%2520scheme%252C%2520high-quality%2520visualization%2520of%2520financial%2520data%2520analytics%2520for%2520Fortune%2520500%2520company&width=1200&height=600&seq=hero-dashboard&orientation=landscape" alt="Financial Analytics Dashboard" class="w-full h-full object-cover object-top">
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-70"></div>
+            <div class="absolute bottom-0 left-0 p-8">
+                <span class="inline-block bg-primary bg-opacity-90 text-white px-3 py-1 text-sm font-medium rounded-full mb-4">Analytics</span>
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Financial Analytics Dashboard</h1>
+                <p class="text-lg text-gray-100 max-w-2xl">A comprehensive financial analytics platform providing real-time insights into revenue streams and cost centers for a Fortune 500 company.</p>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="text-sm text-gray-500 mb-1">Duration</div>
+                <div class="font-semibold text-gray-900">4 Months</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="text-sm text-gray-500 mb-1">My Role</div>
+                <div class="font-semibold text-gray-900">Lead Data Analyst</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="text-sm text-gray-500 mb-1">Client</div>
+                <div class="font-semibold text-gray-900">Fortune 500 Financial Services</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="text-sm text-gray-500 mb-1">Completion</div>
+                <div class="font-semibold text-gray-900">March 2025</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content Navigation -->
+<div class="bg-white border-b sticky top-16 z-40">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex overflow-x-auto py-4 scrollbar-hide">
+            <ul class="flex space-x-8">
+                <li><a href="#overview" class="text-primary font-medium whitespace-nowrap">Overview</a></li>
+                <li><a href="#challenge" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Challenge</a></li>
+                <li><a href="#solution" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Solution</a></li>
+                <li><a href="#process" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Process</a></li>
+                <li><a href="#technologies" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Technologies</a></li>
+                <li><a href="#results" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Results</a></li>
+                <li><a href="#gallery" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Gallery</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-12">
+            <!-- Main Content -->
+            <div class="lg:w-2/3">
+                <!-- Overview Section -->
+                <section id="overview" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Project Overview</h2>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        The Financial Analytics Dashboard project was developed for a Fortune 500 financial services company seeking to consolidate their complex financial data into an intuitive, real-time analytics platform. The client needed a comprehensive solution that would enable executives and financial analysts to monitor key performance indicators, identify trends, and make data-driven decisions more efficiently.
+                    </p>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        As the Lead Data Analyst on this project, I was responsible for designing the data architecture, developing the analytical models, and creating interactive visualizations that transformed raw financial data into actionable insights. The dashboard integrates multiple data sources, including revenue streams, cost centers, market performance, and competitive benchmarking.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        The resulting platform has become an essential tool for the client's financial strategy, enabling them to identify cost-saving opportunities, optimize revenue channels, and improve overall financial performance. The dashboard's intuitive interface and powerful analytics capabilities have significantly reduced the time required for financial analysis and reporting.
+                    </p>
+                </section>
+
+                <!-- Challenge Section -->
+                <section id="challenge" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">The Challenge</h2>
+                    <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-red-100 text-red-600 mr-4 mt-1 flex-shrink-0">
+                                <i class="ri-error-warning-line"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Key Challenges</h3>
+                                <p class="text-gray-700">
+                                    The client faced significant obstacles in consolidating and analyzing their financial data, leading to delayed decision-making and missed opportunities.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Data Fragmentation</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                The client's financial data was scattered across multiple systems and databases, including legacy platforms, Excel spreadsheets, and third-party services. This fragmentation made it extremely difficult to obtain a unified view of their financial performance and required manual consolidation that was both time-consuming and error-prone.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Reporting Delays</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                The existing reporting process required financial analysts to spend up to three weeks each month preparing reports, resulting in decisions being made based on outdated information. By the time reports were available, the data was often no longer relevant for timely decision-making.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Limited Analytical Capabilities</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                The client lacked sophisticated analytical tools to identify patterns, forecast trends, or perform scenario analysis. Their existing tools provided basic reporting but couldn't support advanced analytics needed for strategic financial planning and optimization.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Accessibility Issues</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Financial insights were not readily accessible to key decision-makers across the organization. Executives needed to request reports from the finance department, creating bottlenecks and preventing self-service analysis that could drive more agile decision-making.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Solution Section -->
+                <section id="solution" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">The Solution</h2>
+                    <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-4 mt-1 flex-shrink-0">
+                                <i class="ri-lightbulb-line"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Solution Approach</h3>
+                                <p class="text-gray-700">
+                                    I designed and implemented a comprehensive financial analytics dashboard that transformed the client's approach to financial data analysis and reporting.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Centralized Data Architecture</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                I developed a centralized data warehouse that integrates financial data from all sources, including ERP systems, CRM platforms, and external market data. This unified architecture provides a single source of truth for all financial analytics and eliminates data silos that previously hindered analysis.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Real-Time Analytics Engine</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                The solution includes a powerful analytics engine that processes financial data in real-time, enabling immediate insights rather than retrospective analysis. This allows decision-makers to respond to market changes and financial trends as they occur, rather than weeks after the fact.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Interactive Visualization Dashboard</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                I designed an intuitive dashboard interface with interactive visualizations that make complex financial data accessible and actionable. The dashboard includes customizable views for different user roles, from executive overviews to detailed analyst workbenches with drill-down capabilities.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Predictive Analytics Models</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                The solution incorporates predictive analytics models that forecast financial performance based on historical data and market trends. These models enable scenario planning and help identify potential risks and opportunities before they materialize.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Automated Reporting System</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                I implemented an automated reporting system that generates standardized financial reports on a scheduled basis or on-demand. This eliminates the manual reporting process that previously consumed significant resources and ensures consistent, accurate reporting across the organization.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Implementation Process -->
+                <section id="process" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Implementation Process</h2>
+                    <div class="space-y-8">
+                        <div class="flex">
+                            <div class="mr-6">
+                                <div class="w-12 h-12 flex items-center justify-center rounded-full bg-primary text-white font-bold text-xl">1</div>
+                                <div class="h-full w-0.5 bg-gray-200 mx-auto mt-4"></div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-3">Discovery & Requirements Analysis</h3>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    I began with a comprehensive analysis of the client's existing financial systems, data sources, and reporting processes. Through stakeholder interviews and workshops, I identified key requirements and pain points that the dashboard needed to address.
+                                </p>
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h4 class="font-medium text-gray-900 mb-2">Key Activities:</h4>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                        <li>Conducted interviews with 15+ stakeholders across finance, executive, and IT teams</li>
+                                        <li>Mapped existing data flows and identified integration points</li>
+                                        <li>Documented KPI requirements and reporting needs</li>
+                                        <li>Analyzed current reporting bottlenecks and inefficiencies</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="mr-6">
+                                <div class="w-12 h-12 flex items-center justify-center rounded-full bg-primary text-white font-bold text-xl">2</div>
+                                <div class="h-full w-0.5 bg-gray-200 mx-auto mt-4"></div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-3">Data Architecture Design</h3>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    Based on the requirements analysis, I designed a comprehensive data architecture that would serve as the foundation for the analytics dashboard. This included data models, ETL processes, and integration strategies for all relevant data sources.
+                                </p>
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h4 class="font-medium text-gray-900 mb-2">Key Activities:</h4>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                        <li>Designed normalized data warehouse schema optimized for financial analytics</li>
+                                        <li>Developed ETL pipelines for 8 distinct data sources</li>
+                                        <li>Implemented data quality checks and validation procedures</li>
+                                        <li>Created data governance framework and documentation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="mr-6">
+                                <div class="w-12 h-12 flex items-center justify-center rounded-full bg-primary text-white font-bold text-xl">3</div>
+                                <div class="h-full w-0.5 bg-gray-200 mx-auto mt-4"></div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-3">Analytics Model Development</h3>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    I developed a suite of analytical models to transform raw financial data into meaningful insights. These models included trend analysis, variance detection, forecasting algorithms, and performance benchmarking capabilities.
+                                </p>
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h4 class="font-medium text-gray-900 mb-2">Key Activities:</h4>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                        <li>Created time-series forecasting models for revenue projection</li>
+                                        <li>Developed anomaly detection algorithms for expense monitoring</li>
+                                        <li>Implemented attribution models for revenue channel analysis</li>
+                                        <li>Built scenario analysis tools for financial planning</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="mr-6">
+                                <div class="w-12 h-12 flex items-center justify-center rounded-full bg-primary text-white font-bold text-xl">4</div>
+                                <div class="h-full w-0.5 bg-gray-200 mx-auto mt-4"></div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-3">Dashboard Design & Development</h3>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    I designed and developed the interactive dashboard interface, focusing on user experience, information hierarchy, and visual clarity. The dashboard was built using Tableau, with custom extensions for specific functionality.
+                                </p>
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h4 class="font-medium text-gray-900 mb-2">Key Activities:</h4>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                        <li>Created wireframes and prototypes for user feedback</li>
+                                        <li>Developed 12 interactive dashboard views for different user roles</li>
+                                        <li>Implemented drill-down capabilities and custom filters</li>
+                                        <li>Designed mobile-responsive layouts for executive access</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="mr-6">
+                                <div class="w-12 h-12 flex items-center justify-center rounded-full bg-primary text-white font-bold text-xl">5</div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-3">Testing, Deployment & Training</h3>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    The final phase involved comprehensive testing, deployment to production, and user training to ensure successful adoption across the organization.
+                                </p>
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h4 class="font-medium text-gray-900 mb-2">Key Activities:</h4>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                        <li>Conducted user acceptance testing with key stakeholders</li>
+                                        <li>Performed load testing and optimization for performance</li>
+                                        <li>Developed comprehensive documentation and user guides</li>
+                                        <li>Delivered training sessions for 50+ users across departments</li>
+                                        <li>Implemented feedback mechanisms for continuous improvement</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Technologies Used -->
+                <section id="technologies" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Technologies Used</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mb-4">
+                                <i class="ri-database-2-line ri-lg"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Data Management</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">SQL Server</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Azure Data Factory</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Snowflake</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Redis Cache</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
+                                <i class="ri-code-box-line ri-lg"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Development</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Python</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">SQL</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">R</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">JavaScript</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 mb-4">
+                                <i class="ri-pie-chart-line ri-lg"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Visualization</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Tableau</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">D3.js</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Plotly</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Highcharts</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Skills Applied</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Data Modeling</span>
+                            <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">ETL Development</span>
+                            <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">Statistical Analysis</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full">Financial Modeling</span>
+                            <span class="bg-red-100 text-red-800 text-sm px-3 py-1 rounded-full">Dashboard Design</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-sm px-3 py-1 rounded-full">Time Series Analysis</span>
+                            <span class="bg-pink-100 text-pink-800 text-sm px-3 py-1 rounded-full">Data Visualization</span>
+                            <span class="bg-teal-100 text-teal-800 text-sm px-3 py-1 rounded-full">Performance Optimization</span>
+                            <span class="bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">User Experience Design</span>
+                            <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">Requirements Analysis</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section id="results" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Results & Impact</h2>
+                    <p class="text-gray-700 mb-8 leading-relaxed">
+                        The Financial Analytics Dashboard has transformed the client's approach to financial analysis and decision-making, delivering significant measurable improvements across multiple dimensions:
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-3">
+                                    <i class="ri-time-line"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-900">Time Efficiency</h3>
+                            </div>
+                            <div id="time-chart" class="h-64 mb-4"></div>
+                            <p class="text-gray-700">
+                                Reduced financial reporting time from 3 weeks to near real-time, enabling more agile decision-making and faster response to market changes.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mr-3">
+                                    <i class="ri-funds-line"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-900">Cost Optimization</h3>
+                            </div>
+                            <div id="cost-chart" class="h-64 mb-4"></div>
+                            <p class="text-gray-700">
+                                Identified cost-saving opportunities that resulted in a 12% reduction in operational expenses within the first six months of implementation.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-sm mb-8">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Key Performance Improvements</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-primary mb-2">87%</div>
+                                <p class="text-gray-700">Increase in data accessibility across departments</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-primary mb-2">42%</div>
+                                <p class="text-gray-700">Improvement in forecast accuracy</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-primary mb-2">9.3M</div>
+                                <p class="text-gray-700">Additional revenue identified through analytics</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Client Testimonial</h3>
+                        <blockquote class="text-gray-700 italic mb-4">
+                            "The Financial Analytics Dashboard has completely transformed how we approach financial decision-making. What used to take weeks now happens in real-time, giving us unprecedented agility in responding to market changes. The insights generated by the platform have directly contributed to cost savings and revenue growth across multiple business units."
+                        </blockquote>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-gray-300 mr-4"></div>
+                            <div>
+                                <div class="font-medium text-gray-900">Jennifer Richardson</div>
+                                <div class="text-sm text-gray-600">Chief Financial Officer</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gallery Section -->
+                <section id="gallery" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Project Gallery</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="gallery-item relative rounded-lg overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=financial%2520dashboard%2520showing%2520revenue%2520analytics%2520with%2520multiple%2520charts%252C%2520KPIs%252C%2520and%2520metrics%252C%2520professional%2520business%2520interface%2520with%2520blue%2520color%2520scheme%252C%2520clean%2520modern%2520design%2520with%2520data%2520visualization%2520of%2520financial%2520performance&width=600&height=400&seq=gallery1&orientation=landscape" alt="Revenue Analytics Dashboard" class="w-full h-64 object-cover object-top">
+                            <div class="gallery-overlay absolute inset-0 bg-black bg-opacity-70 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                                <button class="bg-white text-gray-900 px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
+                                    View Larger
+                                </button>
+                            </div>
+                            <div class="p-4 bg-white">
+                                <h3 class="font-medium text-gray-900">Revenue Analytics Dashboard</h3>
+                                <p class="text-sm text-gray-600">Main view showing revenue streams and growth trends</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item relative rounded-lg overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=expense%2520tracking%2520dashboard%2520with%2520cost%2520center%2520analysis%252C%2520budget%2520variance%2520charts%252C%2520and%2520expense%2520categories%252C%2520professional%2520financial%2520interface%2520with%2520blue%2520color%2520scheme%252C%2520clean%2520modern%2520design%2520with%2520data%2520visualization%2520of%2520corporate%2520expenses&width=600&height=400&seq=gallery2&orientation=landscape" alt="Expense Tracking Dashboard" class="w-full h-64 object-cover object-top">
+                            <div class="gallery-overlay absolute inset-0 bg-black bg-opacity-70 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                                <button class="bg-white text-gray-900 px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
+                                    View Larger
+                                </button>
+                            </div>
+                            <div class="p-4 bg-white">
+                                <h3 class="font-medium text-gray-900">Expense Tracking Dashboard</h3>
+                                <p class="text-sm text-gray-600">Cost center analysis with budget variance tracking</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item relative rounded-lg overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=financial%2520forecasting%2520dashboard%2520with%2520predictive%2520models%252C%2520trend%2520projections%252C%2520and%2520scenario%2520analysis%252C%2520professional%2520business%2520interface%2520with%2520blue%2520color%2520scheme%252C%2520clean%2520modern%2520design%2520with%2520data%2520visualization%2520of%2520future%2520financial%2520performance&width=600&height=400&seq=gallery3&orientation=landscape" alt="Financial Forecasting Dashboard" class="w-full h-64 object-cover object-top">
+                            <div class="gallery-overlay absolute inset-0 bg-black bg-opacity-70 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                                <button class="bg-white text-gray-900 px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
+                                    View Larger
+                                </button>
+                            </div>
+                            <div class="p-4 bg-white">
+                                <h3 class="font-medium text-gray-900">Financial Forecasting Dashboard</h3>
+                                <p class="text-sm text-gray-600">Predictive models with scenario analysis capabilities</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item relative rounded-lg overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=executive%2520summary%2520dashboard%2520with%2520key%2520financial%2520metrics%252C%2520performance%2520indicators%252C%2520and%2520business%2520health%2520overview%252C%2520professional%2520interface%2520designed%2520for%2520C-suite%2520executives%252C%2520clean%2520modern%2520design%2520with%2520blue%2520color%2520scheme%2520and%2520high-level%2520financial%2520data%2520visualization&width=600&height=400&seq=gallery4&orientation=landscape" alt="Executive Summary Dashboard" class="w-full h-64 object-cover object-top">
+                            <div class="gallery-overlay absolute inset-0 bg-black bg-opacity-70 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                                <button class="bg-white text-gray-900 px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
+                                    View Larger
+                                </button>
+                            </div>
+                            <div class="p-4 bg-white">
+                                <h3 class="font-medium text-gray-900">Executive Summary Dashboard</h3>
+                                <p class="text-sm text-gray-600">High-level overview designed for C-suite executives</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="lg:w-1/3">
+                <div class="sticky-nav space-y-8">
+                    <!-- CTA Section -->
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">View Interactive Dashboard</h3>
+                        <p class="text-gray-700 mb-6">
+                            Experience the full functionality of this financial analytics dashboard in an interactive demo on Tableau Public.
+                        </p>
+                        <a href="#" class="block bg-primary text-white px-6 py-4 rounded-button font-medium hover:bg-opacity-90 transition text-center mb-4 whitespace-nowrap transform hover:scale-[1.02] hover:shadow-md flex items-center justify-center">
+                            <i class="ri-external-link-line mr-2"></i>
+                            Open in Tableau Public
+                        </a>
+                        <p class="text-sm text-gray-500 text-center">
+                            Demo version with anonymized data
+                        </p>
+                    </div>
+                    
+                    <!-- Contact Section -->
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Interested in a Similar Solution?</h3>
+                        <p class="text-gray-700 mb-6">
+                            Let's discuss how I can help you develop a custom analytics dashboard tailored to your organization's needs.
+                        </p>
+                        <a href="#contact-form" class="block bg-white border border-primary text-primary px-6 py-3 rounded-button font-medium hover:bg-primary hover:text-white transition text-center whitespace-nowrap">
+                            Contact Me
+                        </a>
+                    </div>
+                    
+                    <!-- Technologies Used Summary -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Technologies</h3>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Tableau</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">SQL</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">Python</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">Azure</span>
+                            <span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Snowflake</span>
+                        </div>
+                        
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Project Details</h3>
+                        <ul class="space-y-3">
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Duration:</span>
+                                <span class="font-medium text-gray-900">4 Months</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Role:</span>
+                                <span class="font-medium text-gray-900">Lead Data Analyst</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Completion:</span>
+                                <span class="font-medium text-gray-900">March 2025</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Client Industry:</span>
+                                <span class="font-medium text-gray-900">Financial Services</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Form Section -->
+<section id="contact-form" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Get In Touch</h2>
+            <p class="text-gray-700 mb-8 text-center">
+                Interested in discussing this project or how I can help with your data analytics needs? Send me a message!
+            </p>
+            <form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                        <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Your Email</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                    <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                    <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required></textarea>
+                </div>
+                <button type="submit" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap w-full md:w-auto">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0">
+                <a href="#" class="font-['Pacifico'] text-2xl text-white mb-4 inline-block">Tiffany Tay</a>
+            </div>
+            <div class="flex space-x-6">
+                <a href="https://readdy.ai/home/e8d1107f-9213-4e3a-bc3b-cad8f268cbab/aebef8f1-40b1-4ea3-8cbf-3fb692ae452c" data-readdy="true" class="text-gray-400 hover:text-white flex items-center">
+                    <i class="ri-arrow-left-line mr-2"></i>
+                    Back to Portfolio
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white">
+                    <i class="ri-linkedin-fill ri-lg"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white">
+                    <i class="ri-github-fill ri-lg"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white">
+                    <i class="ri-twitter-x-fill ri-lg"></i>
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400">© 2025 Tiffany Tay. All rights reserved.</p>
+            <div class="mt-4 md:mt-0 flex space-x-6">
+                <a href="#" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to top button -->
+<button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+    <i class="ri-arrow-up-line ri-lg"></i>
+</button>
+
+<!-- Image Lightbox -->
+<div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center hidden">
+    <button id="close-lightbox" class="absolute top-6 right-6 text-white w-10 h-10 flex items-center justify-center">
+        <i class="ri-close-line ri-2x"></i>
+    </button>
+    <img id="lightbox-image" src="" alt="Lightbox image" class="max-w-[90%] max-h-[90vh] object-contain">
+</div>
+
+<!-- Scripts -->
+<script id="navigation-script">
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('nav a');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+                
+                // Update active state
+                navLinks.forEach(navLink => {
+                    navLink.classList.remove('text-primary');
+                    navLink.classList.add('text-gray-600');
+                });
+                
+                this.classList.remove('text-gray-600');
+                this.classList.add('text-primary');
+            }
+        });
+    });
+    
+    // Update active link on scroll
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section[id]');
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.offsetHeight;
+            
+            if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                currentSection = '#' + section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('text-primary');
+            link.classList.add('text-gray-600');
+            
+            if (link.getAttribute('href') === currentSection) {
+                link.classList.remove('text-gray-600');
+                link.classList.add('text-primary');
+            }
+        });
+    });
+});
+</script>
+
+<script id="progress-bar-script">
+document.addEventListener('DOMContentLoaded', function() {
+    const progressBar = document.getElementById('progressBar');
+    
+    window.addEventListener('scroll', function() {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight - windowHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        const width = (scrollTop / documentHeight) * 100;
+        progressBar.style.width = width + '%';
+    });
+});
+</script>
+
+<script id="back-to-top-script">
+document.addEventListener('DOMContentLoaded', function() {
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.remove('opacity-0', 'invisible');
+            backToTopButton.classList.add('opacity-100', 'visible');
+        } else {
+            backToTopButton.classList.remove('opacity-100', 'visible');
+            backToTopButton.classList.add('opacity-0', 'invisible');
+        }
+    });
+    
+    backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+</script>
+
+<script id="lightbox-script">
+document.addEventListener('DOMContentLoaded', function() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const closeLightbox = document.getElementById('close-lightbox');
+    
+    galleryItems.forEach(item => {
+        const image = item.querySelector('img');
+        const viewButton = item.querySelector('button');
+        
+        viewButton.addEventListener('click', function() {
+            lightboxImage.src = image.src;
+            lightboxImage.alt = image.alt;
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    closeLightbox.addEventListener('click', function() {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    });
+    
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    });
+});
+</script>
+
+<script id="charts-script">
+document.addEventListener('DOMContentLoaded', function() {
+    // Time Efficiency Chart
+    const timeChart = echarts.init(document.getElementById('time-chart'));
+    const timeOption = {
+        animation: false,
+        tooltip: {
+            trigger: 'axis',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            textStyle: {
+                color: '#1f2937'
+            }
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Before', 'After'],
+            axisLine: {
+                lineStyle: {
+                    color: '#d1d5db'
+                }
+            },
+            axisLabel: {
+                color: '#1f2937'
+            }
+        },
+        yAxis: {
+            type: 'value',
+            name: 'Days',
+            nameTextStyle: {
+                color: '#1f2937'
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#d1d5db'
+                }
+            },
+            axisLabel: {
+                color: '#1f2937'
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#e5e7eb'
+                }
+            }
+        },
+        series: [{
+            data: [21, 1],
+            type: 'bar',
+            itemStyle: {
+                color: 'rgba(87, 181, 231, 1)'
+            },
+            barWidth: '40%',
+            label: {
+                show: true,
+                position: 'top',
+                formatter: '{c} days',
+                color: '#1f2937'
+            }
+        }],
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            top: '10%',
+            containLabel: true
+        }
+    };
+    timeChart.setOption(timeOption);
+    
+    // Cost Optimization Chart
+    const costChart = echarts.init(document.getElementById('cost-chart'));
+    const costOption = {
+        animation: false,
+        tooltip: {
+            trigger: 'axis',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            textStyle: {
+                color: '#1f2937'
+            }
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Q1', 'Q2', 'Q3', 'Q4'],
+            axisLine: {
+                lineStyle: {
+                    color: '#d1d5db'
+                }
+            },
+            axisLabel: {
+                color: '#1f2937'
+            }
+        },
+        yAxis: {
+            type: 'value',
+            name: 'Expenses ($M)',
+            nameTextStyle: {
+                color: '#1f2937'
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#d1d5db'
+                }
+            },
+            axisLabel: {
+                color: '#1f2937'
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#e5e7eb'
+                }
+            }
+        },
+        series: [{
+            name: 'Before Implementation',
+            type: 'line',
+            data: [8.2, 8.4, 8.3, 8.5],
+            itemStyle: {
+                color: 'rgba(252, 141, 98, 1)'
+            },
+            lineStyle: {
+                width: 3
+            },
+            smooth: true,
+            symbol: 'none'
+        }, {
+            name: 'After Implementation',
+            type: 'line',
+            data: [8.2, 7.8, 7.4, 7.1],
+            itemStyle: {
+                color: 'rgba(141, 211, 199, 1)'
+            },
+            lineStyle: {
+                width: 3
+            },
+            smooth: true,
+            symbol: 'none',
+            areaStyle: {
+                color: {
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                        offset: 0,
+                        color: 'rgba(141, 211, 199, 0.2)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(141, 211, 199, 0.01)'
+                    }]
+                }
+            }
+        }],
+        legend: {
+            data: ['Before Implementation', 'After Implementation'],
+            bottom: '0%',
+            textStyle: {
+                color: '#1f2937'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '15%',
+            top: '10%',
+            containLabel: true
+        }
+    };
+    costChart.setOption(costOption);
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        timeChart.resize();
+        costChart.resize();
+    });
+});
+</script>
+
+</body>
+</html>
