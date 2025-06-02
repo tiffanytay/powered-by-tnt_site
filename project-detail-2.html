@@ -87,6 +87,12 @@ body {
     .glass-card label {
       color: #333; /* Dark grey for labels */
     }
+.matrix-card {
+  background: #181818 !important;         /* Dark background */
+  border: 1px solid #333 !important;      /* Dark border */
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  color: #f3f4f6;                         /* Light text for contrast */
+}
 
 </style>
 </head>
@@ -294,7 +300,7 @@ body {
         </div>
 
         <div class="lg:col-span-2 space-y-8">
-          <div class="glass-card rounded-lg p-6">
+          <div class="glass-card matrix-card rounded-lg p-6">
             <h2 class="text-xl font-semibold mb-4">Prioritization Matrix</h2>
             <div id="matrix-chart" class="w-full h-96"></div>
           </div>
