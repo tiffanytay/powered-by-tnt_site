@@ -352,10 +352,10 @@ body {
                 </thead>
                 <tbody id="feature-list">
                   <tr class="border-b border-gray-800 hover:bg-[#252525]">
-                    <td class="py-3 px-4 text-gray-800">User Authentication</td>
-                    <td class="py-3 px-4 text-center text-gray-800">9</td>
-                    <td class="py-3 px-4 text-center text-gray-800">7</td>
-                    <td class="py-3 px-4 text-center text-gray-800">6</td>
+                    <td class="py-3 px-4 text-gray-800 hover:text-white">User Authentication</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">9</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">7</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">6</td>
                     <td class="py-3 px-4 text-center">
                       <button
                         class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400"
@@ -365,10 +365,10 @@ body {
                     </td>
                   </tr>
                   <tr class="border-b border-gray-800 hover:bg-[#252525]">
-                    <td class="py-3 px-4 text-gray-800">Payment Integration</td>
-                    <td class="py-3 px-4 text-center text-gray-800">8</td>
-                    <td class="py-3 px-4 text-center text-gray-800">8</td>
-                    <td class="py-3 px-4 text-center text-gray-800">9</td>
+                    <td class="py-3 px-4 text-gray-800 hover:text-white">Payment Integration</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">8</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">8</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">9</td>
                     <td class="py-3 px-4 text-center">
                       <button
                         class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400"
@@ -378,10 +378,10 @@ body {
                     </td>
                   </tr>
                   <tr class="border-b border-gray-800 hover:bg-[#252525]">
-                    <td class="py-3 px-4 text-gray-800">Dark Mode Support</td>
-                    <td class="py-3 px-4 text-center text-gray-800">6</td>
-                    <td class="py-3 px-4 text-center text-gray-800">4</td>
-                    <td class="py-3 px-4 text-center text-gray-800">3</td>
+                    <td class="py-3 px-4 text-gray-800 hover:text-white">Dark Mode Support</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">6</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">4</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">3</td>
                     <td class="py-3 px-4 text-center">
                       <button
                         class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400"
@@ -391,10 +391,10 @@ body {
                     </td>
                   </tr>
                   <tr class="border-b border-gray-800 hover:bg-[#252525]">
-                    <td class="py-3 px-4 text-gray-800">Export to PDF</td>
-                    <td class="py-3 px-4 text-center text-gray-800">5</td>
-                    <td class="py-3 px-4 text-center text-gray-800">3</td>
-                    <td class="py-3 px-4 text-center text-gray-800">2</td>
+                    <td class="py-3 px-4 text-gray-800 hover:text-white">Export to PDF</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">5</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">3</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">2</td>
                     <td class="py-3 px-4 text-center">
                       <button
                         class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400"
@@ -404,10 +404,10 @@ body {
                     </td>
                   </tr>
                   <tr class="hover:bg-[#252525]">
-                    <td class="py-3 px-4 text-gray-800">Multi-language Support</td>
-                    <td class="py-3 px-4 text-center text-gray-800">7</td>
-                    <td class="py-3 px-4 text-center text-gray-800">9</td>
-                    <td class="py-3 px-4 text-center text-gray-800">7</td>
+                    <td class="py-3 px-4 text-gray-800 hover:text-white">Multi-language Support</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">7</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">9</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">7</td>
                     <td class="py-3 px-4 text-center">
                       <button
                         class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400"
@@ -777,7 +777,6 @@ const matrixDom = document.getElementById('matrix-chart');
 if (matrixDom) {
     const matrixChart = echarts.init(matrixDom);
     const matrixOption = {
-        backgroundColor: '#cfd0d1', // Light grey background
         xAxis: {
             name: 'Effort',
             min: 0,
@@ -1128,10 +1127,10 @@ if (matrixDom) {
                 row.className = 'border-b border-gray-800 hover:bg-[#252525]';
                 
                 row.innerHTML = `
-                    <td class="py-3 px-4 text-gray-800">${feature.name}</td>
-                    <td class="py-3 px-4 text-center text-gray-800">${feature.impact}</td>
-                    <td class="py-3 px-4 text-center text-gray-800">${feature.effort}</td>
-                    <td class="py-3 px-4 text-center text-gray-800">${feature.cost}</td>
+                    <td class="py-3 px-4 text-gray-800 hover:text-white">${feature.name}</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${feature.impact}</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${feature.effort}</td>
+                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${feature.cost}</td>
                     <td class="py-3 px-4 text-center">
                         <button class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400">
                             <i class="ri-delete-bin-line"></i>
