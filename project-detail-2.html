@@ -284,7 +284,7 @@ glass-card {
 
               <button
                 id="update-matrix"
-                class="w-full py-3 bg-gray-700 text-white rounded-button hover:bg-gray-600 transition-colors flex items-center justify-center whitespace-nowrap"
+                class="w-full py-3 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors flex items-center justify-center whitespace-nowrap"
               >
                 <i class="ri-refresh-line ri-lg mr-2"></i>
                 Update Matrix
@@ -346,10 +346,10 @@ glass-card {
                 </thead>
                 <tbody id="feature-list">
                   <tr class="border-b border-gray-800 hover:bg-[#252525]">
-                    <td class="py-3 px-4 text-white">User Authentication</td>
-                    <td class="py-3 px-4 text-center text-white">9</td>
-                    <td class="py-3 px-4 text-center text-white">7</td>
-                    <td class="py-3 px-4 text-center text-white">6</td>
+                    <td class="py-3 px-4 text-gray-800">User Authentication</td>
+                    <td class="py-3 px-4 text-center text-gray-800">9</td>
+                    <td class="py-3 px-4 text-center text-gray-800">7</td>
+                    <td class="py-3 px-4 text-center text-gray-800">6</td>
                     <td class="py-3 px-4 text-center">
                       <button
                         class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400"
@@ -359,10 +359,10 @@ glass-card {
                     </td>
                   </tr>
                   <tr class="border-b border-gray-800 hover:bg-[#252525]">
-                    <td class="py-3 px-4 text-white">Payment Integration</td>
-                    <td class="py-3 px-4 text-center text-white">8</td>
-                    <td class="py-3 px-4 text-center text-white">8</td>
-                    <td class="py-3 px-4 text-center text-white">9</td>
+                    <td class="py-3 px-4 text-gray-800">Payment Integration</td>
+                    <td class="py-3 px-4 text-center text-gray-800">8</td>
+                    <td class="py-3 px-4 text-center text-gray-800">8</td>
+                    <td class="py-3 px-4 text-center text-gray-800">9</td>
                     <td class="py-3 px-4 text-center">
                       <button
                         class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400"
@@ -372,10 +372,10 @@ glass-card {
                     </td>
                   </tr>
                   <tr class="border-b border-gray-800 hover:bg-[#252525]">
-                    <td class="py-3 px-4 text-white">Dark Mode Support</td>
-                    <td class="py-3 px-4 text-center text-white">6</td>
-                    <td class="py-3 px-4 text-center text-white">4</td>
-                    <td class="py-3 px-4 text-center text-white">3</td>
+                    <td class="py-3 px-4 text-gray-800">Dark Mode Support</td>
+                    <td class="py-3 px-4 text-center text-gray-800">6</td>
+                    <td class="py-3 px-4 text-center text-gray-800">4</td>
+                    <td class="py-3 px-4 text-center text-gray-800">3</td>
                     <td class="py-3 px-4 text-center">
                       <button
                         class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400"
@@ -385,10 +385,10 @@ glass-card {
                     </td>
                   </tr>
                   <tr class="border-b border-gray-800 hover:bg-[#252525]">
-                    <td class="py-3 px-4 text-white">Export to PDF</td>
-                    <td class="py-3 px-4 text-center text-white">5</td>
-                    <td class="py-3 px-4 text-center text-white">3</td>
-                    <td class="py-3 px-4 text-center text-white">2</td>
+                    <td class="py-3 px-4 text-gray-800">Export to PDF</td>
+                    <td class="py-3 px-4 text-center text-gray-800">5</td>
+                    <td class="py-3 px-4 text-center text-gray-800">3</td>
+                    <td class="py-3 px-4 text-center text-gray-800">2</td>
                     <td class="py-3 px-4 text-center">
                       <button
                         class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400"
@@ -398,10 +398,10 @@ glass-card {
                     </td>
                   </tr>
                   <tr class="hover:bg-[#252525]">
-                    <td class="py-3 px-4 text-white">Multi-language Support</td>
-                    <td class="py-3 px-4 text-center text-white">7</td>
-                    <td class="py-3 px-4 text-center text-white">9</td>
-                    <td class="py-3 px-4 text-center text-white">7</td>
+                    <td class="py-3 px-4 text-gray-800">Multi-language Support</td>
+                    <td class="py-3 px-4 text-center text-gray-800">7</td>
+                    <td class="py-3 px-4 text-center text-gray-800">9</td>
+                    <td class="py-3 px-4 text-center text-gray-800">7</td>
                     <td class="py-3 px-4 text-center">
                       <button
                         class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400"
@@ -771,7 +771,7 @@ const matrixDom = document.getElementById('matrix-chart');
 if (matrixDom) {
     const matrixChart = echarts.init(matrixDom);
     const matrixOption = {
-        backgroundColor: '#222', // Darker background
+        backgroundColor: '#cfd0d1', // Light grey background
         xAxis: {
             name: 'Effort',
             min: 0,
@@ -797,7 +797,7 @@ if (matrixDom) {
             ],
             type: 'scatter',
             itemStyle: {
-                color: '#4F46E5'
+                color: '#0000FF'
             }
         }]
     };
@@ -1122,10 +1122,10 @@ if (matrixDom) {
                 row.className = 'border-b border-gray-800 hover:bg-[#252525]';
                 
                 row.innerHTML = `
-                    <td class="py-3 px-4 text-white">${feature.name}</td>
-                    <td class="py-3 px-4 text-center text-white">${feature.impact}</td>
-                    <td class="py-3 px-4 text-center text-white">${feature.effort}</td>
-                    <td class="py-3 px-4 text-center text-white">${feature.cost}</td>
+                    <td class="py-3 px-4 text-gray-800">${feature.name}</td>
+                    <td class="py-3 px-4 text-center text-gray-800">${feature.impact}</td>
+                    <td class="py-3 px-4 text-center text-gray-800">${feature.effort}</td>
+                    <td class="py-3 px-4 text-center text-gray-800">${feature.cost}</td>
                     <td class="py-3 px-4 text-center">
                         <button class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400">
                             <i class="ri-delete-bin-line"></i>
