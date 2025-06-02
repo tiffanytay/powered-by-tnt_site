@@ -14,13 +14,17 @@
 <style>
 :where([class^="ri-"])::before { content: "\f3c2"; }
 body {
+    background-color: #ffffff; /* Pure white background */
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
+    color: #333; /* Dark grey for main text for contrast */
 }
 glass-card {
-          background: rgba(253, 253, 253, 0.7);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.342);
+          background-color: #ffffff; /* White background */
+          border: 1px solid #e5e5e5; /* Thin grey border */
+          border-radius: 8px; /* Rounded corners, adjust as needed */
+          box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* Subtle shadow */
+          padding: 24px; /* Adjust padding as needed */
       }
       .custom-range {
           -webkit-appearance: none;
@@ -70,6 +74,19 @@ glass-card {
       input[type="number"] {
           -moz-appearance: textfield;
       }
+    .glass-card input,
+    .glass-card textarea,
+    .glass-card select {
+      background-color: #fff; /* White background */
+      border: 1px solid #e5e5e5; /* Thin grey border */
+      color: #333; /* Dark grey text */
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    .glass-card label {
+      color: #333; /* Dark grey for labels */
+    }
+
 </style>
 </head>
 <body class="bg-gray-50">
