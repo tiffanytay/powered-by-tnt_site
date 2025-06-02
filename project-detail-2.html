@@ -765,6 +765,51 @@ document.addEventListener('DOMContentLoaded', function() {
         costChart.resize();
     });
 });
+
+// Prioritization Matrix Chart
+const matrixDom = document.getElementById('matrix-chart');
+if (matrixDom) {
+    const matrixChart = echarts.init(matrixDom);
+    const matrixOption = {
+        backgroundColor: '#222', // Darker background
+        xAxis: {
+            name: 'Effort',
+            min: 0,
+            max: 10,
+            splitLine: { lineStyle: { color: '#444' } }, // Darker grid lines
+            axisLine: { lineStyle: { color: '#888' } },
+            axisLabel: { color: '#fff' }
+        },
+        yAxis: {
+            name: 'Impact',
+            min: 0,
+            max: 10,
+            splitLine: { lineStyle: { color: '#444' } },
+            axisLine: { lineStyle: { color: '#888' } },
+            axisLabel: { color: '#fff' }
+        },
+        series: [{
+            symbolSize: 24,
+            data: [
+                [7, 9], // User Authentication
+                [8, 8], // Payment Integration
+                [4, 6]  // Dark Mode Support
+            ],
+            type: 'scatter',
+            itemStyle: {
+                color: '#4F46E5'
+            }
+        }]
+    };
+    matrixChart.setOption(matrixOption);
+
+    // Make it responsive
+    window.addEventListener('resize', function() {
+        matrixChart.resize();
+    });
+}
+
+    
 </script>
 
 </body>
