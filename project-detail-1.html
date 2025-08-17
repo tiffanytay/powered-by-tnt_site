@@ -135,10 +135,10 @@ input:focus, textarea:focus {
                 <section id="overview" class="mb-16">
                     <h2 class="text-3xl font-bold text-gray-900 mb-6">Project Overview</h2>
                     <p class="text-gray-700 mb-6 leading-relaxed">
-                        Nonprofits play vital roles in our communities, but their stories aren’t always easy to grasp just by reading through dense IRS filings. This project set out to change that by transforming intricate tax return data from IRS Form 990 XML files into a dynamic, user-friendly dashboard that tells the full story of a nonprofit’s financial health and impact.
+                        Nonprofits play vital roles in our communities, but their stories aren’t always easy to grasp just by reading through dense IRS filings. This project set out to change that by transforming intricate tax return data from recent IRS Form 990 XML files into a dynamic, user-friendly dashboard that tells the full story of a nonprofit’s financial health and impact.
                     </p>
                     <p class="text-gray-700 mb-6 leading-relaxed">
-                        At its heart, this dashboard acts like a window into any nonprofit’s world — revealing not only their financial trends across revenue, expenses, net income, assets, and liabilities, but also showcasing their mission and powerful program accomplishments. What makes this tool especially exciting is its flexibility: it isn’t locked to one organization’s data. Instead, it can be effortlessly swapped out to highlight a different nonprofit’s unique story without any technical overhaul.
+                        At its heart, this dashboard acts like a window into any nonprofit’s world — revealing not only their financial trends across revenue, expenses, net income, assets, and liabilities, but also showcasing their mission and powerful program accomplishments. What makes this tool especially exciting is its flexibility: it isn’t locked to one organization’s data. Instead, it can be easily swapped out to highlight a different nonprofit’s unique story without any technical overhaul.
                     </p>
                     <p class="text-gray-700 leading-relaxed">
                         Currently, the dashboard is brought to life using data from Big Brothers Big Sisters of America, styled carefully to reflect their brand identity. This real-world example allows viewers to explore their financial journey and witness the tangible impact they report directly to the IRS, bridging numbers with meaningful mission-driven outcomes.
@@ -165,19 +165,19 @@ input:focus, textarea:focus {
                         <div>
                             <h3 class="text-xl font-semibold text-gray-900 mb-3">Data Fragmentation</h3>
                             <p class="text-gray-700 leading-relaxed">
-                                The client's financial data was scattered across multiple systems and databases, including legacy platforms, Excel spreadsheets, and third-party services. This fragmentation made it extremely difficult to obtain a unified view of their financial performance and required manual consolidation that was both time-consuming and error-prone.
+                                Publicly available financial data on a nonprofit over many years is typically scattered across multiple systems and is formatted inconsistently. This fragmentation made it extremely difficult to obtain a unified view of their financial performance and required manual consolidation that was both time-consuming and error-prone.
                             </p>
                         </div>
                         <div>
                             <h3 class="text-xl font-semibold text-gray-900 mb-3">Limited Analytical Capabilities</h3>
                             <p class="text-gray-700 leading-relaxed">
-                                The client lacked sophisticated analytical tools to identify patterns, forecast trends, or perform scenario analysis. Their existing tools provided basic reporting but couldn't support advanced analytics needed for strategic financial planning and optimization.
+                                Many people lack sophisticated analytical tools to transform data, summarize data or analyze trends.
                             </p>
                         </div>
                         <div>
                             <h3 class="text-xl font-semibold text-gray-900 mb-3">Accessibility Issues</h3>
                             <p class="text-gray-700 leading-relaxed">
-                                Financial insights were not readily accessible to key decision-makers across the organization. Executives needed to request reports from the finance department, creating bottlenecks and preventing self-service analysis that could drive more agile decision-making.
+                                Financial insights were not readily accessible to the average person interested in learning more about a nonprofit organization.
                             </p>
                         </div>
                     </div>
@@ -194,37 +194,31 @@ input:focus, textarea:focus {
                             <div>
                                 <h3 class="text-xl font-semibold text-gray-900 mb-2">Solution Approach</h3>
                                 <p class="text-gray-700">
-                                    I designed and implemented a comprehensive financial analytics dashboard that transformed the client's approach to financial data analysis and reporting.
+                                    I designed and implemented a high-level dashboard leveraging the standardized formatting of tax return data, transforming a fragmented, manual process into a streamlined process with a much more pleasant user experience.
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="embedded">
+                    <div class="embedded" style="margin-bottom: 20px;">
                         <iframe title="Nonprofit in a Nutshell Dashboard" width="800" height="485" src="https://app.powerbi.com/view?r=eyJrIjoiNDNlMjdkMjEtOTI4Ni00NzJmLTk1NzYtMjcyNzg2YWNmMDE2IiwidCI6IjYyOWQwNWU3LTIxODUtNDY4Zi04MjMyLTQzYmU1NTNhZmQ1ZSIsImMiOjJ9" frameborder="0" allowFullScreen="true"></iframe>
                     </div>
                     <div class="space-y-6">
                         <div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Centralized Data Architecture</h3>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Dynamic Data Integration</h3>
                             <p class="text-gray-700 leading-relaxed">
-                                I developed a centralized data warehouse that integrates financial data from all sources, including ERP systems, CRM platforms, and external market data. This unified architecture provides a single source of truth for all financial analytics and eliminates data silos that previously hindered analysis.
+                                I developed a streamlined transform and load data process that ingests 990 XML files, applies the same transformations to each and aggregates them together automatically. Thus, this tool isn’t locked to one organization’s data. Instead, it can be easily swapped out to highlight a different nonprofit’s unique story without any technical overhaul.
                             </p>
                         </div>
                         <div>
                             <h3 class="text-xl font-semibold text-gray-900 mb-3">Interactive Visualization Dashboard</h3>
                             <p class="text-gray-700 leading-relaxed">
-                                I designed an intuitive dashboard interface with interactive visualizations that make complex financial data accessible and actionable. The dashboard includes customizable views for different user roles, from executive overviews to detailed analyst workbenches with drill-down capabilities.
+                                I designed an intuitive dashboard interface with interactive visualizations that make complex tax return data accessible and actionable. The dashboard includes a filter by tax return years.
                             </p>
                         </div>
                         <div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Predictive Analytics Models</h3>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Centralized Data</h3>
                             <p class="text-gray-700 leading-relaxed">
-                                The solution incorporates predictive analytics models that forecast financial performance based on historical data and market trends. These models enable scenario planning and help identify potential risks and opportunities before they materialize.
-                            </p>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Automated Reporting System</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                I implemented an automated reporting system that generates standardized financial reports on a scheduled basis or on-demand. This eliminates the manual reporting process that previously consumed significant resources and ensures consistent, accurate reporting across the organization.
+                                At its heart, this dashboard acts like a window into any nonprofit’s world — revealing not only their financial trends across revenue, expenses, net income, assets, and liabilities, but also showcasing their mission and powerful program accomplishments all from one place.
                             </p>
                         </div>
                     </div>
@@ -233,20 +227,7 @@ input:focus, textarea:focus {
                 <!-- Technologies Used -->
                 <section id="technologies" class="mb-16">
                     <h2 class="text-3xl font-bold text-gray-900 mb-6">Technologies Used</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mb-4">
-                                <i class="ri-database-2-line ri-lg"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Data Management</h3>
-                            <ul class="space-y-2">
-                                <li class="flex items-center">
-                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
-                                    <span class="text-gray-700">None?</span>
-                                </li>
-                            </ul>
-                        </div>
-                        
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">                     
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <div class="w-12 h-12 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
                                 <i class="ri-code-box-line ri-lg"></i>
@@ -289,7 +270,6 @@ input:focus, textarea:focus {
                             <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">ETL Development</span>
                             <span class="bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full">Financial Modeling</span>
                             <span class="bg-red-100 text-red-800 text-sm px-3 py-1 rounded-full">Dashboard Design</span>
-                            <span class="bg-indigo-100 text-indigo-800 text-sm px-3 py-1 rounded-full">Time Series Analysis</span>
                             <span class="bg-pink-100 text-pink-800 text-sm px-3 py-1 rounded-full">Data Visualization</span>
                             <span class="bg-teal-100 text-teal-800 text-sm px-3 py-1 rounded-full">Performance Optimization</span>
                             <span class="bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">User Experience Design</span>
@@ -302,7 +282,28 @@ input:focus, textarea:focus {
                 <section id="results" class="mb-16">
                     <h2 class="text-3xl font-bold text-gray-900 mb-6">Results & Impact</h2>
                     <p class="text-gray-700 mb-8 leading-relaxed">
-                        The Financial Analytics Dashboard has transformed the client's approach to financial analysis and decision-making, delivering significant measurable improvements across multiple dimensions:
+                        IRS Form 990 filings are treasure troves of information, yet they remain largely inaccessible to most people who want to understand how nonprofits operate, grow, and serve their communities. By turning raw XML data into intuitive visuals and concise summaries, this project lowers the barrier to nonprofit financial literacy and impact awareness. Whether you’re a donor, grant-maker, nonprofit leader, or researcher, this dashboard offers a fast, clear way to get the big picture—helping you make informed decisions and appreciate the scale of nonprofit work.
+                    </p>
+                    <p class="text-gray-700 mb-8 leading-relaxed">
+                        Real-World Uses:
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                <span class="text-gray-700">Donors seeking quick insight before making contributions</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                <span class="text-gray-700">Grant officers evaluating nonprofit applicants</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                <span class="text-gray-700">Executives monitoring financial and program performance over time</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                <span class="text-gray-700">Researchers analyzing trends and organizational focus in the nonprofit sector</span>
+                            </li>
+                        </ul>
                     </p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
@@ -333,83 +334,8 @@ input:focus, textarea:focus {
                         </div>
                     </div>
                     
-                    <div class="bg-white p-8 rounded-lg shadow-sm mb-8">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Key Performance Improvements</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="text-center">
-                                <div class="text-4xl font-bold text-primary mb-2">87%</div>
-                                <p class="text-gray-700">Increase in data accessibility across departments</p>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-4xl font-bold text-primary mb-2">42%</div>
-                                <p class="text-gray-700">Improvement in forecast accuracy</p>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-4xl font-bold text-primary mb-2">9.3M</div>
-                                <p class="text-gray-700">Additional revenue identified through analytics</p>
-                            </div>
-                        </div>
-                    </div>
-                    
                 </section>
-
-                <!-- Gallery Section -->
-                <section id="gallery" class="mb-16">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Project Gallery</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="gallery-item relative rounded-lg overflow-hidden">
-                            <img src="https://readdy.ai/api/search-image?query=financial%2520dashboard%2520showing%2520revenue%2520analytics%2520with%2520multiple%2520charts%252C%2520KPIs%252C%2520and%2520metrics%252C%2520professional%2520business%2520interface%2520with%2520blue%2520color%2520scheme%252C%2520clean%2520modern%2520design%2520with%2520data%2520visualization%2520of%2520financial%2520performance&width=600&height=400&seq=gallery1&orientation=landscape" alt="Revenue Analytics Dashboard" class="w-full h-64 object-cover object-top">
-                            <div class="gallery-overlay absolute inset-0 bg-black bg-opacity-70 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                                <button class="bg-white text-gray-900 px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
-                                    View Larger
-                                </button>
-                            </div>
-                            <div class="p-4 bg-white">
-                                <h3 class="font-medium text-gray-900">Revenue Analytics Dashboard</h3>
-                                <p class="text-sm text-gray-600">Main view showing revenue streams and growth trends</p>
-                            </div>
-                        </div>
-                        
-                        <div class="gallery-item relative rounded-lg overflow-hidden">
-                            <img src="https://readdy.ai/api/search-image?query=expense%2520tracking%2520dashboard%2520with%2520cost%2520center%2520analysis%252C%2520budget%2520variance%2520charts%252C%2520and%2520expense%2520categories%252C%2520professional%2520financial%2520interface%2520with%2520blue%2520color%2520scheme%252C%2520clean%2520modern%2520design%2520with%2520data%2520visualization%2520of%2520corporate%2520expenses&width=600&height=400&seq=gallery2&orientation=landscape" alt="Expense Tracking Dashboard" class="w-full h-64 object-cover object-top">
-                            <div class="gallery-overlay absolute inset-0 bg-black bg-opacity-70 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                                <button class="bg-white text-gray-900 px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
-                                    View Larger
-                                </button>
-                            </div>
-                            <div class="p-4 bg-white">
-                                <h3 class="font-medium text-gray-900">Expense Tracking Dashboard</h3>
-                                <p class="text-sm text-gray-600">Cost center analysis with budget variance tracking</p>
-                            </div>
-                        </div>
-                        
-                        <div class="gallery-item relative rounded-lg overflow-hidden">
-                            <img src="https://readdy.ai/api/search-image?query=financial%2520forecasting%2520dashboard%2520with%2520predictive%2520models%252C%2520trend%2520projections%252C%2520and%2520scenario%2520analysis%252C%2520professional%2520business%2520interface%2520with%2520blue%2520color%2520scheme%252C%2520clean%2520modern%2520design%2520with%2520data%2520visualization%2520of%2520future%2520financial%2520performance&width=600&height=400&seq=gallery3&orientation=landscape" alt="Financial Forecasting Dashboard" class="w-full h-64 object-cover object-top">
-                            <div class="gallery-overlay absolute inset-0 bg-black bg-opacity-70 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                                <button class="bg-white text-gray-900 px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
-                                    View Larger
-                                </button>
-                            </div>
-                            <div class="p-4 bg-white">
-                                <h3 class="font-medium text-gray-900">Financial Forecasting Dashboard</h3>
-                                <p class="text-sm text-gray-600">Predictive models with scenario analysis capabilities</p>
-                            </div>
-                        </div>
-                        
-                        <div class="gallery-item relative rounded-lg overflow-hidden">
-                            <img src="https://readdy.ai/api/search-image?query=executive%2520summary%2520dashboard%2520with%2520key%2520financial%2520metrics%252C%2520performance%2520indicators%252C%2520and%2520business%2520health%2520overview%252C%2520professional%2520interface%2520designed%2520for%2520C-suite%2520executives%252C%2520clean%2520modern%2520design%2520with%2520blue%2520color%2520scheme%2520and%2520high-level%2520financial%2520data%2520visualization&width=600&height=400&seq=gallery4&orientation=landscape" alt="Executive Summary Dashboard" class="w-full h-64 object-cover object-top">
-                            <div class="gallery-overlay absolute inset-0 bg-black bg-opacity-70 opacity-0 transition-opacity duration-300 flex items-center justify-center">
-                                <button class="bg-white text-gray-900 px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
-                                    View Larger
-                                </button>
-                            </div>
-                            <div class="p-4 bg-white">
-                                <h3 class="font-medium text-gray-900">Executive Summary Dashboard</h3>
-                                <p class="text-sm text-gray-600">High-level overview designed for C-suite executives</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                
             </div>
             
             <!-- Sidebar -->
@@ -421,7 +347,7 @@ input:focus, textarea:focus {
                         <p class="text-gray-700 mb-6">
                             Experience the full functionality of this dashboard in an interactive demo on Power BI.
                         </p>
-                        <a href="#" class="block bg-primary text-white px-6 py-4 rounded-button font-medium hover:bg-opacity-90 transition text-center mb-4 whitespace-nowrap transform hover:scale-[1.02] hover:shadow-md flex items-center justify-center">
+                        <a href="https://app.powerbi.com/view?r=eyJrIjoiNDNlMjdkMjEtOTI4Ni00NzJmLTk1NzYtMjcyNzg2YWNmMDE2IiwidCI6IjYyOWQwNWU3LTIxODUtNDY4Zi04MjMyLTQzYmU1NTNhZmQ1ZSIsImMiOjJ9&embedImagePlaceholder=true" class="block bg-primary text-white px-6 py-4 rounded-button font-medium hover:bg-opacity-90 transition text-center mb-4 whitespace-nowrap transform hover:scale-[1.02] hover:shadow-md flex items-center justify-center">
                             <i class="ri-external-link-line mr-2"></i>
                             Open in Power BI
                         </a>
