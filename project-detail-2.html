@@ -146,7 +146,305 @@ body {
     </div>
 </section>
 
-Interactive visualization tool to help teams quickly assess project status and workloads.
+<!-- Content Navigation -->
+<div class="bg-white border-b sticky top-16 z-40">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex overflow-x-auto py-4 scrollbar-hide">
+            <ul class="flex space-x-8">
+                <li><a href="#overview" class="text-primary font-medium whitespace-nowrap">Overview</a></li>
+                <li><a href="#challenge" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Challenge</a></li>
+                <li><a href="#solution" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Solution</a></li>
+                <li><a href="#technologies" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Technologies</a></li>
+                <li><a href="#results" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Results</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-12">
+            <!-- Main Content -->
+            <div class="lg:w-2/3">
+                <!-- Overview Section -->
+                <section id="overview" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Project Overview</h2>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Nonprofits play vital roles in our communities, but their stories aren’t always easy to grasp just by reading through dense IRS filings. This project set out to change that by transforming intricate tax return data from recent IRS Form 990 XML files into a dynamic, user-friendly dashboard that tells the full story of a nonprofit’s financial health and impact.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Currently, the dashboard is brought to life using data from both Coqual and Big Brothers Big Sisters of America, styled carefully to reflect each separate brand identity. This real-world example allows viewers to explore their financial journey and witness the tangible impact they report directly to the IRS, bridging numbers with meaningful mission-driven outcomes.
+                    </p>
+                </section>
+
+                <!-- Challenge Section -->
+                <section id="challenge" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">The Challenge</h2>
+                    <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-red-100 text-red-600 mr-4 mt-1 flex-shrink-0">
+                                <i class="ri-error-warning-line"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Key Challenges</h3>
+                                <p class="text-gray-700">
+                                    IRS Form 990 filings are treasure troves of information, yet they remain largely inaccessible to most people who want to understand how nonprofits operate, grow, and serve their communities.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Data Fragmentation</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Publicly available financial data on a nonprofit over many years is typically scattered across multiple systems and is formatted inconsistently. This fragmentation made it extremely difficult to obtain a unified view of their financial performance and required manual consolidation that was both time-consuming and error-prone.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Limited Analytical Capabilities</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Many people lack sophisticated analytical tools to transform data, summarize data or analyze trends.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Accessibility Issues</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Financial insights were not readily accessible to the average person interested in learning more about a nonprofit organization.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Solution Section -->
+                <section id="solution" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">The Solution</h2>
+                    <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-4 mt-1 flex-shrink-0">
+                                <i class="ri-lightbulb-line"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Solution Approach</h3>
+                                <p class="text-gray-700">
+                                    I designed and implemented a high-level dashboard leveraging the standardized formatting of tax return data, transforming a fragmented, manual process into a streamlined process with a much more pleasant user experience.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="embedded-coqual" style="margin-bottom: 20px;">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Coqual Version</h3>
+                        <iframe title="Nonprofit in a Nutshell Dashboard - Coqual" width="800" height="485" src="https://app.powerbi.com/view?r=eyJrIjoiZDExNzZkODctMmEwMC00NGUxLWIxZjAtYTFkNzI0MTJkMDVhIiwidCI6IjYyOWQwNWU3LTIxODUtNDY4Zi04MjMyLTQzYmU1NTNhZmQ1ZSIsImMiOjJ9" frameborder="0" allowFullScreen="true"></iframe>
+                    </div>
+                    <div class="embedded-bbbsa" style="margin-bottom: 20px;">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Big Brothers Big Sisters of America Version</h3>
+                        <iframe title="Nonprofit in a Nutshell Dashboard" width="800" height="485" src="https://app.powerbi.com/view?r=eyJrIjoiNDNlMjdkMjEtOTI4Ni00NzJmLTk1NzYtMjcyNzg2YWNmMDE2IiwidCI6IjYyOWQwNWU3LTIxODUtNDY4Zi04MjMyLTQzYmU1NTNhZmQ1ZSIsImMiOjJ9" frameborder="0" allowFullScreen="true"></iframe>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Dynamic Data Integration</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                I developed a streamlined transform and load data process that ingests 990 XML files, applies the same transformations to each and aggregates them together automatically. Thus, this tool isn’t locked to one organization’s data. Instead, it can be easily swapped out to highlight a different nonprofit’s unique story without any technical overhaul.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Interactive Visualization Dashboard</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                I designed an intuitive dashboard interface with interactive visualizations that make complex tax return data accessible and actionable. The dashboard includes a filter by tax return years.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Centralized Data Analytics</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                At its heart, this dashboard acts like a window into any nonprofit’s world — revealing not only their financial trends across revenue, expenses, net income, assets, and liabilities, but also showcasing their mission and powerful program accomplishments all from one place.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Technologies Used -->
+                <section id="technologies" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Technologies Used</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">                     
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
+                                <i class="ri-code-box-line ri-lg"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Development</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Power Query</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">DAX</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">HTML</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 mb-4">
+                                <i class="ri-pie-chart-line ri-lg"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Visualization</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Power BI</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Skills Applied</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Data Modeling</span>
+                            <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">ETL Development</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full">Financial Modeling</span>
+                            <span class="bg-red-100 text-red-800 text-sm px-3 py-1 rounded-full">Dashboard Design</span>
+                            <span class="bg-pink-100 text-pink-800 text-sm px-3 py-1 rounded-full">Data Visualization</span>
+                            <span class="bg-teal-100 text-teal-800 text-sm px-3 py-1 rounded-full">Performance Optimization</span>
+                            <span class="bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">User Experience Design</span>
+                            <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full">Requirements Analysis</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section id="results" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Results & Impact</h2>
+                    <p class="text-gray-700 mb-8 leading-relaxed">
+                        IRS Form 990 filings are treasure troves of information, yet they remain largely inaccessible to most people who want to understand how nonprofits operate, grow, and serve their communities. By turning raw XML data into intuitive visuals and concise summaries, this project lowers the barrier to nonprofit financial literacy and impact awareness. Whether you’re a donor, grant-maker, nonprofit leader, or researcher, this dashboard offers a fast, clear way to get the big picture—helping you make informed decisions and appreciate the scale of nonprofit work.
+                    </p>
+                    <p class="text-gray-700 mb-8 leading-relaxed">
+                        Real-World Uses:
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                <span class="text-gray-700">Donors seeking quick insight before making contributions</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                <span class="text-gray-700">Grant officers evaluating nonprofit applicants</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                <span class="text-gray-700">Executives monitoring financial and program performance over time</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                <span class="text-gray-700">Researchers analyzing trends and organizational focus in the nonprofit sector</span>
+                            </li>
+                        </ul>
+                    </p>
+                    
+                </section>
+                
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="lg:w-1/3">
+                <div class="sticky-nav space-y-8">
+                    <!-- CTA Section -->
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">View Interactive Dashboard</h3>
+                        <p class="text-gray-700 mb-6">
+                            Experience the full functionality of this dashboard in an interactive demo on Power BI.
+                        </p>
+                        <a href="https://app.powerbi.com/view?r=eyJrIjoiZDExNzZkODctMmEwMC00NGUxLWIxZjAtYTFkNzI0MTJkMDVhIiwidCI6IjYyOWQwNWU3LTIxODUtNDY4Zi04MjMyLTQzYmU1NTNhZmQ1ZSIsImMiOjJ9" class="block bg-primary text-white px-6 py-4 rounded-button font-medium hover:bg-opacity-90 transition text-center mb-4 whitespace-nowrap transform hover:scale-[1.02] hover:shadow-md flex items-center justify-center">
+                            <i class="ri-external-link-line mr-2"></i>
+                            Open in Power BI
+                        </a>
+                        <p class="text-sm text-gray-500 text-center">
+                            Demo version with Coqual data
+                        </p>
+                    </div>
+                    
+                    <!-- Contact Section -->
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Interested in a Similar Solution?</h3>
+                        <p class="text-gray-700 mb-6">
+                            Let's discuss how I can help you develop a custom analytics dashboard tailored to your organization's needs.
+                        </p>
+                        <a href="#contact-form" class="block bg-white border border-primary text-primary px-6 py-3 rounded-button font-medium hover:bg-primary hover:text-white transition text-center whitespace-nowrap">
+                            Contact Me
+                        </a>
+                    </div>
+                    
+                    <!-- Technologies Used Summary -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Technologies</h3>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Power BI</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Power Query</span>
+                        </div>
+                        
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Project Details</h3>
+                        <ul class="space-y-3">
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Duration:</span>
+                                <span class="font-medium text-gray-900">2 Days</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Role:</span>
+                                <span class="font-medium text-gray-900">Lead Data Analyst</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Completion:</span>
+                                <span class="font-medium text-gray-900">August 2025</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Client Industry:</span>
+                                <span class="font-medium text-gray-900">Nonprofit</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Form Section -->
+<section id="contact-form" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Get In Touch</h2>
+            <p class="text-gray-700 mb-8 text-center">
+                Interested in discussing this project or how I can help with your data analytics needs? Send me a message!
+            </p>
+            <form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                        <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Your Email</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                    <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                    <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required></textarea>
+                </div>
+                <button type="submit" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap w-full md:w-auto">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
 
 <!-- Footer -->
 <footer class="bg-gray-900 text-white py-12">
@@ -172,7 +470,7 @@ Interactive visualization tool to help teams quickly assess project status and w
             <p class="text-gray-400">© 2025 Tiffany Tay. All rights reserved.</p>
             <div class="mt-4 md:mt-0 flex space-x-6">
                 <a href="privacy-policy-details.html" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
-                <a href="terms-of-service.html" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
+                <a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
             </div>
         </div>
     </div>
@@ -318,520 +616,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
-<script id="range-slider-handlers">
-        document.addEventListener('DOMContentLoaded', function() {
-            const impactRange = document.getElementById('impact');
-            const impactValue = document.getElementById('impact-value');
-            const effortRange = document.getElementById('effort');
-            const effortValue = document.getElementById('effort-value');
-            const costRange = document.getElementById('cost');
-            const costValue = document.getElementById('cost-value');
-            
-            impactRange.addEventListener('input', function() {
-                impactValue.textContent = this.value;
-            });
-            
-            effortRange.addEventListener('input', function() {
-                effortValue.textContent = this.value;
-            });
-            
-            costRange.addEventListener('input', function() {
-                costValue.textContent = this.value;
-            });
-        });
-    </script>
-
-    <script id="input-handlers">
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputs = document.querySelectorAll('input[type="text"], textarea');
-            
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.parentElement.classList.add('has-value');
-                });
-                
-                input.addEventListener('blur', function() {
-                    if (this.value === '') {
-                        this.parentElement.classList.remove('has-value');
-                    }
-                });
-                
-                // Check initial state
-                if (input.value !== '') {
-                    input.parentElement.classList.add('has-value');
-                }
-            });
-        });
-    </script>
-
-    <script id="matrix-chart-handler">
-        document.addEventListener('DOMContentLoaded', function() {
-            const chartDom = document.getElementById('matrix-chart');
-            const myChart = echarts.init(chartDom);
-            
-            const features = [
-                { name: 'User Authentication', impact: 9, effort: 7, cost: 6 },
-                { name: 'Payment Integration', impact: 8, effort: 8, cost: 9 },
-                { name: 'Dark Mode Support', impact: 6, effort: 4, cost: 3 },
-                { name: 'Export to PDF', impact: 5, effort: 3, cost: 2 },
-                { name: 'Multi-language Support', impact: 7, effort: 9, cost: 7 }
-            ];
-            
-            function updateChart() {
-                const xAxis = document.getElementById('x-axis').value;
-                const yAxis = document.getElementById('y-axis').value;
-                
-                const data = features.map(feature => {
-                    return [
-                        feature[xAxis],
-                        feature[yAxis],
-                        feature.name
-                    ];
-                });
-                
-                const option = {
-                    animation: false,
-                    grid: {
-                        left: 40,
-                        right: 40,
-                        top: 60,
-                        bottom: 60
-                    },
-                    xAxis: {
-                        type: 'value',
-                        name: xAxis.charAt(0).toUpperCase() + xAxis.slice(1),
-                        nameLocation: 'middle',
-                        nameGap: 30,
-                        min: 0,
-                        max: 10,
-                        splitLine: {
-                            lineStyle: {
-                                color: '#2A2A2A'
-                            }
-                        },
-                        axisLine: {
-                            lineStyle: {
-                                color: '#6B7280'
-                            }
-                        },
-                        axisLabel: {
-                            color: '#FFFFFF'
-                        },
-                        nameTextStyle: {
-                            color: '#FFFFFF'
-                        }
-                    },
-                    yAxis: {
-                        type: 'value',
-                        name: yAxis.charAt(0).toUpperCase() + yAxis.slice(1),
-                        nameLocation: 'middle',
-                        nameGap: 30,
-                        min: 0,
-                        max: 10,
-                        splitLine: {
-                            lineStyle: {
-                                color: '#2A2A2A'
-                            }
-                        },
-                        axisLine: {
-                            lineStyle: {
-                                color: '#6B7280'
-                            }
-                        },
-                        axisLabel: {
-                            color: '#FFFFFF'
-                        },
-                        nameTextStyle: {
-                            color: '#FFFFFF'
-                        }
-                    },
-                    tooltip: {
-                        formatter: function(params) {
-                            return `<div style="font-weight:bold;margin-bottom:4px;">${params.data[2]}</div>
-                                    <div>${xAxis.charAt(0).toUpperCase() + xAxis.slice(1)}: ${params.data[0]}</div>
-                                    <div>${yAxis.charAt(0).toUpperCase() + yAxis.slice(1)}: ${params.data[1]}</div>`;
-                        },
-                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                        textStyle: {
-                            color: '#1f2937'
-                        },
-                        borderColor: 'rgba(255, 255, 255, 0.3)',
-                        borderWidth: 1
-                    },
-                    series: [
-                        {
-                            type: 'scatter',
-                            symbolSize: 20,
-                            data: data,
-                            itemStyle: {
-                                color: function(params) {
-                                    // Use our defined color palette
-                                    const colors = [
-                                        'rgba(87, 181, 231, 1)',
-                                        'rgba(141, 211, 199, 1)',
-                                        'rgba(251, 191, 114, 1)',
-                                        'rgba(252, 141, 98, 1)'
-                                    ];
-                                    return colors[params.dataIndex % colors.length];
-                                }
-                            },
-                            label: {
-                                show: true,
-                                formatter: function(params) {
-                                    // Return a short name or first letter
-                                    const words = params.data[2].split(' ');
-                                    return words.map(word => word[0]).join('');
-                                },
-                                color: '#FFFFFF',
-                                fontSize: 10
-                            }
-                        }
-                    ],
-                    // Add quadrant lines
-                    graphic: [
-                        {
-                            type: 'line',
-                            shape: { x1: 5, y1: 0, x2: 5, y2: 10 },
-                            style: {
-                                stroke: '#6B7280',
-                                lineDash: [4, 4]
-                            },
-                            z: 0
-                        },
-                        {
-                            type: 'line',
-                            shape: { x1: 0, y1: 5, x2: 10, y2: 5 },
-                            style: {
-                                stroke: '#6B7280',
-                                lineDash: [4, 4]
-                            },
-                            z: 0
-                        },
-                        // Quadrant labels
-                        {
-                            type: 'text',
-                            position: [2.5, 7.5],
-                            style: {
-                                text: 'Quick Wins',
-                                fill: '#FFFFFF',
-                                fontSize: 12
-                            },
-                            z: 100
-                        },
-                        {
-                            type: 'text',
-                            position: [7.5, 7.5],
-                            style: {
-                                text: 'Major Projects',
-                                fill: '#FFFFFF',
-                                fontSize: 12
-                            },
-                            z: 100
-                        },
-                        {
-                            type: 'text',
-                            position: [2.5, 2.5],
-                            style: {
-                                text: 'Low Priority',
-                                fill: '#FFFFFF',
-                                fontSize: 12
-                            },
-                            z: 100
-                        },
-                        {
-                            type: 'text',
-                            position: [7.5, 2.5],
-                            style: {
-                                text: 'Time Wasters',
-                                fill: '#FFFFFF',
-                                fontSize: 12
-                            },
-                            z: 100
-                        }
-                    ]
-                };
-                
-                myChart.setOption(option);
-            }
-            
-            // Initial chart render
-            updateChart();
-            
-            // Update chart when settings change
-            document.getElementById('update-matrix').addEventListener('click', updateChart);
-            document.getElementById('x-axis').addEventListener('change', updateChart);
-            document.getElementById('y-axis').addEventListener('change', updateChart);
-            
-            // Responsive chart
-            window.addEventListener('resize', function() {
-                myChart.resize();
-            });
-        });
-    </script>
-
-    <script id="feature-form-handler">
-        document.addEventListener('DOMContentLoaded', function() {
-            const featureForm = document.getElementById('feature-form');
-            const featureList = document.getElementById('feature-list');
-            let features = [
-                { name: 'User Authentication', impact: 9, effort: 7, cost: 6 },
-                { name: 'Payment Integration', impact: 8, effort: 8, cost: 9 },
-                { name: 'Dark Mode Support', impact: 6, effort: 4, cost: 3 },
-                { name: 'Export to PDF', impact: 5, effort: 3, cost: 2 },
-                { name: 'Multi-language Support', impact: 7, effort: 9, cost: 7 }
-            ];
-            
-            featureForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const featureName = document.getElementById('feature-name').value;
-                const impact = parseInt(document.getElementById('impact').value);
-                const effort = parseInt(document.getElementById('effort').value);
-                const cost = parseInt(document.getElementById('cost').value);
-                const description = document.getElementById('feature-description').value;
-                
-                if (featureName.trim() === '') {
-                    alert('Please enter a feature name');
-                    return;
-                }
-                
-                // Add to features array
-                features.push({
-                    name: featureName,
-                    impact: impact,
-                    effort: effort,
-                    cost: cost,
-                    description: description
-                });
-                
-                // Add to table
-                addFeatureToTable({
-                    name: featureName,
-                    impact: impact,
-                    effort: effort,
-                    cost: cost
-                });
-                
-                // Reset form
-                featureForm.reset();
-                document.querySelectorAll('.input-container').forEach(container => {
-                    container.classList.remove('has-value');
-                });
-                document.getElementById('impact-value').textContent = '5';
-                document.getElementById('effort-value').textContent = '5';
-                document.getElementById('cost-value').textContent = '5';
-                
-                // Update chart
-                document.getElementById('update-matrix').click();
-            });
-            
-            function addFeatureToTable(feature) {
-                const row = document.createElement('tr');
-                row.className = 'border-b border-gray-800 hover:bg-[#252525]';
-                
-                row.innerHTML = `
-                    <td class="py-3 px-4 text-gray-800 hover:text-white">${feature.name}</td>
-                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${feature.impact}</td>
-                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${feature.effort}</td>
-                    <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${feature.cost}</td>
-                    <td class="py-3 px-4 text-center">
-                        <button class="delete-feature w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-400">
-                            <i class="ri-delete-bin-line"></i>
-                        </button>
-                    </td>
-                `;
-                
-                featureList.appendChild(row);
-                
-                // Add event listener to delete button
-                const deleteButton = row.querySelector('.delete-feature');
-                deleteButton.addEventListener('click', function() {
-                    const featureName = row.querySelector('td').textContent;
-                    features = features.filter(f => f.name !== featureName);
-                    row.remove();
-                    document.getElementById('update-matrix').click();
-                });
-            }
-            
-            // Add event listeners to existing delete buttons
-            document.querySelectorAll('.delete-feature').forEach(button => {
-                button.addEventListener('click', function() {
-                    const row = this.closest('tr');
-                    const featureName = row.querySelector('td').textContent;
-                    features = features.filter(f => f.name !== featureName);
-                    row.remove();
-                    document.getElementById('update-matrix').click();
-                });
-            });
-            
-            // Clear all features
-            document.getElementById('clear-all').addEventListener('click', function() {
-                if (confirm('Are you sure you want to clear all features?')) {
-                    features = [];
-                    featureList.innerHTML = '';
-                    document.getElementById('update-matrix').click();
-                }
-            });
-        });
-    </script>
-<script>
-/* --- Feature Data State --- */
-// let features = [
-//   {
-//     name: "User Authentication",
-//     impact: 9,
-//     effort: 7,
-//     cost: 6,
-//     description: "Secure login and registration"
-//   }
-// ];
-
-/* --- Utility: Render Feature List Table --- */
-function renderFeatureList() {
-  const tbody = document.getElementById('feature-list');
-  tbody.innerHTML = '';
-  features.forEach((f, idx) => {
-    const tr = document.createElement('tr');
-    tr.className = "border-b border-gray-800 hover:bg-[#252525]";
-    tr.innerHTML = `
-      <td class="py-3 px-4 text-gray-800 hover:text-white">${f.name}</td>
-      <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${f.impact}</td>
-      <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${f.effort}</td>
-      <td class="py-3 px-4 text-center text-gray-800 hover:text-white">${f.cost}</td>
-      <td class="py-3 px-4 text-center">
-        <button class="delete-feature w-8 h-8 flex items-center justify-center text-red-600 hover:text-red-800" data-idx="${idx}" title="Delete">
-          <i class="ri-delete-bin-line"></i>
-        </button>
-      </td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-/* --- Utility: Get Matrix Data Based on Axis Selection --- */
-function getMatrixData() {
-  const xAxis = document.getElementById('x-axis').value; // 'effort' or 'cost'
-  const yAxis = document.getElementById('y-axis').value; // 'impact'
-  return features.map(f => ({
-    value: [f[xAxis], f[yAxis]],
-    name: f.name,
-    desc: f.description || ''
-  }));
-}
-
-/* --- ECharts Matrix Chart Setup --- */
-const matrixDom = document.getElementById('matrix-chart');
-const matrixChart = echarts.init(matrixDom);
-
-function updateMatrixChart() {
-  const xAxisType = document.getElementById('x-axis').value;
-  const yAxisType = document.getElementById('y-axis').value;
-  const axisLabels = {
-    effort: "Effort",
-    cost: "Cost",
-    impact: "Impact"
-  };
-
-  const option = {
-    backgroundColor: '#181818',
-    tooltip: {
-      trigger: 'item',
-      backgroundColor: 'rgba(255,255,255,0.95)',
-      textStyle: { color: '#1f2937' },
-      formatter: function(params) {
-        return `
-          <strong>${params.data.name}</strong><br>
-          ${axisLabels[xAxisType]}: ${params.data.value[0]}<br>
-          ${axisLabels[yAxisType]}: ${params.data.value[1]}<br>
-          ${params.data.desc ? `<em>${params.data.desc}</em>` : ''}
-        `;
-      }
-    },
-    xAxis: {
-      name: axisLabels[xAxisType],
-      min: 0,
-      max: 10,
-      splitLine: { lineStyle: { color: '#444' } },
-      axisLine: { lineStyle: { color: '#888' } },
-      axisLabel: { color: '#fff' }
-    },
-    yAxis: {
-      name: axisLabels[yAxisType],
-      min: 0,
-      max: 10,
-      splitLine: { lineStyle: { color: '#444' } },
-      axisLine: { lineStyle: { color: '#888' } },
-      axisLabel: { color: '#fff' }
-    },
-    series: [{
-      type: 'scatter',
-      symbolSize: 28,
-      data: getMatrixData(),
-      itemStyle: { color: '#0000FF' }
-    }]
-  };
-  matrixChart.setOption(option);
-}
-
-/* --- Handle Add Feature Form --- */
-document.getElementById('feature-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const name = document.getElementById('feature-name').value.trim();
-  const impact = parseInt(document.getElementById('impact').value, 10);
-  const effort = parseInt(document.getElementById('effort').value, 10);
-  const cost = parseInt(document.getElementById('cost').value, 10);
-  const description = document.getElementById('feature-description').value.trim();
-  if (!name) return;
-  features.push({ name, impact, effort, cost, description });
-  renderFeatureList();
-  updateMatrixChart();
-  this.reset();
-  // Reset range value displays
-  document.getElementById('impact-value').textContent = 5;
-  document.getElementById('effort-value').textContent = 5;
-  document.getElementById('cost-value').textContent = 5;
-});
-
-/* --- Handle Delete Feature --- */
-document.getElementById('feature-list').addEventListener('click', function(e) {
-  if (e.target.closest('.delete-feature')) {
-    const idx = parseInt(e.target.closest('.delete-feature').getAttribute('data-idx'), 10);
-    features.splice(idx, 1);
-    renderFeatureList();
-    updateMatrixChart();
-  }
-});
-
-/* --- Handle Clear All --- */
-document.getElementById('clear-all').addEventListener('click', function() {
-  if (confirm('Are you sure you want to clear all features?')) {
-    features = [];
-    renderFeatureList();
-    updateMatrixChart();
-  }
-});
-
-/* --- Handle Matrix Settings (X/Y Axis) --- */
-document.getElementById('update-matrix').addEventListener('click', function() {
-  updateMatrixChart();
-});
-
-/* --- Handle Range Value Displays --- */
-['impact', 'effort', 'cost'].forEach(id => {
-  const input = document.getElementById(id);
-  const valueSpan = document.getElementById(id + '-value');
-  input.addEventListener('input', function() {
-    valueSpan.textContent = this.value;
-  });
-});
-
-/* --- Initial Render --- */
-renderFeatureList();
-updateMatrixChart();
-window.addEventListener('resize', () => matrixChart.resize());
-</script>
-
-    
 </body>
 </html>
