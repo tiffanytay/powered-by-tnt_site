@@ -140,21 +140,12 @@ input:focus, textarea:focus {
                 <!-- Challenge Section -->
                 <section id="challenge" class="mb-16">
                     <h2 class="text-3xl font-bold text-gray-900 mb-6">The Challenge</h2>
-                    <div class="bg-gray-50 p-6 rounded-lg mb-8">
-                        <div class="flex items-start">
-                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-red-100 text-red-600 mr-4 mt-1 flex-shrink-0">
-                                <i class="ri-error-warning-line"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Key Challenges</h3>
-                                <ul class="list-disc list-inside text-gray-700 space-y-1">
-                                    <li>Inconsistent data formatting across annual shelter statistics files.</li>
-                                    <li>Lack of standardized unique facility identifiers, complicating analysis.</li>
-                                    <li>Integration of statistics, regulatory facility lists, and IRS nonprofit tax return data.</li>
-                                    <li>Some facilities had the same name but in different cities.</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Inconsistent data formatting across 21 annual shelter statistics files spanning from 2007 to 2024.</li>
+                            <li>Lack of standardized unique facility identifiers, complicating analysis.</li>
+                            <li>Integration of statistics, regulatory facility list and, if available, updated location data.</li>
+                        </ul>
                     </div>
                 </section>
 
@@ -169,7 +160,7 @@ input:focus, textarea:focus {
                             <div>
                                 <h3 class="text-xl font-semibold text-gray-900 mb-2">Solution Approach</h3>
                                 <p class="text-gray-700">
-                                    I built interactive Tableau and Power BI visuals.
+                                    I unified and cleaned complex shelter and nonprofit data using Python and Jupyter, then built interactive Power BI and Tableau dashboards to visualize key animal welfare metrics and facilitate actionable insights.
                                 </p>
                             </div>
                         </div>
