@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Documentation Example</title>
+<link rel="icon" type="image/x-icon" href="graphics/favicon.ico">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#0000FF',secondary:'#10B981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+    background-color: #ffffff; /* Pure white background */
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+    color: #333; /* Dark grey for main text for contrast */
+}
+.glass-card {
+          background-color: #ffffff; /* White background */
+          border: 1px solid #e5e5e5; /* Thin grey border */
+          border-radius: 8px; /* Rounded corners, adjust as needed */
+          box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* Subtle shadow */
+          padding: 24px; /* Adjust padding as needed */
+      }
+      .custom-range {
+          -webkit-appearance: none;
+          width: 100%;
+          height: 8px;
+          background: #fcfcfc;
+          border-radius: 999px;
+          outline: none;
+      }
+      .custom-range::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 18px;
+          height: 18px;
+          background: #007AFF;
+          border-radius: 50%;
+          cursor: pointer;
+      }
+      .custom-range::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          background: #007AFF;
+          border-radius: 50%;
+          cursor: pointer;
+          border: none;
+      }
+      .floating-label {
+          position: absolute;
+          pointer-events: none;
+          left: 12px;
+          top: 12px;
+          transition: 0.2s ease all;
+      }
+      .input-container:focus-within .floating-label,
+      .input-container.has-value .floating-label {
+          top: -10px;
+          left: 10px;
+          font-size: 12px;
+          color: #007AFF;
+          background-color: #fcfcfc;
+          padding: 0 4px;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      input[type="number"] {
+          -moz-appearance: textfield;
+      }
+    .glass-card input,
+    .glass-card textarea,
+    .glass-card select {
+      background-color: #fff; /* White background */
+      border: 1px solid #e5e5e5; /* Thin grey border */
+      color: #333; /* Dark grey text */
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    .glass-card label {
+      color: #333; /* Dark grey for labels */
+    }
+.matrix-card {
+  background: #181818 !important;         /* Dark background */
+  border: 1px solid #333 !important;      /* Dark border */
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  color: #f3f4f6;                         /* Light text for contrast */
+}
+
+</style>
+</head>
+<body class="min-h-screen">
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Header -->
+<header class="bg-white shadow-sm fixed w-full z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <div class="flex-shrink-0">
+                <a href="index.html" class="font-['Pacifico'] text-2xl text-primary">Tiffany Tay</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="index.html" data-readdy="true" class="flex items-center text-gray-700 hover:text-primary">
+                    <i class="ri-arrow-left-line mr-1"></i>
+                    Back to Portfolio
+                </a>
+                <div class="flex items-center space-x-3">
+                    <a href="project-detail-4.html" class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </a>
+                    <span class="text-sm text-gray-500">Project 5 of 5</span>
+                    <a href="project-detail-1.html" class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <a href="https://readdy.ai/home/e8d1107f-9213-4e3a-bc3b-cad8f268cbab/aebef8f1-40b1-4ea3-8cbf-3fb692ae452c" data-readdy="true" class="flex items-center justify-center w-10 h-10 text-gray-700">
+                    <i class="ri-arrow-left-line ri-lg"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="pt-24 pb-12 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative h-[400px] md:h-[500px] overflow-hidden rounded-lg mb-8">
+            <img src="graphics/grantseeking-tracker.png" alt="Grantseeking Tracker Dashboard" class="w-full h-full object-cover object-top">
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-70"></div>
+            <div class="absolute bottom-0 left-0 p-8">
+                <span class="inline-block bg-primary bg-opacity-90 text-white px-3 py-1 text-sm font-medium rounded-full mb-4">Documentation</span>
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">User Documentation Example</h1>
+                <p class="text-lg text-gray-100 max-w-2xl">A sample on my approach to creating user documentation efficiently without sacrificing user experience.</p>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                <div class="text-sm text-gray-500 mb-1">Industry</div>
+                <div class="font-semibold text-gray-900">Various</div>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                <div class="text-sm text-gray-500 mb-1">Completion</div>
+                <div class="font-semibold text-gray-900">November 2025</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content Navigation -->
+<div class="bg-white border-b sticky top-16 z-40">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex overflow-x-auto py-4 scrollbar-hide">
+            <ul class="flex space-x-8">
+                <li><a href="#overview" class="text-primary font-medium whitespace-nowrap">Overview</a></li>
+                <li><a href="#challenge" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Challenge</a></li>
+                <li><a href="#solution" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Solution</a></li>
+                <li><a href="#technologies" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Technologies</a></li>
+                <li><a href="#results" class="text-gray-600 hover:text-primary font-medium whitespace-nowrap">Results</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-12">
+            <!-- Main Content -->
+            <div class="lg:w-2/3">
+                <!-- Overview Section -->
+                <section id="overview" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Project Overview</h2>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        This mini-project shows my approach to creating user documentation as efficiently as possible but still providing enough detail to allow users to easily follow the document. For this example, I used getting started with Power BI Desktop as the subject matter.
+                    </p>
+                </section>
+
+                <!-- Challenge Section -->
+                <section id="challenge" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">The Challenge</h2>
+                    <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-red-100 text-red-600 mr-4 mt-1 flex-shrink-0">
+                                <i class="ri-error-warning-line"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Key Challenges</h3>
+                                <p class="text-gray-700">
+                                    To design an easy-to-follow user guide quickly.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">User Experience Design</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                With grants at various stages—from drafting to decision and payment—tracking critical deadlines, deliverables, and funder relationships required pulling these separate data points into a flexible data model and creating realistic sample datasets for demonstration.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Process Optimization</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Prioritizing the right data points is critical so that users can easily identify which deadlines, application statuses and funder deliverables required attention immediately.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Solution Section -->
+                <section id="solution" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">The Solution</h2>
+                    <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-4 mt-1 flex-shrink-0">
+                                <i class="ri-lightbulb-line"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Solution Approach</h3>
+                                <p class="text-gray-700">
+                                    The dashboard integrates grant history, current application data, documentation and payment status to provide a comprehensive overview of a nonprofit's grantseeking operations. Currently, the dashboard has formatting inspired by theguardian.org's brand.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="embedded-guardian-grantseeking" style="margin-bottom: 20px;">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">The Guardian Version</h3>
+                        <iframe title="Grantseeking Tracker - Guardian" width="1014" height="612" src="https://app.powerbi.com/view?r=eyJrIjoiNWZkODFmZGMtYmExMy00OTk1LThhNTAtNmYyZTY4Y2ZhYjI0IiwidCI6IjYyOWQwNWU3LTIxODUtNDY4Zi04MjMyLTQzYmU1NTNhZmQ1ZSIsImMiOjJ9" frameborder="0" allowFullScreen="true"></iframe>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Grant Pipeline Visualization</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Easily track applications moving from drafted, submitted, approved, to declined. Status breakdowns and sortable tables highlight success rates and pipeline health.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Deadline & Deliverable Tracking</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Interactive status donuts show upcoming application deadlines, required reports and payment schedules at a glance. Overdue tasks and critical dates are automatically flagged for action.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Grant Portfolio Financials</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Summaries of total funding received, expected payments, and reimbursement trends support financial stewardship and forecasting. Payment receipt dates enhance transparency and audit-readiness.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Funder Relationship and Grant History Insights</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Visuals link funder names with grant outcomes and deadlines, clarifying performance history and strategic partnership opportunities.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Customizable Analytics</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Calculated columns (e.g., Days to Deadline) help prioritize urgent applications. Filters let users drill into specific years or statuses to inform strategic decision-making. More data points could be added as desired.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Technologies Used -->
+                <section id="technologies" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Technologies Used</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mb-4">
+                                <i class="ri-database-2-line ri-lg"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Data Collection & Management</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Perplexity AI</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Excel</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
+                                <i class="ri-code-box-line ri-lg"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Development</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Power Query</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">DAX</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">HTML</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                            <div class="w-12 h-12 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 mb-4">
+                                <i class="ri-pie-chart-line ri-lg"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Visualization</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                    <span class="text-gray-700">Power BI</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Skills Applied</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Data Modeling</span>
+                            <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">ETL Development</span>
+                            <span class="bg-red-100 text-red-800 text-sm px-3 py-1 rounded-full">Dashboard Design</span>
+                            <span class="bg-pink-100 text-pink-800 text-sm px-3 py-1 rounded-full">Data Visualization</span>
+                            <span class="bg-teal-100 text-teal-800 text-sm px-3 py-1 rounded-full">Performance Optimization</span>
+                            <span class="bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">User Experience Design</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section id="results" class="mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Results & Impact</h2>
+
+                    <p class="text-gray-700 mb-8 leading-relaxed">
+                        With its intuitive visualizations and up-to-date tracking, this dashboard empowers nonprofits to:
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                <span class="text-gray-700">Increase grant success rates by staying ahead of deadlines.</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                <span class="text-gray-700">Improve funder collaboration with timely deliverables and transparent reporting.</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                <span class="text-gray-700">Strengthen decision-making through actionable data and performance insights.</span>
+                            </li>
+                        </ul>
+                    </p>
+                    
+                </section>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="lg:w-1/3">
+                <div class="sticky-nav space-y-8">
+                    <!-- CTA Section -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">View Interactive Dashboard</h3>
+                        <p class="text-gray-700 mb-6">
+                            Experience the full functionality of this dashboard in an interactive demo on Power BI
+                        </p>
+                        <a href="https://app.powerbi.com/view?r=eyJrIjoiNWZkODFmZGMtYmExMy00OTk1LThhNTAtNmYyZTY4Y2ZhYjI0IiwidCI6IjYyOWQwNWU3LTIxODUtNDY4Zi04MjMyLTQzYmU1NTNhZmQ1ZSIsImMiOjJ9" class="block bg-primary text-white px-6 py-4 rounded-button font-medium hover:bg-opacity-90 transition text-center mb-4 whitespace-nowrap transform hover:scale-[1.02] hover:shadow-md flex items-center justify-center">
+                            <i class="ri-external-link-line mr-2"></i>
+                            Open in Power BI
+                        </a>
+                    </div>
+                    
+                    <!-- Contact Section -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Interested in a Similar Solution?</h3>
+                        <p class="text-gray-700 mb-6">
+                            Let's discuss how I can help you develop a custom dashboard tailored to your organization's needs.
+                        </p>
+                        <a href="#contact-form" class="block bg-white border border-primary text-primary px-6 py-3 rounded-button font-medium hover:bg-primary hover:text-white transition text-center whitespace-nowrap">
+                            Contact Me
+                        </a>
+                    </div>
+                    
+                    <!-- Technologies Used Summary -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Technologies</h3>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Power BI</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Excel</span>
+                            <span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Perplexity AI</span>
+                        </div>
+                        
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Project Details</h3>
+                        <ul class="space-y-3">
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Completion:</span>
+                                <span class="font-medium text-gray-900">September 2025</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600">Industry:</span>
+                                <span class="font-medium text-gray-900">Nonprofit</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Form Section -->
+<section id="contact-form" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Get In Touch</h2>
+            <p class="text-gray-700 mb-8 text-center">
+                Interested in discussing this project or how I can help with your data analytics needs? Send me a message!
+            </p>
+            <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+              <input type="hidden" name="access_key" value="d5b0b07d-d2c0-4a93-acf3-259cf4caee86">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+              <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+              </div>
+              <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Your Email</label>
+              <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+              </div>
+              </div>
+              <div class="mb-6">
+              <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+              <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+              </div>
+              <div class="mb-6">
+              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+              <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required></textarea>
+              </div>
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+              <button type="submit" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">Send</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0">
+                <a href="index.html" class="font-['Pacifico'] text-2xl text-white mb-4 inline-block">Tiffany Tay</a>
+            </div>
+            <div class="flex space-x-6">
+                <a href="index.html" data-readdy="true" class="text-gray-400 hover:text-white flex items-center">
+                    <i class="ri-arrow-left-line mr-2"></i>
+                    Back to Portfolio
+                </a>
+                <a href="https://www.linkedin.com/in/tiffany-n-tay/" class="text-gray-400 hover:text-white">
+                    <i class="ri-linkedin-fill ri-lg"></i>
+                </a>
+                <a href="https://github.com/tiffanytay" class="text-gray-400 hover:text-white">
+                    <i class="ri-github-fill ri-lg"></i>
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400">© 2025 Tiffany Tay. All rights reserved.</p>
+            <div class="mt-4 md:mt-0 flex space-x-6">
+                <a href="privacy-policy-details.html" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+                <a href="terms-of-service.html" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
+                <a href="privacy-policy-details.html#cookies" class="text-gray-400 hover:text-white text-sm">Cookies Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to top button -->
+<button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+    <i class="ri-arrow-up-line ri-lg"></i>
+</button>
+
+<!-- Image Lightbox -->
+<div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center hidden">
+    <button id="close-lightbox" class="absolute top-6 right-6 text-white w-10 h-10 flex items-center justify-center">
+        <i class="ri-close-line ri-2x"></i>
+    </button>
+    <img id="lightbox-image" src="" alt="Lightbox image" class="max-w-[90%] max-h-[90vh] object-contain">
+</div>
+
+<!-- Scripts -->
+<script id="navigation-script">
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('nav a');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+                
+                // Update active state
+                navLinks.forEach(navLink => {
+                    navLink.classList.remove('text-primary');
+                    navLink.classList.add('text-gray-600');
+                });
+                
+                this.classList.remove('text-gray-600');
+                this.classList.add('text-primary');
+            }
+        });
+    });
+    
+    // Update active link on scroll
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section[id]');
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.offsetHeight;
+            
+            if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                currentSection = '#' + section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('text-primary');
+            link.classList.add('text-gray-600');
+            
+            if (link.getAttribute('href') === currentSection) {
+                link.classList.remove('text-gray-600');
+                link.classList.add('text-primary');
+            }
+        });
+    });
+});
+</script>
+
+<script id="progress-bar-script">
+document.addEventListener('DOMContentLoaded', function() {
+    const progressBar = document.getElementById('progressBar');
+    
+    window.addEventListener('scroll', function() {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight - windowHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        const width = (scrollTop / documentHeight) * 100;
+        progressBar.style.width = width + '%';
+    });
+});
+</script>
+
+<script id="back-to-top-script">
+document.addEventListener('DOMContentLoaded', function() {
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.remove('opacity-0', 'invisible');
+            backToTopButton.classList.add('opacity-100', 'visible');
+        } else {
+            backToTopButton.classList.remove('opacity-100', 'visible');
+            backToTopButton.classList.add('opacity-0', 'invisible');
+        }
+    });
+    
+    backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+</script>
+
+<script id="lightbox-script">
+document.addEventListener('DOMContentLoaded', function() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const closeLightbox = document.getElementById('close-lightbox');
+    
+    galleryItems.forEach(item => {
+        const image = item.querySelector('img');
+        const viewButton = item.querySelector('button');
+        
+        viewButton.addEventListener('click', function() {
+            lightboxImage.src = image.src;
+            lightboxImage.alt = image.alt;
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    closeLightbox.addEventListener('click', function() {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    });
+    
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    });
+});
+</script>
+
+<script>
+const form = document.getElementById('form');
+const result = document.getElementById('result');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+  result.innerHTML = "Please wait..."
+
+    fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.innerHTML = "Form submitted successfully";
+            } else {
+                console.log(response);
+                result.innerHTML = json.message;
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+        })
+        .then(function() {
+            form.reset();
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 3000);
+        });
+});
+</script>
+
+</body>
+</html>
