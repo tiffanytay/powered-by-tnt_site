@@ -6,7 +6,23 @@
 <title>Tiffany Tay - Operations & Analytics Leadership</title>
 <link rel="icon" type="image/x-icon" href="graphics/favicon.ico">
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>tailwind.config={theme:{extend:{colors:{primary:'#0000FF',secondary:'#10B981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<script>
+  tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#0F172A',   /* Midnight Navy */
+        accent: '#B68D40',    /* Muted Gold */
+        secondary: '#475569', /* Slate Gray */
+        surface: '#F8FAFC'    /* Off-white */
+      },
+      borderRadius: {
+        'button': '4px'       /* Sharper edges for a more "Executive" feel */
+      }
+    }
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -16,22 +32,21 @@
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
 <style>
-  /* Custom Whimsy & Depth */
-  .glass-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
+  body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; color: #1E293B; }
   
-  .hero-gradient {
-    background: radial-gradient(circle at 0% 0%, #ffffff 0%, #f0f4ff 100%);
+  /* Sophisticated Hover: Project cards lift and glow slightly */
+  .project-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
   }
 
-  /* Accessibility: Visible Focus for keyboard users */
-  a:focus, button:focus {
-    outline: 3px solid #10B981;
-    outline-offset: 2px;
-  }
+  /* Custom Data-viz Scroll Bar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #F1F5F9; }
+  ::-webkit-scrollbar-thumb { background: #0F172A; border-radius: 4px; }
 </style>
 
 <body class="bg-gray-50 overflow-x-hidden">
@@ -160,378 +175,99 @@
 </script>
   
 <!-- Projects Section -->
-<section id="projects" class="py-20 bg-white">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center mb-16">
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
-<p class="text-xl text-gray-600 max-w-3xl mx-auto">
-A sample of my work in business intelligence, operational optimization and social impact measurement.
-</p>
-</div>
-<div class="mb-8 flex justify-center">
-<div class="inline-flex rounded-full bg-gray-100 p-1">
-<button class="project-filter-btn active px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap bg-primary text-white" data-filter="all">All Projects</button>
-<button class="project-filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-filter="wrangling">Data Wrangling</button>
-<button class="project-filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-filter="visualization">Visualization</button>
-<button class="project-filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-filter="documentation">Documentation</button>
-<!--<button class="project-filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" data-filter="ai">AI & ML</button>-->
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- Project 1 -->
-<div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="visualization">
-<div class="relative h-60 overflow-hidden">
-<img src="graphics/coqual-990-financial-screenshot.png" alt="Nonprofit in a Nutshell Dashboard, Financial Summary page, 40% transparent" class="w-full object-cover object-top">
-<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
-<a href="project-detail-1.html" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Nonprofit Insights Dashboard – Form 990 Data Aggregation</h3>
-<p class="text-gray-600 mb-4">
-Turning complex nonprofit tax data into clear stories of impact and financial health.
-</p>
-<div class="flex flex-wrap gap-2">
-<span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Power BI</span>
-<span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Power Query</span>
-</div>
-</div>
-</div>
-<!-- Project 2 -->
-<div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="visualization">
-<div class="relative h-60 overflow-hidden">
-<img src="graphics/projmgmt-dashboard.png" alt="Project Management Dashboard screenshot" class="w-full h-full object-cover object-top">
-<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
-<a href="project-detail-2.html" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Project Management Dashboard</h3>
-<p class="text-gray-600 mb-4">
-A dynamic Excel-based dashboard that transforms raw project data into instant, actionable insights.
-</p>
-<div class="flex flex-wrap gap-2">
-<span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Tableau</span>
-  <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Excel</span>
-</div>
-</div>
-</div>
-<!-- Project 3 -->
-<div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="wrangling">
-<div class="relative h-60 overflow-hidden">
-<img src="graphics/nkc-screenshot_tiffany-tay.png" alt="Data for Paws Power BI screenshot" class="w-full h-full object-cover object-top">
-<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
-<a href="project-detail-3.html" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Data for Paws - Opportunities Dashboard</h3>
-<p class="text-gray-600 mb-4">
-Wrangling and visualizing raw animal shelter and rescue data from Colorado into actionable insights to improve animal welfare.
-</p>
-<div class="flex flex-wrap gap-2">
-<span class="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full">Python</span>
-<span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Tableau</span>
-<span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Power BI</span>
-<span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Slack</span>
-</div>
-</div>
-</div>
-<!-- Project 4 -->
-<div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="visualization">
-<div class="relative h-60 overflow-hidden">
-<img src="graphics/grantseeking-tracker.png" alt="Grantseeking Tracker Dashboard screenshot" class="w-full h-full object-cover object-top">
-<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
-<a href="project-detail-4.html" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Grantseeking Tracker</h3>
-<p class="text-gray-600 mb-4">
-A practical, data-driven tool for nonprofits to manage the entire grant lifecycle.
-</p>
-<div class="flex flex-wrap gap-2">
-<span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Power BI</span>
-<span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Excel</span>
-<span class="bg-orange-100 text-orange-800 text-xs px-3 py-1 rounded-full">Perplexity AI</span>
-</div>
-</div>
-</div>
-<!-- Project 5 -->
-<div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="documentation">
-<div class="relative h-60 overflow-hidden">
-<img src="graphics/doc-sample-cover.png" alt="Top part of cover page to Getting Started with Power BI" class="w-full h-full object-cover object-top">
-<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
-<a href="project-detail-5.html" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">User Documentation Example</h3>
-<p class="text-gray-600 mb-4">
-A sample on my approach to creating user documentation efficiently without sacrificing user experience.
-</p>
-<div class="flex flex-wrap gap-2">
-<span class="bg-teal-100 text-teal-800 text-xs px-3 py-1 rounded-full">Power BI</span>
-<span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">Google Docs</span>
-<span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Perplexity AI</span>
-</div>
-</div>
-</div>
-<!-- Project 6 -->
-<!-- <div class="project-card bg-white rounded shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300" data-category="ai">
-<div class="relative h-60 overflow-hidden">
-<img src="https://readdy.ai/api/search-image?query=natural%20language%20processing%20chatbot%20interface%2C%20AI%20conversational%20assistant%20for%20customer%20service%2C%20professional%20tech%20design%20showing%20chatbot%20analytics%20and%20conversation%20flows%2C%20sentiment%20analysis%20visualization%2C%20modern%20digital%20interface&width=600&height=400&seq=project6&orientation=landscape" alt="NLP Chatbot Analytics" class="w-full h-full object-cover object-top">
-<div class="project-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 transition-opacity duration-300">
-<a href="#" class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">View Details</a>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">NLP Chatbot Analytics</h3>
-<p class="text-gray-600 mb-4">
-Natural Language Processing chatbot with integrated analytics dashboard to monitor conversation quality and customer satisfaction.
-</p>
-<div class="flex flex-wrap gap-2">
-<span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">BERT</span>
-<span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Flask</span>
-<span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">MongoDB</span>
-</div>
-</div>
-</div> -->
-</div>
-</div>
+<section id="projects" class="py-24 bg-white">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+      <div class="max-w-2xl" data-aos="fade-right">
+        <h2 class="text-xs font-bold tracking-[0.2em] text-accent uppercase mb-3">Portfolio</h2>
+        <h3 class="text-4xl font-serif text-primary italic">Turning Data into Strategy</h3>
+      </div>
+      <div class="flex gap-2 bg-slate-100 p-1 rounded-sm" data-aos="fade-left">
+        <button class="px-6 py-2 text-sm font-medium bg-white shadow-sm text-primary">All</button>
+        <button class="px-6 py-2 text-sm font-medium text-secondary hover:text-primary transition-colors">Nonprofit</button>
+        <button class="px-6 py-2 text-sm font-medium text-secondary hover:text-primary transition-colors">Analytics</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div class="project-card group" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-video bg-slate-200">
+          <img src="graphics/coqual-990-financial-screenshot.png" alt="990 Dashboard" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700">
+          <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center p-8 text-white">
+            <p class="text-accent font-bold mb-2">Impact Highlight:</p>
+            <p class="text-lg mb-6">Automated 50+ hours of manual data entry into a 1-click financial health narrative.</p>
+            <a href="#" class="border-b border-accent w-fit hover:text-accent transition-colors">View Case Study →</a>
+          </div>
+        </div>
+        <div class="mt-6">
+          <h4 class="text-2xl font-bold text-primary mb-2">Nonprofit Insights Engine</h4>
+          <p class="text-secondary leading-relaxed mb-4">A high-level dashboard aggregating Form 990 data to visualize organizational sustainability for board-level decision-making.</p>
+          <div class="flex gap-3">
+             <span class="text-[10px] tracking-widest uppercase font-bold border border-slate-200 px-2 py-1">Power BI</span>
+             <span class="text-[10px] tracking-widest uppercase font-bold border border-slate-200 px-2 py-1">Financial Analysis</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card group" data-aos="fade-up" data-aos-delay="200">
+        <div class="relative overflow-hidden aspect-video bg-slate-200">
+          <img src="graphics/nkc-screenshot_tiffany-tay.png" alt="Animal Rescue Data" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700">
+          <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center p-8 text-white">
+            <p class="text-accent font-bold mb-2">Impact Highlight:</p>
+            <p class="text-lg mb-6">Mapped 10,000+ data points to identify regional rescue bottlenecks in Colorado.</p>
+            <a href="#" class="border-b border-accent w-fit hover:text-accent transition-colors">View Case Study →</a>
+          </div>
+        </div>
+        <div class="mt-6">
+          <h4 class="text-2xl font-bold text-primary mb-2">Data for Paws Dashboard</h4>
+          <p class="text-secondary leading-relaxed mb-4">Wrangling disparate animal shelter data into a cohesive geographical heat map to optimize rescue operations.</p>
+          <div class="flex gap-3">
+             <span class="text-[10px] tracking-widest uppercase font-bold border border-slate-200 px-2 py-1">Python</span>
+             <span class="text-[10px] tracking-widest uppercase font-bold border border-slate-200 px-2 py-1">Tableau</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <!-- Skills Section -->
-<section id="skills" class="py-20 bg-gray-50">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center mb-16">
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
-<p class="text-xl text-gray-600 max-w-3xl mx-auto">
-My professional toolkit includes a wide range of data analytics, visualization, and programming skills.
-</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-<div>
-<div class="mb-12">
-<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-<div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-3">
-<i class="ri-bar-chart-box-line text-primary ri-lg"></i>
-</div>
-Product & Operations Management
-</h3>
-<div class="space-y-6">
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">Strategic Planning</span>
-    <span class="text-gray-500 font-medium">Advanced</span>
+<section id="skills" class="py-24 bg-slate-50 border-y border-slate-200">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+      
+      <div data-aos="fade-right">
+        <h2 class="text-3xl font-serif text-primary mb-6">The Strategic <br>Intersection</h2>
+        <p class="text-secondary mb-8">My value lies at the crossroads of rigorous CPA-level financial oversight and modern AI-driven analytics.</p>
+        <div class="p-6 bg-primary text-white rounded-sm shadow-xl">
+           <p class="text-sm italic text-slate-400">"Tiffany bridges the gap between the board room and the server room."</p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10" data-aos="fade-left">
+        <div>
+          <h4 class="flex items-center text-primary font-bold mb-4">
+            <i class="ri-shield-check-line mr-2 text-accent"></i> Core Governance
+          </h4>
+          <ul class="space-y-3 text-secondary text-sm">
+            <li class="flex justify-between border-b border-slate-200 pb-1"><span>CPA Financial Oversight</span><span class="text-primary font-bold italic">Expert</span></li>
+            <li class="flex justify-between border-b border-slate-200 pb-1"><span>Nonprofit Operations</span><span class="text-primary font-bold italic">Expert</span></li>
+            <li class="flex justify-between border-b border-slate-200 pb-1"><span>Strategic Planning</span><span class="text-primary font-bold italic">Advanced</span></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="flex items-center text-primary font-bold mb-4">
+            <i class="ri-database-2-line mr-2 text-accent"></i> Data Intelligence
+          </h4>
+          <ul class="space-y-3 text-secondary text-sm">
+            <li class="flex justify-between border-b border-slate-200 pb-1"><span>Power BI (DAX)</span><span class="text-primary font-bold italic">Advanced</span></li>
+            <li class="flex justify-between border-b border-slate-200 pb-1"><span>Python / SQL</span><span class="text-primary font-bold italic">Proficient</span></li>
+            <li class="flex justify-between border-b border-slate-200 pb-1"><span>AI Agents (LLMs)</span><span class="text-primary font-bold italic">Emerging</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-  </div>
-</div>
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">Stakeholder Management</span>
-    <span class="text-gray-500 font-medium">Advanced</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-  </div>
-</div>
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">Impact Measurement</span>
-    <span class="text-gray-500 font-medium">Advanced</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-  </div>
-</div>
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">Agile Leadership</span>
-    <span class="text-gray-500 font-medium">Intermediate</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment"></div>
-  </div>
-</div>
-</div>
-</div>
-<div>
-<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-<div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-3">
-<i class="ri-code-box-line text-primary ri-lg"></i>
-</div>
-Programming Languages
-</h3>
-<div class="space-y-6">
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">DAX</span>
-    <span class="text-gray-500 font-medium">Advanced</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-  </div>
-</div>
-  <div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">Python</span>
-    <span class="text-gray-500 font-medium">Intermediate</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment"></div>
-  </div>
-</div>
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">SQL</span>
-    <span class="text-gray-500 font-medium">Beginner</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment"></div>
-    <div class="skill-segment"></div>
-  </div>
-</div>
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">HTML</span>
-    <span class="text-gray-500 font-medium">Beginner</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment"></div>
-    <div class="skill-segment"></div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-<div>
-<div class="mb-12">
-<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-<div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-3">
-<i class="ri-pie-chart-line text-primary ri-lg"></i>
-</div>
-Data Visualization
-</h3>
-<div class="space-y-6">
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">Power BI</span>
-    <span class="text-gray-500 font-medium">Advanced</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-  </div>
-</div>
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">Tableau</span>
-    <span class="text-gray-500 font-medium">Intermediate</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment"></div>
-  </div>
-</div>
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">Matplotlib/Seaborn/Plotly</span>
-    <span class="text-gray-500 font-medium">Intermediate</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment"></div>
-  </div>
-</div>
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">UI/UX Design</span>
-    <span class="text-gray-500 font-medium">Intermediate</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment"></div>
-  </div>
-</div>
-</div>
-</div>
-<div>
-<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-<div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-3">
-<i class="ri-ai-generate text-primary ri-lg"></i>
-</div>
-AI & Machine Learning
-</h3>
-<div class="space-y-6">
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">Natural Language Processing</span>
-    <span class="text-gray-500 font-medium">Intermediate</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment"></div>
-  </div>
-</div>
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">Retreival Augmented Generation</span>
-    <span class="text-gray-500 font-medium">Intermediate</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment active"></div>
-    <div class="skill-segment"></div>
-  </div>
-</div>
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">Scikit-learn</span>
-    <span class="text-gray-500 font-medium">Beginner</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment"></div>
-    <div class="skill-segment"></div>
-  </div>
-</div>
-<div>
-  <div class="flex justify-between mb-1">
-    <span class="text-gray-700 font-medium">AI Agents</span>
-    <span class="text-gray-500 font-medium">Beginner</span>
-  </div>
-  <div class="skill-scale">
-    <div class="skill-segment active"></div>
-    <div class="skill-segment"></div>
-    <div class="skill-segment"></div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </section>
 <!-- AI Chatbot Section -->
 <section class="py-20 chatbot-bg bg-cover bg-center">
@@ -615,147 +351,42 @@ Tiffany excels in Tableau and Power BI, with over 7 years of experience creating
 </div>
 </section>
 <!-- About Section -->
-<section id="about" class="py-20 bg-white">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center mb-16">
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">About Me</h2>
-<p class="text-xl text-gray-600 max-w-3xl mx-auto">
-A passionate data and ops professional with a focus on turning complex information into actionable insights and optimizing processes to make all our lives easier.
-</p>
-</div>
-<div class="flex flex-col md:flex-row items-center">
-<div class="md:w-2/5 mb-8 md:mb-0">
-<img
-src="graphics/6.jpeg"
-alt="Tiffany Tay headshot #6"
-class="rounded-lg shadow-md w-full max-w-md mx-auto"
->
-</div>
-<div class="md:w-3/5 md:pl-12">
-<h3 class="text-2xl font-bold text-gray-900 mb-4">My Journey</h3>
-<p class="text-gray-700 mb-6 leading-relaxed">
-Over the past decade, I’ve led product and operations initiatives that have transformed both B2B SaaS platforms and nonprofit organizations. I excel at turning complex data into clear strategies, building user-focused solutions, and streamlining operations to maximize impact and efficiency.
-</p>
-<p class="text-gray-700 mb-6 leading-relaxed">
-I’ve managed cross-functional teams to deliver measurable growth—whether increasing SaaS customer retention through automated reporting or redesigning nonprofit workflows to accelerate mission delivery. My strength lies in bridging technology with social good, creating scalable tools and processes that empower organizations to work smarter and achieve more.
-</p>
-<p class="text-gray-700 mb-6 leading-relaxed">
-Looking ahead, I’m focused on deepening my expertise in nonprofit operations management and impact measurement. I want to partner with mission-driven teams to build data-driven, user-centered solutions that drive sustainable growth and social change. My goal is to lead and innovate at the crossroads of technology, analytics, and purpose, turning vision into tangible results.
-</p>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-<div>
-<h4 class="text-lg font-bold text-gray-900 mb-2">Education</h4>
-<ul class="space-y-3">
-<li class="flex items-start">
-<div class="w-6 h-6 flex items-center justify-center text-primary mr-2 mt-0.5">
-<i class="ri-graduation-cap-line"></i>
-</div>
-<div>
-<div class="font-medium">Master in Professional Accounting</div>
-<div class="font-medium">Bachelor of Business Administration</div>
-<div class="text-sm text-gray-600">The University of Texas at Austin</div>
-</div>
-</li>
-<li class="flex items-start">
-<div class="w-6 h-6 flex items-center justify-center text-primary mr-2 mt-0.5">
-<i class="ri-graduation-cap-line"></i>
-</div>
-<div>
-<div class="font-medium">Texas Academy of Math & Science</div>
-<div class="text-sm text-gray-600">University of North Texas</div>
-<div class="text-sm text-gray-500 italic">Early entrance college program</div>
-</div>
-</li>
-</ul>
-</div>
-<div>
-<h4 class="text-lg font-bold text-gray-900 mb-2">Certifications</h4>
-<ul class="space-y-3">
-<li class="flex items-start">
-<div class="w-6 h-6 flex items-center justify-center text-primary mr-2 mt-0.5">
-<i class="ri-award-line"></i>
-</div>
-<div>
-<div class="font-medium">Applied Data Science Lab</div>
-<div class="text-sm text-gray-600">WorldQuant University, 2025</div>
-</div>
-</li>
-<li class="flex items-start">
-<div class="w-6 h-6 flex items-center justify-center text-primary mr-2 mt-0.5">
-<i class="ri-award-line"></i>
-</div>
-<div>
-<div class="font-medium">Certified Public Accountant (CPA)</div>
-<div class="text-sm text-gray-600">Licensed in New York State and Texas</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
+<section id="about" class="py-24 bg-white">
+  <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div class="relative" data-aos="fade-right">
+        <img src="graphics/6.jpeg" alt="Tiffany Tay" class="relative z-10 rounded-sm">
+        <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-accent z-0"></div>
+      </div>
+      <div data-aos="fade-left">
+        <h2 class="text-xs font-bold tracking-[0.2em] text-accent uppercase mb-3">My Philosophy</h2>
+        <h3 class="text-3xl font-serif text-primary mb-6">Decisions shouldn't be made in the dark.</h3>
+        <p class="text-secondary leading-relaxed mb-6">
+          With a background as a licensed CPA and a decade in SaaS operations, I help organizations build the "nervous system" they need to scale. Whether it's a nonprofit or a tech-startup, I focus on the three pillars of excellence: **Data Integrity**, **Process Automation**, and **Measurable Impact**.
+        </p>
+        <div class="grid grid-cols-2 gap-4">
+          <div><h5 class="font-bold text-primary">10+ Years</h5><p class="text-xs text-secondary">Operations Experience</p></div>
+          <div><h5 class="font-bold text-primary">NY/TX</h5><p class="text-xs text-secondary">CPA Licensure</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
 <!-- Contact Section -->
-<section id="contact" class="py-20 bg-gray-50">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center mb-16">
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-<p class="text-xl text-gray-600 max-w-3xl mx-auto">
-Interested in working together? Feel free to reach out for collaborations or just a friendly chat.
-</p>
-</div>
-<div class="flex flex-col lg:flex-row">
-<div class="lg:w-1/2 lg:pr-12 mb-12 lg:mb-0">
-<div class="bg-white rounded-lg shadow-md p-8">
-<h3 class="text-2xl font-bold text-gray-900 mb-6">Send Me a Message</h3>
-<form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
-  <input type="hidden" name="access_key" value="d5b0b07d-d2c0-4a93-acf3-259cf4caee86">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-  <div>
-  <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
-  <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
+<footer id="contact" class="bg-primary text-white py-20">
+  <div class="container mx-auto px-4 text-center">
+    <h3 class="text-3xl font-serif mb-8" data-aos="fade-up">Let's build something scalable.</h3>
+    <p class="text-slate-400 mb-10 max-w-lg mx-auto" data-aos="fade-up" data-aos-delay="100">
+      Available for leadership roles, consulting engagements, or board-level advisory regarding analytics and nonprofit ops.
+    </p>
+    <a href="mailto:ttay@poweredbytnt.com" class="inline-block bg-accent text-white px-10 py-4 rounded-sm font-bold hover:bg-opacity-90 transition-all shadow-lg" data-aos="zoom-in">
+      Get In Touch
+    </a>
   </div>
-  <div>
-  <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Your Email</label>
-  <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
-  </div>
-  </div>
-  <div class="mb-6">
-  <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
-  <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required>
-  </div>
-  <div class="mb-6">
-  <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-  <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded border border-gray-300 focus:border-primary" required></textarea>
-  </div>
-  <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-  <button type="submit" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">Send</button>
-</form>
-</div>
-</div>
-<div class="lg:w-1/2 lg:pl-12">
-<div class="bg-white rounded-lg shadow-md p-8 mb-8">
-<h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
-<ul class="space-y-6">
-<li class="flex items-start">
-<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-primary mr-4">
-<i class="ri-mail-line ri-lg"></i>
-</div>
-<div>
-<div class="text-sm text-gray-500 mb-1">Email</div>
-<a href="mailto:tiffany.tay@gmail.com" class="text-gray-900 hover:text-primary">ttay@poweredbytnt.com</a>
-</div>
-</li>
-<!-- <li class="flex items-start">
-<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-primary mr-4">
-<i class="ri-phone-line ri-lg"></i>
-</div>
-<div>
-<div class="text-sm text-gray-500 mb-1">Phone</div>
-<a href="tel:+14155552671" class="text-gray-900 hover:text-primary">+1 (415) 555-2671</a>
-</div>
-</li> -->
+</footer>
+  
+
 <li class="flex items-start">
 <div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-primary mr-4">
 <i class="ri-map-pin-line ri-lg"></i>
@@ -778,13 +409,7 @@ Interested in working together? Feel free to reach out for collaborations or jus
 </a>
 </a>
 </div>
-<div class="mt-8">
-<h4 class="text-lg font-bold text-gray-900 mb-4">Availability</h4>
-<div class="flex items-center mb-2">
-<div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-<span class="text-gray-700">Currently available for freelance projects</span>
-</div>
-</div>
+
 </div>
 </div>
 </div>
@@ -829,20 +454,11 @@ Bridging technology and social impact through innovative product management and 
 <li><a href="#home" class="text-gray-400 hover:text-white">Consulting</a></li>
 </ul>
 </div>
-<!-- <div class="col-span-2 md:col-span-1">
-<h3 class="text-lg font-semibold mb-4">Subscribe</h3>
-<p class="text-gray-400 mb-4">Stay updated with my latest projects and insights.</p>
-<form class="flex">
-<input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-button text-gray-900 border-none">
-<button type="submit" class="bg-primary text-white px-4 py-2 rounded-r-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
-Subscribe
-</button>
-</form>
-</div> -->
+
 </div>
 </div>
 <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-<p class="text-gray-400">© 2025 Tiffany Tay. All rights reserved.</p>
+<p class="text-gray-400">© 2026 Tiffany Tay. All rights reserved.</p>
 <div class="mt-4 md:mt-0 flex space-x-6">
 <a href="privacy-policy-details.html" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
 <a href="terms-of-service.html" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
