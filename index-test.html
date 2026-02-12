@@ -71,6 +71,38 @@
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   transition: background 0.5s ease;
 }
+/* Vertical Strategy Swap Animation */
+@keyframes strategy-swap {
+  0%, 20% { transform: translateY(0); }
+  25%, 45% { transform: translateY(-25%); }
+  50%, 70% { transform: translateY(-50%); }
+  75%, 95% { transform: translateY(-75%); }
+  100% { transform: translateY(0); }
+}
+
+.animate-strategy-swap {
+  animation: strategy-swap 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+/* Force Thumbnails to Color on Hover */
+.project-card {
+  perspective: 1000px;
+}
+
+.project-card img {
+  filter: grayscale(100%) contrast(1.1);
+  transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover img {
+  filter: grayscale(0%) contrast(1);
+  transform: scale(1.08) rotate(1deg);
+}
+
+/* Accent link hover effect */
+.project-card:hover .project-title {
+  color: #B68D40;
+}
 </style>
 
 <body class="bg-gray-50 overflow-x-hidden">
@@ -91,40 +123,65 @@
   </div>
 </header>
 
-<section id="home" class="hero-gradient min-h-screen flex items-center pt-20 relative overflow-hidden bg-white">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="flex flex-col lg:flex-row items-center gap-12">
+<section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#F8FAFC]">
+  
+  <div class="absolute inset-0 z-0 opacity-[0.03]" style="background-image: radial-gradient(#0F172A 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+  <div class="container mx-auto px-4 lg:px-8 relative z-10">
+    <div class="flex flex-col lg:flex-row items-center gap-16">
       
-      <div class="lg:w-1/2" data-aos="fade-right">
-        <span class="inline-block py-1 px-3 rounded-full bg-slate-100 text-primary text-xs font-bold tracking-widest mb-4 border border-slate-200">
-          CPA + DATA STRATEGY
-        </span>
-        <h1 class="text-5xl md:text-7xl font-bold text-gray-900 leading-[1.1] mb-6">
-          Systems that <br>
-          <span id="typed-text" class="text-accent"></span>
+      <div class="lg:w-1/2">
+        <div class="inline-flex items-center gap-3 py-2 px-4 rounded-full bg-emerald-50 border border-emerald-100 mb-6">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span class="text-[10px] font-bold tracking-[0.2em] text-emerald-700 uppercase">Available for 2026 Strategy Partners</span>
+        </div>
+
+        <h1 class="text-6xl md:text-8xl font-bold text-primary leading-[1.05] tracking-tighter mb-8">
+          I build systems <br>that 
+          <span class="relative inline-block text-accent italic font-serif h-[1.1em] overflow-hidden align-bottom">
+            <span class="flex flex-col animate-strategy-swap">
+              <span>scale.</span>
+              <span>endure.</span>
+              <span>inspire.</span>
+              <span>scale.</span>
+            </span>
+          </span>
         </h1>
-        <p class="text-xl text-gray-600 mb-8 max-w-xl leading-relaxed">
-          I bridge the gap between <strong>complex data</strong> and <strong>human impact</strong>. I turn operational friction into scalable, colorful workflows.
+
+        <p class="text-xl text-secondary leading-relaxed max-w-lg mb-10 border-l-2 border-slate-200 pl-6">
+          A <span class="text-primary font-semibold">CPA-led approach</span> to operational excellence. I translate chaotic data into high-integrity growth engines for nonprofits and startups.
         </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="#projects" class="bg-primary text-white px-8 py-4 rounded-button font-bold hover:bg-slate-800 transition-all shadow-lg">Explore Work</a>
-          <a href="https://www.linkedin.com/in/tiffany-n-tay/" target="_blank" class="flex items-center gap-2 border border-slate-300 px-8 py-4 rounded-button font-bold text-primary hover:bg-slate-50 transition-all">
-            <i class="ri-linkedin-box-fill text-xl"></i> LinkedIn
+
+        <div class="flex flex-wrap gap-5">
+          <a href="#projects" class="bg-primary text-white px-10 py-5 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-accent transition-all duration-500 shadow-2xl">
+            View Case Studies
+          </a>
+          <a href="https://www.linkedin.com/in/tiffany-n-tay/" target="_blank" class="flex items-center gap-3 px-8 py-5 rounded-sm font-bold text-primary border border-slate-200 hover:bg-white hover:border-accent transition-all">
+            <i class="ri-linkedin-fill text-xl"></i>
+            <span class="uppercase text-xs tracking-widest">Connect</span>
           </a>
         </div>
       </div>
 
-      <div class="lg:w-1/2 w-full" data-aos="zoom-in" data-aos-delay="400">
-        <div class="bg-white border border-slate-200 p-8 rounded-sm shadow-2xl relative overflow-hidden">
-          <div class="flex justify-between items-center mb-6">
-            <div>
-              <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400">Strategic Performance</h4>
-              <p class="text-lg font-bold text-primary italic font-serif">Revenue vs. Social Impact</p>
-            </div>
-            <i class="ri-bar-chart-box-line text-accent text-3xl"></i>
-          </div>
-          <div id="hero-chart-new" style="width: 100%; height: 350px;"></div>
+      <div class="lg:w-1/2 w-full relative">
+        <div class="relative z-10 bg-white p-2 shadow-[0_50px_100px_-20px_rgba(15,23,42,0.15)] border border-slate-100">
+           <div class="bg-slate-50 p-6 border-b border-slate-100 flex justify-between items-center">
+              <div>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Operational Health Index</p>
+                <p class="text-xl font-serif italic text-primary">Strategic Efficiency</p>
+              </div>
+              <div class="flex gap-2">
+                <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                  <i class="ri-arrow-right-up-line"></i>
+                </div>
+              </div>
+           </div>
+           <div id="hero-chart-new" style="width: 100%; height: 380px;" class="p-4"></div>
         </div>
+        <div class="absolute -bottom-6 -right-6 w-full h-full bg-accent/10 -z-10 border border-accent/20"></div>
       </div>
 
     </div>
@@ -156,17 +213,37 @@ document.addEventListener('DOMContentLoaded', function() {
     cursorChar: '|'
   });
 
-  // ECharts Logic - ensure the container has height
+  // Step Line Chart Logic - ensure the container has height
   const chartDom = document.getElementById('hero-chart-new');
-  if (chartDom) {
-    const myChart = echarts.init(chartDom);
-    // ... insert the 'option' code from the previous response here ...
-    myChart.setOption(option);
-    
-    window.addEventListener('resize', function() {
-      myChart.resize();
-    });
-  }
+  const myChart = echarts.init(chartDom);
+  const option = {
+    grid: { top: 20, right: 20, bottom: 40, left: 20, containLabel: true },
+    xAxis: {
+      type: 'category',
+      data: ['2022', '2023', '2024', '2025', '2026'],
+      axisLine: { lineStyle: { color: '#E2E8F0' } },
+      axisLabel: { color: '#94A3B8', fontSize: 10, fontWeight: 'bold' }
+    },
+    yAxis: { show: false },
+    series: [
+      {
+        name: 'Systemic Stability',
+        type: 'line',
+        step: 'middle', // Innovative "Step" look
+        data: [120, 132, 201, 234, 290],
+        lineStyle: { color: '#B68D40', width: 3 },
+        itemStyle: { color: '#B68D40', borderWidth: 2 },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(182, 141, 64, 0.1)' },
+            { offset: 1, color: 'transparent' }
+          ])
+        }
+      }
+    ]
+  };
+  myChart.setOption(option);
+  window.addEventListener('resize', myChart.resize);
 });
 </script>
   
