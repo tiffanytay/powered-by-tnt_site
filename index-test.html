@@ -33,77 +33,175 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
   
 <style>
-  /* Fixes the "dullness" with a subtle ambient glow */
-  .hero-gradient {
-    background: radial-gradient(circle at 10% 20%, rgba(182, 141, 64, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+  /* 1. Global & Animation Polish */
+  body { font-family: 'Inter', sans-serif; background-color: #0F172A; }
+  
+  @keyframes strategy-swap {
+    0%, 20% { transform: translateY(0); }
+    25%, 45% { transform: translateY(-25%); }
+    50%, 70% { transform: translateY(-50%); }
+    75%, 95% { transform: translateY(-75%); }
+    100% { transform: translateY(0); }
+  }
+  .animate-strategy-swap {
+    animation: strategy-swap 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
   }
 
-  /* Color-on-hover for thumbnails */
-  .project-card img {
-    filter: grayscale(100%) brightness(0.9);
-    transition: all 0.5s ease;
+  /* 2. Interactive Chart Container */
+  #hero-interactive-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
   }
-  .project-card:hover img {
-    filter: grayscale(0%) brightness(1.1);
-    transform: scale(1.03);
+
+  /* 3. Readability Overlay */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: radial-gradient(circle at 20% 50%, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.4) 100%);
+    pointer-events: none;
   }
-  /* 1. Force thumbnails to pop into color */
-.project-card .project-thumbnail-img {
-  filter: grayscale(100%);
-  transition: filter 0.5s ease, transform 0.5s ease;
-  will-change: filter;
-}
 
-.project-card:hover .project-thumbnail-img {
-  filter: grayscale(0%) !important;
-  transform: scale(1.05);
-}
-
-/* 2. Fix the "glitchy" typewriter cursor */
-.typed-cursor {
-  color: #B68D40;
-  font-size: 1.2em;
-}
-
-/* 3. Smooth background transition */
-.hero-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  transition: background 0.5s ease;
-}
-/* Vertical Strategy Swap Animation */
-@keyframes strategy-swap {
-  0%, 20% { transform: translateY(0); }
-  25%, 45% { transform: translateY(-25%); }
-  50%, 70% { transform: translateY(-50%); }
-  75%, 95% { transform: translateY(-75%); }
-  100% { transform: translateY(0); }
-}
-
-.animate-strategy-swap {
-  animation: strategy-swap 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
-}
-
-/* Force Thumbnails to Color on Hover */
-.project-card {
-  perspective: 1000px;
-}
-
-.project-card img {
-  filter: grayscale(100%) contrast(1.1);
-  transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.project-card:hover img {
-  filter: grayscale(0%) contrast(1);
-  transform: scale(1.08) rotate(1deg);
-}
-
-/* Accent link hover effect */
-.project-card:hover .project-title {
-  color: #B68D40;
-}
+  /* 4. Project Thumbnail Color Fix */
+  .project-card .project-thumbnail-img {
+    filter: grayscale(100%) brightness(0.8) !important;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  .project-card:hover .project-thumbnail-img {
+    filter: grayscale(0%) brightness(1) !important;
+    transform: scale(1.05);
+  }
 </style>
+
+<section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#0F172A]">
+  
+  <canvas id="hero-interactive-canvas"></canvas>
+  <div class="hero-overlay"></div>
+
+  <div class="container mx-auto px-4 lg:px-8 relative z-10">
+    <div class="lg:w-2/3" data-aos="fade-right">
+      <div class="inline-flex items-center gap-3 py-2 px-4 rounded-full bg-accent/10 border border-accent/20 mb-6">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+        </span>
+        <span class="text-[10px] font-bold tracking-[0.2em] text-accent uppercase">Strategic Systems Expert</span>
+      </div>
+
+      <h1 class="text-6xl md:text-8xl font-bold text-white leading-[1.05] tracking-tighter mb-8">
+        I build systems <br>that 
+        <span class="relative inline-block text-accent italic font-serif h-[1.1em] overflow-hidden align-bottom">
+          <span class="flex flex-col animate-strategy-swap">
+            <span>scale.</span>
+            <span>endure.</span>
+            <span>inspire.</span>
+            <span>scale.</span>
+          </span>
+        </span>
+      </h1>
+
+      <p class="text-xl text-slate-300 leading-relaxed max-w-lg mb-10 border-l-2 border-accent/30 pl-6">
+        A <span class="text-white font-semibold">CPA-led approach</span> to operational excellence. I translate chaotic data into high-integrity growth engines.
+      </p>
+
+      <div class="flex flex-wrap gap-5">
+        <a href="#projects" class="bg-accent text-primary px-10 py-5 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-white transition-all duration-500 shadow-2xl">
+          View Case Studies
+        </a>
+        <a href="#contact" class="flex items-center gap-3 px-8 py-5 rounded-sm font-bold text-white border border-slate-700 hover:border-accent transition-all">
+          <span class="uppercase text-xs tracking-widest">Inquire</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/**
+ * INTERACTIVE NEURAL GRID SCRIPT
+ * Creates a reactive node-link system that follows the mouse.
+ */
+(function() {
+  const canvas = document.getElementById('hero-interactive-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const particleCount = 80;
+  const mouse = { x: null, y: null, radius: 150 };
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.x;
+    mouse.y = e.y;
+  });
+
+  function init() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        baseX: Math.random() * canvas.width,
+        baseY: Math.random() * canvas.height,
+        density: (Math.random() * 30) + 1
+      });
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particles.length; i++) {
+      let p = particles[i];
+      
+      // Movement logic
+      let dx = mouse.x - p.x;
+      let dy = mouse.y - p.y;
+      let distance = Math.sqrt(dx*dx + dy*dy);
+      
+      if (distance < mouse.radius) {
+        p.x -= dx / 10;
+        p.y -= dy / 10;
+      } else {
+        if (p.x !== p.baseX) p.x += (p.baseX - p.x) / 20;
+        if (p.y !== p.baseY) p.y += (p.baseY - p.y) / 20;
+      }
+
+      // Draw Particle
+      ctx.fillStyle = '#B68D40'; // Gold dots
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Draw Lines (Neural connections)
+      for (let j = i; j < particles.length; j++) {
+        let p2 = particles[j];
+        let dx2 = p.x - p2.x;
+        let dy2 = p.y - p2.y;
+        let dist2 = Math.sqrt(dx2*dx2 + dy2*dy2);
+
+        if (dist2 < 120) {
+          ctx.strokeStyle = `rgba(182, 141, 64, ${1 - dist2/120})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', init);
+  init();
+  animate();
+})();
+</script>
 
 <body class="bg-gray-50 overflow-x-hidden">
 
@@ -123,105 +221,130 @@
   </div>
 </header>
 
-<section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-primary">
+<section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#0F172A]">
   
-  <div id="hero-interactive-viz" class="absolute inset-0 z-0 opacity-60"></div>
-  
-  <div class="absolute inset-0 z-10 bg-gradient-to-r from-primary via-primary/80 to-transparent"></div>
+  <canvas id="hero-interactive-canvas"></canvas>
+  <div class="hero-overlay"></div>
 
-  <div class="container mx-auto px-4 lg:px-8 relative z-20">
-    <div class="flex flex-col lg:flex-row items-center gap-16">
-      
-      <div class="lg:w-3/5" data-aos="fade-right">
-        <div class="inline-flex items-center gap-3 py-2 px-4 rounded-full bg-accent/10 border border-accent/20 mb-6">
-          <span class="text-[10px] font-bold tracking-[0.2em] text-accent uppercase">Operational Intelligence 2026</span>
-        </div>
+  <div class="container mx-auto px-4 lg:px-8 relative z-10">
+    <div class="lg:w-2/3" data-aos="fade-right">
+      <div class="inline-flex items-center gap-3 py-2 px-4 rounded-full bg-accent/10 border border-accent/20 mb-6">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+        </span>
+        <span class="text-[10px] font-bold tracking-[0.2em] text-accent uppercase">Strategic Systems Expert</span>
+      </div>
 
-        <h1 class="text-6xl md:text-8xl font-bold text-white leading-[1.05] tracking-tighter mb-8">
-          I build systems <br>that 
-          <span class="relative inline-block text-accent italic font-serif h-[1.1em] overflow-hidden align-bottom">
-            <span class="flex flex-col animate-strategy-swap">
-              <span>scale.</span>
-              <span>endure.</span>
-              <span>inspire.</span>
-              <span>scale.</span>
-            </span>
+      <h1 class="text-6xl md:text-8xl font-bold text-white leading-[1.05] tracking-tighter mb-8">
+        I build systems <br>that 
+        <span class="relative inline-block text-accent italic font-serif h-[1.1em] overflow-hidden align-bottom">
+          <span class="flex flex-col animate-strategy-swap">
+            <span>scale.</span>
+            <span>endure.</span>
+            <span>inspire.</span>
+            <span>scale.</span>
           </span>
-        </h1>
-        <p class="text-xl text-slate-300 leading-relaxed max-w-lg mb-10 border-l-2 border-accent/30 pl-6">
-          Harnessing the power of <span class="text-white font-semibold">interactive data</span> to drive nonprofit and startup strategy. 
-        </p>
-        
-        <div class="flex gap-4">
-            <a href="#projects" class="bg-accent text-primary px-10 py-5 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-white transition-all">Explore Work</a>
-        </div>
+        </span>
+      </h1>
+
+      <p class="text-xl text-slate-300 leading-relaxed max-w-lg mb-10 border-l-2 border-accent/30 pl-6">
+        A <span class="text-white font-semibold">CPA-led approach</span> to operational excellence. I translate chaotic data into high-integrity growth engines.
+      </p>
+
+      <div class="flex flex-wrap gap-5">
+        <a href="#projects" class="bg-accent text-primary px-10 py-5 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-white transition-all duration-500 shadow-2xl">
+          View Case Studies
+        </a>
+        <a href="#contact" class="flex items-center gap-3 px-8 py-5 rounded-sm font-bold text-white border border-slate-700 hover:border-accent transition-all">
+          <span class="uppercase text-xs tracking-widest">Inquire</span>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const chartDom = document.getElementById('hero-interactive-viz');
-    const myChart = echarts.init(chartDom);
-    
-    // Generate random data points (nodes)
-    const nodes = [];
-    for (let i = 0; i < 50; i++) {
-        nodes.push({
-            id: i,
-            name: '',
-            symbolSize: Math.random() * 10 + 5,
-            x: Math.random() * 1000,
-            y: Math.random() * 1000,
-            itemStyle: { color: i % 2 === 0 ? '#B68D40' : '#475569' }
-        });
+/**
+ * INTERACTIVE NEURAL GRID SCRIPT
+ * Creates a reactive node-link system that follows the mouse.
+ */
+(function() {
+  const canvas = document.getElementById('hero-interactive-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const particleCount = 80;
+  const mouse = { x: null, y: null, radius: 150 };
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.x;
+    mouse.y = e.y;
+  });
+
+  function init() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        baseX: Math.random() * canvas.width,
+        baseY: Math.random() * canvas.height,
+        density: (Math.random() * 30) + 1
+      });
     }
+  }
 
-    const option = {
-        backgroundColor: 'transparent',
-        series: [{
-            type: 'graph',
-            layout: 'force',
-            animation: false,
-            data: nodes,
-            force: {
-                repulsion: 100,
-                edgeLength: 150,
-                gravity: 0.1
-            },
-            lineStyle: {
-                color: '#B68D40',
-                opacity: 0.1,
-                width: 1,
-                curveness: 0.3
-            },
-            emphasis: {
-                focus: 'adjacency',
-                lineStyle: { width: 4, opacity: 0.5 }
-            }
-        }]
-    };
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particles.length; i++) {
+      let p = particles[i];
+      
+      // Movement logic
+      let dx = mouse.x - p.x;
+      let dy = mouse.y - p.y;
+      let distance = Math.sqrt(dx*dx + dy*dy);
+      
+      if (distance < mouse.radius) {
+        p.x -= dx / 10;
+        p.y -= dy / 10;
+      } else {
+        if (p.x !== p.baseX) p.x += (p.baseX - p.x) / 20;
+        if (p.y !== p.baseY) p.y += (p.baseY - p.y) / 20;
+      }
 
-    myChart.setOption(option);
+      // Draw Particle
+      ctx.fillStyle = '#B68D40'; // Gold dots
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
 
-    // MOUSE INTERACTION LOGIC
-    window.addEventListener('mousemove', function(e) {
-        // Subtle shift of the chart gravity based on mouse position
-        const xPercent = (e.clientX / window.innerWidth) * 100;
-        const yPercent = (e.clientY / window.innerHeight) * 100;
-        
-        myChart.setOption({
-            series: [{
-                force: {
-                    center: [xPercent + '%', yPercent + '%']
-                }
-            }]
-        });
-    });
+      // Draw Lines (Neural connections)
+      for (let j = i; j < particles.length; j++) {
+        let p2 = particles[j];
+        let dx2 = p.x - p2.x;
+        let dy2 = p.y - p2.y;
+        let dist2 = Math.sqrt(dx2*dx2 + dy2*dy2);
 
-    window.addEventListener('resize', () => myChart.resize());
-});
+        if (dist2 < 120) {
+          ctx.strokeStyle = `rgba(182, 141, 64, ${1 - dist2/120})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', init);
+  init();
+  animate();
+})();
 </script>
   
 <!-- Projects Section -->
@@ -515,63 +638,21 @@ card.style.display = 'none';
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize AOS
-  AOS.init({ duration: 1000, once: true });
-
-  // Typewriter
-  new Typed('#typed-text', {
-    strings: ['scale with integrity.', 'optimize growth.', 'simplify complexity.', 'maximize impact.'],
-    typeSpeed: 50,
-    backSpeed: 30,
-    loop: true
+  // 1. Initialize AOS (Animate on Scroll)
+  // This keeps your cards fading in beautifully
+  AOS.init({ 
+    duration: 1000, 
+    once: true,
+    mirror: false 
   });
 
-  // The Fix: Target the new ID and use proper configuration
-  const chartDom = document.getElementById('hero-chart-new');
-  if (chartDom) {
-    const myChart = echarts.init(chartDom);
-    const option = {
-      tooltip: { trigger: 'axis' },
-      grid: { left: '0%', right: '5%', bottom: '5%', top: '10%', containLabel: true },
-      xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: ['Q1', 'Q2', 'Q3', 'Q4', 'Current'],
-        axisLine: { lineStyle: { color: '#CBD5E1' } }
-      },
-      yAxis: { show: false },
-      series: [
-        {
-          name: 'Revenue Growth',
-          type: 'line',
-          smooth: true,
-          data: [30, 45, 40, 70, 95],
-          lineStyle: { color: '#B68D40', width: 4 }, // Gold
-          itemStyle: { color: '#B68D40' },
-          areaStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: 'rgba(182, 141, 64, 0.2)' },
-              { offset: 1, color: 'transparent' }
-            ])
-          }
-        },
-        {
-          name: 'Social Impact',
-          type: 'line',
-          smooth: true,
-          data: [20, 50, 65, 80, 110],
-          lineStyle: { color: '#10B981', width: 4, type: 'dashed' }, // Emerald Green
-          itemStyle: { color: '#10B981' }
-        }
-      ]
-    };
-    myChart.setOption(option);
-
-    window.addEventListener('resize', () => myChart.resize());
-  }
+  // 2. Clean up legacy instances
+  // We explicitly stop any Typed.js or old ECharts attempts 
+  // to target IDs that no longer exist.
+  const oldChart = document.getElementById('hero-chart-new');
+  if (oldChart) oldChart.innerHTML = ''; 
 });
 </script>
-
 
 </body>
 </html>
