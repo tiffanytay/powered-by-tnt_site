@@ -48,6 +48,29 @@
     filter: grayscale(0%) brightness(1.1);
     transform: scale(1.03);
   }
+  /* 1. Force thumbnails to pop into color */
+.project-card .project-thumbnail-img {
+  filter: grayscale(100%);
+  transition: filter 0.5s ease, transform 0.5s ease;
+  will-change: filter;
+}
+
+.project-card:hover .project-thumbnail-img {
+  filter: grayscale(0%) !important;
+  transform: scale(1.05);
+}
+
+/* 2. Fix the "glitchy" typewriter cursor */
+.typed-cursor {
+  color: #B68D40;
+  font-size: 1.2em;
+}
+
+/* 3. Smooth background transition */
+.hero-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  transition: background 0.5s ease;
+}
 </style>
 
 <body class="bg-gray-50 overflow-x-hidden">
@@ -109,48 +132,42 @@
 </section>
 
 <script>
-  // Initialize AOS
-  AOS.init({ duration: 1000, once: true });
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize AOS first
+  AOS.init({ duration: 800, once: true });
 
-  // Typewriter Effect
-  new Typed('#typed-text', {
-    strings: ['drive social change.', 'optimize growth.', 'simplify complexity.', 'scale impact.'],
-    typeSpeed: 50,
-    backSpeed: 30,
-    loop: true
+  // Kill any existing Typed instance if it exists (prevents double-typing)
+  if (window.ityped) { window.ityped.destroy(); }
+
+  // New Clean Typewriter Instance
+  window.ityped = new Typed('#typed-text', {
+    strings: [
+      'maximize social impact.', 
+      'optimize financial growth.', 
+      'simplify complex data.', 
+      'scale nonprofit operations.'
+    ],
+    typeSpeed: 60,
+    backSpeed: 40,
+    backDelay: 2000, // Gives user time to read
+    startDelay: 500,
+    loop: true,
+    showCursor: true,
+    cursorChar: '|'
   });
 
-  // Hero Background Viz (Flow Diagram Style)
-  const chartDom = document.getElementById('hero-chart');
-  const myChart = echarts.init(chartDom);
-  const option = {
-    series: [{
-      type: 'graph',
-      layout: 'force',
-      animation: true,
-      data: [
-        { name: 'Data', symbolSize: 60, itemStyle: {color: '#0000FF'} },
-        { name: 'Strategy', symbolSize: 40 },
-        { name: 'Impact', symbolSize: 80, itemStyle: {color: '#10B981'} },
-        { name: 'Scalability', symbolSize: 50 },
-        { name: 'Automation', symbolSize: 30 },
-      ],
-      links: [
-        { source: 'Data', target: 'Strategy' },
-        { source: 'Strategy', target: 'Impact' },
-        { source: 'Data', target: 'Automation' },
-        { source: 'Automation', target: 'Scalability' },
-        { source: 'Scalability', target: 'Impact' }
-      ],
-      lineStyle: { opacity: 0.2, width: 2, curveness: 0.3 },
-      force: { repulsion: 1000, edgeLength: 200 },
-      label: { show: true, position: 'right', fontSize: 14 }
-    }]
-  };
-  myChart.setOption(option);
-
-  // Resize chart on window resize
-  window.addEventListener('resize', () => myChart.resize());
+  // ECharts Logic - ensure the container has height
+  const chartDom = document.getElementById('hero-chart-new');
+  if (chartDom) {
+    const myChart = echarts.init(chartDom);
+    // ... insert the 'option' code from the previous response here ...
+    myChart.setOption(option);
+    
+    window.addEventListener('resize', function() {
+      myChart.resize();
+    });
+  }
+});
 </script>
   
 <!-- Projects Section -->
@@ -170,31 +187,35 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
       <div class="project-card group" data-aos="fade-up">
-        <div class="relative overflow-hidden aspect-video bg-slate-200">
-          <img src="graphics/coqual-990-financial-screenshot.png" alt="990 Dashboard" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700">
-          <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center p-8 text-white">
-            <p class="text-accent font-bold mb-2">Impact Highlight:</p>
-            <p class="text-lg mb-6">Automated 50+ hours of manual data entry into a 1-click financial health narrative.</p>
-            <a href="project-detail-1.html" class="border-b border-accent w-fit hover:text-accent transition-colors">View Case Study →</a>
+        <div class="relative overflow-hidden aspect-video bg-slate-200 rounded-sm">
+          <img src="graphics/coqual-990-financial-screenshot.png" 
+               class="project-thumbnail-img w-full h-full object-cover">
+          
+          <div class="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center p-8 text-white">
+            <p class="text-accent font-bold mb-2 uppercase tracking-tighter text-xs">Impact Highlight</p>
+            <p class="text-lg mb-6 font-medium leading-snug">Automated 50+ hours of manual data entry.</p>
+            <a href="project-detail-1.html" class="text-sm font-bold border-b border-accent w-fit hover:text-accent transition-colors">View Case Study →</a>
           </div>
         </div>
         <div class="mt-6">
           <h4 class="text-2xl font-bold text-primary mb-2">Nonprofit Insights Engine</h4>
-          <p class="text-secondary leading-relaxed mb-4">A high-level dashboard aggregating Form 990 data to visualize organizational sustainability for board-level decision-making.</p>
-          <div class="flex gap-3">
-             <span class="text-[10px] tracking-widest uppercase font-bold border border-slate-200 px-2 py-1">Power BI</span>
-             <span class="text-[10px] tracking-widest uppercase font-bold border border-slate-200 px-2 py-1">Financial Analysis</span>
+          <div class="flex gap-2">
+             <span class="text-[10px] tracking-widest uppercase font-bold text-slate-400">Power BI</span>
+             <span class="text-[10px] tracking-widest uppercase font-bold text-slate-400">•</span>
+             <span class="text-[10px] tracking-widest uppercase font-bold text-slate-400">Financial Analysis</span>
           </div>
         </div>
       </div>
 
-      <div class="project-card group" data-aos="fade-up" data-aos-delay="200">
-        <div class="relative overflow-hidden aspect-video bg-slate-200">
-          <img src="graphics/nkc-screenshot_tiffany-tay.png" alt="Animal Rescue Data" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700">
-          <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center p-8 text-white">
-            <p class="text-accent font-bold mb-2">Impact Highlight:</p>
-            <p class="text-lg mb-6">Mapped 10,000+ data points to identify regional rescue bottlenecks in Colorado.</p>
-            <a href="project-detail-2.html" class="border-b border-accent w-fit hover:text-accent transition-colors">View Case Study →</a>
+      <div class="project-card group" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-video bg-slate-200 rounded-sm">
+          <img src="graphics/coqual-990-financial-screenshot.png" 
+               class="project-thumbnail-img w-full h-full object-cover">
+          
+          <div class="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center p-8 text-white">
+            <p class="text-accent font-bold mb-2 uppercase tracking-tighter text-xs">Impact Highlight:</p>
+            <p class="text-lg mb-6 font-medium leading-snug">Mapped 10,000+ data points to identify regional rescue bottlenecks in Colorado.</p>
+            <a href="project-detail-2.html" class="text-sm font-bold border-b border-accent w-fit hover:text-accent transition-colors">View Case Study →</a>
           </div>
         </div>
         <div class="mt-6">
@@ -342,6 +363,8 @@ Tiffany excels in Tableau and Power BI, with over 7 years of experience creating
         <h3 class="text-3xl font-serif text-primary mb-6">Decisions shouldn't be made in the dark.</h3>
         <p class="text-secondary leading-relaxed mb-6">
           With a background as a licensed CPA and a decade in consulting and SaaS operations, I help organizations build the "nervous system" they need to scale. Whether it's a nonprofit or a tech-startup, I focus on the three pillars of excellence:
+        </p>
+        <p class="text-secondary leading-relaxed mb-6">
           <ul>
             <li><strong>Data Integrity</strong></li>
             <li><strong>Process Automation</strong></li>
