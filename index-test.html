@@ -30,23 +30,24 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-
-<style>
-  body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; color: #1E293B; }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
   
-  /* Sophisticated Hover: Project cards lift and glow slightly */
-  .project-card {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+<style>
+  /* Fixes the "dullness" with a subtle ambient glow */
+  .hero-gradient {
+    background: radial-gradient(circle at 10% 20%, rgba(182, 141, 64, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
   }
 
-  /* Custom Data-viz Scroll Bar */
-  ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-track { background: #F1F5F9; }
-  ::-webkit-scrollbar-thumb { background: #0F172A; border-radius: 4px; }
+  /* Color-on-hover for thumbnails */
+  .project-card img {
+    filter: grayscale(100%) brightness(0.9);
+    transition: all 0.5s ease;
+  }
+  .project-card:hover img {
+    filter: grayscale(0%) brightness(1.1);
+    transform: scale(1.03);
+  }
 </style>
 
 <body class="bg-gray-50 overflow-x-hidden">
@@ -67,61 +68,39 @@
   </div>
 </header>
 
-<section id="home" class="hero-gradient min-h-screen flex items-center pt-20 relative overflow-hidden">
-  <div id="hero-chart" class="absolute right-[-10%] top-0 w-3/4 h-full opacity-40 z-0"></div>
-
+<section id="home" class="hero-gradient min-h-screen flex items-center pt-20 relative overflow-hidden bg-white">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="flex flex-col lg:flex-row items-center gap-12">
       
-      <div class="lg:w-3/5" data-aos="fade-up" data-aos-delay="200">
-        <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-primary text-sm font-bold mb-4">
-          OPERATIONS + ANALYTICS + IMPACT
+      <div class="lg:w-1/2" data-aos="fade-right">
+        <span class="inline-block py-1 px-3 rounded-full bg-slate-100 text-primary text-xs font-bold tracking-widest mb-4 border border-slate-200">
+          CPA + DATA STRATEGY
         </span>
         <h1 class="text-5xl md:text-7xl font-bold text-gray-900 leading-[1.1] mb-6">
-          I build systems that <br>
-          <span id="typed-text" class="text-primary"></span>
+          Systems that <br>
+          <span id="typed-text" class="text-accent"></span>
         </h1>
         <p class="text-xl text-gray-600 mb-8 max-w-xl leading-relaxed">
-          Bridging the gap between <strong>complex data</strong> and <strong>human impact</strong>. I specialize in turning operational friction into scalable workflows.
+          I bridge the gap between <strong>complex data</strong> and <strong>human impact</strong>. I turn operational friction into scalable, colorful workflows.
         </p>
         <div class="flex flex-wrap gap-4">
-          <a href="#projects" class="group flex items-center bg-gray-900 text-white px-8 py-4 rounded-button font-bold hover:bg-primary transition-all duration-300 shadow-xl">
-            Explore My Work
-            <i class="ri-arrow-right-line ml-2 group-hover:translate-x-1 transition-transform"></i>
+          <a href="#projects" class="bg-primary text-white px-8 py-4 rounded-button font-bold hover:bg-slate-800 transition-all shadow-lg">Explore Work</a>
+          <a href="https://www.linkedin.com/in/tiffany-n-tay/" target="_blank" class="flex items-center gap-2 border border-slate-300 px-8 py-4 rounded-button font-bold text-primary hover:bg-slate-50 transition-all">
+            <i class="ri-linkedin-box-fill text-xl"></i> LinkedIn
           </a>
-          <div class="flex items-center gap-4 ml-2">
-            <div class="flex -space-x-3">
-               <img src="graphics/13.jpeg" class="w-12 h-12 rounded-full border-2 border-white object-cover" alt="Tiffany profile">
-            </div>
-            <span class="text-sm text-gray-500 italic">Available for <br>strategic partnerships</span>
-          </div>
         </div>
       </div>
 
-      <div class="lg:w-2/5 w-full" data-aos="zoom-in" data-aos-delay="400">
-        <div class="glass-card p-8 rounded-3xl shadow-2xl relative">
-          <div class="flex justify-between items-start mb-8">
-            <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg">
-              <i class="ri-pulse-line ri-xl"></i>
+      <div class="lg:w-1/2 w-full" data-aos="zoom-in" data-aos-delay="400">
+        <div class="bg-white border border-slate-200 p-8 rounded-sm shadow-2xl relative overflow-hidden">
+          <div class="flex justify-between items-center mb-6">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400">Strategic Performance</h4>
+              <p class="text-lg font-bold text-primary italic font-serif">Revenue vs. Social Impact</p>
             </div>
-            <div class="text-right">
-              <div class="text-sm text-gray-400">Current Focus</div>
-              <div class="font-bold text-gray-900">Nonprofit Scalability</div>
-            </div>
+            <i class="ri-bar-chart-box-line text-accent text-3xl"></i>
           </div>
-          
-          <div class="space-y-6">
-            <div class="bg-gray-50/50 p-4 rounded-xl border border-gray-100">
-              <div class="flex justify-between text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">
-                <span>Operational Efficiency</span>
-                <span class="text-primary">+34%</span>
-              </div>
-              <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                <div class="bg-primary h-full w-[85%] rounded-full"></div>
-              </div>
-            </div>
-            <div id="mini-viz" class="h-32 w-full"></div>
-          </div>
+          <div id="hero-chart-new" style="width: 100%; height: 350px;"></div>
         </div>
       </div>
 
@@ -362,7 +341,12 @@ Tiffany excels in Tableau and Power BI, with over 7 years of experience creating
         <h2 class="text-xs font-bold tracking-[0.2em] text-accent uppercase mb-3">My Philosophy</h2>
         <h3 class="text-3xl font-serif text-primary mb-6">Decisions shouldn't be made in the dark.</h3>
         <p class="text-secondary leading-relaxed mb-6">
-          With a background as a licensed CPA and a decade in SaaS operations, I help organizations build the "nervous system" they need to scale. Whether it's a nonprofit or a tech-startup, I focus on the three pillars of excellence: **Data Integrity**, **Process Automation**, and **Measurable Impact**.
+          With a background as a licensed CPA and a decade in consulting and SaaS operations, I help organizations build the "nervous system" they need to scale. Whether it's a nonprofit or a tech-startup, I focus on the three pillars of excellence:
+          <ul>
+            <li><strong>Data Integrity</strong></li>
+            <li><strong>Process Automation</strong></li>
+            <li><strong>Measurable Impact</strong></li>
+          </ul>
         </p>
         <div class="grid grid-cols-2 gap-4">
           <div><h5 class="font-bold text-primary">10+ Years</h5><p class="text-xs text-secondary">Operations Experience</p></div>
@@ -452,7 +436,64 @@ card.style.display = 'none';
 });
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize AOS
+  AOS.init({ duration: 1000, once: true });
 
+  // Typewriter
+  new Typed('#typed-text', {
+    strings: ['scale with integrity.', 'optimize growth.', 'simplify complexity.', 'maximize impact.'],
+    typeSpeed: 50,
+    backSpeed: 30,
+    loop: true
+  });
+
+  // The Fix: Target the new ID and use proper configuration
+  const chartDom = document.getElementById('hero-chart-new');
+  if (chartDom) {
+    const myChart = echarts.init(chartDom);
+    const option = {
+      tooltip: { trigger: 'axis' },
+      grid: { left: '0%', right: '5%', bottom: '5%', top: '10%', containLabel: true },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['Q1', 'Q2', 'Q3', 'Q4', 'Current'],
+        axisLine: { lineStyle: { color: '#CBD5E1' } }
+      },
+      yAxis: { show: false },
+      series: [
+        {
+          name: 'Revenue Growth',
+          type: 'line',
+          smooth: true,
+          data: [30, 45, 40, 70, 95],
+          lineStyle: { color: '#B68D40', width: 4 }, // Gold
+          itemStyle: { color: '#B68D40' },
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgba(182, 141, 64, 0.2)' },
+              { offset: 1, color: 'transparent' }
+            ])
+          }
+        },
+        {
+          name: 'Social Impact',
+          type: 'line',
+          smooth: true,
+          data: [20, 50, 65, 80, 110],
+          lineStyle: { color: '#10B981', width: 4, type: 'dashed' }, // Emerald Green
+          itemStyle: { color: '#10B981' }
+        }
+      ]
+    };
+    myChart.setOption(option);
+
+    window.addEventListener('resize', () => myChart.resize());
+  }
+});
+</script>
 
 
 </body>
