@@ -33,62 +33,61 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
   
 <style>
-  /* 1. Global & Animation Polish */
-  body { font-family: 'Inter', sans-serif; background-color: #0F172A; }
-  
-  @keyframes strategy-swap {
-    0%, 20% { transform: translateY(0); }
-    25%, 45% { transform: translateY(-25%); }
-    50%, 70% { transform: translateY(-50%); }
-    75%, 95% { transform: translateY(-75%); }
-    100% { transform: translateY(0); }
-  }
-  .animate-strategy-swap {
-    animation: strategy-swap 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
-  }
+  /* 1. Ensure the Header is visible and high-contrast */
+header {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  z-index: 100 !important; /* Forces it above the canvas */
+  border-bottom: 1px solid #e2e8f0;
+}
 
-  /* 2. Interactive Chart Container */
-  #hero-interactive-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
+/* 2. Neural Background Layering */
+#hero-interactive-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Lowest layer */
+  background-color: #0F172A; /* Deep Navy */
+}
 
-  /* 3. Readability Overlay */
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background: radial-gradient(circle at 20% 50%, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.4) 100%);
-    pointer-events: none;
-  }
+/* 3. The "Strategic" Contrast Overlay */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  /* Darker on the left for text readability, clear on the right for the viz */
+  background: linear-gradient(to right, #0F172A 30%, rgba(15, 23, 42, 0.2) 100%);
+  pointer-events: none;
+}
 
-  /* 4. Project Thumbnail Color Fix */
-  .project-card .project-thumbnail-img {
-    filter: grayscale(100%) brightness(0.8) !important;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  }
-  .project-card:hover .project-thumbnail-img {
-    filter: grayscale(0%) brightness(1) !important;
-    transform: scale(1.05);
-  }
+/* 4. Text Content Layer */
+.hero-content-wrapper {
+  position: relative;
+  z-index: 10; /* Highest hero layer */
+}
+
+/* 5. Animation */
+@keyframes strategy-swap {
+  0%, 20% { transform: translateY(0); }
+  25%, 45% { transform: translateY(-25%); }
+  50%, 70% { transform: translateY(-50%); }
+  75%, 95% { transform: translateY(-75%); }
+  100% { transform: translateY(0); }
+}
+.animate-strategy-swap {
+  animation: strategy-swap 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
 </style>
 
-<section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#0F172A]">
+<section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
   
   <canvas id="hero-interactive-canvas"></canvas>
   <div class="hero-overlay"></div>
 
-  <div class="container mx-auto px-4 lg:px-8 relative z-10">
+  <div class="container mx-auto px-4 lg:px-8 hero-content-wrapper">
     <div class="lg:w-2/3" data-aos="fade-right">
-      <div class="inline-flex items-center gap-3 py-2 px-4 rounded-full bg-accent/10 border border-accent/20 mb-6">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-        </span>
+      <div class="inline-flex items-center gap-3 py-2 px-4 rounded-full bg-accent/20 border border-accent/40 mb-6">
         <span class="text-[10px] font-bold tracking-[0.2em] text-accent uppercase">Strategic Systems Expert</span>
       </div>
 
@@ -104,16 +103,13 @@
         </span>
       </h1>
 
-      <p class="text-xl text-slate-300 leading-relaxed max-w-lg mb-10 border-l-2 border-accent/30 pl-6">
+      <p class="text-xl text-slate-200 leading-relaxed max-w-lg mb-10 border-l-2 border-accent pl-6">
         A <span class="text-white font-semibold">CPA-led approach</span> to operational excellence. I translate chaotic data into high-integrity growth engines.
       </p>
 
       <div class="flex flex-wrap gap-5">
-        <a href="#projects" class="bg-accent text-primary px-10 py-5 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-white transition-all duration-500 shadow-2xl">
+        <a href="#projects" class="bg-accent text-primary px-10 py-5 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-white transition-all duration-500 shadow-2xl pointer-events-auto">
           View Case Studies
-        </a>
-        <a href="#contact" class="flex items-center gap-3 px-8 py-5 rounded-sm font-bold text-white border border-slate-700 hover:border-accent transition-all">
-          <span class="uppercase text-xs tracking-widest">Inquire</span>
         </a>
       </div>
     </div>
@@ -121,31 +117,27 @@
 </section>
 
 <script>
-/**
- * INTERACTIVE NEURAL GRID SCRIPT
- * Creates a reactive node-link system that follows the mouse.
- */
 (function() {
   const canvas = document.getElementById('hero-interactive-canvas');
   const ctx = canvas.getContext('2d');
   let particles = [];
-  const particleCount = 80;
-  const mouse = { x: null, y: null, radius: 150 };
+  const mouse = { x: null, y: null, radius: 180 };
 
   window.addEventListener('mousemove', (e) => {
-    mouse.x = e.x;
-    mouse.y = e.y;
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
   });
 
   function init() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     particles = [];
-    for (let i = 0; i < particleCount; i++) {
+    // Increased particle count for better density
+    for (let i = 0; i < 100; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1,
+        size: Math.random() * 3 + 1, // Larger dots
         baseX: Math.random() * canvas.width,
         baseY: Math.random() * canvas.height,
         density: (Math.random() * 30) + 1
@@ -157,36 +149,34 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < particles.length; i++) {
       let p = particles[i];
-      
-      // Movement logic
       let dx = mouse.x - p.x;
       let dy = mouse.y - p.y;
       let distance = Math.sqrt(dx*dx + dy*dy);
       
       if (distance < mouse.radius) {
-        p.x -= dx / 10;
-        p.y -= dy / 10;
+        p.x -= dx / 15;
+        p.y -= dy / 15;
       } else {
-        if (p.x !== p.baseX) p.x += (p.baseX - p.x) / 20;
-        if (p.y !== p.baseY) p.y += (p.baseY - p.y) / 20;
+        p.x += (p.baseX - p.x) / 30;
+        p.y += (p.baseY - p.y) / 30;
       }
 
-      // Draw Particle
-      ctx.fillStyle = '#B68D40'; // Gold dots
+      // Brighter Gold for Accessibility
+      ctx.fillStyle = '#D4AF37'; 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
 
-      // Draw Lines (Neural connections)
       for (let j = i; j < particles.length; j++) {
         let p2 = particles[j];
         let dx2 = p.x - p2.x;
         let dy2 = p.y - p2.y;
         let dist2 = Math.sqrt(dx2*dx2 + dy2*dy2);
 
-        if (dist2 < 120) {
-          ctx.strokeStyle = `rgba(182, 141, 64, ${1 - dist2/120})`;
-          ctx.lineWidth = 0.5;
+        if (dist2 < 150) { // Longer connection distance
+          // Higher opacity lines
+          ctx.strokeStyle = `rgba(212, 175, 55, ${0.4 - dist2/150})`;
+          ctx.lineWidth = 1; 
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
