@@ -133,82 +133,87 @@
     </section>
 
     <script>
-    (function() {
-        const canvas = document.getElementById('hero-interactive-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        const mouse = { x: null, y: null, radius: 180 };
+(function() {
+    const canvas = document.getElementById('hero-interactive-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const mouse = { x: null, y: null, radius: 200 }; // Slightly larger interaction area
 
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-        });
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
 
-        function init() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            // High Density for Visibility
-            for (let i = 0; i < 110; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2.5 + 1.5,
-                    baseX: Math.random() * canvas.width,
-                    baseY: Math.random() * canvas.height,
-                    density: (Math.random() * 30) + 1
-                });
+    function init() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        particles = [];
+        // Optimized count for thicker lines
+        for (let i = 0; i < 90; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 4 + 2, // Larger nodes
+                baseX: Math.random() * canvas.width,
+                baseY: Math.random() * canvas.height,
+                density: (Math.random() * 30) + 1
+            });
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = 0; i < particles.length; i++) {
+            let p = particles[i];
+            let dx = mouse.x - p.x;
+            let dy = mouse.y - p.y;
+            let distance = Math.sqrt(dx*dx + dy*dy);
+            
+            if (distance < mouse.radius) {
+                p.x -= dx / 12;
+                p.y -= dy / 12;
+            } else {
+                p.x += (p.baseX - p.x) / 25;
+                p.y += (p.baseY - p.y) / 25;
+            }
+
+            // Draw Glowing Nodes
+            ctx.fillStyle = '#D4AF37'; 
+            ctx.shadowBlur = 15; // Added glow effect
+            ctx.shadowColor = '#B68D40';
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0; // Reset blur for lines to keep them sharp
+
+            // Draw Thicker Connections
+            for (let j = i; j < particles.length; j++) {
+                let p2 = particles[j];
+                let dx2 = p.x - p2.x;
+                let dy2 = p.y - p2.y;
+                let dist2 = Math.sqrt(dx2*dx2 + dy2*dy2);
+
+                if (dist2 < 170) {
+                    // Increased opacity and fixed width
+                    ctx.strokeStyle = `rgba(212, 175, 55, ${0.6 - dist2/170})`; 
+                    ctx.lineWidth = 2; // Doubled thickness
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
             }
         }
+        requestAnimationFrame(animate);
+    }
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                let p = particles[i];
-                let dx = mouse.x - p.x;
-                let dy = mouse.y - p.y;
-                let distance = Math.sqrt(dx*dx + dy*dy);
-                
-                if (distance < mouse.radius) {
-                    p.x -= dx / 15;
-                    p.y -= dy / 15;
-                } else {
-                    p.x += (p.baseX - p.x) / 30;
-                    p.y += (p.baseY - p.y) / 30;
-                }
-
-                // Brighter gold dots
-                ctx.fillStyle = '#D4AF37'; 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
-
-                for (let j = i; j < particles.length; j++) {
-                    let p2 = particles[j];
-                    let dx2 = p.x - p2.x;
-                    let dy2 = p.y - p2.y;
-                    let dist2 = Math.sqrt(dx2*dx2 + dy2*dy2);
-
-                    if (dist2 < 160) {
-                        // High visibility connection lines
-                        ctx.strokeStyle = `rgba(182, 141, 64, ${0.45 - dist2/160})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('resize', init);
-        init();
-        animate();
-        AOS.init({ duration: 1000, once: true });
-    })();
-    </script>
+    window.addEventListener('resize', init);
+    init();
+    animate();
+    AOS.init({ duration: 1000, once: true });
+})();
+</script>
   
 <!-- Projects Section -->
 <section id="projects" class="py-24 bg-white">
@@ -239,10 +244,11 @@
         </div>
         <div class="mt-6">
           <h4 class="text-2xl font-bold text-primary mb-2">Nonprofit Insights Engine</h4>
-          <div class="flex gap-2">
-             <span class="text-[10px] tracking-widest uppercase font-bold text-slate-400">Power BI</span>
-             <span class="text-[10px] tracking-widest uppercase font-bold text-slate-400">•</span>
-             <span class="text-[10px] tracking-widest uppercase font-bold text-slate-400">Financial Analysis</span>
+          <p class="text-secondary leading-relaxed mb-4">[ ].</p>
+          <div class="flex gap-3">
+             <span class="text-[10px] tracking-widest uppercase font-bold border border-slate-200 px-2 py-1">Power BI</span>
+             <span class="text-[10px] tracking-widest uppercase font-bold border border-slate-200 px-2 py-1">•</span>
+             <span class="text-[10px] tracking-widest uppercase font-bold border border-slate-200 px-2 py-1">Financial Analysis</span>
           </div>
         </div>
       </div>
