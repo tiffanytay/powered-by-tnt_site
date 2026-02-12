@@ -33,309 +33,182 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
   
 <style>
-  /* 1. Ensure the Header is visible and high-contrast */
-header {
-  background-color: rgba(255, 255, 255, 0.98) !important;
-  z-index: 100 !important; /* Forces it above the canvas */
-  border-bottom: 1px solid #e2e8f0;
-}
-
-/* 2. Neural Background Layering */
-#hero-interactive-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1; /* Lowest layer */
-  background-color: #0F172A; /* Deep Navy */
-}
-
-/* 3. The "Strategic" Contrast Overlay */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  /* Darker on the left for text readability, clear on the right for the viz */
-  background: linear-gradient(to right, #0F172A 30%, rgba(15, 23, 42, 0.2) 100%);
-  pointer-events: none;
-}
-
-/* 4. Text Content Layer */
-.hero-content-wrapper {
-  position: relative;
-  z-index: 10; /* Highest hero layer */
-}
-
-/* 5. Animation */
-@keyframes strategy-swap {
-  0%, 20% { transform: translateY(0); }
-  25%, 45% { transform: translateY(-25%); }
-  50%, 70% { transform: translateY(-50%); }
-  75%, 95% { transform: translateY(-75%); }
-  100% { transform: translateY(0); }
-}
-.animate-strategy-swap {
-  animation: strategy-swap 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
-}
-</style>
-
-<section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
-  
-  <canvas id="hero-interactive-canvas"></canvas>
-  <div class="hero-overlay"></div>
-
-  <div class="container mx-auto px-4 lg:px-8 hero-content-wrapper">
-    <div class="lg:w-2/3" data-aos="fade-right">
-      <div class="inline-flex items-center gap-3 py-2 px-4 rounded-full bg-accent/20 border border-accent/40 mb-6">
-        <span class="text-[10px] font-bold tracking-[0.2em] text-accent uppercase">Strategic Systems Expert</span>
-      </div>
-
-      <h1 class="text-6xl md:text-8xl font-bold text-white leading-[1.05] tracking-tighter mb-8">
-        I build systems <br>that 
-        <span class="relative inline-block text-accent italic font-serif h-[1.1em] overflow-hidden align-bottom">
-          <span class="flex flex-col animate-strategy-swap">
-            <span>scale.</span>
-            <span>endure.</span>
-            <span>inspire.</span>
-            <span>scale.</span>
-          </span>
-        </span>
-      </h1>
-
-      <p class="text-xl text-slate-200 leading-relaxed max-w-lg mb-10 border-l-2 border-accent pl-6">
-        A <span class="text-white font-semibold">CPA-led approach</span> to operational excellence. I translate chaotic data into high-integrity growth engines.
-      </p>
-
-      <div class="flex flex-wrap gap-5">
-        <a href="#projects" class="bg-accent text-primary px-10 py-5 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-white transition-all duration-500 shadow-2xl pointer-events-auto">
-          View Case Studies
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script>
-(function() {
-  const canvas = document.getElementById('hero-interactive-canvas');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  const mouse = { x: null, y: null, radius: 180 };
-
-  window.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
-
-  function init() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    particles = [];
-    // Increased particle count for better density
-    for (let i = 0; i < 100; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 1, // Larger dots
-        baseX: Math.random() * canvas.width,
-        baseY: Math.random() * canvas.height,
-        density: (Math.random() * 30) + 1
-      });
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particles.length; i++) {
-      let p = particles[i];
-      let dx = mouse.x - p.x;
-      let dy = mouse.y - p.y;
-      let distance = Math.sqrt(dx*dx + dy*dy);
-      
-      if (distance < mouse.radius) {
-        p.x -= dx / 15;
-        p.y -= dy / 15;
-      } else {
-        p.x += (p.baseX - p.x) / 30;
-        p.y += (p.baseY - p.y) / 30;
-      }
-
-      // Brighter Gold for Accessibility
-      ctx.fillStyle = '#D4AF37'; 
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-
-      for (let j = i; j < particles.length; j++) {
-        let p2 = particles[j];
-        let dx2 = p.x - p2.x;
-        let dy2 = p.y - p2.y;
-        let dist2 = Math.sqrt(dx2*dx2 + dy2*dy2);
-
-        if (dist2 < 150) { // Longer connection distance
-          // Higher opacity lines
-          ctx.strokeStyle = `rgba(212, 175, 55, ${0.4 - dist2/150})`;
-          ctx.lineWidth = 1; 
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
+        /* 1. Header Visibility Fix */
+        header {
+            background-color: rgba(255, 255, 255, 0.98) !important;
+            z-index: 100 !important;
+            border-bottom: 1px solid #e2e8f0;
         }
-      }
-    }
-    requestAnimationFrame(animate);
-  }
 
-  window.addEventListener('resize', init);
-  init();
-  animate();
-})();
-</script>
+        /* 2. Neural Background - HIGH CONTRAST VERSION */
+        #hero-interactive-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background-color: #0F172A;
+        }
+
+        /* 3. Gradient Overlay for readability */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(to right, #0F172A 40%, rgba(15, 23, 42, 0.3) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* 4. Strategy Swap Animation */
+        @keyframes strategy-swap {
+            0%, 20% { transform: translateY(0); }
+            25%, 45% { transform: translateY(-25%); }
+            50%, 70% { transform: translateY(-50%); }
+            75%, 95% { transform: translateY(-75%); }
+            100% { transform: translateY(0); }
+        }
+        .animate-strategy-swap {
+            animation: strategy-swap 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+        }
+    </style>
+</head>
 
 <body class="bg-gray-50 overflow-x-hidden">
 
-<header class="bg-white/90 backdrop-blur-md shadow-sm fixed w-full z-50 transition-all duration-300">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-20 items-center">
-      <div class="flex-shrink-0" data-aos="fade-right">
-        <a href="#home" class="font-['Pacifico'] text-3xl text-primary" aria-label="Tiffany Tay Home">Tiffany Tay</a>
-      </div>
-      <nav class="hidden md:flex items-center space-x-10" data-aos="fade-down">
-        <a href="#projects" class="text-gray-600 hover:text-primary transition-colors font-medium">Projects</a>
-        <a href="#skills" class="text-gray-600 hover:text-primary transition-colors font-medium">Skills</a>
-        <a href="#about" class="text-gray-600 hover:text-primary transition-colors font-medium">About</a>
-        <a href="#contact" class="bg-primary text-white px-5 py-2.5 rounded-button hover:shadow-lg transition-all">Work With Me</a>
-      </nav>
-    </div>
-  </div>
-</header>
+    <header class="fixed w-full transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="font-['Pacifico'] text-3xl text-primary">Tiffany Tay</a>
+                </div>
+                <nav class="hidden md:flex items-center space-x-10">
+                    <a href="#projects" class="text-gray-600 hover:text-primary transition-colors font-medium">Projects</a>
+                    <a href="#skills" class="text-gray-600 hover:text-primary transition-colors font-medium">Skills</a>
+                    <a href="#about" class="text-gray-600 hover:text-primary transition-colors font-medium">About</a>
+                    <a href="#contact" class="bg-primary text-white px-5 py-2.5 rounded-button hover:shadow-lg transition-all">Work With Me</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-<section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#0F172A]">
-  
-  <canvas id="hero-interactive-canvas"></canvas>
-  <div class="hero-overlay"></div>
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#0F172A]">
+        <canvas id="hero-interactive-canvas"></canvas>
+        <div class="hero-overlay"></div>
 
-  <div class="container mx-auto px-4 lg:px-8 relative z-10">
-    <div class="lg:w-2/3" data-aos="fade-right">
-      <div class="inline-flex items-center gap-3 py-2 px-4 rounded-full bg-accent/10 border border-accent/20 mb-6">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-        </span>
-        <span class="text-[10px] font-bold tracking-[0.2em] text-accent uppercase">Strategic Systems Expert</span>
-      </div>
+        <div class="container mx-auto px-4 lg:px-8 hero-content-wrapper">
+            <div class="lg:w-2/3" data-aos="fade-right">
+                <div class="inline-flex items-center gap-3 py-2 px-4 rounded-full bg-accent/20 border border-accent/40 mb-6">
+                    <span class="text-[10px] font-bold tracking-[0.2em] text-accent uppercase">Strategic Systems Expert</span>
+                </div>
 
-      <h1 class="text-6xl md:text-8xl font-bold text-white leading-[1.05] tracking-tighter mb-8">
-        I build systems <br>that 
-        <span class="relative inline-block text-accent italic font-serif h-[1.1em] overflow-hidden align-bottom">
-          <span class="flex flex-col animate-strategy-swap">
-            <span>scale.</span>
-            <span>endure.</span>
-            <span>inspire.</span>
-            <span>scale.</span>
-          </span>
-        </span>
-      </h1>
+                <h1 class="text-6xl md:text-8xl font-bold text-white leading-[1.05] tracking-tighter mb-8">
+                    I build systems <br>that 
+                    <span class="relative inline-block text-accent italic font-serif h-[1.1em] overflow-hidden align-bottom">
+                        <span class="flex flex-col animate-strategy-swap">
+                            <span>scale.</span>
+                            <span>endure.</span>
+                            <span>inspire.</span>
+                            <span>scale.</span>
+                        </span>
+                    </span>
+                </h1>
 
-      <p class="text-xl text-slate-300 leading-relaxed max-w-lg mb-10 border-l-2 border-accent/30 pl-6">
-        A <span class="text-white font-semibold">CPA-led approach</span> to operational excellence. I translate chaotic data into high-integrity growth engines.
-      </p>
+                <p class="text-xl text-slate-200 leading-relaxed max-w-lg mb-10 border-l-2 border-accent pl-6">
+                    A <span class="text-white font-semibold">CPA-led approach</span> to operational excellence. I translate chaotic data into high-integrity growth engines.
+                </p>
 
-      <div class="flex flex-wrap gap-5">
-        <a href="#projects" class="bg-accent text-primary px-10 py-5 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-white transition-all duration-500 shadow-2xl">
-          View Case Studies
-        </a>
-        <a href="#contact" class="flex items-center gap-3 px-8 py-5 rounded-sm font-bold text-white border border-slate-700 hover:border-accent transition-all">
-          <span class="uppercase text-xs tracking-widest">Inquire</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+                <div class="flex flex-wrap gap-5">
+                    <a href="#projects" class="bg-accent text-primary px-10 py-5 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-white transition-all duration-500 shadow-2xl">
+                        View Case Studies
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script>
-/**
- * INTERACTIVE NEURAL GRID SCRIPT
- * Creates a reactive node-link system that follows the mouse.
- */
-(function() {
-  const canvas = document.getElementById('hero-interactive-canvas');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  const particleCount = 80;
-  const mouse = { x: null, y: null, radius: 150 };
+    <script>
+    (function() {
+        const canvas = document.getElementById('hero-interactive-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 180 };
 
-  window.addEventListener('mousemove', (e) => {
-    mouse.x = e.x;
-    mouse.y = e.y;
-  });
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
 
-  function init() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    particles = [];
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1,
-        baseX: Math.random() * canvas.width,
-        baseY: Math.random() * canvas.height,
-        density: (Math.random() * 30) + 1
-      });
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particles.length; i++) {
-      let p = particles[i];
-      
-      // Movement logic
-      let dx = mouse.x - p.x;
-      let dy = mouse.y - p.y;
-      let distance = Math.sqrt(dx*dx + dy*dy);
-      
-      if (distance < mouse.radius) {
-        p.x -= dx / 10;
-        p.y -= dy / 10;
-      } else {
-        if (p.x !== p.baseX) p.x += (p.baseX - p.x) / 20;
-        if (p.y !== p.baseY) p.y += (p.baseY - p.y) / 20;
-      }
-
-      // Draw Particle
-      ctx.fillStyle = '#B68D40'; // Gold dots
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Draw Lines (Neural connections)
-      for (let j = i; j < particles.length; j++) {
-        let p2 = particles[j];
-        let dx2 = p.x - p2.x;
-        let dy2 = p.y - p2.y;
-        let dist2 = Math.sqrt(dx2*dx2 + dy2*dy2);
-
-        if (dist2 < 120) {
-          ctx.strokeStyle = `rgba(182, 141, 64, ${1 - dist2/120})`;
-          ctx.lineWidth = 0.5;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            // High Density for Visibility
+            for (let i = 0; i < 110; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2.5 + 1.5,
+                    baseX: Math.random() * canvas.width,
+                    baseY: Math.random() * canvas.height,
+                    density: (Math.random() * 30) + 1
+                });
+            }
         }
-      }
-    }
-    requestAnimationFrame(animate);
-  }
 
-  window.addEventListener('resize', init);
-  init();
-  animate();
-})();
-</script>
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                let dx = mouse.x - p.x;
+                let dy = mouse.y - p.y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+                
+                if (distance < mouse.radius) {
+                    p.x -= dx / 15;
+                    p.y -= dy / 15;
+                } else {
+                    p.x += (p.baseX - p.x) / 30;
+                    p.y += (p.baseY - p.y) / 30;
+                }
+
+                // Brighter gold dots
+                ctx.fillStyle = '#D4AF37'; 
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                for (let j = i; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dx2 = p.x - p2.x;
+                    let dy2 = p.y - p2.y;
+                    let dist2 = Math.sqrt(dx2*dx2 + dy2*dy2);
+
+                    if (dist2 < 160) {
+                        // High visibility connection lines
+                        ctx.strokeStyle = `rgba(182, 141, 64, ${0.45 - dist2/160})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        animate();
+        AOS.init({ duration: 1000, once: true });
+    })();
+    </script>
   
 <!-- Projects Section -->
 <section id="projects" class="py-24 bg-white">
@@ -376,7 +249,7 @@ header {
 
       <div class="project-card group" data-aos="fade-up">
         <div class="relative overflow-hidden aspect-video bg-slate-200 rounded-sm">
-          <img src="graphics/coqual-990-financial-screenshot.png" 
+          <img src="graphics/nkc-screenshot_tiffany-tay.png" 
                class="project-thumbnail-img w-full h-full object-cover">
           
           <div class="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center p-8 text-white">
