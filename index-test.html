@@ -51,19 +51,7 @@
             background-color: #0F172A;
         }
 
-        /* 3. Gradient Overlay for readability */
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            background: linear-gradient(to right, #0F172A 35%, rgba(15, 23, 42, 0.3) 100%);
-            pointer-events: none;
-        }
-
-        .hero-content-wrapper {
-            position: relative;
-            z-index: 10;
-        }
+        
 
         /* 4. Strategy Swap Animation */
         @keyframes strategy-swap {
@@ -75,6 +63,26 @@
         }
         .animate-strategy-swap {
             animation: strategy-swap 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+        }
+
+        /* Animated "Hint" for interaction */
+        .click-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(182, 141, 64, 0.6);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            pointer-events: none;
+            animation: pulse 2s infinite;
+            z-index: 20;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
@@ -133,6 +141,7 @@
                 </div>
             </div>
         </div>
+      <div class="click-hint font-bold">Click to Disrupt • Move to Organize</div>
     </section>
 
     <script>
@@ -142,13 +151,7 @@
     let particles = [];
     let animationFrame;
     
-    // Interactive state
-    const mouse = {
-        x: null,
-        y: null,
-        radius: 150,
-        active: false
-    };
+    const mouse = { x: null, y: null, radius: 150, active: false };
 
     window.addEventListener('mousemove', (e) => {
         mouse.x = e.clientX;
@@ -156,14 +159,15 @@
         mouse.active = true;
     });
 
-    window.addEventListener('mouseleave', () => {
-        mouse.active = false;
+    // CLICK TO BURST EFFECT
+    window.addEventListener('mousedown', (e) => {
+        particles.forEach(p => p.burst(e.clientX, e.clientY));
     });
 
+    window.addEventListener('mouseleave', () => { mouse.active = false; });
+
     class Particle {
-        constructor() {
-            this.init();
-        }
+        constructor() { this.init(); }
 
         init() {
             this.x = Math.random() * canvas.width;
@@ -171,12 +175,22 @@
             this.baseX = this.x;
             this.baseY = this.y;
             this.size = Math.random() * 2 + 1;
-            
-            // Movement physics
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.accel = 0.05;
-            this.friction = 0.95;
+            this.vx = 0;
+            this.vy = 0;
+            this.friction = 0.92; // Slightly higher friction for smoother "settling"
+            this.ease = 0.05;
+        }
+
+        burst(clickX, clickY) {
+            let dx = this.x - clickX;
+            let dy = this.y - clickY;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            let force = 100 / distance; // Inverse relationship: closer = faster burst
+
+            if (distance < 300) {
+                this.vx += (dx / distance) * force * 15;
+                this.vy += (dy / distance) * force * 15;
+            }
         }
 
         update() {
@@ -184,20 +198,18 @@
                 let dx = mouse.x - this.x;
                 let dy = mouse.y - this.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
-                
                 if (distance < mouse.radius) {
-                    // Gravity Well effect: particles pull toward mouse and swirl
                     let force = (mouse.radius - distance) / mouse.radius;
-                    this.vx += dx * force * 0.02;
-                    this.vy += dy * force * 0.02;
+                    this.vx += dx * force * 0.03;
+                    this.vy += dy * force * 0.03;
                 }
             }
 
-            // Return to "System" (Home position)
+            // The "System" pull: Constant return to original coordinates
             let dxBase = this.baseX - this.x;
             let dyBase = this.baseY - this.y;
-            this.vx += dxBase * 0.001;
-            this.vy += dyBase * 0.001;
+            this.vx += dxBase * 0.002;
+            this.vy += dyBase * 0.002;
 
             this.vx *= this.friction;
             this.vy *= this.friction;
@@ -206,7 +218,7 @@
         }
 
         draw() {
-            ctx.fillStyle = '#B68D40'; // Your Muted Gold
+            ctx.fillStyle = '#B68D40'; 
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
@@ -217,31 +229,29 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         particles = [];
-        // Particle density based on screen size
-        const numberOfParticles = (canvas.width * canvas.height) / 15000;
+        const numberOfParticles = (canvas.width * canvas.height) / 12000;
         for (let i = 0; i < numberOfParticles; i++) {
             particles.push(new Particle());
         }
     }
 
     function animate() {
-        // Subtle trail effect
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.2)'; // Fades out previous frames
+        // Reduced opacity here makes the "trails" longer during the burst
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.25)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         for (let i = 0; i < particles.length; i++) {
             particles[i].update();
             particles[i].draw();
 
-            // Draw connections
             for (let j = i; j < particles.length; j++) {
                 let dx = particles[i].x - particles[j].x;
                 let dy = particles[i].y - particles[j].y;
                 let dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 100) {
-                    ctx.strokeStyle = `rgba(182, 141, 64, ${1 - dist/100})`;
-                    ctx.lineWidth = 0.5;
+                if (dist < 110) {
+                    ctx.strokeStyle = `rgba(182, 141, 64, ${0.4 - dist/110})`;
+                    ctx.lineWidth = 0.8;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
@@ -260,7 +270,6 @@
 
     init();
     animate();
-    AOS.init({ duration: 1000, once: true });
 })();
 </script>
   
