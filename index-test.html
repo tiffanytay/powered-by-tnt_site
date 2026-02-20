@@ -140,78 +140,124 @@
     const canvas = document.getElementById('hero-interactive-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    const mouse = { x: null, y: null, radius: 200 }; // Slightly larger interaction area
+    let animationFrame;
+    
+    // Interactive state
+    const mouse = {
+        x: null,
+        y: null,
+        radius: 150,
+        active: false
+    };
 
     window.addEventListener('mousemove', (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
+        mouse.active = true;
     });
+
+    window.addEventListener('mouseleave', () => {
+        mouse.active = false;
+    });
+
+    class Particle {
+        constructor() {
+            this.init();
+        }
+
+        init() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.baseX = this.x;
+            this.baseY = this.y;
+            this.size = Math.random() * 2 + 1;
+            
+            // Movement physics
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.accel = 0.05;
+            this.friction = 0.95;
+        }
+
+        update() {
+            if (mouse.active) {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouse.radius) {
+                    // Gravity Well effect: particles pull toward mouse and swirl
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.vx += dx * force * 0.02;
+                    this.vy += dy * force * 0.02;
+                }
+            }
+
+            // Return to "System" (Home position)
+            let dxBase = this.baseX - this.x;
+            let dyBase = this.baseY - this.y;
+            this.vx += dxBase * 0.001;
+            this.vy += dyBase * 0.001;
+
+            this.vx *= this.friction;
+            this.vy *= this.friction;
+            this.x += this.vx;
+            this.y += this.vy;
+        }
+
+        draw() {
+            ctx.fillStyle = '#B68D40'; // Your Muted Gold
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
 
     function init() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         particles = [];
-        // Optimized count for thicker lines
-        for (let i = 0; i < 90; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 4 + 2, // Larger nodes
-                baseX: Math.random() * canvas.width,
-                baseY: Math.random() * canvas.height,
-                density: (Math.random() * 30) + 1
-            });
+        // Particle density based on screen size
+        const numberOfParticles = (canvas.width * canvas.height) / 15000;
+        for (let i = 0; i < numberOfParticles; i++) {
+            particles.push(new Particle());
         }
     }
 
     function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Subtle trail effect
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.2)'; // Fades out previous frames
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         for (let i = 0; i < particles.length; i++) {
-            let p = particles[i];
-            let dx = mouse.x - p.x;
-            let dy = mouse.y - p.y;
-            let distance = Math.sqrt(dx*dx + dy*dy);
-            
-            if (distance < mouse.radius) {
-                p.x -= dx / 12;
-                p.y -= dy / 12;
-            } else {
-                p.x += (p.baseX - p.x) / 25;
-                p.y += (p.baseY - p.y) / 25;
-            }
+            particles[i].update();
+            particles[i].draw();
 
-            // Draw Glowing Nodes
-            ctx.fillStyle = '#D4AF37'; 
-            ctx.shadowBlur = 15; // Added glow effect
-            ctx.shadowColor = '#B68D40';
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.shadowBlur = 0; // Reset blur for lines to keep them sharp
-
-            // Draw Thicker Connections
+            // Draw connections
             for (let j = i; j < particles.length; j++) {
-                let p2 = particles[j];
-                let dx2 = p.x - p2.x;
-                let dy2 = p.y - p2.y;
-                let dist2 = Math.sqrt(dx2*dx2 + dy2*dy2);
+                let dx = particles[i].x - particles[j].x;
+                let dy = particles[i].y - particles[j].y;
+                let dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist2 < 170) {
-                    // Increased opacity and fixed width
-                    ctx.strokeStyle = `rgba(212, 175, 55, ${0.6 - dist2/170})`; 
-                    ctx.lineWidth = 2; // Doubled thickness
+                if (dist < 100) {
+                    ctx.strokeStyle = `rgba(182, 141, 64, ${1 - dist/100})`;
+                    ctx.lineWidth = 0.5;
                     ctx.beginPath();
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(p2.x, p2.y);
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
                     ctx.stroke();
                 }
             }
         }
-        requestAnimationFrame(animate);
+        animationFrame = requestAnimationFrame(animate);
     }
 
-    window.addEventListener('resize', init);
+    window.addEventListener('resize', () => {
+        cancelAnimationFrame(animationFrame);
+        init();
+        animate();
+    });
+
     init();
     animate();
     AOS.init({ duration: 1000, once: true });
