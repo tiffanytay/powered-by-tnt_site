@@ -51,7 +51,25 @@
             background-color: #0F172A;
         }
 
+        /* 3. Gradient Overlay - Optimized for text contrast & background visibility */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            /* This creates a solid block on the left that fades out by the middle of the screen */
+            background: linear-gradient(
+                to right, 
+                rgba(15, 23, 42, 1) 0%,    /* Solid Midnight Navy at the left edge */
+                rgba(15, 23, 42, 0.9) 30%, /* Stays mostly solid behind the text */
+                rgba(15, 23, 42, 0) 60%    /* Fully transparent by the 60% mark to show particles */
+            );
+            pointer-events: none;
+        }
         
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
 
         /* 4. Strategy Swap Animation */
         @keyframes strategy-swap {
