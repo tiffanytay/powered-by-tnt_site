@@ -175,6 +175,16 @@
             nav.style.backgroundColor = 'transparent';
         }
     });
+
+    function scrollRow(direction) {
+        const row = document.querySelector('.project-row');
+        const scrollAmount = 300; // Matches card width
+        if (direction === 'left') {
+            row.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            row.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
 </script>
 
 </body>
