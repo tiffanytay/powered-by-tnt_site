@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+/* Tell Tailwind v4 to explicitly scan your root files */
+@source "./index-test-3.jsx";
+@source "./main.jsx";
