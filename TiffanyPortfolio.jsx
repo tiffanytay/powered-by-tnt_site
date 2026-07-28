@@ -408,8 +408,8 @@ export default function TiffanyPortfolio() {
                 Tell me what&rsquo;s keeping your finance stack messy — I reply within two business days.
               </p>
               <div className="space-y-1 font-mono text-sm">
-                <a href="mailto:ttay@poweredbytnt.com" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald transition-colors">
-                  <Mail size={16} className="text-emerald" /> ttay@poweredbytnt.com
+                <a href="mailto:tnt@poweredbytnt.com" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald transition-colors">
+                  <Mail size={16} className="text-emerald" /> tnt@poweredbytnt.com
                 </a>
                 <a href="https://www.linkedin.com/in/tiffany-n-tay/" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald transition-colors">
                   <Linkedin size={16} className="text-emerald" /> in/tiffany-n-tay
@@ -467,7 +467,7 @@ export default function TiffanyPortfolio() {
           <div className="flex items-center gap-5">
             <a href="https://www.linkedin.com/in/tiffany-n-tay/" className="hover:text-emerald transition-colors"><Linkedin size={16} /></a>
             <a href="https://github.com/tiffanytay" className="hover:text-emerald transition-colors"><Github size={16} /></a>
-            <a href="mailto:ttay@poweredbytnt.com" className="hover:text-emerald transition-colors"><Mail size={16} /></a>
+            <a href="mailto:tnt@poweredbytnt.com" className="hover:text-emerald transition-colors"><Mail size={16} /></a>
           </div>
           <span>&copy; 2026 — all figures reconciled</span>
         </div>
