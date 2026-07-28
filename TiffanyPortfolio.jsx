@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, ArrowRight, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowRight, ArrowLeft, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 
 // ponytail: lucide-react dropped brand/logo glyphs; inline the two marks we need instead of adding a dependency.
 function Linkedin({ size = 18, className }) {
@@ -43,6 +43,28 @@ function SplitPortrait({ className = '' }) {
     // position (relative/absolute) supplied by caller to avoid conflicting utilities
     <div className={`rounded-full overflow-hidden border-4 border-paper shadow-2xl select-none pointer-events-none ${className}`}>
       <img src="graphics/13.jpeg" alt="Tiffany Tay" className="absolute inset-0 w-full h-full object-cover object-top" />
+    </div>
+  );
+}
+
+// ponytail: two case studies have no screenshot to show (a Slack bot, an HR process) — a
+// ledger-style stat card fits the site's aesthetic better than a stock/placeholder image.
+function DataVisual({ eyebrow, flow, stat, statLabel, className = '' }) {
+  return (
+    <div className={`bg-pine text-paper flex flex-col justify-between p-6 ${className}`}>
+      <div className="font-mono text-xs uppercase tracking-widest text-paper/40">{eyebrow}</div>
+      <div className="flex flex-wrap items-center gap-2 font-mono text-xs my-4">
+        {flow.map((step, i) => (
+          <React.Fragment key={step}>
+            {i > 0 && <ArrowRight size={12} className="text-emerald shrink-0" />}
+            <span className="border border-paper/20 px-2 py-1">{step}</span>
+          </React.Fragment>
+        ))}
+      </div>
+      <div>
+        <div className="font-display text-3xl sm:text-4xl font-bold text-emerald">{stat}</div>
+        <div className="font-mono text-xs text-paper/50 mt-1">{statLabel}</div>
+      </div>
     </div>
   );
 }
@@ -97,24 +119,73 @@ const projects = [
     n: '01',
     title: 'Nonprofit Insights Dashboard',
     subtitle: 'Form 990 Data Aggregation',
-    desc: 'Years of Form 990 filings aggregated into one Power BI model — leadership tracks trends, benchmarks against peers, and walks into board meetings with answers instead of spreadsheets.',
+    desc: 'Years of Form 990 filings aggregated into one Power BI model — quick insights from dense tax returns, with a drill-down behind every number.',
     image: 'graphics/coqual-990-financial-screenshot.png',
     tags: ['Power BI', 'Power Query'],
     featured: true,
+    detail: {
+      body: [
+        'A nonprofit’s Form 990s hold years of financial history — revenue mix, program spend, fundraising efficiency — but nobody has time to dig it out of hundreds of pages of dense tax filings.',
+        'This dashboard does the digging. Years of filings are aggregated into a single Power BI model, so the headline story — where money comes from, where it goes, and how that’s shifting over time — surfaces in seconds instead of an afternoon of PDF archaeology.',
+        'Every summary view drills down: start at the multi-year trends, then click through to the specific schedules and line items behind any number. Leadership walks into board meetings with answers and the receipts to back them up.',
+      ],
+      highlights: [
+        'Years of dense Form 990 filings, one queryable model',
+        'Headline revenue and spend trends surfaced in seconds',
+        'Drill-down from any trend to the underlying line items',
+        'Built in Power BI, refreshed via Power Query — no re-keying',
+      ],
+    },
   },
   {
     n: '02',
-    title: 'Project Management Dashboard',
-    desc: 'An Excel-based command center turning raw project data into a live view of timelines, budgets, and bottlenecks.',
-    image: 'graphics/projmgmt-dashboard.png',
-    tags: ['Excel', 'Tableau'],
+    title: 'Slack-to-Jira Ticketing Bot',
+    desc: 'A Slack bot that turns IT support requests into fully-populated Jira tickets the moment they’re posted — nothing waits in a channel to be triaged by hand.',
+    tags: ['Slack API', 'Jira API', 'Automation'],
+    visual: {
+      eyebrow: 'IT Support Automation',
+      flow: ['Slack message', 'Bot', 'Jira ticket'],
+      stat: '25%',
+      statLabel: 'faster ticket turnaround',
+    },
+    detail: {
+      body: [
+        'IT support requests came in through a Slack channel, and nothing happened next until someone remembered to manually open a Jira ticket — which meant requests sat, got buried under other messages, or fell through the cracks entirely.',
+        'This bot closes that gap. The moment a request is posted to the channel, it creates a Jira ticket automatically, pre-filled with the original message and context — so the Tech team sees exactly what’s being asked for and can prioritize it correctly without chasing down details.',
+        'It also tags whoever is on call that day, so every ticket lands with a name attached from the start. The combined effect: about 25% faster turnaround on IT support requests, with a paper trail that starts the second someone asks for help.',
+      ],
+      highlights: [
+        'Every Slack support request becomes a Jira ticket automatically',
+        'Tickets pre-populated with the original message for faster triage',
+        'On-call teammate auto-tagged on every new ticket',
+        '~25% faster average ticket turnaround',
+      ],
+    },
   },
   {
     n: '03',
-    title: 'Data for Paws',
-    desc: 'Scattered Colorado shelter data wrangled into a clear, data-backed case for where animal welfare resources should go next.',
-    image: 'graphics/nkc-screenshot_tiffany-tay.png',
-    tags: ['Python', 'Tableau', 'Power BI'],
+    title: 'Performance Review Overhaul',
+    desc: 'Redesigned a nonprofit executive director’s performance review process — cutting a 3-month cycle down to 6 weeks with standardized forms and reporting.',
+    tags: ['Forms', 'Reporting', 'HR Ops'],
+    visual: {
+      eyebrow: 'HR Process Redesign',
+      flow: ['Structured intake', 'Standardized report', 'Board summary'],
+      stat: '3mo → 6wk',
+      statLabel: 'review cycle time',
+    },
+    detail: {
+      body: [
+        'The performance review process for this nonprofit’s executive director took three months from start to finish — collecting input, compiling it, and getting it in front of the board was a slow, manual slog every cycle.',
+        'I rebuilt the process around form technology and reporting technology: structured intake forms replaced ad hoc collection, and a reporting layer turned raw responses into a board-ready summary automatically instead of by hand.',
+        'I also standardized the questions across cycles, so results could be compared year over year instead of starting from scratch each time. The rebuilt process runs in 6 weeks instead of 3 months, and now produces a multi-year performance trend the board can actually track.',
+      ],
+      highlights: [
+        'Review cycle cut from 3 months to 6 weeks',
+        'Structured forms replaced manual data collection',
+        'Automated reporting for board-ready summaries',
+        'Standardized questions enable year-over-year comparison',
+      ],
+    },
   },
   {
     n: '04',
@@ -122,6 +193,19 @@ const projects = [
     desc: 'The full grant lifecycle — deadlines, drafts, follow-ups — in one practical system where nothing falls through the cracks.',
     image: 'graphics/grantseeking-tracker.png',
     tags: ['Power BI', 'Excel', 'Perplexity AI'],
+    detail: {
+      body: [
+        'Grant lifecycles have a lot of moving parts — deadlines, drafts, follow-ups, funder-specific requirements — and when they live across email threads and someone’s memory, things get missed.',
+        'This tracker puts the full lifecycle in one system: every prospect, deadline, draft status, and follow-up in a single view, built in Power BI and Excel, with Perplexity AI used to help research and qualify new funding prospects.',
+        'The result is a pipeline nothing falls out of — anyone on the team can see what stage a grant is at and what’s due next, instead of that knowledge living in one person’s inbox.',
+      ],
+      highlights: [
+        'Every grant deadline and draft tracked in one system',
+        'Funder research assisted by Perplexity AI',
+        'Built in Power BI and Excel for easy handoff',
+        'Nothing depends on one person’s inbox anymore',
+      ],
+    },
   },
   {
     n: '05',
@@ -129,11 +213,107 @@ const projects = [
     desc: 'Clear documentation that gets new tools adopted instead of ignored — systems only work if people use them.',
     image: 'graphics/doc-sample-cover.png',
     tags: ['Power BI', 'Google Docs'],
+    detail: {
+      body: [
+        'A new tool is only as good as the documentation behind it — without clear docs, teams default back to their old workaround the first time something’s unclear.',
+        'This documentation was written to be used, not just filed away: step-by-step instructions with screenshots, written in plain language for the people actually doing the work, not the people who built the system.',
+        'The measure of success wasn’t the doc itself — it was adoption. Teams picked up the new tool and stuck with it, because the documentation answered their questions before they had to ask.',
+      ],
+      highlights: [
+        'Step-by-step, screenshot-led instructions',
+        'Written in plain language for end users, not admins',
+        'Built to drive adoption, not just satisfy a checklist',
+        'Delivered in Power BI + Google Docs for easy updates',
+      ],
+    },
   },
 ];
 
+function ProjectDetail({ project, prev, next }) {
+  return (
+    <div className="bg-paper text-ink font-sans antialiased min-h-screen flex flex-col">
+      <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b border-line">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <a href="#work" className="inline-flex items-center gap-2 font-mono text-sm hover:text-emerald transition-colors">
+            <ArrowLeft size={15} /> all work
+          </a>
+          <a href="#home" className="font-mono text-sm font-medium tracking-tight">
+            tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40"> — CPA</span>
+          </a>
+        </div>
+      </header>
+
+      <main className="flex-1">
+        <div className="max-w-4xl mx-auto px-6 py-16">
+          <p className="font-mono text-xs font-bold tracking-widest uppercase text-emerald mb-4">
+            {project.n} / {String(projects.length).padStart(2, '0')} — Selected Work
+          </p>
+          <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight mb-2">{project.title}</h1>
+          {project.subtitle && <p className="font-mono text-sm text-ink/40 mb-8">{project.subtitle}</p>}
+          {project.image ? (
+            <img src={project.image} alt={project.title} className="w-full border border-line my-8" />
+          ) : (
+            <DataVisual {...project.visual} className="w-full h-64 sm:h-72 border border-line my-8" />
+          )}
+          <div className="space-y-5 text-ink/70 leading-relaxed max-w-2xl">
+            {(project.detail?.body ?? [project.desc]).map((t) => <p key={t}>{t}</p>)}
+          </div>
+          {project.detail?.highlights && (
+            <ul className="mt-10 font-mono text-sm space-y-3">
+              {project.detail.highlights.map((h) => (
+                <li key={h} className="flex gap-3">
+                  <span className="text-emerald font-bold">+</span>
+                  <span className="text-ink/70">{h}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="mt-10 font-mono text-xs text-ink/50 flex flex-wrap gap-x-4 gap-y-1">
+            {project.tags.map((t) => <span key={t}>[{t}]</span>)}
+          </div>
+        </div>
+      </main>
+
+      {/* Prev / next project */}
+      <nav className="border-t border-line grid sm:grid-cols-2">
+        <a href={`#/project/${prev.n}`} className="group p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-line hover:bg-mist transition-colors">
+          <div className="font-mono text-xs font-bold text-emerald mb-2 flex items-center gap-2">
+            <ArrowLeft size={13} /> PREV — {prev.n}
+          </div>
+          <div className="font-display font-bold tracking-tight group-hover:text-emerald transition-colors">{prev.title}</div>
+        </a>
+        <a href={`#/project/${next.n}`} className="group p-6 sm:p-8 text-right hover:bg-mist transition-colors">
+          <div className="font-mono text-xs font-bold text-emerald mb-2 flex items-center justify-end gap-2">
+            NEXT — {next.n} <ArrowRight size={13} />
+          </div>
+          <div className="font-display font-bold tracking-tight group-hover:text-emerald transition-colors">{next.title}</div>
+        </a>
+      </nav>
+    </div>
+  );
+}
+
 export default function TiffanyPortfolio() {
   const [status, setStatus] = useState('idle');
+  // ponytail: hash routing (#/project/NN) — one detail view over static data doesn't warrant react-router
+  const [route, setRoute] = useState(window.location.hash);
+
+  useEffect(() => {
+    const onHash = () => setRoute(window.location.hash);
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  useEffect(() => {
+    if (route.startsWith('#/project/')) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    // Re-scroll to plain anchors (#work etc.) after returning from a detail page,
+    // since the target element doesn't exist until React re-renders the main page.
+    const el = route.length > 1 && document.getElementById(route.slice(1));
+    if (el) el.scrollIntoView();
+  }, [route]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -155,6 +335,18 @@ export default function TiffanyPortfolio() {
     } catch {
       setStatus('error');
     }
+  }
+
+  const projectIdx = projects.findIndex((p) => route === `#/project/${p.n}`);
+  if (projectIdx !== -1) {
+    const len = projects.length;
+    return (
+      <ProjectDetail
+        project={projects[projectIdx]}
+        prev={projects[(projectIdx + len - 1) % len]}
+        next={projects[(projectIdx + 1) % len]}
+      />
+    );
   }
 
   return (
@@ -285,7 +477,8 @@ export default function TiffanyPortfolio() {
 
           {/* Featured */}
           {projects.filter((p) => p.featured).map((p) => (
-            <Reveal key={p.n} className="group grid md:grid-cols-2 border border-line mb-12 hover:border-ink transition-colors">
+            <Reveal key={p.n} className="mb-12">
+              <a href={`#/project/${p.n}`} className="group grid md:grid-cols-2 border border-line hover:border-ink transition-colors">
               <div className="overflow-hidden border-b md:border-b-0 md:border-r border-line">
                 <img
                   src={p.image}
@@ -307,15 +500,21 @@ export default function TiffanyPortfolio() {
                   {p.tags.map((t) => <span key={t}>[{t}]</span>)}
                 </div>
               </div>
+              </a>
             </Reveal>
           ))}
 
           {/* Grid */}
           <div className="grid sm:grid-cols-2 gap-6">
             {projects.filter((p) => !p.featured).map((p, i) => (
-              <Reveal key={p.n} delay={i * 0.05} className="group border border-line hover:border-ink transition-colors flex flex-col">
+              <Reveal key={p.n} delay={i * 0.05} className="h-full">
+                <a href={`#/project/${p.n}`} className="group border border-line hover:border-ink transition-colors flex flex-col h-full">
                 <div className="overflow-hidden border-b border-line">
-                  <img src={p.image} alt={p.title} className="w-full h-48 object-cover object-top group-hover:scale-[1.03] transition-transform duration-500" />
+                  {p.image ? (
+                    <img src={p.image} alt={p.title} className="w-full h-48 object-cover object-top group-hover:scale-[1.03] transition-transform duration-500" />
+                  ) : (
+                    <DataVisual {...p.visual} className="w-full h-48" />
+                  )}
                 </div>
                 <div className="p-6 flex flex-col gap-3 flex-1">
                   <div className="flex items-center justify-between">
@@ -328,6 +527,7 @@ export default function TiffanyPortfolio() {
                     {p.tags.map((t) => <span key={t}>[{t}]</span>)}
                   </div>
                 </div>
+                </a>
               </Reveal>
             ))}
           </div>
