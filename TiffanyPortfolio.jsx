@@ -42,9 +42,7 @@ function SplitPortrait({ className = '' }) {
   return (
     // position (relative/absolute) supplied by caller to avoid conflicting utilities
     <div className={`rounded-full overflow-hidden border-4 border-paper shadow-2xl select-none pointer-events-none ${className}`}>
-      <img src="graphics/13.jpeg" alt="" className="absolute inset-0 w-full h-full object-cover object-top [clip-path:inset(0_50%_0_0)]" />
-      <img src="graphics/13.jpeg" alt="Tiffany Tay" className="absolute inset-0 w-full h-full object-cover object-top grayscale contrast-110 [clip-path:inset(0_0_0_50%)]" />
-      <div className="absolute inset-0 bg-emerald/30 mix-blend-multiply [clip-path:inset(0_0_0_50%)]" />
+      <img src="graphics/13.jpeg" alt="Tiffany Tay" className="absolute inset-0 w-full h-full object-cover object-top" />
     </div>
   );
 }
@@ -52,7 +50,7 @@ function SplitPortrait({ className = '' }) {
 function SectionHeader({ index, label, title, dark = false }) {
   return (
     <Reveal className="mb-14">
-      <div className={`flex items-center gap-3 font-mono text-xs tracking-widest uppercase mb-4 ${dark ? 'text-emerald' : 'text-emerald'}`}>
+      <div className={`flex items-center gap-3 font-mono text-xs font-bold tracking-widest uppercase mb-4 ${dark ? 'text-emerald' : 'text-emerald'}`}>
         <span>{index}</span>
         <span className={`h-px w-10 ${dark ? 'bg-emerald/50' : 'bg-emerald/50'}`} />
         <span>{label}</span>
@@ -191,7 +189,7 @@ export default function TiffanyPortfolio() {
           {/* Left: The CPA */}
           <div className="bg-paper flex items-center">
             <div className="w-full max-w-xl ml-auto px-6 lg:pr-40 xl:pr-48 py-16 lg:py-0">
-              <p className="font-mono text-xs tracking-widest uppercase text-emerald mb-5">Dr — The CPA</p>
+              <p className="font-mono text-xs font-bold tracking-widest uppercase text-emerald mb-5">Dr — The CPA</p>
               <h1 className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.05] mb-5">
                 Finance that holds up to an audit.
               </h1>
@@ -208,7 +206,7 @@ export default function TiffanyPortfolio() {
           {/* Right: The Analyst */}
           <div className="bg-pine text-paper flex items-center">
             <div className="w-full max-w-xl mr-auto px-6 lg:pl-40 xl:pl-48 py-16 lg:py-0">
-              <p className="font-mono text-xs tracking-widest uppercase text-emerald mb-5">Cr — The Analyst</p>
+              <p className="font-mono text-xs font-bold tracking-widest uppercase text-emerald mb-5">Cr — The Analyst</p>
               <h2 className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.05] mb-5">
                 Data that people actually use.
               </h2>
@@ -253,9 +251,9 @@ export default function TiffanyPortfolio() {
                 </div>
               ))}
               <div className="flex items-baseline gap-3 py-4 text-emerald">
-                <span className="font-medium">Net position</span>
+                <span className="font-bold">Net position</span>
                 <span className="flex-1 border-b border-dotted border-emerald/40 translate-y-[-4px]" />
-                <span className="font-medium">Clarity</span>
+                <span className="font-bold">Clarity</span>
               </div>
             </div>
           </Reveal>
@@ -269,7 +267,7 @@ export default function TiffanyPortfolio() {
           <div className="grid sm:grid-cols-2 border-t border-l border-line">
             {services.map((s, i) => (
               <Reveal key={s.n} delay={i * 0.05} className="group border-b border-r border-line p-8 hover:bg-mist transition-colors">
-                <div className="font-mono text-xs text-emerald mb-6">{s.n}</div>
+                <div className="font-mono text-xs font-bold text-emerald mb-6">{s.n}</div>
                 <h3 className="font-display text-xl font-bold tracking-tight mb-3 group-hover:text-emerald transition-colors">
                   {s.title}
                 </h3>
@@ -298,7 +296,7 @@ export default function TiffanyPortfolio() {
               <div className="p-8 lg:p-10 flex flex-col justify-between gap-6">
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <span className="font-mono text-xs text-emerald">{p.n} / FEATURED</span>
+                    <span className="font-mono text-xs font-bold text-emerald">{p.n} / FEATURED</span>
                     <ArrowUpRight size={18} className="text-ink/30 group-hover:text-emerald transition-colors" />
                   </div>
                   <h3 className="font-display text-2xl font-bold tracking-tight mb-1">{p.title}</h3>
@@ -321,7 +319,7 @@ export default function TiffanyPortfolio() {
                 </div>
                 <div className="p-6 flex flex-col gap-3 flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs text-emerald">{p.n}</span>
+                    <span className="font-mono text-xs font-bold text-emerald">{p.n}</span>
                     <ArrowUpRight size={16} className="text-ink/30 group-hover:text-emerald transition-colors" />
                   </div>
                   <h3 className="font-display text-lg font-bold tracking-tight">{p.title}</h3>
@@ -399,19 +397,6 @@ export default function TiffanyPortfolio() {
           </div>
         </div>
       </section>
-
-      {/* AI BAR */}
-      <a
-        href="https://chatbot.poweredbytnt.com/"
-        className="group block border-b border-line bg-paper hover:bg-mist transition-colors"
-      >
-        <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between gap-4 font-mono text-sm">
-          <span className="text-ink/60">
-            <span className="text-emerald">$</span> ask my AI assistant about any project or how I work
-          </span>
-          <ArrowUpRight size={16} className="text-ink/30 group-hover:text-emerald transition-colors shrink-0" />
-        </div>
-      </a>
 
       {/* CONTACT */}
       <section id="contact" className="border-b border-line">
