@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useSpring, useTransform, useMotionTemplate, useReducedMotion } from 'framer-motion';
 import { Mail, ArrowRight, ArrowLeft, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 
 // ponytail: lucide-react dropped brand/logo glyphs; inline the two marks we need instead of adding a dependency.
@@ -257,6 +257,158 @@ const projects = [
   },
 ];
 
+// Motion ported from the adhamdannaway.com hero: jQuery's easeOutExpo / easeOutBack as beziers.
+const EASE_EXPO = [0.19, 1, 0.22, 1];
+const EASE_BACK = [0.34, 1.56, 0.64, 1];
+
+const heroCopy = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE_EXPO } },
+};
+
+function SplitHero() {
+  const reduce = useReducedMotion();
+  const ref = useRef(null);
+  // Width doubles as the "is the seesaw live" flag: 0 => stacked layout, touch, or reduced motion.
+  const [width, setWidth] = useState(0);
+
+  // -1 = pointer hard left, 0 = centred, +1 = hard right. The spring reproduces the
+  // reference's damped `xp += (target - xp) / 12` follow without its 30fps setInterval.
+  const t = useSpring(0, { stiffness: 90, damping: 22, mass: 0.6 });
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px) and (pointer: fine)');
+    const measure = () => setWidth(mq.matches && !reduce ? ref.current.getBoundingClientRect().width : 0);
+    measure();
+    mq.addEventListener('change', measure);
+    window.addEventListener('resize', measure);
+    return () => {
+      mq.removeEventListener('change', measure);
+      window.removeEventListener('resize', measure);
+    };
+  }, [reduce]);
+
+  useEffect(() => {
+    if (!width) return;
+    const el = ref.current;
+    const onMove = (e) => {
+      const r = el.getBoundingClientRect();
+      t.set(((e.clientX - r.left) / r.width - 0.5) * 2);
+    };
+    const onLeave = () => t.set(0);
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('mouseleave', onLeave);
+    return () => {
+      el.removeEventListener('mousemove', onMove);
+      el.removeEventListener('mouseleave', onLeave);
+    };
+  }, [width, t]);
+
+  // The seam slides toward the side you point at, so that half grows and the other shrinks.
+  const seam = useTransform(t, (v) => -v * width * 0.07);
+  const columns = useMotionTemplate`calc(50% + ${seam}px) 1fr`;
+  // ponytail: reference fades the far side to 0; floored at 0.4 so the pitch stays readable.
+  const dimLeft = useTransform(t, [0, 1], [1, 0.4]);
+  const dimRight = useTransform(t, [-1, 0], [0.4, 1]);
+
+  const slide = (dir) => ({
+    hidden: { opacity: 0, x: reduce ? 0 : dir * 80 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: reduce ? 0 : 1, ease: EASE_EXPO, delayChildren: 0.7, staggerChildren: 0.08 },
+    },
+  });
+
+  const portrait = {
+    hidden: { opacity: 0, scale: reduce ? 1 : 0.85 },
+    show: { opacity: 1, scale: 1, transition: { duration: reduce ? 0 : 0.9, delay: 0.3, ease: EASE_BACK } },
+  };
+
+  return (
+    <section id="home" ref={ref} className="relative border-b border-line">
+      {/* Reduced motion starts at the finished state, so nothing is ever left hidden. */}
+      <motion.div variants={{ hidden: {}, show: {} }} initial={reduce ? 'show' : 'hidden'} animate="show">
+        {/* Mobile portrait (desktop version straddles the seam below) */}
+        <motion.div variants={portrait} className="lg:hidden flex justify-center pt-10">
+          <SplitPortrait className="relative w-36 h-36" />
+        </motion.div>
+
+        <motion.div
+          className="grid lg:grid-cols-2 lg:min-h-[calc(100vh-4rem)]"
+          style={width ? { gridTemplateColumns: columns } : undefined}
+        >
+          {/* Left: The CPA — wrappers stay motion.* so the variant chain reaches the copy */}
+          <motion.div className="bg-paper flex items-center overflow-hidden">
+            <motion.div
+              variants={slide(-1)}
+              className="w-full max-w-xl ml-auto px-6 lg:pr-40 xl:pr-48 py-16 lg:py-0"
+            >
+              <motion.div style={{ opacity: dimLeft }}>
+              <motion.p variants={heroCopy} className="font-mono text-xs font-bold tracking-widest uppercase text-emerald mb-5">Dr — The CPA</motion.p>
+              <motion.h1 variants={heroCopy} className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.05] mb-5">
+                Finance that holds up to an audit.
+              </motion.h1>
+              <motion.p variants={heroCopy} className="text-ink/60 leading-relaxed mb-8">
+                Licensed CPA (NY &amp; TX) keeping nonprofit books, budgets, and Form 990s
+                board-clear and funder-ready.
+              </motion.p>
+              <motion.a variants={heroCopy} href="#services" className="inline-flex items-center gap-2 text-sm font-medium border-b-2 border-emerald pb-1 hover:gap-3 transition-all">
+                What I take off your plate <ArrowRight size={15} />
+              </motion.a>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right: The Analyst */}
+          <motion.div className="bg-pine text-paper flex items-center overflow-hidden">
+            <motion.div
+              variants={slide(1)}
+              className="w-full max-w-xl mr-auto px-6 lg:pl-40 xl:pl-48 py-16 lg:py-0"
+            >
+              <motion.div style={{ opacity: dimRight }}>
+              <motion.p variants={heroCopy} className="font-mono text-xs font-bold tracking-widest uppercase text-emerald mb-5">Cr — The Analyst</motion.p>
+              <motion.h2 variants={heroCopy} className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.05] mb-5">
+                Data that people actually use.
+              </motion.h2>
+              <motion.p variants={heroCopy} className="text-paper/60 leading-relaxed mb-8">
+                Power BI, Tableau, and Python turning messy operational data into dashboards
+                teams open every Monday.
+              </motion.p>
+              <motion.a variants={heroCopy} href="#work" className="inline-flex items-center gap-2 text-sm font-medium border-b-2 border-emerald pb-1 hover:gap-3 transition-all">
+                See the work <ArrowRight size={15} />
+              </motion.a>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* Split portrait straddling the seam (desktop only) — rides the seam as it slides */}
+        <motion.div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 xl:w-72 xl:h-72">
+          <motion.div variants={portrait} style={width ? { x: seam } : undefined} className="w-full h-full">
+            <SplitPortrait className="relative w-full h-full" />
+          </motion.div>
+        </motion.div>
+
+        {/* Status bar */}
+        <motion.div
+          variants={{ hidden: { opacity: 0, y: reduce ? 0 : 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 1, ease: EASE_EXPO } } }}
+          className="border-t border-line bg-paper"
+        >
+          <div className="max-w-6xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 font-mono text-xs text-ink/50">
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald animate-pulse" />
+              accepting_new_clients: true
+            </span>
+            <span>location: New York, NY</span>
+            <span className="hidden sm:inline">stack: [Power BI, Tableau, Python, Excel]</span>
+          </div>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}
+
 function ProjectDetail({ project, prev, next }) {
   return (
     <div className="bg-paper text-ink font-sans antialiased min-h-screen flex flex-col">
@@ -400,62 +552,7 @@ export default function TiffanyPortfolio() {
       </header>
 
       {/* SPLIT HERO */}
-      <section id="home" className="relative border-b border-line">
-        {/* Mobile portrait (desktop version straddles the seam below) */}
-        <div className="lg:hidden flex justify-center pt-10">
-          <SplitPortrait className="relative w-36 h-36" />
-        </div>
-        <div className="grid lg:grid-cols-2 lg:min-h-[calc(100vh-4rem)]">
-          {/* Left: The CPA */}
-          <div className="bg-paper flex items-center">
-            <div className="w-full max-w-xl ml-auto px-6 lg:pr-40 xl:pr-48 py-16 lg:py-0">
-              <p className="font-mono text-xs font-bold tracking-widest uppercase text-emerald mb-5">Dr — The CPA</p>
-              <h1 className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.05] mb-5">
-                Finance that holds up to an audit.
-              </h1>
-              <p className="text-ink/60 leading-relaxed mb-8">
-                Licensed CPA (NY &amp; TX) keeping nonprofit books, budgets, and Form 990s
-                board-clear and funder-ready.
-              </p>
-              <a href="#services" className="inline-flex items-center gap-2 text-sm font-medium border-b-2 border-emerald pb-1 hover:gap-3 transition-all">
-                What I take off your plate <ArrowRight size={15} />
-              </a>
-            </div>
-          </div>
-
-          {/* Right: The Analyst */}
-          <div className="bg-pine text-paper flex items-center">
-            <div className="w-full max-w-xl mr-auto px-6 lg:pl-40 xl:pl-48 py-16 lg:py-0">
-              <p className="font-mono text-xs font-bold tracking-widest uppercase text-emerald mb-5">Cr — The Analyst</p>
-              <h2 className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.05] mb-5">
-                Data that people actually use.
-              </h2>
-              <p className="text-paper/60 leading-relaxed mb-8">
-                Power BI, Tableau, and Python turning messy operational data into dashboards
-                teams open every Monday.
-              </p>
-              <a href="#work" className="inline-flex items-center gap-2 text-sm font-medium border-b-2 border-emerald pb-1 hover:gap-3 transition-all">
-                See the work <ArrowRight size={15} />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Split portrait straddling the seam (desktop only) */}
-        <SplitPortrait className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 xl:w-72 xl:h-72" />
-
-        {/* Status bar */}
-        <div className="border-t border-line bg-paper">
-          <div className="max-w-6xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 font-mono text-xs text-ink/50">
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald animate-pulse" />
-              accepting_new_clients: true
-            </span>
-            <span>location: New York, NY</span>
-            <span className="hidden sm:inline">stack: [Power BI, Tableau, Python, Excel]</span>
-          </div>
-        </div>
-      </section>
+      <SplitHero />
 
       {/* LEDGER */}
       <section className="bg-mist border-b border-line">
