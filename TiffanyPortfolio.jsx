@@ -118,13 +118,13 @@ const services = [
 const offTheClock = [
   {
     title: 'Dogs',
-    desc: 'Will stop mid-sentence for a dog on the sidewalk. Every single time.',
+    desc: 'Ask me about my dog; tell me about yours! ; )',
     image: null,
     slot: 'personal-dogs.jpg',
   },
   {
     title: 'Broadway',
-    desc: 'Twenty minutes from the theater district and fully taking advantage of it.',
+    desc: 'Fifteen minutes from the theater district and fully taking advantage of it.',
     image: null,
     slot: 'personal-broadway.jpg',
   },
