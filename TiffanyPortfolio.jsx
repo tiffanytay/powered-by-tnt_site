@@ -114,6 +114,34 @@ const services = [
   },
 ];
 
+// Drop a photo into public/graphics/ and set `image` to swap out the placeholder tile.
+const offTheClock = [
+  {
+    title: 'Dogs',
+    desc: 'Will stop mid-sentence for a dog on the sidewalk. Every single time.',
+    image: null,
+    slot: 'personal-dogs.jpg',
+  },
+  {
+    title: 'Broadway',
+    desc: 'Twenty minutes from the theater district and fully taking advantage of it.',
+    image: null,
+    slot: 'personal-broadway.jpg',
+  },
+  {
+    title: 'Travel & Food',
+    desc: 'New cities, and eating my way through them one unfamiliar menu at a time.',
+    image: null,
+    slot: 'personal-travel.jpg',
+  },
+  {
+    title: 'Puzzles',
+    desc: 'The same pattern-finding itch that makes the day job fun, minus the deadlines.',
+    image: null,
+    slot: 'personal-puzzles.jpg',
+  },
+];
+
 const projects = [
   {
     n: '01',
@@ -598,11 +626,33 @@ export default function TiffanyPortfolio() {
         </div>
       </section>
 
+      {/* OFF THE CLOCK */}
+      <section className="bg-mist border-b border-line">
+        <div className="max-w-6xl mx-auto px-6 py-20">
+          <SectionHeader index="05" label="Non-Billable Hours" title="Off the clock." />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {offTheClock.map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.05}>
+                {item.image ? (
+                  <img src={item.image} alt={item.title} className="w-full aspect-square object-cover border border-line mb-4" />
+                ) : (
+                  <div className="w-full aspect-square border border-line bg-paper mb-4 flex items-center justify-center p-3">
+                    <span className="font-mono text-[10px] text-ink/30 text-center break-all">{item.slot}</span>
+                  </div>
+                )}
+                <h3 className="font-display text-lg font-bold tracking-tight mb-2">{item.title}</h3>
+                <p className="text-sm text-ink/60 leading-relaxed">{item.desc}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
       <section id="contact" className="border-b border-line">
         <div className="max-w-6xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-14">
           <div>
-            <SectionHeader index="05" label="Contact" title="Let's close the gap between your books and your board." />
+            <SectionHeader index="06" label="Contact" title="Let's close the gap between your books and your board." />
             <Reveal>
               <p className="text-ink/60 leading-relaxed mb-8 max-w-md">
                 Tell me what&rsquo;s keeping your finance stack messy — I reply within two business days.
