@@ -9,10 +9,25 @@
   --color-ink: #0b1210;
   --color-pine: #071013;
   --color-emerald: #66c3ff;
+  /* Same hue for text on paper/mist: bright emerald is ~2:1 on white; this clears 4.5:1 on both. */
+  --color-emerald-deep: #0b6bb0;
   --color-mist: #f4f6f5;
   --color-line: #e2e7e4;
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+@layer base {
+  html {
+    /* Anchor targets land below the 4rem sticky header instead of under it. */
+    scroll-padding-top: 4rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  /* Translucent chrome goes frosty/solid when the user asks for less transparency. */
+  @media (prefers-reduced-transparency: reduce) {
+    .site-header { background-color: var(--color-paper); backdrop-filter: none; }
+  }
 }
