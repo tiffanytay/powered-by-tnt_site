@@ -18,9 +18,15 @@ function Github({ size = 18, className }) {
   );
 }
 
+// Press feedback lands on pointer-down (transform only, so it stays on the compositor).
+const press = 'active:scale-[0.97] motion-reduce:active:scale-100 motion-reduce:active:opacity-70';
+const btn = `inline-flex items-center bg-ink text-paper font-medium hover:bg-emerald hover:text-ink transition-[color,background-color,transform] duration-150 ${press}`;
+
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  // Delay rides in via `custom`: a variant-level transition wins over the component's
+  // `transition` prop, so passing delay there never applied.
+  show: (delay = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut', delay } }),
 };
 
 function Reveal({ children, className, delay = 0 }) {
@@ -31,7 +37,7 @@ function Reveal({ children, className, delay = 0 }) {
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
       variants={fadeUp}
-      transition={{ delay }}
+      custom={delay}
     >
       {children}
     </motion.div>
@@ -42,7 +48,7 @@ function SplitPortrait({ className = '' }) {
   return (
     // position (relative/absolute) supplied by caller to avoid conflicting utilities
     <div className={`rounded-full overflow-hidden border-4 border-paper shadow-2xl select-none pointer-events-none ${className}`}>
-      <img src="graphics/13.jpeg" alt="Tiffany Tay" className="absolute inset-0 w-full h-full object-cover object-top" />
+      <img src="graphics/13.jpeg" alt="Tiffany Tay" fetchPriority="high" className="absolute inset-0 w-full h-full object-cover object-top" />
     </div>
   );
 }
@@ -72,12 +78,12 @@ function DataVisual({ eyebrow, flow, stat, statLabel, className = '' }) {
 function SectionHeader({ index, label, title, dark = false }) {
   return (
     <Reveal className="mb-14">
-      <div className={`flex items-center gap-3 font-mono text-xs font-bold tracking-widest uppercase mb-4 ${dark ? 'text-emerald' : 'text-emerald'}`}>
+      <div className={`flex items-center gap-3 font-mono text-xs font-bold tracking-widest uppercase mb-4 ${dark ? 'text-emerald' : 'text-emerald-deep'}`}>
         <span>{index}</span>
         <span className={`h-px w-10 ${dark ? 'bg-emerald/50' : 'bg-emerald/50'}`} />
         <span>{label}</span>
       </div>
-      <h2 className={`font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight ${dark ? 'text-paper' : 'text-ink'}`}>
+      <h2 className={`font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] ${dark ? 'text-paper' : 'text-ink'}`}>
         {title}
       </h2>
     </Reveal>
@@ -119,7 +125,7 @@ const offTheClock = [
   {
     title: 'Dogs',
     desc: 'Ask me about my dog; tell me about yours! ; )',
-    image: null,
+    image: 'graphics/personal-dogs.jpg',
     slot: 'personal-dogs.jpg',
   },
   {
@@ -316,14 +322,18 @@ function SplitHero() {
     show: {
       opacity: 1,
       x: 0,
-      transition: { duration: reduce ? 0 : 1, ease: EASE_EXPO, delayChildren: 0.7, staggerChildren: 0.08 },
+      // Copy is readable ~0.4s in; the reference's 1.7s wait was latency, not choreography.
+      transition: { duration: reduce ? 0 : 0.8, ease: EASE_EXPO, delayChildren: 0.4, staggerChildren: 0.08 },
     },
   });
 
   const portrait = {
     hidden: { opacity: 0, scale: reduce ? 1 : 0.85 },
-    show: { opacity: 1, scale: 1, transition: { duration: reduce ? 0 : 0.9, delay: 0.3, ease: EASE_BACK } },
+    show: { opacity: 1, scale: 1, transition: { duration: reduce ? 0 : 0.8, delay: 0.2, ease: EASE_BACK } },
   };
+
+  const cta = 'group inline-flex items-center gap-2 text-sm font-medium border-b-2 border-emerald pb-1 transition-opacity active:opacity-70';
+  const ctaArrow = 'transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0';
 
   return (
     <section id="home" ref={ref} className="relative border-b border-line">
@@ -345,7 +355,7 @@ function SplitHero() {
               className="w-full max-w-xl ml-auto px-6 lg:pr-40 xl:pr-48 py-16 lg:py-0"
             >
               <motion.div style={{ opacity: dimLeft }}>
-              <motion.p variants={heroCopy} className="font-mono text-xs font-bold tracking-widest uppercase text-emerald mb-5">Dr — The CPA</motion.p>
+              <motion.p variants={heroCopy} className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep mb-5">Dr — The CPA</motion.p>
               <motion.h1 variants={heroCopy} className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.05] mb-5">
                 Finance that holds up to an audit.
               </motion.h1>
@@ -353,8 +363,8 @@ function SplitHero() {
                 Licensed CPA (NY &amp; TX) keeping nonprofit books, budgets, and Form 990s
                 board-clear and funder-ready.
               </motion.p>
-              <motion.a variants={heroCopy} href="#services" className="inline-flex items-center gap-2 text-sm font-medium border-b-2 border-emerald pb-1 hover:gap-3 transition-all">
-                What I take off your plate <ArrowRight size={15} />
+              <motion.a variants={heroCopy} href="#services" className={cta}>
+                What I take off your plate <ArrowRight size={15} className={ctaArrow} />
               </motion.a>
               </motion.div>
             </motion.div>
@@ -375,8 +385,8 @@ function SplitHero() {
                 Power BI, Tableau, and Python turning messy operational data into dashboards
                 teams open every Monday.
               </motion.p>
-              <motion.a variants={heroCopy} href="#work" className="inline-flex items-center gap-2 text-sm font-medium border-b-2 border-emerald pb-1 hover:gap-3 transition-all">
-                See the work <ArrowRight size={15} />
+              <motion.a variants={heroCopy} href="#work" className={cta}>
+                See the work <ArrowRight size={15} className={ctaArrow} />
               </motion.a>
               </motion.div>
             </motion.div>
@@ -392,12 +402,12 @@ function SplitHero() {
 
         {/* Status bar */}
         <motion.div
-          variants={{ hidden: { opacity: 0, y: reduce ? 0 : 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 1, ease: EASE_EXPO } } }}
+          variants={{ hidden: { opacity: 0, y: reduce ? 0 : 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.7, ease: EASE_EXPO } } }}
           className="border-t border-line bg-paper"
         >
           <div className="max-w-6xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 font-mono text-xs text-ink/50">
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-emerald animate-pulse motion-reduce:animate-none" />
               accepting_new_clients: true
             </span>
             <span>location: New York, NY</span>
@@ -409,13 +419,23 @@ function SplitHero() {
   );
 }
 
+// Sticky chrome as a translucent material: content scrolls under it; `.site-header` goes solid under prefers-reduced-transparency.
+const headerCls = 'site-header sticky top-0 z-50 bg-paper/80 backdrop-blur-xl border-b border-line';
+
 function ProjectDetail({ project, prev, next }) {
   return (
-    <div className="bg-paper text-ink font-sans antialiased min-h-screen flex flex-col">
-      <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b border-line">
+    // Keyed by project so prev/next re-runs the fade; under reduced motion only the opacity cross-fade remains.
+    <motion.div
+      key={project.n}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+      className="bg-paper text-ink font-sans antialiased min-h-screen flex flex-col"
+    >
+      <header className={headerCls}>
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#work" className="inline-flex items-center gap-2 font-mono text-sm hover:text-emerald transition-colors">
-            <ArrowLeft size={15} /> all work
+          <a href="#work" className={`group inline-flex items-center gap-2 font-mono text-sm hover:text-emerald-deep transition-colors ${press}`}>
+            <ArrowLeft size={15} className="transition-transform duration-200 group-hover:-translate-x-1 motion-reduce:group-hover:translate-x-0" /> all work
           </a>
           <a href="#home" className="font-mono text-sm font-medium tracking-tight">
             tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40"> — CPA</span>
@@ -425,7 +445,7 @@ function ProjectDetail({ project, prev, next }) {
 
       <main className="flex-1">
         <div className="max-w-4xl mx-auto px-6 py-16">
-          <p className="font-mono text-xs font-bold tracking-widest uppercase text-emerald mb-4">
+          <p className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep mb-4">
             {project.n} / {String(projects.length).padStart(2, '0')} — Selected Work
           </p>
           <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight mb-2">{project.title}</h1>
@@ -442,7 +462,7 @@ function ProjectDetail({ project, prev, next }) {
             <ul className="mt-10 font-mono text-sm space-y-3">
               {project.detail.highlights.map((h) => (
                 <li key={h} className="flex gap-3">
-                  <span className="text-emerald font-bold">+</span>
+                  <span className="text-emerald-deep font-bold">+</span>
                   <span className="text-ink/70">{h}</span>
                 </li>
               ))}
@@ -456,20 +476,20 @@ function ProjectDetail({ project, prev, next }) {
 
       {/* Prev / next project */}
       <nav className="border-t border-line grid sm:grid-cols-2">
-        <a href={`#/project/${prev.n}`} className="group p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-line hover:bg-mist transition-colors">
-          <div className="font-mono text-xs font-bold text-emerald mb-2 flex items-center gap-2">
-            <ArrowLeft size={13} /> PREV — {prev.n}
+        <a href={`#/project/${prev.n}`} className="group p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-line hover:bg-mist active:bg-mist transition-colors">
+          <div className="font-mono text-xs font-bold text-emerald-deep mb-2 flex items-center gap-2">
+            <ArrowLeft size={13} className="transition-transform duration-200 group-hover:-translate-x-1 motion-reduce:group-hover:translate-x-0" /> PREV — {prev.n}
           </div>
-          <div className="font-display font-bold tracking-tight group-hover:text-emerald transition-colors">{prev.title}</div>
+          <div className="font-display font-bold tracking-tight group-hover:text-emerald-deep transition-colors">{prev.title}</div>
         </a>
-        <a href={`#/project/${next.n}`} className="group p-6 sm:p-8 text-right hover:bg-mist transition-colors">
-          <div className="font-mono text-xs font-bold text-emerald mb-2 flex items-center justify-end gap-2">
-            NEXT — {next.n} <ArrowRight size={13} />
+        <a href={`#/project/${next.n}`} className="group p-6 sm:p-8 text-right hover:bg-mist active:bg-mist transition-colors">
+          <div className="font-mono text-xs font-bold text-emerald-deep mb-2 flex items-center justify-end gap-2">
+            NEXT — {next.n} <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
           </div>
-          <div className="font-display font-bold tracking-tight group-hover:text-emerald transition-colors">{next.title}</div>
+          <div className="font-display font-bold tracking-tight group-hover:text-emerald-deep transition-colors">{next.title}</div>
         </a>
       </nav>
-    </div>
+    </motion.div>
   );
 }
 
@@ -484,15 +504,20 @@ export default function TiffanyPortfolio() {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
+  // Page swaps jump instantly (a new page has no spatial continuity to animate); in-page
+  // anchor clicks are left to the browser so the CSS smooth-scroll (motion-safe) applies.
+  const prevRoute = useRef(route);
   useEffect(() => {
+    const from = prevRoute.current;
+    prevRoute.current = route;
     if (route.startsWith('#/project/')) {
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
-    // Re-scroll to plain anchors (#work etc.) after returning from a detail page,
-    // since the target element doesn't exist until React re-renders the main page.
+    if (!from.startsWith('#/project/')) return;
+    // Returning from a detail page: the anchor target only exists after React re-renders.
     const el = route.length > 1 && document.getElementById(route.slice(1));
-    if (el) el.scrollIntoView();
+    if (el) el.scrollIntoView({ behavior: 'instant' });
   }, [route]);
 
   async function handleSubmit(e) {
@@ -532,21 +557,22 @@ export default function TiffanyPortfolio() {
   return (
     <div className="bg-paper text-ink font-sans antialiased">
       {/* NAV */}
-      <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b border-line">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <header className={headerCls}>
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
           <a href="#home" className="font-mono text-sm font-medium tracking-tight">
-            tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40"> — CPA</span>
+            tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40 hidden sm:inline"> — CPA</span>
           </a>
-          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-ink/60">
-            <a href="#work" className="hover:text-ink transition-colors">Work</a>
-            <a href="#services" className="hover:text-ink transition-colors">Services</a>
-            <a href="#about" className="hover:text-ink transition-colors">About</a>
+          {/* Wayfinding at every width: "where can I go?" must have an answer on a phone too. */}
+          <nav className="flex items-center gap-4 sm:gap-7 text-xs sm:text-sm font-medium text-ink/60">
+            <a href="#work" className="hover:text-ink active:text-ink transition-colors">Work</a>
+            <a href="#services" className="hover:text-ink active:text-ink transition-colors">Services</a>
+            <a href="#about" className="hover:text-ink active:text-ink transition-colors">About</a>
           </nav>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-1.5 bg-ink text-paper text-sm font-medium px-4 py-2 hover:bg-emerald transition-colors"
-          >
-            Contact <ArrowRight size={14} />
+          {/* Phone widths: icon-only so the logo, nav, and button share 375px without wrapping. */}
+          <a href="#contact" aria-label="Contact" className={`${btn} gap-1.5 text-sm p-2.5 sm:px-4 sm:py-2`}>
+            <Mail size={16} className="sm:hidden" />
+            <span className="hidden sm:inline">Contact</span>
+            <ArrowRight size={14} className="hidden sm:inline" />
           </a>
         </div>
       </header>
@@ -567,7 +593,7 @@ export default function TiffanyPortfolio() {
                   <span className="font-medium text-ink tabular-nums">{row.value}</span>
                 </div>
               ))}
-              <div className="flex items-baseline gap-3 py-4 text-emerald">
+              <div className="flex items-baseline gap-3 py-4 text-emerald-deep">
                 <span className="font-bold">Net position</span>
                 <span className="flex-1 border-b border-dotted border-emerald/40 translate-y-[-4px]" />
                 <span className="font-bold">Clarity</span>
@@ -583,9 +609,9 @@ export default function TiffanyPortfolio() {
           <SectionHeader index="02" label="Services" title="What I take off your plate." />
           <div className="grid sm:grid-cols-2 border-t border-l border-line">
             {services.map((s, i) => (
-              <Reveal key={s.n} delay={i * 0.05} className="group border-b border-r border-line p-8 hover:bg-mist transition-colors">
-                <div className="font-mono text-xs font-bold text-emerald mb-6">{s.n}</div>
-                <h3 className="font-display text-xl font-bold tracking-tight mb-3 group-hover:text-emerald transition-colors">
+              <Reveal key={s.n} delay={i * 0.05} className="group border-b border-r border-line p-8 hover:bg-mist active:bg-mist transition-colors">
+                <div className="font-mono text-xs font-bold text-emerald-deep mb-6">{s.n}</div>
+                <h3 className="font-display text-xl font-bold tracking-tight mb-3 group-hover:text-emerald-deep transition-colors">
                   {s.title}
                 </h3>
                 <p className="text-sm text-ink/60 leading-relaxed">{s.desc}</p>
@@ -603,19 +629,20 @@ export default function TiffanyPortfolio() {
           {/* Featured */}
           {projects.filter((p) => p.featured).map((p) => (
             <Reveal key={p.n} className="mb-12">
-              <a href={`#/project/${p.n}`} className="group grid md:grid-cols-2 border border-line hover:border-ink transition-colors">
+              <a href={`#/project/${p.n}`} className="group grid md:grid-cols-2 border border-line hover:border-ink active:border-ink transition-colors">
               <div className="overflow-hidden border-b md:border-b-0 md:border-r border-line">
                 <img
                   src={p.image}
                   alt={p.title}
-                  className="w-full h-full object-cover object-top max-h-80 md:max-h-none group-hover:scale-[1.02] transition-transform duration-500"
+                  loading="lazy"
+                  className="w-full h-full object-cover object-top max-h-80 md:max-h-none group-hover:scale-[1.02] motion-reduce:group-hover:scale-100 transition-transform duration-500"
                 />
               </div>
               <div className="p-8 lg:p-10 flex flex-col justify-between gap-6">
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <span className="font-mono text-xs font-bold text-emerald">{p.n} / FEATURED</span>
-                    <ArrowUpRight size={18} className="text-ink/30 group-hover:text-emerald transition-colors" />
+                    <span className="font-mono text-xs font-bold text-emerald-deep">{p.n} / FEATURED</span>
+                    <ArrowUpRight size={18} className="text-ink/30 group-hover:text-emerald-deep transition-colors" />
                   </div>
                   <h3 className="font-display text-2xl font-bold tracking-tight mb-1">{p.title}</h3>
                   <p className="font-mono text-xs text-ink/40 mb-4">{p.subtitle}</p>
@@ -633,18 +660,18 @@ export default function TiffanyPortfolio() {
           <div className="grid sm:grid-cols-2 gap-6">
             {projects.filter((p) => !p.featured).map((p, i) => (
               <Reveal key={p.n} delay={i * 0.05} className="h-full">
-                <a href={`#/project/${p.n}`} className="group border border-line hover:border-ink transition-colors flex flex-col h-full">
+                <a href={`#/project/${p.n}`} className="group border border-line hover:border-ink active:border-ink transition-colors flex flex-col h-full">
                 <div className="overflow-hidden border-b border-line">
                   {p.image ? (
-                    <img src={p.image} alt={p.title} className="w-full h-48 object-cover object-top group-hover:scale-[1.03] transition-transform duration-500" />
+                    <img src={p.image} alt={p.title} loading="lazy" className="w-full h-48 object-cover object-top group-hover:scale-[1.03] motion-reduce:group-hover:scale-100 transition-transform duration-500" />
                   ) : (
                     <DataVisual {...p.visual} className="w-full h-48" />
                   )}
                 </div>
                 <div className="p-6 flex flex-col gap-3 flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-emerald">{p.n}</span>
-                    <ArrowUpRight size={16} className="text-ink/30 group-hover:text-emerald transition-colors" />
+                    <span className="font-mono text-xs font-bold text-emerald-deep">{p.n}</span>
+                    <ArrowUpRight size={16} className="text-ink/30 group-hover:text-emerald-deep transition-colors" />
                   </div>
                   <h3 className="font-display text-lg font-bold tracking-tight">{p.title}</h3>
                   <p className="text-sm text-ink/60 leading-relaxed flex-1">{p.desc}</p>
@@ -666,7 +693,7 @@ export default function TiffanyPortfolio() {
           <div className="grid md:grid-cols-[0.85fr_1.15fr] gap-12 items-start">
             <Reveal>
               <div className="relative">
-                <img src="graphics/6.jpeg" alt="Tiffany Tay" className="w-full object-cover object-top grayscale contrast-110" />
+                <img src="graphics/6.jpeg" alt="Tiffany Tay" loading="lazy" className="w-full object-cover object-top grayscale contrast-110" />
                 <div className="absolute inset-0 bg-emerald/20 mix-blend-multiply" />
                 <div className="absolute bottom-0 left-0 font-mono text-xs bg-paper text-ink px-3 py-2">
                   fig 1. — the person behind the ledger
@@ -731,10 +758,13 @@ export default function TiffanyPortfolio() {
             {offTheClock.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.05}>
                 {item.image ? (
-                  <img src={item.image} alt={item.title} className="w-full aspect-square object-cover border border-line mb-4" />
+                  <img src={item.image} alt={item.title} loading="lazy" className="w-full aspect-square object-cover border border-line mb-4" />
                 ) : (
                   <div className="w-full aspect-square border border-line bg-paper mb-4 flex items-center justify-center p-3">
-                    <span className="font-mono text-[10px] text-ink/30 text-center break-all">{item.slot}</span>
+                    {/* The slot filename is an authoring hint; visitors never see an internal path. */}
+                    {import.meta.env.DEV && (
+                      <span className="font-mono text-[10px] text-ink/30 text-center break-all">{item.slot}</span>
+                    )}
                   </div>
                 )}
                 <h3 className="font-display text-lg font-bold tracking-tight mb-2">{item.title}</h3>
@@ -755,14 +785,14 @@ export default function TiffanyPortfolio() {
                 Tell me what&rsquo;s keeping your finance stack messy — I reply within two business days.
               </p>
               <div className="space-y-1 font-mono text-sm">
-                <a href="mailto:tnt@poweredbytnt.com" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald transition-colors">
-                  <Mail size={16} className="text-emerald" /> tnt@poweredbytnt.com
+                <a href="mailto:tnt@poweredbytnt.com" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald-deep transition-colors">
+                  <Mail size={16} className="text-emerald-deep" /> tnt@poweredbytnt.com
                 </a>
-                <a href="https://www.linkedin.com/in/tiffany-n-tay/" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald transition-colors">
-                  <Linkedin size={16} className="text-emerald" /> in/tiffany-n-tay
+                <a href="https://www.linkedin.com/in/tiffany-n-tay/" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald-deep transition-colors">
+                  <Linkedin size={16} className="text-emerald-deep" /> in/tiffany-n-tay
                 </a>
-                <a href="https://github.com/tiffanytay" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald transition-colors">
-                  <Github size={16} className="text-emerald" /> tiffanytay
+                <a href="https://github.com/tiffanytay" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald-deep transition-colors">
+                  <Github size={16} className="text-emerald-deep" /> tiffanytay
                 </a>
               </div>
             </Reveal>
@@ -770,11 +800,16 @@ export default function TiffanyPortfolio() {
 
           <Reveal delay={0.1} className="lg:pt-24">
             {status === 'success' ? (
-              <div className="border border-line h-full flex flex-col items-center justify-center text-center p-10">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="border border-line h-full flex flex-col items-center justify-center text-center p-10"
+              >
                 <CheckCircle2 className="text-emerald mb-4" size={36} />
                 <h3 className="font-display text-xl font-bold mb-2">Message sent</h3>
                 <p className="text-ink/60 text-sm">Thanks for reaching out — I&rsquo;ll be in touch soon.</p>
-              </div>
+              </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
                 <input type="hidden" name="access_key" value="d5b0b07d-d2c0-4a93-acf3-259cf4caee86" />
@@ -794,7 +829,7 @@ export default function TiffanyPortfolio() {
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="inline-flex items-center gap-2 bg-ink text-paper px-7 py-3 font-medium hover:bg-emerald transition-colors disabled:opacity-60"
+                  className={`${btn} gap-2 px-7 py-3 disabled:opacity-60`}
                 >
                   {status === 'sending' ? 'Sending…' : 'Send message'} <ArrowRight size={15} />
                 </button>

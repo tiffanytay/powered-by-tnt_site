@@ -1,90 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lost Your Way? - Tiffany Tay</title>
-    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#E50914',
-                        netflixBlack: '#141414',
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #141414;
-            color: white;
-            margin: 0;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .error-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover;
-            background-position: center;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .vignette {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
-            pointer-events: none;
-        }
-        .error-code {
-            text-shadow: 0px 0px 50px rgba(229, 9, 20, 0.5);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found — Tiffany Tay, CPA</title>
+  <link rel="icon" type="image/svg+xml" href="/graphics/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #ffffff; --ink: #0b1210; --pine: #071013; --emerald: #66c3ff; --emerald-deep: #0b6bb0; --line: #e2e7e4;
+      --sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      --display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: auto; }
+    body {
+      margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+      background: var(--paper); color: var(--ink); font: 16px/1.6 var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    header, footer { border-color: var(--line); font-family: var(--mono); font-size: 0.8rem; }
+    header { border-bottom: 1px solid var(--line); }
+    footer { border-top: 1px solid var(--line); background: var(--pine); color: rgba(255,255,255,0.5); }
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+    header .wrap { height: 4rem; display: flex; align-items: center; }
+    .logo { color: inherit; text-decoration: none; font-weight: 500; letter-spacing: -0.01em; }
+    .dot { color: var(--emerald); }
+    .muted { color: rgba(11,18,16,0.4); }
+    main { flex: 1; display: flex; align-items: center; }
+    main .wrap { padding-top: 4rem; padding-bottom: 4rem; }
+    .eyebrow {
+      font: 700 0.75rem/1 var(--mono); letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--emerald-deep); display: flex; align-items: center; gap: 0.75rem; margin: 0 0 1rem;
+    }
+    .eyebrow::after { content: ''; height: 1px; width: 2.5rem; background: rgba(102,195,255,0.5); }
+    h1 {
+      font: 700 clamp(2.25rem, 6vw, 4rem)/1.05 var(--display); letter-spacing: -0.025em;
+      margin: 0 0 1.25rem; max-width: 22ch;
+    }
+    p { color: rgba(11,18,16,0.6); max-width: 34rem; margin: 0 0 2.5rem; }
+    .ledger { font: 0.875rem/1 var(--mono); max-width: 34rem; margin: 0 0 2.5rem; }
+    .ledger div { display: flex; align-items: baseline; gap: 0.75rem; padding: 0.9rem 0; border-bottom: 1px solid rgba(11,18,16,0.1); }
+    .ledger span:nth-child(2) { flex: 1; border-bottom: 1px dotted rgba(11,18,16,0.25); transform: translateY(-4px); }
+    .ledger .bad { color: #c2410c; }
+    .actions { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: center; }
+    .btn, .link { font-size: 0.875rem; font-weight: 500; text-decoration: none; color: inherit;
+      transition: color 150ms, background-color 150ms, transform 120ms ease-out; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--ink); color: var(--paper); padding: 0.75rem 1.75rem; border: 0; font-family: inherit; cursor: pointer; }
+    .btn:hover { background: var(--emerald); color: var(--ink); }
+    .link { border-bottom: 2px solid var(--emerald); padding-bottom: 0.25rem; }
+    .link:hover { color: var(--emerald-deep); }
+    .btn:active, .link:active { transform: scale(0.97); }
+    footer .wrap { padding: 2rem 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+    @media (prefers-reduced-motion: reduce) { .btn, .link { transition: none; } .btn:active, .link:active { transform: none; opacity: 0.8; } }
+  </style>
 </head>
 <body>
-
-    <div class="vignette"></div>
-
-    <div class="error-bg px-4">
-        <div class="max-w-2xl z-10">
-            <div class="mb-8">
-                <a href="./" class="text-primary font-black text-4xl tracking-tighter">TIFFANY TAY</a>
-            </div>
-
-            <h1 class="text-7xl md:text-9xl font-black mb-4 error-code">404</h1>
-            
-            <h2 class="text-2xl md:text-4xl font-bold mb-6">Lost your connection?</h2>
-            
-            <p class="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed">
-                The page you’re looking for isn't available in your region... or anywhere else. 
-                But don't worry, the rest of our operations and analytics content is ready for you.
-            </p>
-
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="./" class="bg-white text-black px-10 py-3 rounded font-bold text-lg hover:bg-opacity-80 transition duration-300 flex items-center justify-center gap-2">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                   Tiffany Tay Home
-                </a>
-                <button onclick="window.history.back()" class="bg-gray-500 bg-opacity-50 text-white px-10 py-3 rounded font-bold text-lg hover:bg-opacity-40 transition duration-300">
-                    Go Back
-                </button>
-            </div>
-
-            <div class="mt-12 pt-8 border-t border-gray-700">
-                <p class="text-gray-400 text-sm tracking-widest uppercase">
-                    Error Code <span class="font-bold text-white">NSES-404</span>
-                </p>
-            </div>
-        </div>
+  <header>
+    <div class="wrap">
+      <a class="logo" href="/">tiffany<span class="dot">.</span>tay<span class="muted"> — CPA</span></a>
     </div>
+  </header>
 
+  <main>
+    <div class="wrap">
+      <p class="eyebrow">404 — entry not found</p>
+      <h1>This line item doesn’t reconcile.</h1>
+      <p>The page you’re after was never posted to this ledger, or it moved. Everything else still balances.</p>
+      <div class="ledger">
+        <div><span>Requested page</span><span></span><span class="bad">not found</span></div>
+        <div><span>Everything else</span><span></span><span>reconciled</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn" href="/">Back to the books &rarr;</a>
+        <a class="link" href="/#work">See the work</a>
+        <button class="link" type="button" onclick="history.back()">Go back</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>tiffany<span class="dot">.</span>tay — nonprofit finance &amp; operations</span>
+      <span>&copy; 2026 — all other figures reconciled</span>
+    </div>
+  </footer>
 </body>
 </html>
