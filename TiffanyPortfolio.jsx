@@ -82,32 +82,32 @@ function SectionHeader({ index, label, title, dark = false }) {
 }
 
 const ledger = [
-  { item: 'Years in nonprofit & SaaS operations', value: '10+' },
+  { item: 'Years leading operations, finance & delivery', value: '10+' },
   { item: 'CPA licenses held (New York, Texas)', value: '02' },
-  { item: 'Form 990s translated into plain English', value: 'Many' },
-  { item: 'Dashboards actually used after handoff', value: '100%' },
+  { item: 'Ops vacuums stepped into without the title', value: 'Several' },
+  { item: 'Products shipped solo, PRD to build', value: '01' },
 ];
 
 const services = [
   {
     n: '01',
-    title: 'Financial Reporting & Form 990 Clarity',
-    desc: 'Dense filings and financial statements, rebuilt as dashboards your board and funders read without a translator.',
+    title: 'Operations & Process Design',
+    desc: 'The informal, inconsistent, lives-in-someone’s-head process — rebuilt as a repeatable system anyone on the team can run.',
   },
   {
     n: '02',
-    title: 'Grant Lifecycle Systems',
-    desc: 'Trackers and workflows that keep every proposal, deadline, and report moving — out of inboxes, into systems.',
+    title: 'Financial Operations & Controls',
+    desc: 'Books, budgets, and spend under a CPA’s eye: clean lines, real oversight, and the recurring costs nobody has questioned in years.',
   },
   {
     n: '03',
-    title: 'Dashboards & Impact Measurement',
-    desc: 'Power BI and Tableau builds that connect spend to mission outcomes, refreshed without manual heroics.',
+    title: 'Diagnostics & Analysis',
+    desc: 'Data scattered across apps, plus what people actually tell you, pulled into one view — so you fix the root cause, not the symptom.',
   },
   {
     n: '04',
-    title: 'Operations & Process Design',
-    desc: 'Lean processes for teams doing more with less — rigor kept, busywork cut.',
+    title: 'Product & Internal Tooling',
+    desc: 'When the fix is a tool that doesn’t exist yet: PRD, stack decision, and a working build — not a recommendation deck.',
   },
 ];
 
@@ -139,117 +139,113 @@ const offTheClock = [
   },
 ];
 
+// STAR case studies. Each one carries an `image` slot — drop the file into public/graphics/
+// and set `image` to swap the DataVisual placeholder for a real screenshot.
 const projects = [
   {
     n: '01',
-    title: 'Nonprofit Insights Dashboard',
-    subtitle: 'Form 990 Data Aggregation',
-    desc: 'Years of Form 990 filings aggregated into one Power BI model — quick insights from dense tax returns, with a drill-down behind every number.',
-    image: 'graphics/coqual-990-financial-screenshot.png',
-    tags: ['Power BI', 'Power Query'],
+    title: 'Ran Nonprofit Finance Ops With No Ops Director',
+    subtitle: 'Ownership under ambiguity',
+    desc: 'Stepped into a months-long vacancy, set the bookkeeping standard, and audited every recurring expense — without formal authority over anyone doing the work.',
+    image: null,
+    slot: 'case-nonprofit-ops.png',
+    tags: ['QuickBooks', 'BILL.com', 'Google Sheets'],
     featured: true,
-    detail: {
-      body: [
-        'A nonprofit’s Form 990s hold years of financial history — revenue mix, program spend, fundraising efficiency — but nobody has time to dig it out of hundreds of pages of dense tax filings.',
-        'This dashboard does the digging. Years of filings are aggregated into a single Power BI model, so the headline story — where money comes from, where it goes, and how that’s shifting over time — surfaces in seconds instead of an afternoon of PDF archaeology.',
-        'Every summary view drills down: start at the multi-year trends, then click through to the specific schedules and line items behind any number. Leadership walks into board meetings with answers and the receipts to back them up.',
-      ],
-      highlights: [
-        'Years of dense Form 990 filings, one queryable model',
-        'Headline revenue and spend trends surfaced in seconds',
-        'Drill-down from any trend to the underlying line items',
-        'Built in Power BI, refreshed via Power Query — no re-keying',
-      ],
+    visual: {
+      eyebrow: 'Finance Operations',
+      flow: ['No Ops Director', 'Standards set', 'Expenses cut'],
+      stat: '5%',
+      statLabel: 'of recurring spend eliminated',
+    },
+    star: {
+      situation: 'A nonprofit had no Ops Director for months, leaving bookkeeping and expense oversight unmanaged.',
+      task: 'Bring structure back to financial operations without formal authority over the external bookkeeper or staff.',
+      action: 'Directed staff and the external bookkeeper on how the books should be kept, down to which lines to break out, and reviewed every recurring expense for necessity and cost.',
+      result: 'Cut 5% of recurring expenses that were unnecessary or had cheaper alternatives.',
     },
   },
   {
     n: '02',
-    title: 'Slack-to-Jira Ticketing Bot',
-    desc: 'A Slack bot that turns IT support requests into fully-populated Jira tickets the moment they’re posted — nothing waits in a channel to be triaged by hand.',
-    tags: ['Slack API', 'Jira API', 'Automation'],
+    title: 'Led a Distributed Dev Team on Kanban',
+    subtitle: 'People management style',
+    desc: 'Managed 5–8 developers across time zones while deliberately building a team that did not bottleneck on me.',
+    image: null,
+    slot: 'case-kanban-team.png',
+    tags: ['Azure DevOps', 'Kanban', 'Daily Scrum'],
     visual: {
-      eyebrow: 'IT Support Automation',
-      flow: ['Slack message', 'Bot', 'Jira ticket'],
-      stat: '25%',
-      statLabel: 'faster ticket turnaround',
+      eyebrow: 'Team Management',
+      flow: ['Daily scrum', 'Seniors mentor juniors', 'Ownership pushed down'],
+      stat: '+15%',
+      statLabel: 'team throughput',
     },
-    detail: {
-      body: [
-        'IT support requests came in through a Slack channel, and nothing happened next until someone remembered to manually open a Jira ticket — which meant requests sat, got buried under other messages, or fell through the cracks entirely.',
-        'This bot closes that gap. The moment a request is posted to the channel, it creates a Jira ticket automatically, pre-filled with the original message and context — so the Tech team sees exactly what’s being asked for and can prioritize it correctly without chasing down details.',
-        'It also tags whoever is on call that day, so every ticket lands with a name attached from the start. The combined effect: about 25% faster turnaround on IT support requests, with a paper trail that starts the second someone asks for help.',
-      ],
-      highlights: [
-        'Every Slack support request becomes a Jira ticket automatically',
-        'Tickets pre-populated with the original message for faster triage',
-        'On-call teammate auto-tagged on every new ticket',
-        '~25% faster average ticket turnaround',
-      ],
+    star: {
+      situation: 'A cross-functional team of 5–8 geographically dispersed developers needed consistent delivery and clear ownership.',
+      task: 'Manage throughput while building a team that did not bottleneck on me.',
+      action: 'Ran daily scrum and kanban ticketing in Azure DevOps, and mentored senior developers to lead and teach the juniors — pushing ownership down instead of routing it through me.',
+      result: 'Increased throughput 15% and removed myself as the review bottleneck.',
     },
   },
   {
     n: '03',
-    title: 'Performance Review Overhaul',
-    desc: 'Redesigned a nonprofit executive director’s performance review process — cutting a 3-month cycle down to 6 weeks with standardized forms and reporting.',
-    tags: ['Forms', 'Reporting', 'HR Ops'],
+    title: 'Diagnosed an Engagement Gap With Data',
+    subtitle: 'Diagnostic & analytical approach',
+    desc: 'Pulled usage data out of three separate apps and combined it with interview feedback to find why a business unit could not standardize its client engagements.',
+    image: null,
+    slot: 'case-engagement-dashboard.png',
+    tags: ['Power BI', 'Power Query', 'Stakeholder interviews'],
     visual: {
-      eyebrow: 'HR Process Redesign',
-      flow: ['Structured intake', 'Standardized report', 'Board summary'],
-      stat: '3mo → 6wk',
-      statLabel: 'review cycle time',
+      eyebrow: 'Root Cause Analysis',
+      flow: ['3 apps + interviews', 'One Power BI view', 'Action plan'],
+      stat: '3 → 1',
+      statLabel: 'data sources into one view',
     },
-    detail: {
-      body: [
-        'The performance review process for this nonprofit’s executive director took three months from start to finish — collecting input, compiling it, and getting it in front of the board was a slow, manual slog every cycle.',
-        'I rebuilt the process around form technology and reporting technology: structured intake forms replaced ad hoc collection, and a reporting layer turned raw responses into a board-ready summary automatically instead of by hand.',
-        'I also standardized the questions across cycles, so results could be compared year over year instead of starting from scratch each time. The rebuilt process runs in 6 weeks instead of 3 months, and now produces a multi-year performance trend the board can actually track.',
-      ],
-      highlights: [
-        'Review cycle cut from 3 months to 6 weeks',
-        'Structured forms replaced manual data collection',
-        'Automated reporting for board-ready summaries',
-        'Standardized questions enable year-over-year comparison',
-      ],
+    star: {
+      situation: 'A business unit was failing to standardize its engagement process across clients, and nobody could say why.',
+      task: 'Find the root cause using data scattered across three different apps plus qualitative interview feedback.',
+      action: 'Designed a Power BI dashboard that aggregated usage data from all three systems alongside the interview results, so the quantitative and qualitative evidence sat in one view.',
+      result: 'Identified over-customization per client as the core issue and produced an action plan to standardize.',
     },
   },
   {
     n: '04',
-    title: 'Grantseeking Tracker',
-    desc: 'The full grant lifecycle — deadlines, drafts, follow-ups — in one practical system where nothing falls through the cracks.',
-    image: 'graphics/grantseeking-tracker.png',
-    tags: ['Power BI', 'Excel', 'Perplexity AI'],
-    detail: {
-      body: [
-        'Grant lifecycles have a lot of moving parts — deadlines, drafts, follow-ups, funder-specific requirements — and when they live across email threads and someone’s memory, things get missed.',
-        'This tracker puts the full lifecycle in one system: every prospect, deadline, draft status, and follow-up in a single view, built in Power BI and Excel, with Perplexity AI used to help research and qualify new funding prospects.',
-        'The result is a pipeline nothing falls out of — anyone on the team can see what stage a grant is at and what’s due next, instead of that knowledge living in one person’s inbox.',
-      ],
-      highlights: [
-        'Every grant deadline and draft tracked in one system',
-        'Funder research assisted by Perplexity AI',
-        'Built in Power BI and Excel for easy handoff',
-        'Nothing depends on one person’s inbox anymore',
-      ],
+    title: 'Streamlined an Executive Director Review Cycle',
+    subtitle: 'Process design',
+    desc: 'Turned an informal two-month review scramble into a repeatable six-week cycle with results comparable year over year.',
+    image: null,
+    slot: 'case-review-cycle.png',
+    tags: ['Google Forms', 'Power BI', 'Power Query'],
+    visual: {
+      eyebrow: 'HR Process Redesign',
+      flow: ['Structured intake', 'Standard questions', 'Board-ready report'],
+      stat: '2mo → 6wk',
+      statLabel: 'review cycle time',
+    },
+    star: {
+      situation: 'The executive director review cycle took two months and lacked year-over-year consistency.',
+      task: 'Shorten the cycle and make it repeatable and comparable across years.',
+      action: 'Implemented technology suited to the budget and the need, standardized the review questions across cycles, and upgraded the reporting format delivered to the other directors.',
+      result: 'Cut cycle time to 6 weeks and created a consistent, more informative reporting format.',
     },
   },
   {
     n: '05',
-    title: 'User Documentation, Done Right',
-    desc: 'Clear documentation that gets new tools adopted instead of ignored — systems only work if people use them.',
-    image: 'graphics/doc-sample-cover.png',
-    tags: ['Power BI', 'Google Docs'],
-    detail: {
-      body: [
-        'A new tool is only as good as the documentation behind it — without clear docs, teams default back to their old workaround the first time something’s unclear.',
-        'This documentation was written to be used, not just filed away: step-by-step instructions with screenshots, written in plain language for the people actually doing the work, not the people who built the system.',
-        'The measure of success wasn’t the doc itself — it was adoption. Teams picked up the new tool and stuck with it, because the documentation answered their questions before they had to ask.',
-      ],
-      highlights: [
-        'Step-by-step, screenshot-led instructions',
-        'Written in plain language for end users, not admins',
-        'Built to drive adoption, not just satisfy a checklist',
-        'Delivered in Power BI + Google Docs for easy updates',
-      ],
+    title: 'Built Budget Canary as a Solo Founder',
+    subtitle: 'Builder & technical range',
+    desc: 'Took an unserved need for small accounting firms from PRD to a working product — stack choice, OAuth, payments, and automated reporting, built solo.',
+    image: null,
+    slot: 'case-budget-canary.png',
+    tags: ['Next.js', 'Supabase', 'Stripe', 'Resend'],
+    visual: {
+      eyebrow: 'Product Build',
+      flow: ['PRD', 'Architecture', 'Shipped'],
+      stat: 'Demo-ready',
+      statLabel: 'built end to end, solo',
+    },
+    star: {
+      situation: 'Small accounting firms and bookkeepers lack affordable tooling for budget variance monitoring.',
+      task: 'Design and ship a working product solo — from PRD to architecture to build.',
+      action: 'Scoped the PRD, evaluated and chose the stack (Next.js and Supabase), then built the OAuth integrations, payments, and automated reporting.',
+      result: 'Demo-ready product covering the full loop from connected books to delivered report.',
     },
   },
 ];
@@ -295,21 +291,22 @@ function Hero() {
 
           <div className="lg:order-1">
             <motion.p variants={rise} className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep mb-4 lg:mb-6">
-              Dr — The CPA <span className="text-ink/25 mx-1 lg:mx-4">/</span> Cr — The Analyst
+              Dr — The Operator <span className="text-ink/25 mx-1 lg:mx-4">/</span> Cr — The Builder
             </motion.p>
             <motion.h1 variants={rise} className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.05] mb-4 lg:mb-6">
-              Finance that holds up to an audit. <span className="text-ink/40">Data that people actually use.</span>
+              Somebody has to own the mess. <span className="text-ink/40">I make it run on process and numbers.</span>
             </motion.h1>
             <motion.p variants={rise} className="text-ink/60 leading-relaxed lg:text-lg max-w-[560px] mb-7 lg:mb-9">
-              Licensed CPA (NY &amp; TX) keeping nonprofit books, budgets, and Form 990s board-clear — and
-              turning the operational data behind them into dashboards teams open every Monday.
+              Licensed CPA (NY &amp; TX) who steps into ambiguous, under-owned operations — finance,
+              delivery, people process — finds the root cause in the data, and hands back a system
+              that runs without me. When the fix is a tool that doesn&rsquo;t exist yet, I build it.
             </motion.p>
             <motion.div variants={rise} className="flex flex-wrap items-center gap-x-7 gap-y-4">
               <a href="#work" className={`${btn} gap-2 px-7 py-3`}>
                 Open the work <ArrowRight size={15} />
               </a>
               <a href="#services" className={cta}>
-                What I take off your plate <ArrowRight size={15} className={ctaArrow} />
+                How I work <ArrowRight size={15} className={ctaArrow} />
               </a>
             </motion.div>
           </div>
@@ -323,7 +320,7 @@ function Hero() {
               accepting_new_clients: true
             </span>
             <span className="hidden sm:inline">location: New York, NY</span>
-            <span className="hidden sm:inline">stack: [Power BI, Tableau, Python, Excel]</span>
+            <span className="hidden sm:inline">stack: [Power BI, Azure DevOps, QuickBooks, Next.js]</span>
           </div>
         </motion.div>
       </motion.div>
@@ -333,6 +330,13 @@ function Hero() {
 
 // Sticky chrome as a translucent material: content scrolls under it; `.site-header` goes solid under prefers-reduced-transparency.
 const headerCls = 'site-header sticky top-0 z-50 bg-paper/80 backdrop-blur-xl border-b border-line';
+
+const STAR = [
+  ['situation', 'Situation'],
+  ['task', 'Task'],
+  ['action', 'Action'],
+  ['result', 'Result'],
+];
 
 function ProjectDetail({ project, prev, next }) {
   return (
@@ -367,22 +371,18 @@ function ProjectDetail({ project, prev, next }) {
           ) : (
             <DataVisual {...project.visual} className="w-full h-64 sm:h-72 border border-line my-8" />
           )}
-          <div className="space-y-5 text-ink/70 leading-relaxed max-w-2xl">
-            {(project.detail?.body ?? [project.desc]).map((t) => <p key={t}>{t}</p>)}
-          </div>
-          {project.detail?.highlights && (
-            <ul className="mt-10 font-mono text-sm space-y-3">
-              {project.detail.highlights.map((h) => (
-                <li key={h} className="flex gap-3">
-                  <span className="text-emerald-deep font-bold">+</span>
-                  <span className="text-ink/70">{h}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-          <div className="mt-10 font-mono text-xs text-ink/50 flex flex-wrap gap-x-4 gap-y-1">
-            {project.tags.map((t) => <span key={t}>[{t}]</span>)}
-          </div>
+          <dl className="max-w-2xl grid sm:grid-cols-[7rem_minmax(0,1fr)] gap-x-8 gap-y-5">
+            {STAR.map(([key, label]) => (
+              <React.Fragment key={key}>
+                <dt className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep sm:pt-1">{label}</dt>
+                <dd className="text-ink/70 leading-relaxed mb-3 sm:mb-0">{project.star[key]}</dd>
+              </React.Fragment>
+            ))}
+            <dt className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep sm:pt-1">Tools</dt>
+            <dd className="font-mono text-xs text-ink/50 flex flex-wrap gap-x-4 gap-y-1 sm:pt-1">
+              {project.tags.map((t) => <span key={t}>[{t}]</span>)}
+            </dd>
+          </dl>
         </div>
       </main>
 
@@ -495,19 +495,23 @@ export default function TiffanyPortfolio() {
       {/* WORK */}
       <section id="work" className="border-b border-line">
         <div className="max-w-6xl mx-auto px-6 py-20">
-          <SectionHeader index="01" label="Selected Work" title="Real systems, real organizations." />
+          <SectionHeader index="01" label="Selected Work" title="Five messes, five systems." />
 
           {/* Featured */}
           {projects.filter((p) => p.featured).map((p) => (
             <Reveal key={p.n} className="mb-12">
               <a href={`#/project/${p.n}`} className="group grid md:grid-cols-2 border border-line hover:border-ink active:border-ink transition-colors">
               <div className="overflow-hidden border-b md:border-b-0 md:border-r border-line">
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover object-top max-h-80 md:max-h-none group-hover:scale-[1.02] motion-reduce:group-hover:scale-100 transition-transform duration-500"
-                />
+                {p.image ? (
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover object-top max-h-80 md:max-h-none group-hover:scale-[1.02] motion-reduce:group-hover:scale-100 transition-transform duration-500"
+                  />
+                ) : (
+                  <DataVisual {...p.visual} className="w-full h-full min-h-64" />
+                )}
               </div>
               <div className="p-8 lg:p-10 flex flex-col justify-between gap-6">
                 <div>
@@ -560,7 +564,7 @@ export default function TiffanyPortfolio() {
       {/* SERVICES */}
       <section id="services" className="border-b border-line">
         <div className="max-w-6xl mx-auto px-6 py-20">
-          <SectionHeader index="02" label="Services" title="What I take off your plate." />
+          <SectionHeader index="02" label="Services" title="What I take on." />
           <div className="grid sm:grid-cols-2 border-t border-l border-line">
             {services.map((s, i) => (
               <Reveal key={s.n} delay={i * 0.05} className="group border-b border-r border-line p-8 hover:bg-mist active:bg-mist transition-colors">
@@ -614,19 +618,20 @@ export default function TiffanyPortfolio() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="text-paper/70 leading-relaxed mb-5">
-                For the past decade I&rsquo;ve led finance and operations for venture-backed SaaS
-                companies and mission-driven nonprofits — which means I&rsquo;ve seen what happens
-                when financial reporting is treated as a compliance checkbox instead of a
-                decision-making tool.
+                For the past decade I&rsquo;ve led operations, finance, and delivery for
+                venture-backed SaaS companies and mission-driven nonprofits — usually arriving at the
+                point where something important has no owner and everyone has quietly worked around
+                it for months.
               </p>
               <p className="text-paper/70 leading-relaxed mb-8">
-                My work sits at the intersection of accounting rigor and modern analytics: Form 990s
-                and audited financials on one side, Power BI and Python on the other. I use both to
-                help small, resource-strapped teams see exactly where their money and time are going
-                — and where they should go instead.
+                My work sits at the intersection of accounting rigor and building things: audited
+                financials and spend controls on one side, Power BI, Azure DevOps, and a shipped
+                product on the other. The pattern is the same either way — take the ambiguous,
+                under-owned thing, find what the numbers say is actually wrong, and turn it into a
+                process someone else can run.
               </p>
               <p className="font-display text-2xl font-bold tracking-tight text-emerald mb-10">
-                &ldquo;Good financial systems shouldn&rsquo;t require a translator.&rdquo;
+                &ldquo;A process only I can run isn&rsquo;t a process.&rdquo;
               </p>
 
               <div className="grid sm:grid-cols-2 gap-8 font-mono text-sm">
@@ -691,10 +696,10 @@ export default function TiffanyPortfolio() {
       <section id="contact" className="border-b border-line">
         <div className="max-w-6xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-14">
           <div>
-            <SectionHeader index="06" label="Contact" title="Let's close the gap between your books and your board." />
+            <SectionHeader index="06" label="Contact" title="Tell me where the process breaks down." />
             <Reveal>
               <p className="text-ink/60 leading-relaxed mb-8 max-w-md">
-                Tell me what&rsquo;s keeping your finance stack messy — I reply within two business days.
+                Tell me what&rsquo;s running on heroics and good intentions — I reply within two business days.
               </p>
               <div className="space-y-1 font-mono text-sm">
                 <a href="mailto:tnt@poweredbytnt.com" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald-deep transition-colors">
@@ -757,7 +762,7 @@ export default function TiffanyPortfolio() {
       {/* FOOTER */}
       <footer className="bg-pine text-paper/50">
         <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
-          <span>tiffany<span className="text-emerald">.</span>tay — nonprofit finance &amp; operations</span>
+          <span>tiffany<span className="text-emerald">.</span>tay — operations, process &amp; product</span>
           <div className="flex items-center gap-5">
             <a href="https://www.linkedin.com/in/tiffany-n-tay/" className="hover:text-emerald transition-colors"><Linkedin size={16} /></a>
             <a href="https://github.com/tiffanytay" className="hover:text-emerald transition-colors"><Github size={16} /></a>
