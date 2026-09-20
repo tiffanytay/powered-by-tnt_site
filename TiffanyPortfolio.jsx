@@ -45,7 +45,7 @@ function Reveal({ children, className, delay = 0 }) {
 }
 
 // ponytail: two case studies have no screenshot to show (a Slack bot, an HR process) — a
-// ledger-style stat card fits the site's aesthetic better than a stock/placeholder image.
+// stat card fits the site's aesthetic better than a stock/placeholder image.
 function DataVisual({ eyebrow, flow, stat, statLabel, className = '' }) {
   return (
     <div className={`bg-pine text-paper flex flex-col justify-between p-6 ${className}`}>
@@ -80,13 +80,6 @@ function SectionHeader({ index, label, title, dark = false }) {
     </Reveal>
   );
 }
-
-const ledger = [
-  { item: 'Years leading operations, finance & delivery', value: '10+' },
-  { item: 'CPA licenses held (New York, Texas)', value: '02' },
-  { item: 'Ops vacuums stepped into without the title', value: 'Several' },
-  { item: 'Products shipped solo, PRD to build', value: '01' },
-];
 
 const services = [
   {
@@ -144,22 +137,22 @@ const offTheClock = [
 const projects = [
   {
     n: '01',
-    title: 'Ran Nonprofit Finance Ops With No Ops Director',
+    title: 'Rebuilt Nonprofit Finance Ops as Operations Director',
     subtitle: 'Ownership under ambiguity',
-    desc: 'Stepped into a months-long vacancy, set the bookkeeping standard, and audited every recurring expense — without formal authority over anyone doing the work.',
+    desc: 'Nominated and voted into a role that had sat vacant for months, then set the bookkeeping standard and audited every recurring expense.',
     image: null,
     slot: 'case-nonprofit-ops.png',
     tags: ['QuickBooks', 'BILL.com', 'Google Sheets'],
     featured: true,
     visual: {
       eyebrow: 'Finance Operations',
-      flow: ['No Ops Director', 'Standards set', 'Expenses cut'],
+      flow: ['Elected to vacant role', 'Standards set', 'Expenses cut'],
       stat: '5%',
       statLabel: 'of recurring spend eliminated',
     },
     star: {
-      situation: 'A nonprofit had no Ops Director for months, leaving bookkeeping and expense oversight unmanaged.',
-      task: 'Bring structure back to financial operations without formal authority over the external bookkeeper or staff.',
+      situation: 'A nonprofit had gone months without an Operations Director, leaving bookkeeping and expense oversight unmanaged.',
+      task: 'Nominated and voted into the role, bring structure back to financial operations across staff and the external bookkeeper.',
       action: 'Directed staff and the external bookkeeper on how the books should be kept, down to which lines to break out, and reviewed every recurring expense for necessity and cost.',
       result: 'Cut 5% of recurring expenses that were unnecessary or had cheaper alternatives.',
     },
@@ -291,7 +284,7 @@ function Hero() {
 
           <div className="lg:order-1">
             <motion.p variants={rise} className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep mb-4 lg:mb-6">
-              Dr — The Operator <span className="text-ink/25 mx-1 lg:mx-4">/</span> Cr — The Builder
+              The Operator <span className="text-ink/25 mx-1 lg:mx-4">/</span> The Builder
             </motion.p>
             <motion.h1 variants={rise} className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.05] mb-4 lg:mb-6">
               Somebody has to own the mess. <span className="text-ink/40">I make it run on process and numbers.</span>
@@ -579,40 +572,17 @@ export default function TiffanyPortfolio() {
         </div>
       </section>
 
-      {/* LEDGER */}
-      <section className="bg-mist border-b border-line">
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <SectionHeader index="03" label="The Balance Sheet" title="A decade, itemized." />
-          <Reveal className="max-w-3xl">
-            <div className="font-mono text-sm">
-              {ledger.map((row) => (
-                <div key={row.item} className="flex items-baseline gap-3 py-4 border-b border-ink/10">
-                  <span className="text-ink/70">{row.item}</span>
-                  <span className="flex-1 border-b border-dotted border-ink/25 translate-y-[-4px]" />
-                  <span className="font-medium text-ink tabular-nums">{row.value}</span>
-                </div>
-              ))}
-              <div className="flex items-baseline gap-3 py-4 text-emerald-deep">
-                <span className="font-bold">Net position</span>
-                <span className="flex-1 border-b border-dotted border-emerald/40 translate-y-[-4px]" />
-                <span className="font-bold">Clarity</span>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ABOUT */}
       <section id="about" className="bg-pine text-paper border-b border-line">
         <div className="max-w-6xl mx-auto px-6 py-20">
-          <SectionHeader index="04" label="About" title="Both sides of the table." dark />
+          <SectionHeader index="03" label="About" title="Both sides of the table." dark />
           <div className="grid md:grid-cols-[0.85fr_1.15fr] gap-12 items-start">
             <Reveal>
               <div className="relative">
                 <img src="graphics/6.jpeg" alt="Tiffany Tay" loading="lazy" className="w-full object-cover object-top grayscale contrast-110" />
                 <div className="absolute inset-0 bg-emerald/20 mix-blend-multiply" />
                 <div className="absolute bottom-0 left-0 font-mono text-xs bg-paper text-ink px-3 py-2">
-                  fig 1. — the person behind the ledger
+                  fig 1. — the person behind the systems
                 </div>
               </div>
             </Reveal>
@@ -670,7 +640,7 @@ export default function TiffanyPortfolio() {
       {/* OFF THE CLOCK */}
       <section className="bg-mist border-b border-line">
         <div className="max-w-6xl mx-auto px-6 py-20">
-          <SectionHeader index="05" label="Non-Billable Hours" title="Off the clock." />
+          <SectionHeader index="04" label="Non-Billable Hours" title="Off the clock." />
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {offTheClock.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.05}>
@@ -696,7 +666,7 @@ export default function TiffanyPortfolio() {
       <section id="contact" className="border-b border-line">
         <div className="max-w-6xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-14">
           <div>
-            <SectionHeader index="06" label="Contact" title="Tell me where the process breaks down." />
+            <SectionHeader index="05" label="Contact" title="Tell me where the process breaks down." />
             <Reveal>
               <p className="text-ink/60 leading-relaxed mb-8 max-w-md">
                 Tell me what&rsquo;s running on heroics and good intentions — I reply within two business days.
@@ -768,7 +738,7 @@ export default function TiffanyPortfolio() {
             <a href="https://github.com/tiffanytay" className="hover:text-emerald transition-colors"><Github size={16} /></a>
             <a href="mailto:tnt@poweredbytnt.com" className="hover:text-emerald transition-colors"><Mail size={16} /></a>
           </div>
-          <span>&copy; 2026 — all figures reconciled</span>
+          <span>&copy; 2026 — built and maintained in-house</span>
         </div>
       </footer>
     </div>
