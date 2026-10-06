@@ -324,6 +324,8 @@ const HERO_SCRUB_PX = 1400;
 const NAV_H = 64; // matches the h-16 sticky header
 
 // Sticky stage over a tall track: scrolling scrubs the figure from tangle to process.
+// The stage fills the window so the track always leaves HERO_SCRUB_PX of scroll, even with
+// nothing but the footer below it.
 // Reduced motion lands on the finished figure with no scroll track.
 function Hero() {
   const reduce = useReducedMotion();
@@ -338,7 +340,11 @@ function Hero() {
       raf = 0;
       const track = trackRef.current.getBoundingClientRect();
       const span = track.height - stageRef.current.getBoundingClientRect().height;
-      if (span > 0) setScrollP(clamp01((NAV_H - track.top) / span));
+      // The page can end before the track does (mobile toolbar resizes, short footer):
+      // finish the scrub at the last scroll position the page can actually reach.
+      const room = document.documentElement.scrollHeight - window.innerHeight - (track.top + window.scrollY - NAV_H);
+      const end = Math.min(span, room);
+      if (end > 0) setScrollP(clamp01((NAV_H - track.top) / end));
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(calc); };
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -356,7 +362,7 @@ function Hero() {
 
   return (
     <section id="home" ref={trackRef} className="relative border-b border-line">
-      <div ref={stageRef} className="sticky top-16 min-h-[720px] px-6 pt-10 pb-6 bg-paper flex flex-col items-center">
+      <div ref={stageRef} className="sticky top-16 min-h-[max(720px,calc(100svh-4rem))] px-6 pt-10 pb-6 bg-paper flex flex-col items-center">
         <div className="w-full max-w-6xl min-w-0 flex flex-col gap-5">
           <div className="flex items-baseline justify-between gap-4 font-mono text-xs leading-[1.4] text-ink/60">
             <div className="relative flex-auto min-w-0 h-[17px]">
