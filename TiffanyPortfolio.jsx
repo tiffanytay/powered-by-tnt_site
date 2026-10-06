@@ -66,21 +66,6 @@ function DataVisual({ eyebrow, flow, stat, statLabel, className = '' }) {
   );
 }
 
-function SectionHeader({ index, label, title, dark = false }) {
-  return (
-    <Reveal className="mb-14">
-      <div className={`flex items-center gap-3 font-mono text-xs font-bold tracking-widest uppercase mb-4 ${dark ? 'text-emerald' : 'text-emerald-deep'}`}>
-        <span>{index}</span>
-        <span className={`h-px w-10 ${dark ? 'bg-emerald/50' : 'bg-emerald/50'}`} />
-        <span>{label}</span>
-      </div>
-      <h2 className={`font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] ${dark ? 'text-paper' : 'text-ink'}`}>
-        {title}
-      </h2>
-    </Reveal>
-  );
-}
-
 const services = [
   {
     n: '01',
@@ -243,86 +228,223 @@ const projects = [
   },
 ];
 
-// jQuery's easeOutExpo / easeOutBack as beziers.
-const EASE_EXPO = [0.19, 1, 0.22, 1];
-const EASE_BACK = [0.34, 1.56, 0.64, 1];
+// Hero figure, in a 1152×400 viewBox: tangled cubic paths that straighten into five lanes,
+// S-curve onto one rail, and pass three process stops. Each path lerps jumble → ordered by t.
+const FIG_X = [0, 150, 260, 520, 700, 880, 1152];
+const FIG_RAIL = 200;
+const FIG_LANES = [48, 124, 200, 276, 352];
+const FIG_SOURCES = ['[Excel]', '[Slack]', '[Inbox]', '[Bank feed]', '[Forms]'];
+const FIG_STOPS = [
+  { num: '01', name: 'capture', x: 590 },
+  { num: '02', name: 'reconcile', x: 770 },
+  { num: '03', name: 'report', x: 950 },
+];
 
-// One column, both headlines kept, portrait stays round. Copy fades up 20px in a stagger,
-// the portrait pops on ease-back, the status dot pulses.
+// Seeded so the tangle is the same on every load.
+const FIGURE = (() => {
+  let seed = 20261006;
+  const rnd = () => {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const rg = (a, b) => a + (b - a) * rnd();
+  const clampY = (v) => Math.max(-40, Math.min(440, v));
+  const build = (lane) => {
+    const jx = [], jy = [], j1x = [], j1y = [], j2x = [], j2y = [];
+    for (let j = 0; j < 7; j++) {
+      jx.push(j === 0 ? 0 : j === 6 ? 1152 : FIG_X[j] + rg(-80, 80));
+      jy.push(rg(24, 376));
+    }
+    for (let i = 0; i < 6; i++) {
+      j1x.push(jx[i] + rg(-140, 260));
+      j1y.push(clampY(jy[i] + rg(-230, 230)));
+      j2x.push(jx[i + 1] + rg(-260, 140));
+      j2y.push(clampY(jy[i + 1] + rg(-230, 230)));
+    }
+    const R = FIG_RAIL;
+    const oy = lane === null ? [R, R, R, R, R, R, R] : [lane, lane, lane, R, R, R, R];
+    const o1x = [], o1y = [], o2x = [], o2y = [];
+    for (let i = 0; i < 6; i++) {
+      const dx = FIG_X[i + 1] - FIG_X[i];
+      o1x.push(FIG_X[i] + dx * 0.5); o1y.push(oy[i]);
+      o2x.push(FIG_X[i + 1] - dx * 0.5); o2y.push(oy[i + 1]);
+    }
+    return {
+      J: { ax: jx, ay: jy, c1x: j1x, c1y: j1y, c2x: j2x, c2y: j2y },
+      O: { ax: FIG_X, ay: oy, c1x: o1x, c1y: o1y, c2x: o2x, c2y: o2y },
+    };
+  };
+  return { noise: [build(null), build(null), build(null)], core: FIG_LANES.map(build) };
+})();
+
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const smooth = (v) => { const t = clamp01(v); return t * t * (3 - 2 * t); };
+const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const lerp = (a, b, t) => a + (b - a) * t;
+const r1 = (v) => Math.round(v * 10) / 10;
+
+function figPath({ J, O }, t) {
+  const pt = (xs, ys, i) => `${r1(lerp(J[xs][i], O[xs][i], t))} ${r1(lerp(J[ys][i], O[ys][i], t))}`;
+  let d = `M${pt('ax', 'ay', 0)}`;
+  for (let i = 0; i < 6; i++) {
+    d += ` C${pt('c1x', 'c1y', i)},${pt('c2x', 'c2y', i)},${pt('ax', 'ay', i + 1)}`;
+  }
+  return d;
+}
+
+// p: 0 = tangle, 1 = finished process. Returns the paths plus per-element opacity.
+function figFrame(p) {
+  const local = (delay) => easeInOutCubic(clamp01((p - 0.04 - delay) / 0.78));
+  const lines = [];
+  // Loose strays: pulled toward the rail, then dropped.
+  FIGURE.noise.forEach((L, k) => {
+    const t = local(k * 0.02);
+    lines.push({ d: figPath(L, t), stroke: 'var(--color-ink)', width: 1.25, opacity: 0.3 * (1 - smooth(t * 1.4)) });
+  });
+  // Accent halo under the second lane: it becomes the glow on the finished rail.
+  const th = local(0.03);
+  lines.push({ d: figPath(FIGURE.core[1], th), stroke: 'var(--color-emerald)', width: lerp(3, 6, th), opacity: 1 });
+  FIGURE.core.forEach((L, k) => {
+    const t = local(k * 0.03);
+    lines.push({ d: figPath(L, t), stroke: 'var(--color-ink)', width: lerp(1.25, 2, t), opacity: lerp(0.35, 1, t) });
+  });
+  return {
+    lines,
+    sources: smooth((p - 0.6) / 0.15),
+    stops: FIG_STOPS.map((_, i) => smooth((p - 0.78 - i * 0.05) / 0.12)),
+    tag: smooth((p - 0.9) / 0.08),
+    eyebrow: smooth((p - 0.45) / 0.2),
+    hint: 1 - clamp01(p * 10),
+  };
+}
+
+const HERO_SCRUB_PX = 1400;
+const NAV_H = 64; // matches the h-16 sticky header
+
+// Sticky stage over a tall track: scrolling scrubs the figure from tangle to process.
+// Reduced motion lands on the finished figure with no scroll track.
 function Hero() {
   const reduce = useReducedMotion();
-  const rise = {
-    hidden: { opacity: 0, y: reduce ? 0 : 20 },
-    show: { opacity: 1, y: 0, transition: { duration: reduce ? 0 : 0.5, ease: EASE_EXPO } },
-  };
-  const portrait = {
-    hidden: { opacity: 0, scale: reduce ? 1 : 0.8 },
-    show: { opacity: 1, scale: 1, transition: { duration: reduce ? 0 : 0.8, ease: EASE_BACK } },
-  };
-  const cta = 'group inline-flex items-center gap-2 text-sm font-medium border-b-2 border-emerald pb-1 transition-opacity active:opacity-70';
-  const ctaArrow = 'transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0';
+  const trackRef = useRef(null);
+  const stageRef = useRef(null);
+  const [scrollP, setScrollP] = useState(0);
+
+  useEffect(() => {
+    if (reduce) return;
+    let raf = 0;
+    const calc = () => {
+      raf = 0;
+      const track = trackRef.current.getBoundingClientRect();
+      const span = track.height - stageRef.current.getBoundingClientRect().height;
+      if (span > 0) setScrollP(clamp01((NAV_H - track.top) / span));
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(calc); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [reduce]);
+
+  const f = figFrame(reduce ? 1 : scrollP);
+  const lbl = 'max-sm:text-[10px]';
 
   return (
-    <section id="home" className="border-b border-line">
-      {/* Reduced motion starts at the finished state, so nothing is ever left hidden. */}
-      <motion.div
-        variants={{ hidden: {}, show: { transition: { delayChildren: 0.1, staggerChildren: 0.08 } } }}
-        initial={reduce ? 'show' : 'hidden'}
-        animate="show"
-      >
-        <div className="max-w-6xl mx-auto px-6 pt-12 pb-10 lg:pt-26 lg:pb-24 grid lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] gap-8 lg:gap-16 items-center">
-          {/* Portrait: above the copy on phones, right column on desktop */}
-          <motion.div variants={portrait} className="lg:order-2 flex flex-col lg:items-center gap-7">
-            <div className="relative w-30 h-30 lg:w-68 lg:h-68 rounded-full overflow-hidden border-4 border-paper shadow-2xl select-none pointer-events-none">
-              <img src="graphics/13.jpeg" alt="Tiffany Tay" fetchPriority="high" className="absolute inset-0 w-full h-full object-cover object-top" />
+    <section id="home" ref={trackRef} className="relative border-b border-line">
+      <div ref={stageRef} className="sticky top-16 min-h-[720px] px-6 pt-10 pb-6 bg-paper flex flex-col items-center">
+        <div className="w-full max-w-6xl min-w-0 flex flex-col gap-5">
+          <div className="flex items-baseline justify-between gap-4 font-mono text-xs leading-[1.4] text-ink/60">
+            <div className="relative flex-auto min-w-0 h-[17px]">
+              <span className="absolute left-0 top-0 whitespace-nowrap" style={{ opacity: 1 - f.eyebrow }}>fig 1. — the stack, before</span>
+              <span className="absolute left-0 top-0 whitespace-nowrap" style={{ opacity: f.eyebrow }}>fig 2. — the stack, after</span>
             </div>
-            <div className="hidden lg:grid gap-1 text-center font-mono text-xs text-ink/50">
-              <span>accepting_new_clients: <span className="text-emerald-deep">true</span></span>
-              <span>location: New York, NY</span>
-            </div>
-          </motion.div>
+            <span className="whitespace-nowrap" style={{ opacity: f.hint }}>// scroll to reconcile</span>
+          </div>
 
-          <div className="lg:order-1">
-            <motion.p variants={rise} className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep mb-4 lg:mb-6">
-              The Operator <span className="text-ink/25 mx-1 lg:mx-4">/</span> The Builder
-            </motion.p>
-            <motion.h1 variants={rise} className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.05] mb-4 lg:mb-6">
-              Somebody has to own the mess. <span className="text-ink/40">I make it run on process and numbers.</span>
-            </motion.h1>
-            <motion.p variants={rise} className="text-ink/60 leading-relaxed lg:text-lg max-w-[560px] mb-7 lg:mb-9">
-              Licensed CPA (NY &amp; TX) who steps into ambiguous, under-owned operations — finance,
-              delivery, people process — finds the root cause in the data, and hands back a system
-              that runs without me. When the fix is a tool that doesn&rsquo;t exist yet, I build it.
-            </motion.p>
-            <motion.div variants={rise} className="flex flex-wrap items-center gap-x-7 gap-y-4">
-              <a href="#work" className={`${btn} gap-2 px-7 py-3`}>
-                Open the work <ArrowRight size={15} />
-              </a>
-              <a href="#services" className={cta}>
-                How I work <ArrowRight size={15} className={ctaArrow} />
-              </a>
-            </motion.div>
+          <h1 className="font-display font-bold text-[clamp(40px,5.2vw,60px)] leading-[1.05] tracking-tight">
+            <span className="block text-ink/50">Messy stack in.</span>
+            <span className="block">Clean process out.</span>
+          </h1>
+
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <p className="flex-[1_1_360px] max-w-[560px] text-lg leading-relaxed text-ink/60">
+              I rebuild the spreadsheets, inboxes and one-off exports your team runs on into
+              workflows that reconcile — plain English in, board-ready out.
+            </p>
+            <a href="#/work" className={`${btn} gap-2 h-12 px-6 text-sm font-semibold`}>
+              See selected work <ArrowRight size={16} />
+            </a>
+          </div>
+
+          <div className="relative w-full mt-2 aspect-[342/300] sm:aspect-[1152/400]">
+            <svg
+              viewBox="0 0 1152 400"
+              preserveAspectRatio="none"
+              fill="none"
+              role="img"
+              aria-label="Tangled curved lines that straighten into five ordered lanes, merge into one rail and pass through three process stops"
+              className="absolute inset-0 w-full h-full"
+            >
+              {f.lines.map((l, i) => (
+                <path
+                  key={i}
+                  d={l.d}
+                  stroke={l.stroke}
+                  strokeWidth={l.width}
+                  strokeOpacity={l.opacity}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  vectorEffect="non-scaling-stroke"
+                />
+              ))}
+            </svg>
+
+            {FIG_SOURCES.map((s, i) => (
+              <div
+                key={s}
+                className={`absolute left-0 -translate-y-1/2 bg-paper py-[3px] pr-2.5 font-mono text-xs leading-[1.4] text-ink/60 whitespace-nowrap ${lbl}`}
+                style={{ top: `${(FIG_LANES[i] / 400) * 100}%`, opacity: f.sources }}
+              >
+                {s}
+              </div>
+            ))}
+
+            {FIG_STOPS.map((s, i) => (
+              <div
+                key={s.num}
+                className="absolute top-[calc(50%-7px)] flex flex-col items-center gap-2.5 whitespace-nowrap"
+                style={{ left: `${(s.x / 1152) * 100}%`, opacity: f.stops[i], transform: `translate(-50%, ${(1 - f.stops[i]) * 10}px)` }}
+              >
+                <span className="block w-3.5 h-3.5 border-[1.5px] border-ink bg-emerald" />
+                <span className="flex flex-col items-center gap-0.5 font-mono text-xs leading-[1.3]">
+                  <span className={`font-medium ${lbl}`}>{s.num}</span>
+                  <span className={`text-ink/60 ${lbl}`}>{s.name}</span>
+                </span>
+              </div>
+            ))}
+
+            {/* Hidden on phones: at that width it would cover the 02/03 stops. */}
+            <div
+              className="max-sm:hidden absolute right-0 top-1/2 -translate-y-1/2 border border-ink bg-paper px-3.5 py-2.5 font-mono font-medium text-xs leading-[1.4] tracking-widest uppercase whitespace-nowrap"
+              style={{ opacity: f.tag }}
+            >
+              board-ready
+            </div>
           </div>
         </div>
-
-        {/* Status bar */}
-        <motion.div variants={rise} className="border-t border-line bg-paper">
-          <div className="max-w-6xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 font-mono text-xs text-ink/50">
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald animate-pulse motion-reduce:animate-none" />
-              accepting_new_clients: true
-            </span>
-            <span className="hidden sm:inline">location: New York, NY</span>
-            <span className="hidden sm:inline">stack: [Power BI, Azure DevOps, QuickBooks, Next.js]</span>
-          </div>
-        </motion.div>
-      </motion.div>
+      </div>
+      <div aria-hidden="true" style={{ height: reduce ? 0 : HERO_SCRUB_PX }} />
     </section>
   );
 }
 
 // Sticky chrome as a translucent material: content scrolls under it; `.site-header` goes solid under prefers-reduced-transparency.
-const headerCls = 'site-header sticky top-0 z-50 bg-paper/80 backdrop-blur-xl border-b border-line';
+const headerCls = 'site-header sticky top-0 z-50 bg-paper/95 backdrop-blur-sm border-b border-line';
 
 const STAR = [
   ['situation', 'Situation'],
@@ -343,10 +465,10 @@ function ProjectDetail({ project, prev, next }) {
     >
       <header className={headerCls}>
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#work" className={`group inline-flex items-center gap-2 font-mono text-sm hover:text-emerald-deep transition-colors ${press}`}>
+          <a href="#/work" className={`group inline-flex items-center gap-2 font-mono text-sm hover:text-emerald-deep transition-colors ${press}`}>
             <ArrowLeft size={15} className="transition-transform duration-200 group-hover:-translate-x-1 motion-reduce:group-hover:translate-x-0" /> all work
           </a>
-          <a href="#home" className="font-mono text-sm font-medium tracking-tight">
+          <a href="#/" className="font-mono text-sm font-medium tracking-tight">
             tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40"> — CPA</span>
           </a>
         </div>
@@ -398,32 +520,225 @@ function ProjectDetail({ project, prev, next }) {
   );
 }
 
-export default function TiffanyPortfolio() {
+const navLinks = [
+  ['#/work', 'Work'],
+  ['#/services', 'Services'],
+  ['#/about', 'About'],
+  ['#/contact', 'Contact'],
+];
+
+const cta = `${btn} gap-2 h-12 px-6 text-sm font-semibold`;
+const container = 'max-w-6xl mx-auto px-6';
+const mono12 = 'font-mono text-xs leading-[1.4]';
+const eyebrow = `${mono12} tracking-widest uppercase`;
+
+function SiteHeader({ route }) {
+  return (
+    <header className={headerCls}>
+      <div className={`${container} h-16 flex items-center justify-between gap-6`}>
+        <a href="#/" className="font-mono text-sm font-medium whitespace-nowrap">
+          tiffany<span className="text-emerald">.</span>tay<span className="hidden sm:inline"> — CPA</span>
+        </a>
+        {/* Every link stays visible on phones: "where can I go?" needs an answer at 375px too. */}
+        <nav aria-label="Primary" className="flex items-center gap-4 sm:gap-8 text-xs sm:text-sm text-ink/60">
+          {navLinks.map(([href, label]) => (
+            <a
+              key={href}
+              href={href}
+              aria-current={route === href ? 'page' : undefined}
+              className="py-1 border-b-2 border-transparent hover:text-ink active:text-ink transition-colors aria-[current=page]:text-ink aria-[current=page]:border-emerald"
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="bg-pine text-paper/50 border-t border-paper/20">
+      <div className={`${container} py-8 flex flex-wrap items-center justify-between gap-4 ${mono12}`}>
+        <span>tiffany.tay — operations, process &amp; product</span>
+        <span>&copy; 2026 — built and maintained in-house</span>
+      </div>
+    </footer>
+  );
+}
+
+// Eyebrow + title that opens each page; `as="h2"` for a second section on the same page.
+function PageHeader({ index, label, title, dark = false, as: Heading = 'h1' }) {
+  return (
+    <Reveal className="mb-14 flex flex-col gap-4">
+      <span className={`${eyebrow} ${dark ? 'text-paper/50' : 'text-ink/60'}`}>{index} — {label}</span>
+      <Heading className={`font-display font-bold text-[clamp(32px,4.4vw,48px)] leading-[1.15] tracking-tight ${dark ? 'text-paper' : 'text-ink'}`}>
+        {title}
+      </Heading>
+    </Reveal>
+  );
+}
+
+function WorkSection() {
+  const total = String(projects.length).padStart(2, '0');
+  return (
+    <section className={`${container} py-20`}>
+      <PageHeader index="01" label="Selected work" title="Five messes, five systems." />
+      <div className="border-b border-line">
+        {projects.map((p) => (
+          <Reveal key={p.n}>
+            <article className="grid md:grid-cols-2 gap-x-12 gap-y-8 py-10 border-t border-line">
+              <div className="flex flex-col gap-2 min-w-0">
+                <span className={`${mono12} text-ink/60`}>{p.n} / {total}</span>
+                <h2 className="font-display font-bold text-2xl leading-[1.15] tracking-tight">
+                  <a href={`#/project/${p.n}`} className="hover:text-emerald-deep transition-colors">{p.title}</a>
+                </h2>
+                <span className={`${mono12} text-ink/60`}>{p.subtitle}</span>
+              </div>
+              <div className="flex flex-col gap-5 min-w-0">
+                <p className="text-ink/60 leading-relaxed max-w-[560px]">{p.desc}</p>
+                {/* The case study's flow, then its headline number. */}
+                <ul className="flex flex-col gap-2 text-sm leading-normal text-ink/70">
+                  {[...p.visual.flow, `${p.visual.stat} — ${p.visual.statLabel}`].map((h) => (
+                    <li key={h} className="flex gap-3"><span className="font-mono text-ink/60">+</span><span>{h}</span></li>
+                  ))}
+                </ul>
+                <div className={`flex flex-wrap items-center justify-between gap-x-4 gap-y-2 ${mono12} text-ink/60`}>
+                  <span className="flex flex-wrap gap-x-4 gap-y-2">
+                    {p.tags.map((t) => <span key={t}>[{t}]</span>)}
+                  </span>
+                  <a href={`#/project/${p.n}`} className="group inline-flex items-center gap-2 text-ink hover:text-emerald-deep transition-colors">
+                    read the case study
+                    <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
+                  </a>
+                </div>
+              </div>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ServicesSection() {
+  return (
+    <section className={`${container} py-20`}>
+      <PageHeader index="02" label="Services" title="What I take on." />
+      <div className="grid md:grid-cols-2 border-t border-l border-line">
+        {services.map((s, i) => (
+          <Reveal key={s.n} delay={i * 0.05} className="group p-8 flex flex-col gap-3 border-r border-b border-line hover:bg-mist active:bg-mist transition-colors">
+            <span className={`${mono12} text-ink/60`}>{s.n}</span>
+            <h2 className="font-display font-bold text-xl leading-[1.15] tracking-tight group-hover:text-emerald-deep transition-colors">{s.title}</h2>
+            <p className="text-ink/60 leading-relaxed">{s.desc}</p>
+          </Reveal>
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center justify-between gap-6 mt-14">
+        <p className="flex-[1_1_320px] max-w-[560px] text-lg leading-relaxed text-ink/60">
+          Tell me what&rsquo;s running on heroics and good intentions — I reply within two business days.
+        </p>
+        <a href="#/contact" className={cta}>Get in touch <ArrowRight size={16} /></a>
+      </div>
+    </section>
+  );
+}
+
+const credentials = [
+  ['// education', [
+    ['MPA + BBA', 'The University of Texas at Austin'],
+    ['Texas Academy of Math & Science', 'UNT, early entrance program'],
+  ]],
+  ['// credentials', [
+    ['CPA', 'Licensed in New York State & Texas'],
+    ['Applied Data Science Lab', 'WorldQuant University, 2025'],
+  ]],
+];
+
+function AboutSection() {
+  return (
+    <section className="bg-pine text-paper/70">
+      <div className={`${container} py-20`}>
+        <PageHeader index="03" label="About" title="Both sides of the table." dark />
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,0.6fr)] gap-12 items-start">
+        <Reveal className="flex flex-col gap-6 max-w-2xl text-lg leading-relaxed">
+          <p>
+            For the past decade I&rsquo;ve led operations, finance, and delivery for
+            venture-backed SaaS companies and mission-driven nonprofits — usually arriving at the
+            point where something important has no owner and everyone has quietly worked around
+            it for months.
+          </p>
+          <p>
+            My work sits at the intersection of accounting rigor and building things: audited
+            financials and spend controls on one side, Power BI, Azure DevOps, and a shipped
+            product on the other. The pattern is the same either way — take the ambiguous,
+            under-owned thing, find what the numbers say is actually wrong, and turn it into a
+            process someone else can run.
+          </p>
+          <p className="mt-4 font-display font-semibold text-2xl leading-[1.3] tracking-tight text-paper">
+            &ldquo;A process only I can run isn&rsquo;t a process.&rdquo;
+          </p>
+        </Reveal>
+        <Reveal delay={0.1} className="relative max-w-sm lg:max-w-none border border-paper/20">
+          <img src="graphics/6.jpeg" alt="Tiffany Tay" loading="lazy" className="w-full object-cover object-top" />
+          <span className={`absolute bottom-0 left-0 bg-paper text-ink px-3 py-2 ${mono12}`}>fig 1. — the person behind the systems</span>
+        </Reveal>
+        </div>
+        <div className="grid md:grid-cols-2 gap-x-12 gap-y-10 mt-16 pt-10 border-t border-paper/20">
+          {credentials.map(([heading, items]) => (
+            <div key={heading} className="flex flex-col gap-5">
+              <span className={`${eyebrow} text-paper/50`}>{heading}</span>
+              <ul className="flex flex-col gap-4">
+                {items.map(([title, sub]) => (
+                  <li key={title} className="flex flex-col gap-0.5">
+                    <span className="font-medium leading-[1.4] text-paper">{title}</span>
+                    <span className="text-sm leading-normal text-paper/60">{sub}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OffTheClockSection() {
+  return (
+    <section className="bg-mist">
+      <div className={`${container} py-20`}>
+        <PageHeader as="h2" index="04" label="Non-billable hours" title="Off the clock." />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {offTheClock.map((item, i) => (
+            <Reveal key={item.title} delay={i * 0.05} className="flex flex-col gap-2">
+              {item.image ? (
+                <img src={item.image} alt={item.title} loading="lazy" className="w-full aspect-square object-cover border border-line mb-2" />
+              ) : (
+                <div className="w-full aspect-square border border-line bg-paper mb-2 flex items-center justify-center p-3">
+                  {/* The slot filename is an authoring hint; visitors never see an internal path. */}
+                  {import.meta.env.DEV && (
+                    <span className="font-mono text-[10px] text-ink/30 text-center break-all">{item.slot}</span>
+                  )}
+                </div>
+              )}
+              <h3 className="font-display font-bold text-lg tracking-tight">{item.title}</h3>
+              <p className="text-sm text-ink/60 leading-relaxed">{item.desc}</p>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const field = 'w-full pt-2 pb-3 bg-transparent border-b border-line rounded-none text-base leading-normal focus:border-emerald focus:outline-none transition-colors resize-none';
+const fieldLabel = `${eyebrow} text-ink/60`;
+const contactLink = 'inline-flex items-center gap-3 min-h-11 font-mono text-sm hover:text-emerald-deep transition-colors';
+
+function ContactSection() {
   const [status, setStatus] = useState('idle');
-  // ponytail: hash routing (#/project/NN) — one detail view over static data doesn't warrant react-router
-  const [route, setRoute] = useState(window.location.hash);
-
-  useEffect(() => {
-    const onHash = () => setRoute(window.location.hash);
-    window.addEventListener('hashchange', onHash);
-    return () => window.removeEventListener('hashchange', onHash);
-  }, []);
-
-  // Page swaps jump instantly (a new page has no spatial continuity to animate); in-page
-  // anchor clicks are left to the browser so the CSS smooth-scroll (motion-safe) applies.
-  const prevRoute = useRef(route);
-  useEffect(() => {
-    const from = prevRoute.current;
-    prevRoute.current = route;
-    if (route.startsWith('#/project/')) {
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      return;
-    }
-    if (!from.startsWith('#/project/')) return;
-    // Returning from a detail page: the anchor target only exists after React re-renders.
-    const el = route.length > 1 && document.getElementById(route.slice(1));
-    if (el) el.scrollIntoView({ behavior: 'instant' });
-  }, [route]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -447,6 +762,98 @@ export default function TiffanyPortfolio() {
     }
   }
 
+  return (
+    <section className={`${container} py-20 grid lg:grid-cols-2 gap-x-24 gap-y-14`}>
+      <Reveal className="flex flex-col gap-6 min-w-0">
+        <span className={`${eyebrow} text-ink/60`}>05 — Contact</span>
+        <h1 className="font-display font-bold text-[clamp(32px,4.4vw,48px)] leading-[1.15] tracking-tight">
+          Tell me where the process breaks down.
+        </h1>
+        <p className="max-w-md text-ink/60 leading-relaxed">
+          Tell me what&rsquo;s running on heroics and good intentions — I reply within two business days.
+        </p>
+        <div className="flex flex-col mt-2">
+          <a href="mailto:tnt@poweredbytnt.com" className={contactLink}><Mail size={16} /> tnt@poweredbytnt.com</a>
+          <a href="https://www.linkedin.com/in/tiffany-n-tay/" className={contactLink}><Linkedin size={16} /> in/tiffany-n-tay</a>
+          <a href="https://github.com/tiffanytay" className={contactLink}><Github size={16} /> tiffanytay</a>
+        </div>
+        <span className={`flex items-center gap-2 ${mono12} text-ink/60`}>
+          <span className="w-2 h-2 rounded-full bg-emerald animate-pulse motion-reduce:animate-none" />
+          accepting_new_clients: true
+        </span>
+      </Reveal>
+
+      <Reveal delay={0.1} className="min-w-0 pt-2">
+        {status === 'success' ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="border border-line h-full flex flex-col items-center justify-center text-center p-10"
+          >
+            <CheckCircle2 className="text-emerald mb-4" size={36} />
+            <h2 className="font-display text-xl font-bold mb-2">Message sent</h2>
+            <p className="text-ink/60 text-sm">Thanks for reaching out — I&rsquo;ll be in touch soon.</p>
+          </motion.div>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+            <input type="hidden" name="access_key" value="d5b0b07d-d2c0-4a93-acf3-259cf4caee86" />
+            <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+            <div className="flex flex-col gap-1">
+              <label htmlFor="name" className={fieldLabel}>01 — Your name</label>
+              <input id="name" name="name" type="text" autoComplete="name" required className={field} />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="email" className={fieldLabel}>02 — Your email</label>
+              <input id="email" name="email" type="email" autoComplete="email" required className={field} />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="message" className={fieldLabel}>03 — What&rsquo;s messy?</label>
+              <textarea id="message" name="message" rows={3} required className={field} />
+            </div>
+            <div>
+              <button type="submit" disabled={status === 'sending'} className={`${cta} disabled:opacity-60`}>
+                {status === 'sending' ? 'Sending…' : 'Send message'} <ArrowRight size={16} />
+              </button>
+            </div>
+            {status === 'error' && (
+              <p className="text-sm text-red-600 font-mono">error: submission failed — please email me directly.</p>
+            )}
+          </form>
+        )}
+      </Reveal>
+    </section>
+  );
+}
+
+// Anything not listed (#/, #home, unknown) is the homepage.
+const PAGES = {
+  '#/work': [WorkSection],
+  '#/services': [ServicesSection],
+  '#/about': [AboutSection, OffTheClockSection],
+  '#/contact': [ContactSection],
+};
+
+// Old single-page anchors (#work, #about, …) still land on their new page.
+const readRoute = () => window.location.hash.replace(/^#(?!\/)/, '#/');
+
+export default function TiffanyPortfolio() {
+  // ponytail: hash routing (#/work, #/project/NN) — a handful of static pages doesn't warrant react-router
+  const [route, setRoute] = useState(readRoute);
+
+  useEffect(() => {
+    const onHash = () => setRoute(readRoute());
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  // Every page swap starts at the top, instantly: a new page has no spatial continuity to animate.
+  const firstRender = useRef(true);
+  useEffect(() => {
+    if (firstRender.current) { firstRender.current = false; return; }
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [route]);
+
   const projectIdx = projects.findIndex((p) => route === `#/project/${p.n}`);
   if (projectIdx !== -1) {
     const len = projects.length;
@@ -459,288 +866,15 @@ export default function TiffanyPortfolio() {
     );
   }
 
+  const sections = PAGES[route] ?? [Hero];
   return (
-    <div className="bg-paper text-ink font-sans antialiased">
-      {/* NAV */}
-      <header className={headerCls}>
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
-          <a href="#home" className="font-mono text-sm font-medium tracking-tight">
-            tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40 hidden sm:inline"> — CPA</span>
-          </a>
-          {/* Wayfinding at every width: "where can I go?" must have an answer on a phone too. */}
-          <nav className="flex items-center gap-4 sm:gap-7 text-xs sm:text-sm font-medium text-ink/60">
-            <a href="#work" className="hover:text-ink active:text-ink transition-colors">Work</a>
-            <a href="#services" className="hover:text-ink active:text-ink transition-colors">Services</a>
-            <a href="#about" className="hover:text-ink active:text-ink transition-colors">About</a>
-          </nav>
-          {/* Phone widths: icon-only so the logo, nav, and button share 375px without wrapping. */}
-          <a href="#contact" aria-label="Contact" className={`${btn} gap-1.5 text-sm p-2.5 sm:px-4 sm:py-2`}>
-            <Mail size={16} className="sm:hidden" />
-            <span className="hidden sm:inline">Contact</span>
-            <ArrowRight size={14} className="hidden sm:inline" />
-          </a>
-        </div>
-      </header>
-
-      {/* HERO */}
-      <Hero />
-
-      {/* WORK */}
-      <section id="work" className="border-b border-line">
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <SectionHeader index="01" label="Selected Work" title="Five messes, five systems." />
-
-          {/* Featured */}
-          {projects.filter((p) => p.featured).map((p) => (
-            <Reveal key={p.n} className="mb-12">
-              <a href={`#/project/${p.n}`} className="group grid md:grid-cols-2 border border-line hover:border-ink active:border-ink transition-colors">
-              <div className="overflow-hidden border-b md:border-b-0 md:border-r border-line">
-                {p.image ? (
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover object-top max-h-80 md:max-h-none group-hover:scale-[1.02] motion-reduce:group-hover:scale-100 transition-transform duration-500"
-                  />
-                ) : (
-                  <DataVisual {...p.visual} className="w-full h-full min-h-64" />
-                )}
-              </div>
-              <div className="p-8 lg:p-10 flex flex-col justify-between gap-6">
-                <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <span className="font-mono text-xs font-bold text-emerald-deep">{p.n} / FEATURED</span>
-                    <ArrowUpRight size={18} className="text-ink/30 group-hover:text-emerald-deep transition-colors" />
-                  </div>
-                  <h3 className="font-display text-2xl font-bold tracking-tight mb-1">{p.title}</h3>
-                  <p className="font-mono text-xs text-ink/40 mb-4">{p.subtitle}</p>
-                  <p className="text-sm text-ink/60 leading-relaxed">{p.desc}</p>
-                </div>
-                <div className="font-mono text-xs text-ink/50 flex flex-wrap gap-x-4 gap-y-1">
-                  {p.tags.map((t) => <span key={t}>[{t}]</span>)}
-                </div>
-              </div>
-              </a>
-            </Reveal>
-          ))}
-
-          {/* Grid */}
-          <div className="grid sm:grid-cols-2 gap-6">
-            {projects.filter((p) => !p.featured).map((p, i) => (
-              <Reveal key={p.n} delay={i * 0.05} className="h-full">
-                <a href={`#/project/${p.n}`} className="group border border-line hover:border-ink active:border-ink transition-colors flex flex-col h-full">
-                <div className="overflow-hidden border-b border-line">
-                  {p.image ? (
-                    <img src={p.image} alt={p.title} loading="lazy" className="w-full h-48 object-cover object-top group-hover:scale-[1.03] motion-reduce:group-hover:scale-100 transition-transform duration-500" />
-                  ) : (
-                    <DataVisual {...p.visual} className="w-full h-48" />
-                  )}
-                </div>
-                <div className="p-6 flex flex-col gap-3 flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-emerald-deep">{p.n}</span>
-                    <ArrowUpRight size={16} className="text-ink/30 group-hover:text-emerald-deep transition-colors" />
-                  </div>
-                  <h3 className="font-display text-lg font-bold tracking-tight">{p.title}</h3>
-                  <p className="text-sm text-ink/60 leading-relaxed flex-1">{p.desc}</p>
-                  <div className="font-mono text-xs text-ink/50 flex flex-wrap gap-x-4 gap-y-1">
-                    {p.tags.map((t) => <span key={t}>[{t}]</span>)}
-                  </div>
-                </div>
-                </a>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section id="services" className="border-b border-line">
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <SectionHeader index="02" label="Services" title="What I take on." />
-          <div className="grid sm:grid-cols-2 border-t border-l border-line">
-            {services.map((s, i) => (
-              <Reveal key={s.n} delay={i * 0.05} className="group border-b border-r border-line p-8 hover:bg-mist active:bg-mist transition-colors">
-                <div className="font-mono text-xs font-bold text-emerald-deep mb-6">{s.n}</div>
-                <h3 className="font-display text-xl font-bold tracking-tight mb-3 group-hover:text-emerald-deep transition-colors">
-                  {s.title}
-                </h3>
-                <p className="text-sm text-ink/60 leading-relaxed">{s.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section id="about" className="bg-pine text-paper border-b border-line">
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <SectionHeader index="03" label="About" title="Both sides of the table." dark />
-          <div className="grid md:grid-cols-[0.85fr_1.15fr] gap-12 items-start">
-            <Reveal>
-              <div className="relative">
-                <img src="graphics/6.jpeg" alt="Tiffany Tay" loading="lazy" className="w-full object-cover object-top grayscale contrast-110" />
-                <div className="absolute inset-0 bg-emerald/20 mix-blend-multiply" />
-                <div className="absolute bottom-0 left-0 font-mono text-xs bg-paper text-ink px-3 py-2">
-                  fig 1. — the person behind the systems
-                </div>
-              </div>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="text-paper/70 leading-relaxed mb-5">
-                For the past decade I&rsquo;ve led operations, finance, and delivery for
-                venture-backed SaaS companies and mission-driven nonprofits — usually arriving at the
-                point where something important has no owner and everyone has quietly worked around
-                it for months.
-              </p>
-              <p className="text-paper/70 leading-relaxed mb-8">
-                My work sits at the intersection of accounting rigor and building things: audited
-                financials and spend controls on one side, Power BI, Azure DevOps, and a shipped
-                product on the other. The pattern is the same either way — take the ambiguous,
-                under-owned thing, find what the numbers say is actually wrong, and turn it into a
-                process someone else can run.
-              </p>
-              <p className="font-display text-2xl font-bold tracking-tight text-emerald mb-10">
-                &ldquo;A process only I can run isn&rsquo;t a process.&rdquo;
-              </p>
-
-              <div className="grid sm:grid-cols-2 gap-8 font-mono text-sm">
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-paper/40 mb-3">// education</div>
-                  <ul className="space-y-3 text-paper/80">
-                    <li>
-                      MPA + BBA
-                      <div className="text-xs text-paper/50">The University of Texas at Austin</div>
-                    </li>
-                    <li>
-                      Texas Academy of Math &amp; Science
-                      <div className="text-xs text-paper/50">UNT, early entrance program</div>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-paper/40 mb-3">// credentials</div>
-                  <ul className="space-y-3 text-paper/80">
-                    <li>
-                      CPA
-                      <div className="text-xs text-paper/50">Licensed in New York State &amp; Texas</div>
-                    </li>
-                    <li>
-                      Applied Data Science Lab
-                      <div className="text-xs text-paper/50">WorldQuant University, 2025</div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* OFF THE CLOCK */}
-      <section className="bg-mist border-b border-line">
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <SectionHeader index="04" label="Non-Billable Hours" title="Off the clock." />
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {offTheClock.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.05}>
-                {item.image ? (
-                  <img src={item.image} alt={item.title} loading="lazy" className="w-full aspect-square object-cover border border-line mb-4" />
-                ) : (
-                  <div className="w-full aspect-square border border-line bg-paper mb-4 flex items-center justify-center p-3">
-                    {/* The slot filename is an authoring hint; visitors never see an internal path. */}
-                    {import.meta.env.DEV && (
-                      <span className="font-mono text-[10px] text-ink/30 text-center break-all">{item.slot}</span>
-                    )}
-                  </div>
-                )}
-                <h3 className="font-display text-lg font-bold tracking-tight mb-2">{item.title}</h3>
-                <p className="text-sm text-ink/60 leading-relaxed">{item.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="border-b border-line">
-        <div className="max-w-6xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-14">
-          <div>
-            <SectionHeader index="05" label="Contact" title="Tell me where the process breaks down." />
-            <Reveal>
-              <p className="text-ink/60 leading-relaxed mb-8 max-w-md">
-                Tell me what&rsquo;s running on heroics and good intentions — I reply within two business days.
-              </p>
-              <div className="space-y-1 font-mono text-sm">
-                <a href="mailto:tnt@poweredbytnt.com" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald-deep transition-colors">
-                  <Mail size={16} className="text-emerald-deep" /> tnt@poweredbytnt.com
-                </a>
-                <a href="https://www.linkedin.com/in/tiffany-n-tay/" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald-deep transition-colors">
-                  <Linkedin size={16} className="text-emerald-deep" /> in/tiffany-n-tay
-                </a>
-                <a href="https://github.com/tiffanytay" className="flex items-center gap-3 py-3 border-b border-line hover:text-emerald-deep transition-colors">
-                  <Github size={16} className="text-emerald-deep" /> tiffanytay
-                </a>
-              </div>
-            </Reveal>
-          </div>
-
-          <Reveal delay={0.1} className="lg:pt-24">
-            {status === 'success' ? (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                className="border border-line h-full flex flex-col items-center justify-center text-center p-10"
-              >
-                <CheckCircle2 className="text-emerald mb-4" size={36} />
-                <h3 className="font-display text-xl font-bold mb-2">Message sent</h3>
-                <p className="text-ink/60 text-sm">Thanks for reaching out — I&rsquo;ll be in touch soon.</p>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
-                <input type="hidden" name="access_key" value="d5b0b07d-d2c0-4a93-acf3-259cf4caee86" />
-                <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
-                <div>
-                  <label htmlFor="name" className="block font-mono text-xs uppercase tracking-widest text-ink/50 mb-2">01 — Your name</label>
-                  <input id="name" name="name" type="text" required className="w-full py-2.5 bg-transparent border-b border-ink/25 focus:border-emerald focus:outline-none transition-colors" />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block font-mono text-xs uppercase tracking-widest text-ink/50 mb-2">02 — Your email</label>
-                  <input id="email" name="email" type="email" required className="w-full py-2.5 bg-transparent border-b border-ink/25 focus:border-emerald focus:outline-none transition-colors" />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block font-mono text-xs uppercase tracking-widest text-ink/50 mb-2">03 — What's messy?</label>
-                  <textarea id="message" name="message" rows={3} required className="w-full py-2.5 bg-transparent border-b border-ink/25 focus:border-emerald focus:outline-none transition-colors resize-none" />
-                </div>
-                <button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  className={`${btn} gap-2 px-7 py-3 disabled:opacity-60`}
-                >
-                  {status === 'sending' ? 'Sending…' : 'Send message'} <ArrowRight size={15} />
-                </button>
-                {status === 'error' && (
-                  <p className="text-sm text-red-600 font-mono">error: submission failed — please email me directly.</p>
-                )}
-              </form>
-            )}
-          </Reveal>
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="bg-pine text-paper/50">
-        <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
-          <span>tiffany<span className="text-emerald">.</span>tay — operations, process &amp; product</span>
-          <div className="flex items-center gap-5">
-            <a href="https://www.linkedin.com/in/tiffany-n-tay/" className="hover:text-emerald transition-colors"><Linkedin size={16} /></a>
-            <a href="https://github.com/tiffanytay" className="hover:text-emerald transition-colors"><Github size={16} /></a>
-            <a href="mailto:tnt@poweredbytnt.com" className="hover:text-emerald transition-colors"><Mail size={16} /></a>
-          </div>
-          <span>&copy; 2026 — built and maintained in-house</span>
-        </div>
-      </footer>
+    <div className="bg-paper text-ink font-sans antialiased min-h-screen flex flex-col">
+      <SiteHeader route={route} />
+      {/* Keyed by route so each page mounts fresh (its reveals replay, the form resets). */}
+      <main key={route} className="flex-1">
+        {sections.map((S, i) => <S key={i} />)}
+      </main>
+      <SiteFooter />
     </div>
   );
 }
