@@ -71,21 +71,124 @@ const services = [
     n: '01',
     title: 'Operations & Process Design',
     desc: 'The informal, inconsistent, lives-in-someone’s-head process — rebuilt as a repeatable system anyone on the team can run.',
+    art: (<>
+      <g fill="none" stroke="#66c3ff" strokeWidth="1.5" strokeLinecap="round">
+        <path className="a-draw d" pathLength="1" style={{ '--d': '750ms', '--t': '300ms' }} d="M313 180H342" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '850ms', '--t': '300ms' }} d="M368 180H397" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '950ms', '--t': '300ms' }} d="M423 180H452" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1050ms', '--t': '300ms' }} d="M478 180H507" />
+      </g>
+      <g fill="#ffffff" stroke="#66c3ff" strokeWidth="1.5">
+        <rect className="a-fly" x="287" y="167" width="26" height="26" style={{ '--dx': '-70px', '--dy': '-120px', '--r': '-22deg', '--d': '0ms' }} />
+        <rect className="a-fly" x="342" y="167" width="26" height="26" style={{ '--dx': '40px', '--dy': '-140px', '--r': '35deg', '--d': '50ms' }} />
+        <rect className="a-fly" x="397" y="167" width="26" height="26" style={{ '--dx': '-95px', '--dy': '-50px', '--r': '18deg', '--d': '100ms' }} />
+        <rect className="a-fly" x="452" y="167" width="26" height="26" style={{ '--dx': '15px', '--dy': '-100px', '--r': '-40deg', '--d': '150ms' }} />
+        <rect className="a-fly" x="507" y="167" width="26" height="26" style={{ '--dx': '-30px', '--dy': '-150px', '--r': '26deg', '--d': '200ms' }} />
+      </g>
+      <circle className="a-travel" cx="300" cy="180" r="4" fill="#0b6bb0" />
+      <path className="a-draw d" pathLength="1" style={{ '--d': '1300ms', '--t': '400ms' }} d="M513 180l4 4 9-9" fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <text className="a-fade" x="533" y="218" textAnchor="end" fill="rgba(11,18,16,.45)" style={{ '--d': '1450ms' }}>runbook v1</text>
+    </>),
   },
   {
     n: '02',
     title: 'Financial Operations & Controls',
     desc: 'Books, budgets, and spend under a CPA’s eye: clean lines, real oversight, and the recurring costs nobody has questioned in years.',
+    art: (<>
+      <g fill="none" stroke="rgba(102,195,255,.6)" strokeWidth="1">
+        <path className="a-draw d" pathLength="1" style={{ '--d': '0ms' }} d="M300 70H540" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '70ms' }} d="M300 98H540" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '140ms' }} d="M300 126H540" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '210ms' }} d="M300 154H540" />
+      </g>
+      <g fill="#66c3ff">
+        <rect className="a-grow" x="300" y="56" width="92" height="6" fillOpacity=".45" style={{ '--d': '200ms' }} />
+        <rect className="a-grow from-r" x="462" y="56" width="46" height="6" style={{ '--d': '300ms' }} />
+        <rect className="a-grow" x="300" y="84" width="70" height="6" fillOpacity=".45" style={{ '--d': '270ms' }} />
+        <rect className="a-grow from-r" x="462" y="84" width="46" height="6" style={{ '--d': '370ms' }} />
+        <g className="a-dim" style={{ '--d': '1400ms' }}>
+          <rect className="a-grow" x="300" y="112" width="112" height="6" fillOpacity=".45" style={{ '--d': '340ms' }} />
+          <rect className="a-grow from-r" x="462" y="112" width="46" height="6" style={{ '--d': '440ms' }} />
+        </g>
+        <rect className="a-grow" x="300" y="140" width="82" height="6" fillOpacity=".45" style={{ '--d': '410ms' }} />
+        <rect className="a-grow from-r" x="462" y="140" width="46" height="6" style={{ '--d': '510ms' }} />
+      </g>
+      <g fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path className="a-draw d" pathLength="1" style={{ '--d': '800ms', '--t': '300ms' }} d="M520 59l4 4 8-9" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '960ms', '--t': '300ms' }} d="M520 87l4 4 8-9" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1250ms', '--t': '400ms' }} d="M294 115H514" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1120ms', '--t': '300ms' }} d="M520 143l4 4 8-9" />
+      </g>
+      <text className="a-fade" x="540" y="119" textAnchor="end" fill="#0b6bb0" style={{ '--d': '1550ms' }}>cut</text>
+      <g fill="none" stroke="#0b1210" strokeOpacity=".5" strokeWidth="1">
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1500ms', '--t': '400ms' }} d="M440 172H540" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1580ms', '--t': '400ms' }} d="M440 177H540" />
+      </g>
+      <text className="a-fade" x="300" y="193" fill="rgba(11,18,16,.45)" style={{ '--d': '1650ms' }}>total</text>
+      <rect className="a-grow from-r" x="462" y="186" width="46" height="7" fill="#0b6bb0" style={{ '--d': '1700ms' }} />
+    </>),
   },
   {
     n: '03',
     title: 'Diagnostics & Analysis',
     desc: 'Data scattered across apps, plus what people actually tell you, pulled into one view — so you fix the root cause, not the symptom.',
+    art: (<>
+      <path className="a-draw d" pathLength="1" style={{ '--t': '700ms' }} d="M300 36V204H548" fill="none" stroke="rgba(102,195,255,.7)" strokeWidth="1" />
+      <line className="a-scan" x1="300" y1="36" x2="300" y2="204" stroke="#66c3ff" strokeWidth="1.5" />
+      <g fill="#66c3ff">
+        <circle className="a-fly" cx="320" cy="184" r="4" style={{ '--dx': '-120px', '--dy': '-130px', '--d': '150ms' }} />
+        <circle className="a-fly" cx="345" cy="174" r="4" style={{ '--dx': '180px', '--dy': '-150px', '--d': '190ms' }} />
+        <circle className="a-fly" cx="370" cy="168" r="4" style={{ '--dx': '-90px', '--dy': '40px', '--d': '230ms' }} />
+        <circle className="a-fly" cx="395" cy="154" r="4" style={{ '--dx': '140px', '--dy': '60px', '--d': '270ms' }} />
+        <circle className="a-fly" cx="420" cy="148" r="4" style={{ '--dx': '-160px', '--dy': '-60px', '--d': '310ms' }} />
+        <circle className="a-fly" cx="445" cy="134" r="4" style={{ '--dx': '90px', '--dy': '-120px', '--d': '350ms' }} />
+        <circle className="a-fly" cx="470" cy="126" r="4" style={{ '--dx': '-60px', '--dy': '90px', '--d': '390ms' }} />
+        <circle className="a-fly" cx="495" cy="114" r="4" style={{ '--dx': '60px', '--dy': '110px', '--d': '430ms' }} />
+        <circle className="a-fly" cx="520" cy="104" r="4" style={{ '--dx': '-200px', '--dy': '20px', '--d': '470ms' }} />
+      </g>
+      <path className="a-draw d" pathLength="1" style={{ '--d': '900ms', '--t': '600ms' }} d="M312 190L532 98" fill="none" stroke="#66c3ff" strokeOpacity=".6" strokeWidth="1" />
+      <circle className="a-fly" cx="452" cy="66" r="4.5" fill="#0b6bb0" style={{ '--dx': '110px', '--dy': '-40px', '--d': '510ms' }} />
+      <circle className="a-ring" cx="452" cy="66" r="13" fill="none" stroke="#0b6bb0" strokeWidth="1.5" style={{ '--d': '1300ms' }} />
+      <circle className="a-pulse" cx="452" cy="66" r="13" fill="none" stroke="#66c3ff" strokeWidth="1.5" style={{ '--d': '1900ms' }} />
+      <path className="a-fade" style={{ '--d': '1450ms' }} d="M452 44V52M452 80V88M430 66H438M466 66H474" fill="none" stroke="#0b6bb0" strokeWidth="1.5" strokeLinecap="round" />
+      <text className="a-fade" x="480" y="62" fill="#0b6bb0" style={{ '--d': '1650ms' }}>root cause</text>
+    </>),
   },
   {
     n: '04',
     title: 'Product & Internal Tooling',
     desc: 'When the fix is a tool that doesn’t exist yet: PRD, stack decision, and a working build — not a recommendation deck.',
+    art: (<>
+      <rect className="a-draw d" pathLength="1" style={{ '--t': '700ms' }} x="330" y="34" width="210" height="150" fill="#ffffff" fillOpacity=".6" stroke="#66c3ff" strokeWidth="1.5" />
+      <path className="a-draw d" pathLength="1" style={{ '--d': '400ms', '--t': '400ms' }} d="M330 52H540" fill="none" stroke="#66c3ff" strokeWidth="1" />
+      <g fill="#66c3ff">
+        <circle className="a-pop" cx="340" cy="43" r="2.5" style={{ '--d': '500ms' }} />
+        <circle className="a-pop" cx="348" cy="43" r="2.5" style={{ '--d': '550ms' }} />
+        <circle className="a-pop" cx="356" cy="43" r="2.5" style={{ '--d': '600ms' }} />
+        <rect className="a-fade" x="330" y="52" width="44" height="132" fillOpacity=".15" style={{ '--d': '650ms' }} />
+        <rect className="a-grow" x="338" y="64" width="26" height="4" fillOpacity=".6" style={{ '--d': '750ms' }} />
+        <rect className="a-grow" x="338" y="76" width="20" height="4" fillOpacity=".6" style={{ '--d': '800ms' }} />
+        <rect className="a-grow" x="338" y="88" width="24" height="4" fillOpacity=".6" style={{ '--d': '850ms' }} />
+        <rect className="a-grow" x="386" y="66" width="120" height="6" style={{ '--d': '800ms', '--t': '350ms', '--ease': 'steps(9,end)' }} />
+        <rect className="a-grow" x="386" y="80" width="86" height="6" style={{ '--d': '1150ms', '--t': '300ms', '--ease': 'steps(7,end)' }} />
+        <rect className="a-grow" x="386" y="94" width="136" height="6" style={{ '--d': '1450ms', '--t': '400ms', '--ease': 'steps(10,end)' }} />
+      </g>
+      <g className="a-fade" style={{ '--d': '1850ms' }}><rect className="a-blink" x="525" y="92" width="2" height="10" fill="#0b6bb0" /></g>
+      <rect className="a-draw d" pathLength="1" style={{ '--d': '1000ms', '--t': '500ms' }} x="386" y="112" width="140" height="44" fill="none" stroke="#66c3ff" strokeWidth="1" />
+      <g fill="#66c3ff" fillOpacity=".55">
+        <rect className="a-growy" x="396" y="138" width="12" height="14" style={{ '--d': '1250ms' }} />
+        <rect className="a-growy" x="416" y="130" width="12" height="22" style={{ '--d': '1300ms' }} />
+        <rect className="a-growy" x="436" y="134" width="12" height="18" style={{ '--d': '1350ms' }} />
+        <rect className="a-growy" x="456" y="122" width="12" height="30" style={{ '--d': '1400ms' }} />
+        <rect className="a-growy" x="476" y="126" width="12" height="26" style={{ '--d': '1450ms' }} />
+        <rect className="a-growy" x="496" y="118" width="12" height="34" style={{ '--d': '1500ms' }} />
+      </g>
+      <rect className="a-pop" x="470" y="164" width="56" height="12" fill="#0b6bb0" style={{ '--d': '2000ms' }} />
+      <text className="a-fade" x="330" y="208" fill="rgba(11,18,16,.5)" style={{ '--d': '300ms' }}>prd.md</text>
+      <text className="a-fade" x="376" y="208" fill="rgba(11,18,16,.5)" style={{ '--d': '900ms' }}>→ stack</text>
+      <text className="a-fade" x="430" y="208" fill="rgba(11,18,16,.5)" style={{ '--d': '1500ms' }}>→ build</text>
+      <text className="a-fade" x="540" y="208" textAnchor="end" fill="#0b6bb0" style={{ '--d': '2100ms' }}>shipped</text>
+    </>),
   },
 ];
 
@@ -628,7 +731,8 @@ function ServicesSection() {
       <PageHeader index="02" label="Services" title="What I take on." />
       <div className="grid md:grid-cols-2 border-t border-l border-line">
         {services.map((s, i) => (
-          <Reveal key={s.n} delay={i * 0.05} className="group p-8 flex flex-col gap-3 border-r border-b border-line hover:bg-mist active:bg-mist transition-colors">
+          <Reveal key={s.n} delay={i * 0.05} className="svc group relative overflow-hidden p-8 flex flex-col gap-3 border-r border-b border-line hover:bg-mist active:bg-mist transition-colors">
+            <svg className="art" viewBox="0 0 560 240" preserveAspectRatio="xMaxYMax meet" aria-hidden="true" focusable="false">{s.art}</svg>
             <span className={`${mono12} text-ink/60`}>{s.n}</span>
             <h2 className="font-display font-bold text-xl leading-[1.15] tracking-tight group-hover:text-emerald-deep transition-colors">{s.title}</h2>
             <p className="text-ink/60 leading-relaxed">{s.desc}</p>

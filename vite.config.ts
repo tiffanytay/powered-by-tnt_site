@@ -8,6 +8,8 @@ export default defineConfig({
   base: './',
   plugins: [react()],
   server: {
+    // Preview tooling hands out a free port via PORT; plain `npm run dev` keeps Vite's default.
+    port: Number(process.env.PORT) || undefined,
     watch: {
       // CRITICAL: Tells Vite's file watcher to completely ignore the library folders
       ignored: ['**/node_modules/**', '**/.git/**']
