@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Mail, ArrowRight, ArrowLeft, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 
@@ -199,6 +200,7 @@ const offTheClock = [
     desc: 'Ask me about my dog; tell me about yours! ; )',
     image: 'graphics/personal-dogs.jpg',
     slot: 'personal-dogs.jpg',
+    runner: true,
   },
   {
     title: 'Broadway',
@@ -668,7 +670,7 @@ function SiteHeader({ route }) {
 
 function SiteFooter() {
   return (
-    <footer className="bg-pine text-paper/50 border-t border-paper/20">
+    <footer id="site-footer" className="bg-pine text-paper/50 border-t border-paper/20">
       <div className={`${container} py-8 flex flex-wrap items-center justify-between gap-4 ${mono12}`}>
         <span>tiffany.tay — operations, process &amp; product</span>
         <span>&copy; 2026 — built and maintained in-house</span>
@@ -815,16 +817,57 @@ function AboutSection() {
   );
 }
 
+// Dog run cycle: public/graphics/dog-run.png is a strip of 6 frames (each DOG_W x DOG_H, dog faces right, feet end
+// DOG_PAD px above the frame bottom). CSS steps() flips frames while .dog-run slides across the screen (index.css).
+const DOG_W = 260;
+const DOG_H = 136;
+const DOG_PAD = 5;
+function DogSprite() {
+  return <div className="dog-sprite" style={{ backgroundImage: 'url(graphics/dog-run.png)' }} />;
+}
+
+// Hover the Dogs photo: the dog sprints across the viewport with the top of the footer as its ground.
+// If the footer is below the fold, the bottom edge of the window stands in for it.
+function useDogRun() {
+  const [run, setRun] = useState(null);
+  const reduce = useReducedMotion();
+  const start = () => {
+    if (reduce || run) return;
+    const footerTop = document.getElementById('site-footer')?.getBoundingClientRect().top ?? window.innerHeight;
+    setRun({ ground: Math.min(footerTop, window.innerHeight) });
+  };
+  const sprite = run && createPortal(
+    <div
+      aria-hidden="true"
+      className="dog-run"
+      style={{ top: run.ground - DOG_H + DOG_PAD }}
+      onAnimationEnd={(e) => { if (e.target === e.currentTarget) setRun(null); }}
+    >
+      <DogSprite />
+    </div>,
+    document.body,
+  );
+  return { start, sprite };
+}
+
 function OffTheClockSection() {
+  const dog = useDogRun();
   return (
     <section className="bg-mist">
+      {dog.sprite}
       <div className={`${container} py-20`}>
         <PageHeader as="h2" index="04" label="Non-billable hours" title="Off the clock." />
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {offTheClock.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.05} className="flex flex-col gap-2">
               {item.image ? (
-                <img src={item.image} alt={item.title} loading="lazy" className="w-full aspect-square object-cover border border-line mb-2" />
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  className="w-full aspect-square object-cover border border-line mb-2"
+                  {...(item.runner ? { onPointerEnter: dog.start } : {})}
+                />
               ) : (
                 <div className="w-full aspect-square border border-line bg-paper mb-2 flex items-center justify-center p-3">
                   {/* The slot filename is an authoring hint; visitors never see an internal path. */}
