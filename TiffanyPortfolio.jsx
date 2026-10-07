@@ -735,7 +735,7 @@ function ServicesSection() {
             <svg className="art" viewBox="0 0 560 240" preserveAspectRatio="xMaxYMax meet" aria-hidden="true" focusable="false">{s.art}</svg>
             <span className={`${mono12} text-ink/60`}>{s.n}</span>
             <h2 className="font-display font-bold text-xl leading-[1.15] tracking-tight group-hover:text-emerald-deep transition-colors">{s.title}</h2>
-            <p className="text-ink/60 leading-relaxed">{s.desc}</p>
+            <p className="text-ink/60 leading-relaxed transition-opacity duration-200 group-hover:opacity-0 group-active:opacity-0">{s.desc}</p>
           </Reveal>
         ))}
       </div>
