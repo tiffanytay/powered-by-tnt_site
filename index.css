@@ -70,3 +70,10 @@
 :is(.svc:hover, .svc:active) .a-pulse { animation: svc-pulse 1800ms cubic-bezier(0,0,.2,1) var(--d, 0ms) infinite both; }
 :is(.svc:hover, .svc:active) .a-blink { animation: svc-blink 1000ms linear infinite both; }
 @media (prefers-reduced-motion: reduce) { .art * { animation: none !important; } }
+
+/* Dogs photo hover: the dog runs left to right along the top of the footer (see useDogRun). */
+.dog-run { position: fixed; left: 0; z-index: 40; width: 260px; height: 136px; pointer-events: none; animation: dog-dash 2.2s linear both; will-change: transform; }
+.dog-sprite { width: 100%; height: 100%; background-size: 600% 100%; background-repeat: no-repeat; animation: dog-frames .55s steps(6) infinite; }
+@keyframes dog-dash { from { transform: translateX(-280px) } to { transform: translateX(calc(100vw + 20px)) } }
+@keyframes dog-frames { from { background-position: 0 0 } to { background-position: 120% 0 } }
+@media (prefers-reduced-motion: reduce) { .dog-run { display: none; } }
