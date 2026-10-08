@@ -861,7 +861,7 @@ function AboutSection() {
   );
 }
 
-// Dog run cycle: public/graphics/dog-run.png is a strip of 6 frames (each DOG_W x DOG_H, dog faces right, feet end
+// Dog run cycle: public/graphics/dog-run.png is a strip of 12 frames (each DOG_W x DOG_H, dog faces right, feet end
 // DOG_PAD px above the frame bottom). CSS steps() flips frames while .dog-run slides across the screen (index.css).
 const DOG_W = 260;
 const DOG_H = 136;
