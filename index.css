@@ -91,7 +91,7 @@
 
 /* Dogs photo hover: the dog runs left to right along the top of the footer (see useDogRun). */
 .dog-run { position: fixed; left: 0; z-index: 40; width: 260px; height: 136px; pointer-events: none; animation: dog-dash 2.2s linear both; will-change: transform; }
-.dog-sprite { width: 100%; height: 100%; background-size: 600% 100%; background-repeat: no-repeat; animation: dog-frames .55s steps(6) infinite; }
+.dog-sprite { width: 100%; height: 100%; background-size: 1200% 100%; background-repeat: no-repeat; animation: dog-frames .55s steps(12) infinite; }
 @keyframes dog-dash { from { transform: translateX(-280px) } to { transform: translateX(calc(100vw + 20px)) } }
-@keyframes dog-frames { from { background-position: 0 0 } to { background-position: 120% 0 } }
+@keyframes dog-frames { from { background-position: 0 0 } to { background-position: 109.09% 0 } }
 @media (prefers-reduced-motion: reduce) { .dog-run { display: none; } }
