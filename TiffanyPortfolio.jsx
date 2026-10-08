@@ -213,6 +213,7 @@ const offTheClock = [
     desc: 'New cities, and eating my way through them one unfamiliar menu at a time.',
     image: null,
     slot: 'personal-travel.jpg',
+    travel: true,
   },
   {
     title: 'Puzzles',
@@ -893,17 +894,44 @@ function useDogRun() {
   return { start, sprite };
 }
 
+// Hover the Travel & Food tile: the plane flies right to left across the top of the window (index.css).
+function usePlaneFlight() {
+  const [flying, setFlying] = useState(false);
+  const reduce = useReducedMotion();
+  const start = () => { if (!reduce) setFlying(true); };
+  const sprite = flying && createPortal(
+    <img src="graphics/plane.webp" alt="" aria-hidden="true" className="plane-flight" onAnimationEnd={() => setFlying(false)} />,
+    document.body,
+  );
+  return { start, sprite };
+}
+
+// ...while the food illustrations pop up over the tile itself (CSS-driven, settles back on leave).
+const FOODS = ['bakery', 'pie', 'taiwanese', 'mexican'];
+function FoodPop() {
+  return (
+    <div className="food-pop" aria-hidden="true">
+      {FOODS.map((f, i) => <img key={f} src={`graphics/food-${f}.webp`} alt="" style={{ '--d': `${i * 90}ms` }} />)}
+    </div>
+  );
+}
+
 function OffTheClockSection() {
   const dog = useDogRun();
+  const plane = usePlaneFlight();
   return (
     <section className="bg-mist">
       {dog.sprite}
+      {plane.sprite}
       <div className={`${container} py-20`}>
         <PageHeader as="h2" index="04" label="Non-billable hours" title="Off the clock." />
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {offTheClock.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.05} className="flex flex-col gap-2">
-              <div className={item.jigsaw ? 'jig relative mb-2' : 'mb-2'}>
+              <div
+                className={item.jigsaw ? 'jig relative mb-2' : item.travel ? 'travel relative mb-2' : 'mb-2'}
+                {...(item.travel ? { onPointerEnter: plane.start } : {})}
+              >
                 {item.image ? (
                   <img
                     src={item.image}
@@ -921,6 +949,7 @@ function OffTheClockSection() {
                   </div>
                 )}
                 {item.jigsaw && <JigsawShatter image={item.image} />}
+                {item.travel && <FoodPop />}
               </div>
               <h3 className="font-display font-bold text-lg tracking-tight">{item.title}</h3>
               <p className="text-sm text-ink/60 leading-relaxed">{item.desc}</p>
