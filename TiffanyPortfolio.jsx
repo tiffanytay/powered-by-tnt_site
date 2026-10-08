@@ -579,8 +579,9 @@ function ProjectDetail({ project, prev, next }) {
           <a href="#/work" className={`group inline-flex items-center gap-2 font-mono text-sm hover:text-emerald-deep transition-colors ${press}`}>
             <ArrowLeft size={15} className="transition-transform duration-200 group-hover:-translate-x-1 motion-reduce:group-hover:translate-x-0" /> all work
           </a>
-          <a href="#/" className="font-mono text-sm font-medium tracking-tight">
-            tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40"> — CPA</span>
+          <a href="#/" className="inline-flex items-center gap-2 font-mono text-sm font-medium tracking-tight">
+            <img src="graphics/logo.svg" alt="" className="w-6 h-6" />
+            <span>tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40"> — CPA</span></span>
           </a>
         </div>
       </header>
@@ -647,8 +648,9 @@ function SiteHeader({ route }) {
   return (
     <header className={headerCls}>
       <div className={`${container} h-16 flex items-center justify-between gap-6`}>
-        <a href="#/" className="font-mono text-sm font-medium whitespace-nowrap">
-          tiffany<span className="text-emerald">.</span>tay<span className="hidden sm:inline"> — CPA</span>
+        <a href="#/" className="inline-flex items-center gap-2 font-mono text-sm font-medium whitespace-nowrap">
+          <img src="graphics/logo.svg" alt="" className="w-6 h-6" />
+          <span>tiffany<span className="text-emerald">.</span>tay<span className="hidden sm:inline"> — CPA</span></span>
         </a>
         {/* Every link stays visible on phones: "where can I go?" needs an answer at 375px too. */}
         <nav aria-label="Primary" className="flex items-center gap-4 sm:gap-8 text-xs sm:text-sm text-ink/60">
