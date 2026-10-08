@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- T-account: the debit/credit ledger mark, doubling as the T monogram -->
+  <rect width="64" height="64" fill="#071013"/>
+  <rect x="8" y="13" width="48" height="9" fill="#66c3ff"/>
+  <rect x="27.5" y="13" width="9" height="38" fill="#66c3ff"/>
+</svg>
