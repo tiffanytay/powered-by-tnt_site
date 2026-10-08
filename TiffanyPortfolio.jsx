@@ -219,8 +219,49 @@ const offTheClock = [
     desc: 'The same pattern-finding itch that makes the day job fun, minus the deadlines.',
     image: null,
     slot: 'personal-puzzles.jpg',
+    jigsaw: true,
   },
 ];
+
+// 4x4 jigsaw cut of a 100x100 tile. Tab direction per shared edge is fixed so the cut is stable.
+const JIG_N = 4, JIG_S = 100 / JIG_N;
+const jigTab = (a, b) => ((a * 7 + b * 13) % 3 ? 1 : -1);
+const jigEdge = (ax, ay, bx, by, s) => {
+  if (!s) return `L${bx},${by}`;
+  const dx = bx - ax, dy = by - ay;
+  // u runs along the edge, v pushes out along the piece's outward normal.
+  const p = (u, v) => `${ax + u * dx + v * s * dy},${ay + u * dy - v * s * dx}`;
+  return `L${p(.35, 0)} C${p(.42, 0)} ${p(.3, .22)} ${p(.5, .22)} C${p(.7, .22)} ${p(.58, 0)} ${p(.65, 0)} L${bx},${by}`;
+};
+const jigPieces = Array.from({ length: JIG_N * JIG_N }, (_, i) => {
+  const r = Math.floor(i / JIG_N), c = i % JIG_N, x = c * JIG_S, y = r * JIG_S, X = x + JIG_S, Y = y + JIG_S;
+  const top = r ? -jigTab(r - 1, c + 5) : 0, bottom = r < JIG_N - 1 ? jigTab(r, c + 5) : 0;
+  const left = c ? -jigTab(r + 9, c - 1) : 0, right = c < JIG_N - 1 ? jigTab(r + 9, c) : 0;
+  const j = ((r * 5 + c * 3) % 5) - 2;
+  return {
+    d: `M${x},${y} ${jigEdge(x, y, X, y, top)} ${jigEdge(X, y, X, Y, right)} ${jigEdge(X, Y, x, Y, bottom)} ${jigEdge(x, Y, x, y, left)} Z`,
+    style: { '--dx': `${(c - 1.5) * 3 + j * .6}px`, '--dy': `${(r - 1.5) * 3 - j * .5}px`, '--r': `${j * 3}deg`, '--d': `${(r + c) * 25}ms` },
+  };
+});
+
+// Hover overlay: the tile cracks along the jigsaw cut and the pieces burst apart, then settle back on leave.
+function JigsawShatter({ image }) {
+  return (
+    <svg className="jig-pieces" viewBox="0 0 100 100" aria-hidden="true">
+      {image && (
+        <defs>
+          <pattern id="jig-img" patternUnits="userSpaceOnUse" width="100" height="100">
+            <image href={image} width="100" height="100" preserveAspectRatio="xMidYMid slice" />
+          </pattern>
+        </defs>
+      )}
+      {jigPieces.map((p, i) => (
+        <path key={i} d={p.d} style={p.style} fill={image ? 'url(#jig-img)' : 'var(--color-paper)'}
+          stroke={image ? 'rgba(255,255,255,.85)' : 'rgba(11,18,16,.3)'} />
+      ))}
+    </svg>
+  );
+}
 
 // STAR case studies. Each one carries an `image` slot — drop the file into public/graphics/
 // and set `image` to swap the DataVisual placeholder for a real screenshot.
@@ -860,22 +901,25 @@ function OffTheClockSection() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {offTheClock.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.05} className="flex flex-col gap-2">
-              {item.image ? (
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="lazy"
-                  className="w-full aspect-square object-cover border border-line mb-2"
-                  {...(item.runner ? { onPointerEnter: dog.start } : {})}
-                />
-              ) : (
-                <div className="w-full aspect-square border border-line bg-paper mb-2 flex items-center justify-center p-3">
-                  {/* The slot filename is an authoring hint; visitors never see an internal path. */}
-                  {import.meta.env.DEV && (
-                    <span className="font-mono text-[10px] text-ink/30 text-center break-all">{item.slot}</span>
-                  )}
-                </div>
-              )}
+              <div className={item.jigsaw ? 'jig relative mb-2' : 'mb-2'}>
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    loading="lazy"
+                    className="jig-base block w-full aspect-square object-cover border border-line"
+                    {...(item.runner ? { onPointerEnter: dog.start } : {})}
+                  />
+                ) : (
+                  <div className="jig-base w-full aspect-square border border-line bg-paper flex items-center justify-center p-3">
+                    {/* The slot filename is an authoring hint; visitors never see an internal path. */}
+                    {import.meta.env.DEV && (
+                      <span className="font-mono text-[10px] text-ink/30 text-center break-all">{item.slot}</span>
+                    )}
+                  </div>
+                )}
+                {item.jigsaw && <JigsawShatter image={item.image} />}
+              </div>
               <h3 className="font-display font-bold text-lg tracking-tight">{item.title}</h3>
               <p className="text-sm text-ink/60 leading-relaxed">{item.desc}</p>
             </Reveal>
