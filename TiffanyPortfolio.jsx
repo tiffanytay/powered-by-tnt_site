@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Mail, ArrowRight, ArrowLeft, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import dogRunUrl from './assets/dog-run.png';
 
 // ponytail: lucide-react dropped brand/logo glyphs; inline the two marks we need instead of adding a dependency.
 function Linkedin({ size = 18, className }) {
@@ -861,13 +862,14 @@ function AboutSection() {
   );
 }
 
-// Dog run cycle: public/graphics/dog-run.png is a strip of 12 frames (each DOG_W x DOG_H, dog faces right, feet end
+// Dog run cycle: assets/dog-run.png is a strip of 12 frames (each DOG_W x DOG_H, dog faces right, feet end
 // DOG_PAD px above the frame bottom). CSS steps() flips frames while .dog-run slides across the screen (index.css).
+// Imported (not in public/) so Vite hashes its URL: a new sprite can never pair with a stale cached copy.
 const DOG_W = 260;
 const DOG_H = 136;
 const DOG_PAD = 5;
 function DogSprite() {
-  return <div className="dog-sprite" style={{ backgroundImage: 'url(graphics/dog-run.png)' }} />;
+  return <div className="dog-sprite" style={{ backgroundImage: `url(${dogRunUrl})` }} />;
 }
 
 // Hover the Dogs photo: the dog sprints across the viewport with the top of the footer as its ground.
