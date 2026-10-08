@@ -95,3 +95,23 @@
 @keyframes dog-dash { from { transform: translateX(-280px) } to { transform: translateX(calc(100vw + 20px)) } }
 @keyframes dog-frames { from { background-position: 0 0 } to { background-position: 109.09% 0 } }
 @media (prefers-reduced-motion: reduce) { .dog-run { display: none; } }
+
+/* Travel & Food tile hover: the plane crosses the top of the window right to left (see usePlaneFlight)
+   and the food illustrations pop up over the tile, staggered, then shrink away on leave. */
+.plane-flight { position: fixed; top: 76px; left: 0; z-index: 40; width: clamp(180px, 22vw, 300px); pointer-events: none; animation: plane-fly 3.2s cubic-bezier(.3,0,.7,1) both; will-change: transform; }
+@keyframes plane-fly { from { transform: translate(100vw, 24px) } to { transform: translate(-100%, -12px) } }
+.food-pop { position: absolute; inset: 0; pointer-events: none; }
+.food-pop img {
+  position: absolute; width: 56%; opacity: 0; transform-origin: 50% 80%;
+  transform: translateY(12%) scale(0) rotate(var(--r));
+  transition: transform 180ms cubic-bezier(.4,0,1,1), opacity 150ms;
+}
+.food-pop img:nth-child(1) { left: 0; top: 2%; --r: -6deg; }
+.food-pop img:nth-child(2) { right: 0; top: 6%; --r: 5deg; }
+.food-pop img:nth-child(3) { left: 2%; bottom: 4%; --r: 4deg; }
+.food-pop img:nth-child(4) { right: 0; bottom: 2%; --r: -5deg; }
+:is(.travel:hover, .travel:active) .food-pop img {
+  opacity: 1; transform: translateY(0) scale(1) rotate(var(--r));
+  transition: transform 520ms cubic-bezier(.34,1.56,.64,1) var(--d), opacity 120ms var(--d);
+}
+@media (prefers-reduced-motion: reduce) { .plane-flight { display: none; } .food-pop img { transform: none !important; } }
