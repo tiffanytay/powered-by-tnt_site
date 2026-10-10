@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Mail, ArrowRight, ArrowLeft, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowRight, ArrowLeft, ArrowUpRight, CheckCircle2, Search, X } from 'lucide-react';
 import dogRunUrl from './assets/dog-run.png';
 
 // ponytail: lucide-react dropped brand/logo glyphs; inline the two marks we need instead of adding a dependency.
@@ -735,13 +735,46 @@ function PageHeader({ index, label, title, dark = false, as: Heading = 'h1' }) {
   );
 }
 
+// Everything searchable about a project, flattened to one lowercase string.
+const projectText = (p) => JSON.stringify([p.title, p.subtitle, p.desc, p.tags, p.visual, p.star]).toLowerCase();
+
 function WorkSection() {
   const total = String(projects.length).padStart(2, '0');
+  const [query, setQuery] = useState('');
+  // Every word must appear somewhere in the project, so "power bi kanban" narrows rather than widens.
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const shown = projects.filter((p) => words.every((w) => projectText(p).includes(w)));
   return (
     <section className={`${container} py-20`}>
       <PageHeader index="01" label="Selected work" title="Five messes, five systems." />
+      <div role="search" className="mb-10 flex items-center gap-3 h-14 px-5 border-2 border-ink rounded-none focus-within:border-emerald transition-colors">
+        <Search size={20} className="shrink-0 text-ink/60" aria-hidden="true" />
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search skills, tools, experience — e.g. Power BI, team, Stripe"
+          aria-label="Search work by skill, tool, or experience"
+          className="flex-1 min-w-0 bg-transparent text-base sm:text-lg focus:outline-none placeholder:text-ink/40 [&::-webkit-search-cancel-button]:hidden"
+        />
+        {query && (
+          <button type="button" onClick={() => setQuery('')} aria-label="Clear search" className={`shrink-0 p-1 text-ink/60 hover:text-ink transition-colors ${press}`}>
+            <X size={18} />
+          </button>
+        )}
+      </div>
+      {words.length > 0 && (
+        <p className={`${mono12} text-ink/60 mb-4`} aria-live="polite">
+          {shown.length} of {projects.length} projects match “{query.trim()}”
+        </p>
+      )}
+      {shown.length === 0 && (
+        <p className="py-10 border-t border-line text-ink/60">
+          Nothing matches yet — try a tool like <button type="button" onClick={() => setQuery('Power BI')} className="underline hover:text-emerald-deep">Power BI</button> or a skill like <button type="button" onClick={() => setQuery('team')} className="underline hover:text-emerald-deep">team</button>.
+        </p>
+      )}
       <div className="border-b border-line">
-        {projects.map((p) => (
+        {shown.map((p) => (
           <Reveal key={p.n}>
             <article className="grid md:grid-cols-2 gap-x-12 gap-y-8 py-10 border-t border-line">
               <div className="flex flex-col gap-2 min-w-0">
@@ -761,7 +794,9 @@ function WorkSection() {
                 </ul>
                 <div className={`flex flex-wrap items-center justify-between gap-x-4 gap-y-2 ${mono12} text-ink/60`}>
                   <span className="flex flex-wrap gap-x-4 gap-y-2">
-                    {p.tags.map((t) => <span key={t}>[{t}]</span>)}
+                    {p.tags.map((t) => (
+                      <button key={t} type="button" onClick={() => setQuery(t)} title={`Show work using ${t}`} className="hover:text-emerald-deep transition-colors">[{t}]</button>
+                    ))}
                   </span>
                   <a href={`#/project/${p.n}`} className="group inline-flex items-center gap-2 text-ink hover:text-emerald-deep transition-colors">
                     read the case study
