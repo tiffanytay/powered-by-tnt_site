@@ -97,6 +97,24 @@
 @media (prefers-reduced-motion: reduce) { .dog-run { display: none; } }
 
 /* Travel & Food passport mode (see usePassport). */
+.pp-hint {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  background: rgb(255 255 255 / .85); opacity: 0; transition: opacity 150ms cubic-bezier(0,0,.2,1); pointer-events: none;
+}
+.pp-hint-stamp {
+  border: 2px dashed currentColor; padding: 10px 16px; font-family: var(--font-display); font-weight: 700; font-size: 18px;
+  letter-spacing: .03em; text-transform: uppercase; transform: rotate(-6deg) scale(1.12); transition: transform 250ms cubic-bezier(.19,1,.22,1);
+}
+.pp-hint-cta { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgb(11 18 16 / .6); }
+@media (hover: hover) { .pp-tile:hover .pp-hint { opacity: 1; } .pp-tile:hover .pp-hint-stamp { transform: rotate(-6deg); } }
+.pp-tile:focus-visible .pp-hint { opacity: 1; }
+.pp-tile:focus-visible .pp-hint-stamp { transform: rotate(-6deg); }
+.pp-badge {
+  display: none; position: absolute; top: 8px; right: 8px; padding: 4px 8px; background: var(--color-ink); color: var(--color-paper);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+}
+@media (hover: none) { .pp-badge { display: block; } }
+@media (prefers-reduced-motion: reduce) { .pp-hint-stamp { transition: none; } }
 .pp-layer { position: absolute; inset: 0; z-index: 20; cursor: crosshair; touch-action: manipulation; }
 .pp-layer.no-cursor { cursor: none; }
 .pp-banner { animation: pp-drop 300ms cubic-bezier(.19,1,.22,1) both; }

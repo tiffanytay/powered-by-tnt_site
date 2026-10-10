@@ -896,7 +896,7 @@ function useDogRun() {
   return { start, sprite };
 }
 
-// Travel & Food passport mode: hover/click the tile and the section becomes a passport page.
+// Travel & Food passport mode: click the tile and the section becomes a passport page (hover only hints).
 // Each click lays down the next stamp in order (looping), tilted at random and dated today.
 const STAMPS = [
   { country: 'Japan', city: 'Tokyo · Narita', label: 'Entry', food: 'ramen', color: '#c62a3a', shape: 'circle' },
@@ -933,12 +933,12 @@ function usePassport(rootRef) {
   const make = (i, p) => ({ ...STAMPS[i], ...p, id: ++seq.current, rot: Math.round(Math.random() * 30 - 15), date: stampDate() });
 
   const enter = (e) => {
-    if (mode === 'on' || (e.type === 'pointerenter' && e.pointerType === 'touch')) return; // touch enters via click
+    if (mode === 'on') return;
     clearTimeout(timer.current);
     const t = e.currentTarget.getBoundingClientRect();
     setStamps([make(next, toRoot(t.left + t.width / 2, t.top + t.height / 2))]);
     setNext((next + 1) % STAMPS.length);
-    focusExit.current = e.type === 'click' && e.detail === 0; // keyboard activation
+    focusExit.current = e.detail === 0; // keyboard activation
     setMode('on');
   };
   const stampAt = (e) => {
@@ -1015,7 +1015,7 @@ function usePassport(rootRef) {
       </div>
     </>
   );
-  return { enter, ui };
+  return { enter, ui, next: nxt };
 }
 
 function OffTheClockSection() {
@@ -1044,13 +1044,18 @@ function OffTheClockSection() {
                   <button
                     type="button"
                     aria-label={`${item.title} — start passport stamp mode`}
-                    onPointerEnter={passport.enter}
                     onClick={passport.enter}
-                    className="w-full aspect-square border border-line hover:border-ink transition-colors bg-paper flex items-center justify-center p-3 cursor-pointer focus-visible:outline-2 focus-visible:outline-emerald focus-visible:outline-offset-3"
+                    className="pp-tile relative overflow-hidden w-full aspect-square border border-line hover:border-ink transition-colors bg-paper flex items-center justify-center p-3 cursor-pointer focus-visible:outline-2 focus-visible:outline-emerald focus-visible:outline-offset-3"
                   >
                     {import.meta.env.DEV && (
                       <span className="font-mono text-[10px] text-ink/30 text-center break-all">{item.slot}</span>
                     )}
+                    {/* Hover/focus hint previews the next stamp; touch screens get a standing badge instead. */}
+                    <span className="pp-hint" aria-hidden="true">
+                      <span className="pp-hint-stamp" style={{ color: passport.next.color }}>{passport.next.country}</span>
+                      <span className="pp-hint-cta">Click to stamp →</span>
+                    </span>
+                    <span className="pp-badge" aria-hidden="true">Tap to stamp</span>
                   </button>
                 ) : (
                   <div className="jig-base w-full aspect-square border border-line bg-paper flex items-center justify-center p-3">
