@@ -214,6 +214,7 @@ const offTheClock = [
     desc: 'New cities, and eating my way through them one unfamiliar menu at a time.',
     image: null,
     slot: 'personal-travel.jpg',
+    passport: true,
   },
   {
     title: 'Puzzles',
@@ -895,11 +896,136 @@ function useDogRun() {
   return { start, sprite };
 }
 
+// Travel & Food passport mode: hover/click the tile and the section becomes a passport page.
+// Each click lays down the next stamp in order (looping), tilted at random and dated today.
+const STAMPS = [
+  { country: 'Japan', city: 'Tokyo · Narita', label: 'Entry', food: 'ramen', color: '#c62a3a', shape: 'circle' },
+  { country: 'France', city: 'Paris · CDG', label: 'Arrivée', food: 'croissant', color: '#2346a8', shape: 'rect' },
+  { country: 'Mexico', city: 'Ciudad de México', label: 'Entrada', food: 'al pastor', color: '#1f7a4d', shape: 'ticket' },
+  { country: 'Italy', city: 'Roma · Fiumicino', label: 'Arrivo', food: 'cacio e pepe', color: '#b5532a', shape: 'oval' },
+  { country: 'Thailand', city: 'Bangkok', label: 'Arrival', food: 'khao soi', color: '#6a3fa0', shape: 'double' },
+  { country: 'Morocco', city: 'Marrakech', label: 'Entrée', food: 'tagine', color: '#d9731a', shape: 'circle' },
+  { country: 'Peru', city: 'Lima', label: 'Ingreso', food: 'ceviche', color: '#0f7c86', shape: 'rect' },
+  { country: 'South Korea', city: 'Seoul · Incheon', label: 'Entry', food: 'bibimbap', color: '#1b2a6b', shape: 'oval' },
+  { country: 'Vietnam', city: 'Hồ Chí Minh City', label: 'Nhập cảnh', food: 'phở', color: '#b0306e', shape: 'ticket' },
+  { country: 'Greece', city: 'Athens', label: 'Άφιξη', food: 'souvlaki', color: '#2b7fc4', shape: 'double' },
+];
+const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+const MAX_STAMPS = 30;
+const stampDate = (d = new Date()) => `${String(d.getDate()).padStart(2, '0')} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+
+function usePassport(rootRef) {
+  const [mode, setMode] = useState(null); // null | 'on' | 'leaving'
+  const [stamps, setStamps] = useState([]);
+  const [next, setNext] = useState(0);
+  const [ghost, setGhost] = useState(null);
+  const seq = useRef(0);
+  const timer = useRef();
+  const exitRef = useRef(null);
+  const focusExit = useRef(false);
+
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  const toRoot = (x, y) => {
+    const r = rootRef.current.getBoundingClientRect();
+    return { x: Math.round(x - r.left), y: Math.round(y - r.top) };
+  };
+  const make = (i, p) => ({ ...STAMPS[i], ...p, id: ++seq.current, rot: Math.round(Math.random() * 30 - 15), date: stampDate() });
+
+  const enter = (e) => {
+    if (mode === 'on' || (e.type === 'pointerenter' && e.pointerType === 'touch')) return; // touch enters via click
+    clearTimeout(timer.current);
+    const t = e.currentTarget.getBoundingClientRect();
+    setStamps([make(next, toRoot(t.left + t.width / 2, t.top + t.height / 2))]);
+    setNext((next + 1) % STAMPS.length);
+    focusExit.current = e.type === 'click' && e.detail === 0; // keyboard activation
+    setMode('on');
+  };
+  const stampAt = (e) => {
+    if (mode !== 'on') return;
+    setStamps([...stamps, make(next, toRoot(e.clientX, e.clientY))].slice(-MAX_STAMPS));
+    setNext((next + 1) % STAMPS.length);
+  };
+  const exit = () => {
+    setMode('leaving');
+    setGhost(null);
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => { setMode(null); setStamps([]); }, 320);
+  };
+
+  useEffect(() => {
+    if (mode !== 'on') return;
+    if (focusExit.current) exitRef.current?.focus();
+    const onKey = (e) => { if (e.key === 'Escape') exit(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [mode]);
+
+  const nxt = STAMPS[next];
+  const ui = mode && (
+    <>
+      <svg width="0" height="0" className="absolute" aria-hidden="true" focusable="false">
+        <filter id="stamp-ink" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="7" result="noise" />
+          <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -7 5.1" result="wear" />
+          <feComposite in="SourceGraphic" in2="wear" operator="in" result="worn" />
+          <feDisplacementMap in="worn" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
+      <div
+        aria-hidden="true"
+        className={`pp-layer${ghost ? ' no-cursor' : ''}${mode === 'leaving' ? ' is-leaving' : ''}`}
+        onClick={stampAt}
+        onPointerMove={(e) => { if (e.pointerType !== 'touch' && mode === 'on') setGhost(toRoot(e.clientX, e.clientY)); }}
+        onPointerLeave={() => setGhost(null)}
+      >
+        {stamps.map((s) => (
+          <div key={s.id} className="pp-stamp" style={{ left: s.x, top: s.y, color: s.color }}>
+            <div style={{ transform: `rotate(${s.rot}deg)` }}>
+              <div className={`pp-face pp-${s.shape}`}>
+                <span className="pp-label">{s.label}</span>
+                <span className="pp-country">{s.country}</span>
+                <span className="pp-city">{s.city}</span>
+                <span className="pp-date">{s.date}</span>
+                <span className="pp-food">menu: {s.food}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+        {ghost && (
+          <div className="pp-ghost" style={{ left: ghost.x, top: ghost.y, color: nxt.color }}>next · {nxt.city.split(' · ')[0]}</div>
+        )}
+      </div>
+      <div className={`pp-banner absolute top-6 left-6 z-30 max-w-[calc(100%-152px)] pointer-events-none flex flex-wrap items-center gap-x-5 gap-y-2 px-4 py-3 bg-paper border border-line font-mono text-xs${mode === 'leaving' ? ' is-leaving' : ''}`}>
+        <span className="flex items-center gap-2"><span className="pp-dot w-2 h-2 rounded-full bg-emerald" />passport_mode: on</span>
+        <span className="text-ink/60">next_stamp: {String(next + 1).padStart(2, '0')} / {STAMPS.length} — {nxt.country}</span>
+        <span className="text-ink/60">{'// click anywhere to stamp'}</span>
+      </div>
+      <div className="absolute top-6 right-6 z-30 flex flex-col items-center gap-2">
+        <button
+          ref={exitRef}
+          type="button"
+          aria-label="Exit passport stamp mode"
+          onClick={exit}
+          className="w-20 h-20 flex items-center justify-center bg-ink text-paper hover:bg-emerald hover:text-ink transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-emerald focus-visible:outline-offset-3"
+        >
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden="true"><path d="M5 5 L19 19" /><path d="M19 5 L5 19" /></svg>
+        </button>
+        <span className="font-mono text-[11px] font-medium tracking-widest uppercase text-ink/60 pointer-events-none">Exit</span>
+      </div>
+    </>
+  );
+  return { enter, ui };
+}
+
 function OffTheClockSection() {
   const dog = useDogRun();
+  const rootRef = useRef(null);
+  const passport = usePassport(rootRef);
   return (
-    <section className="bg-mist">
+    <section ref={rootRef} className="bg-mist relative overflow-hidden">
       {dog.sprite}
+      {passport.ui}
       <div className={`${container} py-20`}>
         <PageHeader as="h2" index="04" label="Non-billable hours" title="Off the clock." />
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
@@ -914,6 +1040,18 @@ function OffTheClockSection() {
                     className="jig-base block w-full aspect-square object-cover border border-line"
                     {...(item.runner ? { onPointerEnter: dog.start } : {})}
                   />
+                ) : item.passport ? (
+                  <button
+                    type="button"
+                    aria-label={`${item.title} — start passport stamp mode`}
+                    onPointerEnter={passport.enter}
+                    onClick={passport.enter}
+                    className="w-full aspect-square border border-line hover:border-ink transition-colors bg-paper flex items-center justify-center p-3 cursor-pointer focus-visible:outline-2 focus-visible:outline-emerald focus-visible:outline-offset-3"
+                  >
+                    {import.meta.env.DEV && (
+                      <span className="font-mono text-[10px] text-ink/30 text-center break-all">{item.slot}</span>
+                    )}
+                  </button>
                 ) : (
                   <div className="jig-base w-full aspect-square border border-line bg-paper flex items-center justify-center p-3">
                     {/* The slot filename is an authoring hint; visitors never see an internal path. */}
