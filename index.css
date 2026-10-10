@@ -95,3 +95,58 @@
 @keyframes dog-dash { from { transform: translateX(-280px) } to { transform: translateX(calc(100vw + 20px)) } }
 @keyframes dog-frames { from { background-position: 0 0 } to { background-position: 109.09% 0 } }
 @media (prefers-reduced-motion: reduce) { .dog-run { display: none; } }
+
+/* Travel & Food passport mode (see usePassport). */
+.pp-hint {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  background: rgb(255 255 255 / .85); opacity: 0; transition: opacity 150ms cubic-bezier(0,0,.2,1); pointer-events: none;
+}
+.pp-hint-stamp {
+  border: 2px dashed currentColor; padding: 10px 16px; font-family: var(--font-display); font-weight: 700; font-size: 18px;
+  letter-spacing: .03em; text-transform: uppercase; transform: rotate(-6deg) scale(1.12); transition: transform 250ms cubic-bezier(.19,1,.22,1);
+}
+.pp-hint-cta { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgb(11 18 16 / .6); }
+@media (hover: hover) { .pp-tile:hover .pp-hint { opacity: 1; } .pp-tile:hover .pp-hint-stamp { transform: rotate(-6deg); } }
+.pp-tile:focus-visible .pp-hint { opacity: 1; }
+.pp-tile:focus-visible .pp-hint-stamp { transform: rotate(-6deg); }
+.pp-badge {
+  display: none; position: absolute; top: 8px; right: 8px; padding: 4px 8px; background: var(--color-ink); color: var(--color-paper);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+}
+@media (hover: none) { .pp-badge { display: block; } }
+@media (prefers-reduced-motion: reduce) { .pp-hint-stamp { transition: none; } }
+.pp-layer { position: absolute; inset: 0; z-index: 20; cursor: crosshair; touch-action: manipulation; }
+.pp-layer.no-cursor { cursor: none; }
+.pp-banner { animation: pp-drop 300ms cubic-bezier(.19,1,.22,1) both; }
+.pp-banner.is-leaving { opacity: 0; transition: opacity 300ms; }
+.pp-dot { animation: pp-pulse 2s ease-in-out infinite; }
+.pp-stamp { position: absolute; pointer-events: none; transform: translate(-50%,-50%); animation: pp-slam 480ms ease-out both; }
+.pp-layer.is-leaving .pp-stamp { animation: pp-lift 300ms ease-in forwards; }
+.pp-face {
+  position: relative; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  border: 3px solid currentColor; text-align: center; text-transform: uppercase; font-family: var(--font-mono);
+  mix-blend-mode: multiply; opacity: .9; padding: 14px 18px; filter: url(#stamp-ink);
+}
+.pp-face::after { content: ''; position: absolute; inset: -10px; border: 2px solid currentColor; border-radius: inherit; opacity: 0; animation: pp-ring 560ms ease-out both; }
+.pp-circle { width: 196px; height: 196px; border-radius: 50%; outline: 1.5px solid currentColor; outline-offset: -11px; }
+.pp-oval { width: 244px; height: 156px; border-radius: 50%; }
+.pp-rect, .pp-ticket, .pp-double { width: 236px; height: 148px; }
+.pp-ticket { border-style: dashed; }
+.pp-double { border-style: double; border-width: 7px; }
+.pp-label { font-size: 10px; font-weight: 500; letter-spacing: .22em; }
+.pp-country { font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1; letter-spacing: .03em; }
+.pp-city { font-size: 10px; letter-spacing: .12em; }
+.pp-date { font-size: 13px; font-weight: 500; letter-spacing: .08em; border-block: 1.5px solid currentColor; padding: 2px 8px; }
+.pp-food { font-size: 10px; text-transform: none; letter-spacing: .02em; }
+.pp-ghost {
+  position: absolute; pointer-events: none; transform: translate(-50%,-50%); width: 132px; height: 84px; box-sizing: border-box;
+  border: 2px dashed currentColor; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: .1em; text-transform: uppercase; opacity: .75; background: rgba(255,255,255,.35);
+}
+.pp-ghost::before { content: ''; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: currentColor; }
+@keyframes pp-slam { 0% { transform: translate(-50%,-50%) scale(1.85); opacity: 0 } 45% { opacity: 1 } 62% { transform: translate(-50%,-50%) scale(.94) } 82% { transform: translate(-50%,-50%) scale(1.02) } 100% { transform: translate(-50%,-50%) scale(1); opacity: 1 } }
+@keyframes pp-ring { 0% { opacity: .45; transform: scale(.92) } 100% { opacity: 0; transform: scale(1.22) } }
+@keyframes pp-lift { to { opacity: 0; transform: translate(-50%,-50%) scale(.97) } }
+@keyframes pp-drop { from { opacity: 0; transform: translateY(-12px) } to { opacity: 1; transform: none } }
+@keyframes pp-pulse { 0%, 100% { opacity: 1 } 50% { opacity: .35 } }
+@media (prefers-reduced-motion: reduce) { .pp-stamp, .pp-banner, .pp-dot { animation: none !important; } .pp-face::after { display: none; } }
