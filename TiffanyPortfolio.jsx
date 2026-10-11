@@ -368,7 +368,7 @@ const projects = [
   },
   {
     n: '04',
-    title: 'Streamlined an Executive Director Review Cycle',
+    title: 'Streamlined a Nonprofit Executive Director Review Cycle',
     subtitle: 'Process design',
     desc: 'Turned an informal two-month review scramble into a repeatable six-week cycle with results comparable year over year.',
     image: null,
@@ -395,7 +395,8 @@ const projects = [
     image: null,
     slot: 'case-budget-canary.png',
     canary: true,
-    tags: ['Next.js', 'Supabase', 'Stripe', 'Resend'],
+    tags: ['Next.js', 'Supabase', 'Stripe', 'Resend', 'Claude Code/Design'],
+    link: 'https://budgetcanary.com/waitlist',
     visual: {
       eyebrow: 'Product Build',
       flow: ['PRD', 'Architecture', 'Shipped'],
@@ -906,7 +907,12 @@ function ProjectDetail({ project, prev, next }) {
             {STAR.map(([key, label]) => (
               <React.Fragment key={key}>
                 <dt className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep sm:pt-1">{label}</dt>
-                <dd className="text-ink/70 leading-relaxed mb-3 sm:mb-0">{project.star[key]}</dd>
+                <dd className="text-ink/70 leading-relaxed mb-3 sm:mb-0">
+                  {project.star[key]}
+                  {key === 'result' && project.link && (
+                    <> <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-emerald-deep underline underline-offset-2 hover:text-ink transition-colors">{project.link.replace('https://', '')}</a></>
+                  )}
+                </dd>
               </React.Fragment>
             ))}
             <dt className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep sm:pt-1">Tools</dt>
