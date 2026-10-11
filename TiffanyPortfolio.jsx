@@ -311,6 +311,8 @@ const projects = [
     image: null,
     slot: 'case-nonprofit-ops.png',
     tags: ['QuickBooks', 'BILL.com', 'Google Sheets'],
+    // wordmark: the logo already spells out the name, so the text label is skipped.
+    brand: { logo: 'graphics/dvs-logo.png', name: 'Data Visualization Society', href: 'https://www.datavisualizationsociety.org', wordmark: true },
     featured: true,
     art: (<>
       <g className="a-dim" style={{ '--d': '800ms' }}>
@@ -1132,8 +1134,8 @@ function ProjectDetail({ project, prev, next }) {
           </a>
           {project.brand ? (
             <a href={project.brand.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-mono text-sm font-medium tracking-tight">
-              <img src={project.brand.logo} alt={project.brand.name} className="h-5 w-auto" />
-              <span className="hidden sm:inline" aria-hidden="true">{project.brand.name}</span>
+              <img src={project.brand.logo} alt={project.brand.name} className={project.brand.wordmark ? 'h-10 w-auto' : 'h-5 w-auto'} />
+              {!project.brand.wordmark && <span className="hidden sm:inline" aria-hidden="true">{project.brand.name}</span>}
             </a>
           ) : (
             <a href="#/" className="inline-flex items-center gap-2 font-mono text-sm font-medium tracking-tight">
