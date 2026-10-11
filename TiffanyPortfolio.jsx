@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Mail, ArrowRight, ArrowLeft, ArrowUpRight, CheckCircle2, Search, X } from 'lucide-react';
+import { Mail, ArrowRight, ArrowLeft, ArrowUpRight, Search, X } from 'lucide-react';
 import dogRunUrl from './assets/dog-run.png';
 
 // ponytail: lucide-react dropped brand/logo glyphs; inline the two marks we need instead of adding a dependency.
@@ -1446,6 +1446,9 @@ const field = 'w-full pt-2 pb-3 bg-transparent border-b border-line rounded-none
 const fieldLabel = `${eyebrow} text-ink/60`;
 const contactLink = 'inline-flex items-center gap-3 min-h-11 font-mono text-sm hover:text-emerald-deep transition-colors';
 
+// Success burst: [dx, dy, rotate] per tick, fanned out around the check.
+const OK_BURST = [[72, 0, 90], [94, 45, -120], [45, 56, 200], [23, 101, -70], [-16, 70, 160], [-65, 81, -200], [-65, 31, 110], [-104, 0, -90], [-65, -31, 220], [-65, -81, -150], [-16, -70, 75], [23, -101, -210], [45, -56, 130], [94, -45, -60]];
+
 function ContactSection() {
   const [status, setStatus] = useState('idle');
 
@@ -1498,11 +1501,46 @@ function ContactSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="border border-line h-full flex flex-col items-center justify-center text-center p-10"
+            role="status"
+            className="border border-line h-full min-h-[520px] flex flex-col gap-6 p-8"
           >
-            <CheckCircle2 className="text-emerald mb-4" size={36} />
-            <h2 className="font-display text-xl font-bold mb-2">Message sent</h2>
-            <p className="text-ink/60 text-sm">Thanks for reaching out — I&rsquo;ll be in touch soon.</p>
+            {/* the message flies from you to my inbox */}
+            <div aria-hidden="true" className={`flex items-center gap-3 ${mono12} uppercase tracking-widest text-ink/60`}>
+              <span>you</span>
+              <div className="relative w-60 max-w-full h-2.5 shrink">
+                <div className="absolute inset-x-0 top-1/2 border-t border-dotted border-ink/25" />
+                <div className="ok-sq" />
+              </div>
+              <span className="ok-end text-ink">inbox</span>
+            </div>
+
+            <div aria-hidden="true" className="relative w-22 h-22">
+              <div className="ok-ring absolute inset-0" />
+              {OK_BURST.map(([dx, dy, r], i) => (
+                <span key={i} className="ok-tk" style={{ '--dx': `${dx}px`, '--dy': `${dy}px`, '--r': `${r}deg` }} />
+              ))}
+              <svg width="88" height="88" viewBox="0 0 24 24" className="absolute inset-0">
+                <path className="ok-circle" pathLength="1" d="M21.801 10A10 10 0 1 1 17 3.335" />
+                <path className="ok-check" pathLength="1" d="m9 11 3 3L22 4" />
+              </svg>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <h2 className="ok-up font-display font-bold text-4xl leading-[1.15] tracking-tight" style={{ '--d': '1400ms' }}>Sent.</h2>
+              <p className="ok-up max-w-md text-ink/60 leading-relaxed" style={{ '--d': '1550ms' }}>
+                It&rsquo;s in my inbox. I&rsquo;ll write back myself — usually faster than that animation took.
+              </p>
+            </div>
+
+            <div className="ok-up mt-auto pt-4 border-t border-line" style={{ '--d': '1900ms' }}>
+              <button
+                type="button"
+                onClick={() => setStatus('idle')}
+                className={`${eyebrow} min-h-11 border-b-2 border-emerald hover:text-emerald-deep transition-colors`}
+              >
+                Send another →
+              </button>
+            </div>
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-8">
