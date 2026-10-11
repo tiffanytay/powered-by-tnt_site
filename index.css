@@ -35,7 +35,7 @@
 /* Services cards: hover/press plays a small diagram behind the text. CSS-only, so it replays on every hover. */
 .svc > :not(.art) { position: relative; z-index: 1; }
 .art { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0; pointer-events: none; transition: opacity 300ms cubic-bezier(.4,0,.2,1); }
-:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .art { opacity: 1; }
+:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within, .wk.seen) .art { opacity: 1; }
 .art * { transform-box: fill-box; transform-origin: center; }
 .art .a-grow { transform-origin: 0 50%; }
 .art .a-grow.from-r { transform-origin: 100% 50%; }
@@ -57,19 +57,21 @@
 @keyframes svc-pulse { 0% { opacity: .8; transform: scale(1) } 100% { opacity: 0; transform: scale(2.2) } }
 @keyframes svc-blink { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
 
-:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-draw { animation: svc-draw var(--t, 600ms) cubic-bezier(.19,1,.22,1) var(--d, 0ms) both; }
-:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-fly { animation: svc-fly 900ms cubic-bezier(.19,1,.22,1) var(--d, 0ms) both; }
-:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-grow { animation: svc-growx var(--t, 500ms) var(--ease, cubic-bezier(.19,1,.22,1)) var(--d, 0ms) both; }
-:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-growy { animation: svc-growy 500ms cubic-bezier(.19,1,.22,1) var(--d, 0ms) both; }
-:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-fade { animation: svc-fade var(--t, 300ms) cubic-bezier(0,0,.2,1) var(--d, 0ms) both; }
-:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-pop { animation: svc-pop 500ms cubic-bezier(.34,1.56,.64,1) var(--d, 0ms) both; }
-:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-dim { animation: svc-dim 400ms cubic-bezier(0,0,.2,1) var(--d, 0ms) both; }
+:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within, .wk.seen) .a-draw { animation: svc-draw var(--t, 600ms) cubic-bezier(.19,1,.22,1) var(--d, 0ms) both; }
+:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within, .wk.seen) .a-fly { animation: svc-fly 900ms cubic-bezier(.19,1,.22,1) var(--d, 0ms) both; }
+:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within, .wk.seen) .a-grow { animation: svc-growx var(--t, 500ms) var(--ease, cubic-bezier(.19,1,.22,1)) var(--d, 0ms) both; }
+:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within, .wk.seen) .a-growy { animation: svc-growy 500ms cubic-bezier(.19,1,.22,1) var(--d, 0ms) both; }
+:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within, .wk.seen) .a-fade { animation: svc-fade var(--t, 300ms) cubic-bezier(0,0,.2,1) var(--d, 0ms) both; }
+:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within, .wk.seen) .a-pop { animation: svc-pop 500ms cubic-bezier(.34,1.56,.64,1) var(--d, 0ms) both; }
+:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within, .wk.seen) .a-dim { animation: svc-dim 400ms cubic-bezier(0,0,.2,1) var(--d, 0ms) both; }
 :is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-travel { animation: svc-travel 2200ms cubic-bezier(.4,0,.2,1) var(--d, 1100ms) infinite both; }
-:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-scan { animation: svc-scan 1100ms cubic-bezier(.4,0,.2,1) 150ms both; }
-:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-ring { animation: svc-ring 600ms cubic-bezier(.19,1,.22,1) var(--d, 0ms) both; }
+:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within, .wk.seen) .a-scan { animation: svc-scan 1100ms cubic-bezier(.4,0,.2,1) 150ms both; }
+:is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within, .wk.seen) .a-ring { animation: svc-ring 600ms cubic-bezier(.19,1,.22,1) var(--d, 0ms) both; }
 :is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-pulse { animation: svc-pulse 1800ms cubic-bezier(0,0,.2,1) var(--d, 0ms) infinite both; }
 :is(.svc:hover, .svc:active, .wk:hover, .wk:active, .wk:focus-within) .a-blink { animation: svc-blink 1000ms linear infinite both; }
 @media (prefers-reduced-motion: reduce) { .art * { animation: none !important; } }
+/* .seen: a Work row scrolled into view plays its diagram once (desktop: the art is hidden when stacked); the looping
+   travel/pulse/blink stay hover-only so a page of rows never keeps moving on its own. */
 /* Work rows reuse the same diagrams: the whole row is the hover target, the art sits under the title. */
 .wk { transition: background-color 150ms cubic-bezier(0,0,.2,1); }
 :is(.wk:hover, .wk:active, .wk:focus-within) { background-color: var(--color-mist); }

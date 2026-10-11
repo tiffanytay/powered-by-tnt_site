@@ -305,9 +305,10 @@ function JigsawShatter({ image }) {
 const projects = [
   {
     n: '01',
-    title: 'Rebuilt Nonprofit Finance Ops as Operations Director',
+    title: 'Rebuilt Nonprofit Finance Operations as Operations Director',
     subtitle: 'Ownership under ambiguity',
-    desc: 'Nominated and voted into a role that had sat vacant for months, then set the bookkeeping standard, stood up a budget process for a $250k budget, oversaw the 990 filing, streamlined vendor onboarding, and audited every recurring expense.',
+    desc: 'Elected to a long-vacant Operations Director seat; rebuilt budgeting, bookkeeping standards, Form 990 compliance and vendor management for a $250k budget.',
+    skills: ['Budget management', 'Financial oversight', 'Form 990 compliance', 'Vendor management', 'Cost reduction'],
     image: null,
     slot: 'case-nonprofit-ops.png',
     tags: ['QuickBooks', 'BILL.com', 'Google Sheets'],
@@ -365,9 +366,10 @@ const projects = [
   },
   {
     n: '02',
-    title: 'Run Operations & Technology for a Lean Nonprofit',
+    title: 'Ran Operations & Technology for a Lean Nonprofit',
     subtitle: 'Cross-functional ownership',
-    desc: 'Joined mid-project and brought a stalled mobile app to launch, then transitioned into leading the Technology Department, owning its budget, roadmap and staff, plus whatever else the organization needed.',
+    desc: 'Joined mid-project to launch a stalled mobile app, then led the $200k Technology Department: owned budget and roadmap, automated intake, and managed 2 staff plus contractors.',
+    skills: ['Team leadership', 'Budget ownership', 'Project recovery', 'Process automation', 'Roadmap planning'],
     image: null,
     slot: 'case-nonprofit-ops-tech.png',
     tags: ['Jira', 'Slack', 'Claude'],
@@ -384,13 +386,13 @@ const projects = [
         <path className="a-draw d" pathLength="1" style={{ '--d': '220ms', '--t': '400ms' }} d="M468 48H540" />
       </g>
       <g fill="#ffffff" stroke="#66c3ff" strokeWidth="1.25">
-        <rect className="a-fly" x="300" y="58" width="72" height="14" style={{ '--dx': '-60px', '--dy': '-70px', '--r': '-14deg', '--d': '250ms' }} />
-        <rect className="a-fly" x="300" y="78" width="72" height="14" style={{ '--dx': '-90px', '--dy': '20px', '--r': '10deg', '--d': '300ms' }} />
-        <rect className="a-fly" x="300" y="98" width="72" height="14" style={{ '--dx': '-40px', '--dy': '80px', '--r': '-18deg', '--d': '350ms' }} />
-        <rect className="a-fly" x="384" y="58" width="72" height="14" style={{ '--dx': '20px', '--dy': '-100px', '--r': '16deg', '--d': '400ms' }} />
-        <rect className="a-fly" x="384" y="78" width="72" height="14" style={{ '--dx': '-30px', '--dy': '110px', '--r': '-8deg', '--d': '450ms' }} />
-        <rect className="a-fly" x="468" y="58" width="72" height="14" style={{ '--dx': '80px', '--dy': '-80px', '--r': '22deg', '--d': '500ms' }} />
-        <rect className="a-fly" x="468" y="78" width="72" height="14" style={{ '--dx': '100px', '--dy': '30px', '--r': '-14deg', '--d': '550ms' }} />
+        <rect className="a-fly" x="300" y="58" width="72" height="14" style={{ '--dx': '0px', '--dy': '-10px', '--r': '0deg', '--d': '250ms' }} />
+        <rect className="a-fly" x="300" y="78" width="72" height="14" style={{ '--dx': '0px', '--dy': '-10px', '--r': '0deg', '--d': '300ms' }} />
+        <rect className="a-fly" x="300" y="98" width="72" height="14" style={{ '--dx': '0px', '--dy': '-10px', '--r': '0deg', '--d': '350ms' }} />
+        <rect className="a-fly" x="384" y="58" width="72" height="14" style={{ '--dx': '0px', '--dy': '-10px', '--r': '0deg', '--d': '400ms' }} />
+        <rect className="a-fly" x="384" y="78" width="72" height="14" style={{ '--dx': '0px', '--dy': '-10px', '--r': '0deg', '--d': '450ms' }} />
+        <rect className="a-fly" x="468" y="58" width="72" height="14" style={{ '--dx': '0px', '--dy': '-10px', '--r': '0deg', '--d': '500ms' }} />
+        <rect className="a-fly" x="468" y="78" width="72" height="14" style={{ '--dx': '0px', '--dy': '-10px', '--r': '0deg', '--d': '550ms' }} />
       </g>
       <rect className="a-travel" x="300" y="118" width="72" height="14" fill="#0b6bb0" style={{ '--tx': '168px', '--d': '1300ms' }} />
       <text className="a-fade" x="300" y="160" fill="rgba(11,18,16,.5)" style={{ '--d': '600ms' }}>budget</text>
@@ -427,9 +429,68 @@ const projects = [
   },
   {
     n: '03',
+    title: 'Streamlined a Nonprofit Executive Director Review Cycle',
+    subtitle: 'Process design',
+    desc: 'Redesigned the executive director performance review: two months down to six weeks, standardized questions, and a leadership-ready report comparable year over year.',
+    skills: ['Performance management', 'HR process design', 'Executive reporting', 'Process improvement'],
+    image: null,
+    slot: 'case-review-cycle.png',
+    tags: ['Google Forms', 'Power BI', 'Power Query'],
+    logo: { src: 'graphics/a4-logo.svg', alt: 'Asian American Arts Alliance' },
+    art: (<>
+      <rect className="a-draw d" pathLength="1" style={{ '--t': '600ms' }} x="300" y="40" width="96" height="124" fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.5" />
+      <g fill="#ffffff" stroke="#66c3ff" strokeWidth="1.25">
+        <rect className="a-pop" x="310" y="54" width="10" height="10" style={{ '--d': '300ms' }} />
+        <rect className="a-pop" x="310" y="80" width="10" height="10" style={{ '--d': '360ms' }} />
+        <rect className="a-pop" x="310" y="106" width="10" height="10" style={{ '--d': '420ms' }} />
+        <rect className="a-pop" x="310" y="132" width="10" height="10" style={{ '--d': '480ms' }} />
+      </g>
+      <g fill="#66c3ff" fillOpacity=".6">
+        <rect className="a-grow" x="328" y="57" width="56" height="5" style={{ '--d': '350ms' }} />
+        <rect className="a-grow" x="328" y="83" width="44" height="5" style={{ '--d': '410ms' }} />
+        <rect className="a-grow" x="328" y="109" width="52" height="5" style={{ '--d': '470ms' }} />
+        <rect className="a-grow" x="328" y="135" width="40" height="5" style={{ '--d': '530ms' }} />
+      </g>
+      <g fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path className="a-draw d" pathLength="1" style={{ '--d': '700ms', '--t': '250ms' }} d="M312 59l2.5 2.5 5-6" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '800ms', '--t': '250ms' }} d="M312 85l2.5 2.5 5-6" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '900ms', '--t': '250ms' }} d="M312 111l2.5 2.5 5-6" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1000ms', '--t': '250ms' }} d="M312 137l2.5 2.5 5-6" />
+      </g>
+      <text className="a-fade" x="300" y="184" fill="rgba(11,18,16,.5)" style={{ '--d': '200ms' }}>standard Qs</text>
+      <text className="a-fade" x="420" y="72" fill="rgba(11,18,16,.5)" style={{ '--d': '300ms' }}>before</text>
+      <g className="a-dim" style={{ '--d': '1300ms' }}>
+        <rect className="a-grow" x="420" y="80" width="120" height="8" fill="#66c3ff" fillOpacity=".45" style={{ '--d': '400ms', '--t': '700ms' }} />
+        <text className="a-fade" x="540" y="72" textAnchor="end" fill="rgba(11,18,16,.5)" style={{ '--d': '700ms' }}>2 mo</text>
+      </g>
+      <path className="a-draw d" pathLength="1" style={{ '--d': '1200ms', '--t': '400ms' }} d="M414 84H546" fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" />
+      <text className="a-fade" x="420" y="118" fill="rgba(11,18,16,.5)" style={{ '--d': '1400ms' }}>after</text>
+      <rect className="a-grow" x="420" y="126" width="84" height="8" fill="#0b6bb0" style={{ '--d': '1500ms' }} />
+      <text className="a-fade" x="510" y="134" fill="#0b6bb0" style={{ '--d': '1800ms' }}>6 wk</text>
+      <path className="a-draw d" pathLength="1" style={{ '--d': '1900ms', '--t': '600ms' }} d="M420 194L448 186L476 188L504 176L532 166" fill="none" stroke="#66c3ff" strokeWidth="1.5" strokeLinejoin="round" />
+      <circle className="a-pop" cx="532" cy="166" r="3.5" fill="#0b6bb0" style={{ '--d': '2350ms' }} />
+      <circle className="a-pulse" cx="532" cy="166" r="6" fill="none" stroke="#66c3ff" strokeWidth="1.5" style={{ '--d': '2500ms' }} />
+      <text className="a-fade" x="540" y="214" textAnchor="end" fill="#0b6bb0" style={{ '--d': '2400ms' }}>year over year</text>
+    </>),
+    visual: {
+      eyebrow: 'HR Process Redesign',
+      flow: ['Structured intake', 'Standard questions', 'Board-ready report'],
+      stat: '2mo → 6wk',
+      statLabel: 'review cycle time',
+    },
+    star: {
+      situation: 'The executive director review cycle took two months and lacked year-over-year consistency.',
+      task: 'Shorten the cycle and make it repeatable and comparable across years.',
+      action: 'Implemented technology suited to the budget and the need, standardized the review questions across cycles, and upgraded the reporting format delivered to the other directors.',
+      result: 'Cut cycle time to 6 weeks and created a consistent, more informative reporting format.',
+    },
+  },
+  {
+    n: '04',
     title: 'Diagnosed an Engagement Gap With Data',
     subtitle: 'Diagnostic & analytical approach',
-    desc: 'Pulled usage data out of three separate apps and combined it with interview feedback to find why a business unit could not standardize its client engagements.',
+    desc: 'Combined usage data from three apps with stakeholder interviews in one Power BI view to find why client engagements would not standardize, then delivered an action plan.',
+    skills: ['Root cause analysis', 'Data analysis', 'Stakeholder engagement', 'Process standardization'],
     image: null,
     slot: 'case-engagement-dashboard.png',
     tags: ['Power BI', 'Power Query', 'Stakeholder interviews'],
@@ -485,67 +546,11 @@ const projects = [
     },
   },
   {
-    n: '04',
-    title: 'Streamlined a Nonprofit Executive Director Review Cycle',
-    subtitle: 'Process design',
-    desc: 'Turned an informal two-month review scramble into a repeatable six-week cycle with results comparable year over year.',
-    image: null,
-    slot: 'case-review-cycle.png',
-    tags: ['Google Forms', 'Power BI', 'Power Query'],
-    logo: { src: 'graphics/a4-logo.svg', alt: 'Asian American Arts Alliance' },
-    art: (<>
-      <rect className="a-draw d" pathLength="1" style={{ '--t': '600ms' }} x="300" y="40" width="96" height="124" fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.5" />
-      <g fill="#ffffff" stroke="#66c3ff" strokeWidth="1.25">
-        <rect className="a-pop" x="310" y="54" width="10" height="10" style={{ '--d': '300ms' }} />
-        <rect className="a-pop" x="310" y="80" width="10" height="10" style={{ '--d': '360ms' }} />
-        <rect className="a-pop" x="310" y="106" width="10" height="10" style={{ '--d': '420ms' }} />
-        <rect className="a-pop" x="310" y="132" width="10" height="10" style={{ '--d': '480ms' }} />
-      </g>
-      <g fill="#66c3ff" fillOpacity=".6">
-        <rect className="a-grow" x="328" y="57" width="56" height="5" style={{ '--d': '350ms' }} />
-        <rect className="a-grow" x="328" y="83" width="44" height="5" style={{ '--d': '410ms' }} />
-        <rect className="a-grow" x="328" y="109" width="52" height="5" style={{ '--d': '470ms' }} />
-        <rect className="a-grow" x="328" y="135" width="40" height="5" style={{ '--d': '530ms' }} />
-      </g>
-      <g fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <path className="a-draw d" pathLength="1" style={{ '--d': '700ms', '--t': '250ms' }} d="M312 59l2.5 2.5 5-6" />
-        <path className="a-draw d" pathLength="1" style={{ '--d': '800ms', '--t': '250ms' }} d="M312 85l2.5 2.5 5-6" />
-        <path className="a-draw d" pathLength="1" style={{ '--d': '900ms', '--t': '250ms' }} d="M312 111l2.5 2.5 5-6" />
-        <path className="a-draw d" pathLength="1" style={{ '--d': '1000ms', '--t': '250ms' }} d="M312 137l2.5 2.5 5-6" />
-      </g>
-      <text className="a-fade" x="300" y="184" fill="rgba(11,18,16,.5)" style={{ '--d': '200ms' }}>standard Qs</text>
-      <text className="a-fade" x="420" y="72" fill="rgba(11,18,16,.5)" style={{ '--d': '300ms' }}>before</text>
-      <g className="a-dim" style={{ '--d': '1300ms' }}>
-        <rect className="a-grow" x="420" y="80" width="120" height="8" fill="#66c3ff" fillOpacity=".45" style={{ '--d': '400ms', '--t': '700ms' }} />
-        <text className="a-fade" x="540" y="72" textAnchor="end" fill="rgba(11,18,16,.5)" style={{ '--d': '700ms' }}>2 mo</text>
-      </g>
-      <path className="a-draw d" pathLength="1" style={{ '--d': '1200ms', '--t': '400ms' }} d="M414 84H546" fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" />
-      <text className="a-fade" x="420" y="118" fill="rgba(11,18,16,.5)" style={{ '--d': '1400ms' }}>after</text>
-      <rect className="a-grow" x="420" y="126" width="84" height="8" fill="#0b6bb0" style={{ '--d': '1500ms' }} />
-      <text className="a-fade" x="510" y="134" fill="#0b6bb0" style={{ '--d': '1800ms' }}>6 wk</text>
-      <path className="a-draw d" pathLength="1" style={{ '--d': '1900ms', '--t': '600ms' }} d="M420 194L448 186L476 188L504 176L532 166" fill="none" stroke="#66c3ff" strokeWidth="1.5" strokeLinejoin="round" />
-      <circle className="a-pop" cx="532" cy="166" r="3.5" fill="#0b6bb0" style={{ '--d': '2350ms' }} />
-      <circle className="a-pulse" cx="532" cy="166" r="6" fill="none" stroke="#66c3ff" strokeWidth="1.5" style={{ '--d': '2500ms' }} />
-      <text className="a-fade" x="540" y="214" textAnchor="end" fill="#0b6bb0" style={{ '--d': '2400ms' }}>year over year</text>
-    </>),
-    visual: {
-      eyebrow: 'HR Process Redesign',
-      flow: ['Structured intake', 'Standard questions', 'Board-ready report'],
-      stat: '2mo → 6wk',
-      statLabel: 'review cycle time',
-    },
-    star: {
-      situation: 'The executive director review cycle took two months and lacked year-over-year consistency.',
-      task: 'Shorten the cycle and make it repeatable and comparable across years.',
-      action: 'Implemented technology suited to the budget and the need, standardized the review questions across cycles, and upgraded the reporting format delivered to the other directors.',
-      result: 'Cut cycle time to 6 weeks and created a consistent, more informative reporting format.',
-    },
-  },
-  {
     n: '05',
-    title: 'Built Budget Canary as a Solo Founder',
-    subtitle: 'Builder & technical range',
-    desc: 'Took an unserved need for small accounting firms from PRD to a working product: stack choice, OAuth, payments, and automated reporting, built solo.',
+    title: 'Built Budget Canary When No Affordable Tool Existed',
+    subtitle: 'Building the fix when none exists',
+    desc: 'Small accounting firms had no affordable way to monitor budget variance, so I scoped the requirements, evaluated the options and built a demo-ready tool with automated reporting, solo.',
+    skills: ['Needs assessment', 'Technology evaluation', 'Systems implementation', 'Automated reporting'],
     image: null,
     slot: 'case-budget-canary.png',
     canary: true,
@@ -1170,6 +1175,8 @@ function ProjectDetail({ project, prev, next }) {
                 </dd>
               </React.Fragment>
             ))}
+            <dt className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep sm:pt-1">Skills</dt>
+            <dd className="text-ink/70 leading-relaxed mb-3 sm:mb-0">{project.skills.join(', ')}</dd>
             <dt className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep sm:pt-1">Tools</dt>
             <dd className="font-mono text-xs text-ink/50 flex flex-wrap gap-x-4 gap-y-1 sm:pt-1">
               {project.tags.map((t) => <span key={t}>[{t}]</span>)}
@@ -1259,7 +1266,7 @@ function PageHeader({ index, label, title, dark = false, as: Heading = 'h1' }) {
 }
 
 // Everything searchable about a project, flattened to one lowercase string.
-const projectText = (p) => JSON.stringify([p.title, p.subtitle, p.desc, p.tags, p.visual, p.star]).toLowerCase();
+const projectText = (p) => JSON.stringify([p.title, p.subtitle, p.desc, p.skills, p.tags, p.visual, p.star]).toLowerCase();
 
 function WorkSection() {
   const total = String(projects.length).padStart(2, '0');
@@ -1267,16 +1274,22 @@ function WorkSection() {
   // Every word must appear somewhere in the project, so "power bi kanban" narrows rather than widens.
   const words = query.toLowerCase().split(/\s+/).filter(Boolean);
   const shown = projects.filter((p) => words.every((w) => projectText(p).includes(w)));
+  const [seen, setSeen] = useState({});
   return (
     <section className={`${container} py-20`}>
       <PageHeader index="01" label="Selected work" title="Five messes, five systems." />
+      <Reveal className="-mt-8 mb-10" delay={0.1}>
+        <p className="max-w-2xl text-lg leading-relaxed text-ink/70">
+          Nonprofit operations leadership: budgeting and financial oversight, compliance, vendor management, team leadership and process improvement, each with a measurable result.
+        </p>
+      </Reveal>
       <div role="search" className="mb-10 flex items-center gap-3 h-14 px-5 border-2 border-ink rounded-none focus-within:border-emerald transition-colors">
         <Search size={20} className="shrink-0 text-ink/60" aria-hidden="true" />
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search skills, tools, experience (e.g. Power BI, team, Stripe)"
+          placeholder="Search skills, tools, experience (e.g. budget, 990, team, Power BI)"
           aria-label="Search work by skill, tool, or experience"
           className="flex-1 min-w-0 bg-transparent text-base sm:text-lg focus:outline-none placeholder:text-ink/40 [&::-webkit-search-cancel-button]:hidden"
         />
@@ -1293,32 +1306,43 @@ function WorkSection() {
       )}
       {shown.length === 0 && (
         <p className="py-10 border-t border-line text-ink/60">
-          Nothing matches yet. Try a tool like <button type="button" onClick={() => setQuery('Power BI')} className="underline hover:text-emerald-deep">Power BI</button> or a skill like <button type="button" onClick={() => setQuery('team')} className="underline hover:text-emerald-deep">team</button>.
+          Nothing matches yet. Try a skill like <button type="button" onClick={() => setQuery('budget')} className="underline hover:text-emerald-deep">budget</button> or <button type="button" onClick={() => setQuery('team')} className="underline hover:text-emerald-deep">team</button>.
         </p>
       )}
       <div className="border-b border-line">
         {shown.map((p) => (
           <Reveal key={p.n}>
-            <article className="wk grid md:grid-cols-2 gap-x-12 gap-y-8 py-10 px-6 -mx-6 border-t border-line">
+            <motion.article
+              viewport={{ once: true, amount: 0.6 }}
+              onViewportEnter={() => setSeen((s) => ({ ...s, [p.n]: true }))}
+              className={`wk ${seen[p.n] ? 'seen' : ''} grid md:grid-cols-2 gap-x-12 gap-y-8 py-10 px-6 -mx-6 border-t border-line`}
+            >
               <div className="flex flex-col gap-2 min-w-0">
                 <span className={`${mono12} text-ink/60`}>{p.n} / {total}</span>
                 <h2 className="font-display font-bold text-2xl leading-[1.15] tracking-tight">
                   <a href={`#/project/${p.n}`} className="wk-ttl transition-colors">{p.title}</a>
                 </h2>
-                <span className={`${mono12} text-ink/60`}>{p.subtitle}</span>
-                {/* Hover/focus plays the case study as a small diagram (index.css: .art). Desktop only: no room when stacked. */}
+                {/* Competency keywords, the words a hiring manager scans and searches for. */}
+                <p className="text-sm leading-relaxed text-ink/70">
+                  {p.skills.map((k, i) => (
+                    <React.Fragment key={k}>
+                      {i > 0 && ', '}
+                      <button type="button" onClick={() => setQuery(k)} title={`Show work involving ${k}`} className="hover:text-emerald-deep transition-colors">{k}</button>
+                    </React.Fragment>
+                  ))}
+                </p>
+                {/* Scrolling in plays the case study once as a small diagram; hover adds its loops (index.css: .art). Desktop only: no room when stacked. */}
                 <div className="relative hidden md:block flex-auto min-h-[150px] mt-4">
                   <svg className="art" viewBox="290 26 260 200" preserveAspectRatio="xMinYMax meet" aria-hidden="true" focusable="false">{p.art}</svg>
                 </div>
               </div>
               <div className="flex flex-col gap-5 min-w-0">
                 <p className="text-ink/60 leading-relaxed max-w-[560px]">{p.desc}</p>
-                {/* The case study's flow, then its headline number. */}
-                <ul className="flex flex-col gap-2 text-sm leading-normal text-ink/70">
-                  {[...p.visual.flow, `${p.visual.stat} ${p.visual.statLabel}`].map((h) => (
-                    <li key={h} className="flex gap-3"><span className="font-mono text-ink/60">+</span><span>{h}</span></li>
-                  ))}
-                </ul>
+                {/* Headline number only; the step-by-step flow lives on the case study page. */}
+                <div>
+                  <div className="font-display text-3xl font-bold text-emerald-deep">{p.visual.stat}</div>
+                  <div className={`${mono12} text-ink/60 mt-1`}>{p.visual.statLabel}</div>
+                </div>
                 <div className={`flex flex-wrap items-center justify-between gap-x-4 gap-y-2 ${mono12} text-ink/60`}>
                   <span className="flex flex-wrap gap-x-4 gap-y-2">
                     {p.tags.map((t) => (
@@ -1331,7 +1355,7 @@ function WorkSection() {
                   </a>
                 </div>
               </div>
-            </article>
+            </motion.article>
           </Reveal>
         ))}
       </div>
