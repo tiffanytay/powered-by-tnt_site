@@ -240,7 +240,7 @@ const offTheClock = [
   {
     title: 'Broadway',
     desc: 'Fifteen minutes from the theater district and fully taking advantage of it.',
-    image: null,
+    image: 'graphics/personal-broadway.jpg',
     slot: 'personal-broadway.jpg',
   },
   {
