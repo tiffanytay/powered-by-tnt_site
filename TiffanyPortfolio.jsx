@@ -468,9 +468,10 @@ function figFrame(p) {
   };
 }
 
-// Floral frame for the landing CTA, ported from the "CTA floral frame" design canvas.
-// Seeded, so the garden is identical every load; built once at module scope. `d` = enter delay in ms.
-function buildGarden() {
+// CTA frames, ported from the "CTA floral frame" / "CTA — envelopes on hover" design canvases:
+// the same vines and leaves, ending in flowers (landing) or envelopes (Services, Contact).
+// Seeded, so each garden is identical every load; built once at module scope. `d` = enter delay in ms.
+function buildGarden(kind) {
   let seed = 33;
   const rnd = () => {
     seed |= 0; seed = seed + 0x6D2B79F5 | 0;
@@ -609,7 +610,56 @@ function buildGarden() {
     return out;
   }
 
-  const specs = [
+  const EDGE = '#b98f84';
+  const S = (d, fill, stroke = 'none', sw = 0, op = 1) => ({ d, fill, stroke, sw, op });
+  const poly = (pts) => `M${pts.map(pt).join(' L')}Z`;
+  const papers = [CREAM, '#fbd0c6', '#fbc9a0', '#f9d3dc', CREAM];
+  const flaps = ['#ee6f57', '#e45f84', '#c9333d', '#f39a3d', '#f5a9a0'];
+  // Open envelopes carry a letter (drawn between back and front) that rises after the frame lands.
+  function envelope(w, h, open, paper, flap) {
+    const L = -w / 2, R = w / 2, T = -h / 2, B = h / 2;
+    if (open) {
+      const lw = w * 0.4, lt = T - h * 0.42, hx = lw * 0.55, hy = lt + h * 0.14, hr = h * 0.07;
+      return {
+        back: [S(poly([[L, T], [0, T - h * 0.55], [R, T]]), flap, EDGE, 0.6), S(poly([[L, T], [R, T], [R, B], [L, B]]), paper, 'none', 0, 0.75)],
+        letter: [
+          S(poly([[-lw, lt], [lw, lt], [lw, B - h * 0.2], [-lw, B - h * 0.2]]), '#ffffff', EDGE, 0.6),
+          S(`M${pt([-lw * 0.7, lt + h * 0.14])} L${pt([lw * 0.5, lt + h * 0.14])}`, 'none', PLUM, 0.8, 0.35),
+          S(`M${pt([-lw * 0.7, lt + h * 0.27])} L${pt([lw * 0.7, lt + h * 0.27])}`, 'none', PLUM, 0.8, 0.35),
+          S(`M${pt([hx, hy + hr * 1.2])} C${pt([hx - hr * 2, hy - hr * 0.2])} ${pt([hx - hr * 0.9, hy - hr * 1.6])} ${pt([hx, hy - hr * 0.5])} C${pt([hx + hr * 0.9, hy - hr * 1.6])} ${pt([hx + hr * 2, hy - hr * 0.2])} ${pt([hx, hy + hr * 1.2])}Z`, flap),
+        ],
+        front: [
+          S(poly([[L, T], [0, h * 0.06], [L, B]]), paper, EDGE, 0.6),
+          S(poly([[R, T], [0, h * 0.06], [R, B]]), paper, EDGE, 0.6),
+          S(poly([[L, B], [0, -h * 0.02], [R, B]]), paper, EDGE, 0.6),
+          S(poly([[L, B], [0, -h * 0.02], [R, B]]), PLUM, 'none', 0, 0.06),
+        ],
+      };
+    }
+    return {
+      back: [S(poly([[L, T], [R, T], [R, B], [L, B]]), paper, EDGE, 0.7)],
+      front: [
+        S(poly([[L, B], [-w * 0.04, h * 0.02], [w * 0.04, h * 0.02], [R, B]]), PLUM, 'none', 0, 0.07),
+        S(`M${pt([L, B])} L${pt([-w * 0.04, h * 0.02])} M${pt([R, B])} L${pt([w * 0.04, h * 0.02])}`, 'none', EDGE, 0.6),
+        S(poly([[L, T], [0, h * 0.14], [R, T]]), flap, EDGE, 0.6),
+        S(`M${pt([L + w * 0.12, T + h * 0.06])} L${pt([-w * 0.05, 0])}`, 'none', CREAM, 0.9, 0.55),
+        S(circ(0, h * 0.1, h * 0.15), flap === '#c9333d' ? '#9e1f2e' : '#c9333d'),
+        S(circ(0, h * 0.1, h * 0.08), 'none', CREAM, 0.7, 0.5),
+        S(circ(-h * 0.05, h * 0.05, h * 0.03), CREAM, 'none', 0, 0.8),
+      ],
+    };
+  }
+
+  const specs = kind === 'envelopes' ? [
+    { x: -122, y: -6, w: 44, h: 30, open: true }, { x: -28, y: -54, w: 42, h: 29 },
+    { x: 124, y: 8, w: 44, h: 30 }, { x: 42, y: 54, w: 42, h: 29, open: true },
+    { x: -78, y: -48, w: 30, h: 21 }, { x: 16, y: -60, w: 30, h: 21, open: true }, { x: 72, y: -52, w: 30, h: 21 },
+    { x: 114, y: -44, w: 28, h: 20 }, { x: 118, y: 56, w: 30, h: 21 }, { x: -72, y: 52, w: 30, h: 21 },
+    { x: -128, y: 44, w: 28, h: 20, open: true },
+    { x: -158, y: -30, w: 22, h: 15 }, { x: 160, y: -20, w: 22, h: 15 }, { x: -12, y: 60, w: 22, h: 15 }, { x: 165, y: 34, w: 22, h: 15 },
+    { x: -104, y: -50, w: 20, h: 14 }, { x: 98, y: -64, w: 20, h: 14 }, { x: -38, y: 64, w: 20, h: 14 }, { x: 84, y: 40, w: 20, h: 14 },
+    { x: 150, y: -48, w: 20, h: 14 },
+  ] : [
     { x: -124, y: -4, k: 'peony', r: 24, c: 0 }, { x: -28, y: -52, k: 'peony', r: 23, c: 2 },
     { x: 126, y: 10, k: 'peony', r: 24, c: 1 }, { x: 42, y: 52, k: 'peony', r: 23, c: 3 },
     { x: -78, y: -46, k: 'bloom', r: 14 }, { x: 14, y: -56, k: 'bloom', r: 13 }, { x: 72, y: -50, k: 'bloom', r: 14 },
@@ -632,24 +682,35 @@ function buildGarden() {
       [f.x - ux * len * 0.3 + uy * 4 * side, f.y - uy * len * 0.3 - ux * 4 * side],
       [f.x, f.y]];
     const vd = 30 + (idx / specs.length) * 120;
-    vines.push({ d: pathOf(P), d0: dl(vd), w: f.k === 'peony' ? 2.4 : 1.8 });
+    vines.push({ d: pathOf(P), d0: dl(vd), w: f.k === 'peony' || f.w > 40 ? 2.4 : 1.8 });
     addLeaf(...bez(P, 0.5), bezA(P, 0.5) + (side > 0 ? -50 : 50), vd + 140, 'long');
+    if (kind === 'envelopes') {
+      const tilt = (rnd() - 0.5) * 36 + Math.sign(f.x) * 6;
+      const env = envelope(f.w, f.h, f.open, pick(papers), flaps[idx % flaps.length]);
+      flowers.push({ t: `translate(${f.x} ${f.y}) rotate(${r1(tilt)})`, d0: dl(380 + idx * 24), ...env });
+      return;
+    }
     const deg = Math.atan2(uy, ux) * 180 / Math.PI;
     const shapes =
       f.k === 'peony' ? peony(f.r, peonyCols[f.c])
       : f.k === 'bloom' ? bloom(f.r, bloomCols[idx % bloomCols.length])
       : f.k === 'bud' ? bud(f.r, pick(['#ee6f57', '#e45f84', '#f5a9a0']), deg + 90)
       : berries(pick(['#d13b3f', '#f07a5a', '#c43c66']));
-    flowers.push({ t: `translate(${f.x} ${f.y})`, d0: dl(380 + idx * 24), shapes });
+    flowers.push({ t: `translate(${f.x} ${f.y})`, d0: dl(380 + idx * 24), back: shapes });
   });
   return { vines, leaves, flowers };
 }
-const GARDEN = buildGarden();
+const GARDENS = { flowers: buildGarden('flowers'), envelopes: buildGarden('envelopes') };
 
-// Wraps a CTA link; the garden blooms on hover or keyboard focus (pure CSS, see .fc in index.css).
-function FloralCta({ children }) {
+const framePaths = (shapes) => shapes.map((p, j) => (
+  <path key={j} d={p.d} fill={p.fill} stroke={p.stroke} strokeWidth={p.sw} strokeLinecap="round" strokeLinejoin="round" opacity={p.op} />
+));
+
+// Wraps a CTA; the garden grows on hover or keyboard focus (pure CSS, see .fc in index.css).
+function FramedCta({ kind = 'flowers', children }) {
+  const garden = GARDENS[kind];
   return (
-    <span className="fc">
+    <span className={`fc fc-${kind}`}>
       <svg className="fc-garden" viewBox="-200 -110 400 220" aria-hidden="true" focusable="false">
         <defs>
           <filter id="fc-gouache" x="-10%" y="-10%" width="120%" height="120%">
@@ -661,10 +722,10 @@ function FloralCta({ children }) {
           </filter>
         </defs>
         <g filter="url(#fc-gouache)">
-          {GARDEN.vines.map((v, i) => (
+          {garden.vines.map((v, i) => (
             <path key={i} className="fc-vine" style={{ '--d': `${v.d0}ms` }} d={v.d} pathLength="1" stroke="#3f6b4f" strokeWidth={v.w} strokeLinecap="round" />
           ))}
-          {GARDEN.leaves.map((l, i) => (
+          {garden.leaves.map((l, i) => (
             <g key={i} transform={l.t}>
               <g className="fc-leaf" style={{ '--d': `${l.d0}ms` }}>
                 <path d={l.d} fill={l.fill} />
@@ -674,12 +735,12 @@ function FloralCta({ children }) {
           ))}
         </g>
         <g filter="url(#fc-gouache)">
-          {GARDEN.flowers.map((f, i) => (
+          {garden.flowers.map((f, i) => (
             <g key={i} transform={f.t}>
               <g className="fc-bloom" style={{ '--d': `${f.d0}ms` }}>
-                {f.shapes.map((p, j) => (
-                  <path key={j} d={p.d} fill={p.fill} stroke={p.stroke} strokeWidth={p.sw} strokeLinecap="round" opacity={p.op} />
-                ))}
+                {framePaths(f.back)}
+                {f.letter && <g className="fc-letter">{framePaths(f.letter)}</g>}
+                {f.front && framePaths(f.front)}
               </g>
             </g>
           ))}
@@ -752,11 +813,11 @@ function Hero() {
               I rebuild the spreadsheets, inboxes and one-off exports your team runs on into
               workflows that reconcile — plain English in, board-ready out.
             </p>
-            <FloralCta>
+            <FramedCta>
               <a href="#/work" className={`${btn} gap-2 h-12 px-6 text-sm font-semibold`}>
                 See selected work <ArrowRight size={16} className="fc-arrow" />
               </a>
-            </FloralCta>
+            </FramedCta>
           </div>
 
           <div className="relative w-full mt-2 aspect-[342/300] sm:aspect-[1152/400]">
@@ -1055,7 +1116,9 @@ function ServicesSection() {
         <p className="flex-[1_1_320px] max-w-[560px] text-lg leading-relaxed text-ink/60">
           Tell me what&rsquo;s running on heroics and good intentions — I reply within two business days.
         </p>
-        <a href="#/contact" className={cta}>Get in touch <ArrowRight size={16} /></a>
+        <FramedCta kind="envelopes">
+          <a href="#/contact" className={cta}>Get in touch <ArrowRight size={16} className="fc-arrow" /></a>
+        </FramedCta>
       </div>
     </section>
   );
@@ -1414,10 +1477,12 @@ function ContactSection() {
               <label htmlFor="message" className={fieldLabel}>03 — What&rsquo;s messy?</label>
               <textarea id="message" name="message" rows={3} required className={field} />
             </div>
-            <div>
-              <button type="submit" disabled={status === 'sending'} className={`${cta} disabled:opacity-60`}>
-                {status === 'sending' ? 'Sending…' : 'Send message'} <ArrowRight size={16} />
-              </button>
+            <div className="mt-10">
+              <FramedCta kind="envelopes">
+                <button type="submit" disabled={status === 'sending'} className={`${cta} disabled:opacity-60`}>
+                  {status === 'sending' ? 'Sending…' : 'Send message'} <ArrowRight size={16} className="fc-arrow" />
+                </button>
+              </FramedCta>
             </div>
             {status === 'error' && (
               <p className="text-sm text-red-600 font-mono">error: submission failed — please email me directly.</p>

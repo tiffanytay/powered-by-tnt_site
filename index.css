@@ -151,17 +151,20 @@
 @keyframes pp-pulse { 0%, 100% { opacity: 1 } 50% { opacity: .35 } }
 @media (prefers-reduced-motion: reduce) { .pp-stamp, .pp-banner, .pp-dot { animation: none !important; } .pp-face::after { display: none; } }
 
-/* Landing CTA floral frame (see FloralCta): vines draw, leaves pop, blooms spin open on hover/keyboard focus. */
+/* CTA frames (see FramedCta): vines draw, leaves pop, blooms spin open / envelopes tumble in on hover/keyboard focus. */
 .fc { position: relative; display: inline-flex; }
-.fc > a { position: relative; z-index: 2; }
+.fc > :not(.fc-garden) { position: relative; z-index: 2; }
 .fc-garden { position: absolute; left: 50%; top: 50%; width: 400px; height: 220px; margin: -110px 0 0 -200px; z-index: 1; pointer-events: none; overflow: visible; }
 .fc-vine { fill: none; stroke-dasharray: 1 2; stroke-dashoffset: 1; transition: stroke-dashoffset 200ms cubic-bezier(.4,0,1,1); }
 .fc-leaf, .fc-bloom { transform-box: view-box; transform-origin: 0 0; transition: transform 160ms cubic-bezier(.4,0,1,1); }
 .fc-leaf { transform: scale(0); }
 .fc-bloom { transform: scale(0) rotate(-60deg); }
+.fc-envelopes .fc-bloom { transform: translateY(10px) scale(0) rotate(-25deg); }
+.fc-letter { transform-box: view-box; transform-origin: 0 0; transform: translateY(8px); transition: transform 160ms cubic-bezier(.4,0,1,1); }
 .fc-arrow { transition: transform 300ms cubic-bezier(.19,1,.22,1); }
 .fc:is(:hover, :has(:focus-visible)) .fc-arrow { transform: translateX(4px); }
 .fc:is(:hover, :has(:focus-visible)) .fc-vine { stroke-dashoffset: 0; transition: stroke-dashoffset 340ms cubic-bezier(.25,.7,.35,1) var(--d); }
 .fc:is(:hover, :has(:focus-visible)) .fc-leaf { transform: scale(1); transition: transform 260ms cubic-bezier(.34,1.56,.64,1) var(--d); }
 .fc:is(:hover, :has(:focus-visible)) .fc-bloom { transform: scale(1) rotate(0deg); transition: transform 560ms cubic-bezier(.34,1.56,.64,1) var(--d); }
-@media (prefers-reduced-motion: reduce) { .fc-vine, .fc-leaf, .fc-bloom, .fc-arrow { transition-duration: 1ms !important; transition-delay: 0ms !important; } }
+.fc:is(:hover, :has(:focus-visible)) .fc-letter { transform: translateY(0); transition: transform 420ms cubic-bezier(.19,1,.22,1) 1000ms; }
+@media (prefers-reduced-motion: reduce) { .fc-vine, .fc-leaf, .fc-bloom, .fc-letter, .fc-arrow { transition-duration: 1ms !important; transition-delay: 0ms !important; } }
