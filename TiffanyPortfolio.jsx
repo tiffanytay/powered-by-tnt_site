@@ -311,6 +311,43 @@ const projects = [
     slot: 'case-nonprofit-ops.png',
     tags: ['QuickBooks', 'BILL.com', 'Google Sheets'],
     featured: true,
+    art: (<>
+      <g className="a-dim" style={{ '--d': '800ms' }}>
+        <text className="a-fade" x="300" y="36" fill="rgba(11,18,16,.5)">role: vacant</text>
+        <rect className="a-fade" x="300" y="44" width="56" height="40" fill="none" stroke="rgba(11,18,16,.4)" strokeWidth="1.25" strokeDasharray="4 3" />
+      </g>
+      <rect className="a-draw d" pathLength="1" style={{ '--d': '700ms', '--t': '500ms' }} x="300" y="44" width="56" height="40" fill="#ffffff" fillOpacity=".7" stroke="#0b6bb0" strokeWidth="1.75" />
+      <circle className="a-pop" cx="328" cy="58" r="5" fill="#0b6bb0" style={{ '--d': '1000ms' }} />
+      <path className="a-draw d" pathLength="1" style={{ '--d': '1050ms', '--t': '300ms' }} d="M318 78c2-9 18-9 20 0" fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" />
+      <text className="a-fade" x="366" y="68" fill="#0b6bb0" style={{ '--d': '1200ms' }}>owned</text>
+      <g fill="none" stroke="rgba(102,195,255,.6)" strokeWidth="1">
+        <path className="a-draw d" pathLength="1" style={{ '--d': '300ms' }} d="M300 116H540" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '360ms' }} d="M300 138H540" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '420ms' }} d="M300 160H540" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '480ms' }} d="M300 182H540" />
+      </g>
+      <g fill="#66c3ff">
+        <rect className="a-grow" x="300" y="104" width="84" height="6" fillOpacity=".45" style={{ '--d': '400ms' }} />
+        <rect className="a-grow from-r" x="466" y="104" width="44" height="6" style={{ '--d': '500ms' }} />
+        <rect className="a-grow" x="300" y="126" width="62" height="6" fillOpacity=".45" style={{ '--d': '460ms' }} />
+        <rect className="a-grow from-r" x="466" y="126" width="44" height="6" style={{ '--d': '560ms' }} />
+        <g className="a-dim" style={{ '--d': '1650ms' }}>
+          <rect className="a-grow" x="300" y="148" width="100" height="6" fillOpacity=".45" style={{ '--d': '520ms' }} />
+          <rect className="a-grow from-r" x="466" y="148" width="44" height="6" style={{ '--d': '620ms' }} />
+        </g>
+        <rect className="a-grow" x="300" y="170" width="74" height="6" fillOpacity=".45" style={{ '--d': '580ms' }} />
+        <rect className="a-grow from-r" x="466" y="170" width="44" height="6" style={{ '--d': '680ms' }} />
+      </g>
+      <g fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1300ms', '--t': '300ms' }} d="M522 107l3.5 3.5 7-8" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1400ms', '--t': '300ms' }} d="M522 129l3.5 3.5 7-8" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1500ms', '--t': '250ms' }} d="M523 147l8 8M531 147l-8 8" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1600ms', '--t': '400ms' }} d="M294 151H514" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1700ms', '--t': '300ms' }} d="M522 173l3.5 3.5 7-8" />
+      </g>
+      <text className="a-fade" x="300" y="210" fill="rgba(11,18,16,.5)" style={{ '--d': '500ms' }}>recurring expenses</text>
+      <text className="a-fade" x="540" y="210" textAnchor="end" fill="#0b6bb0" style={{ '--d': '1900ms' }}>−5%</text>
+    </>),
     visual: {
       eyebrow: 'Finance Operations',
       flow: ['Elected to vacant role', 'Standards set', 'Expenses cut'],
@@ -332,6 +369,46 @@ const projects = [
     image: null,
     slot: 'case-kanban-team.png',
     tags: ['Azure DevOps', 'Kanban', 'Daily Scrum'],
+    art: (<>
+      <g fill="rgba(11,18,16,.5)">
+        <text className="a-fade" x="300" y="40" style={{ '--d': '0ms' }}>todo</text>
+        <text className="a-fade" x="384" y="40" style={{ '--d': '50ms' }}>doing</text>
+        <text className="a-fade" x="468" y="40" style={{ '--d': '100ms' }}>done</text>
+      </g>
+      <g fill="none" stroke="#66c3ff" strokeWidth="1.5">
+        <path className="a-draw d" pathLength="1" style={{ '--d': '100ms', '--t': '400ms' }} d="M300 48H372" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '160ms', '--t': '400ms' }} d="M384 48H456" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '220ms', '--t': '400ms' }} d="M468 48H540" />
+      </g>
+      <g fill="#ffffff" stroke="#66c3ff" strokeWidth="1.25">
+        <rect className="a-fly" x="300" y="58" width="72" height="14" style={{ '--dx': '-60px', '--dy': '-70px', '--r': '-14deg', '--d': '250ms' }} />
+        <rect className="a-fly" x="300" y="78" width="72" height="14" style={{ '--dx': '-90px', '--dy': '20px', '--r': '10deg', '--d': '300ms' }} />
+        <rect className="a-fly" x="300" y="98" width="72" height="14" style={{ '--dx': '-40px', '--dy': '80px', '--r': '-18deg', '--d': '350ms' }} />
+        <rect className="a-fly" x="384" y="58" width="72" height="14" style={{ '--dx': '20px', '--dy': '-100px', '--r': '16deg', '--d': '400ms' }} />
+        <rect className="a-fly" x="384" y="78" width="72" height="14" style={{ '--dx': '-30px', '--dy': '110px', '--r': '-8deg', '--d': '450ms' }} />
+        <rect className="a-fly" x="468" y="58" width="72" height="14" style={{ '--dx': '80px', '--dy': '-80px', '--r': '22deg', '--d': '500ms' }} />
+        <rect className="a-fly" x="468" y="78" width="72" height="14" style={{ '--dx': '100px', '--dy': '30px', '--r': '-14deg', '--d': '550ms' }} />
+      </g>
+      <rect className="a-travel" x="300" y="118" width="72" height="14" fill="#0b6bb0" style={{ '--tx': '168px', '--d': '1300ms' }} />
+      <text className="a-fade" x="300" y="160" fill="rgba(11,18,16,.5)" style={{ '--d': '600ms' }}>throughput</text>
+      <rect className="a-grow" x="300" y="168" width="200" height="8" fill="#66c3ff" fillOpacity=".45" style={{ '--d': '700ms', '--t': '700ms' }} />
+      <rect className="a-grow" x="500" y="168" width="30" height="8" fill="#0b6bb0" style={{ '--d': '1500ms' }} />
+      <text className="a-fade" x="540" y="160" textAnchor="end" fill="#0b6bb0" style={{ '--d': '1700ms' }}>+15%</text>
+      <g fill="#66c3ff">
+        <circle className="a-pop" cx="304" cy="208" r="4" style={{ '--d': '900ms' }} />
+        <circle className="a-pop" cx="320" cy="208" r="4" style={{ '--d': '950ms' }} />
+        <circle className="a-pop" cx="336" cy="208" r="4" style={{ '--d': '1000ms' }} />
+        <circle className="a-pop" cx="352" cy="208" r="4" style={{ '--d': '1050ms' }} />
+        <circle className="a-pop" cx="368" cy="208" r="4" style={{ '--d': '1100ms' }} />
+        <circle className="a-pop" cx="384" cy="208" r="4" style={{ '--d': '1150ms' }} />
+      </g>
+      <g fill="none" stroke="#0b6bb0" strokeWidth="1.5" strokeLinecap="round">
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1300ms', '--t': '400ms' }} d="M304 202Q312 190 320 202" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1400ms', '--t': '400ms' }} d="M336 202Q344 190 352 202" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1500ms', '--t': '400ms' }} d="M368 202Q376 190 384 202" />
+      </g>
+      <text className="a-fade" x="540" y="212" textAnchor="end" fill="rgba(11,18,16,.5)" style={{ '--d': '1700ms' }}>peer-led</text>
+    </>),
     visual: {
       eyebrow: 'Team Management',
       flow: ['Daily scrum', 'Seniors mentor juniors', 'Ownership pushed down'],
@@ -353,6 +430,43 @@ const projects = [
     image: null,
     slot: 'case-engagement-dashboard.png',
     tags: ['Power BI', 'Power Query', 'Stakeholder interviews'],
+    art: (<>
+      <g fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.25">
+        <rect className="a-draw d" pathLength="1" style={{ '--d': '0ms', '--t': '400ms' }} x="300" y="40" width="50" height="26" />
+        <rect className="a-draw d" pathLength="1" style={{ '--d': '80ms', '--t': '400ms' }} x="300" y="78" width="50" height="26" />
+        <rect className="a-draw d" pathLength="1" style={{ '--d': '160ms', '--t': '400ms' }} x="300" y="116" width="50" height="26" />
+        <rect className="a-draw d" pathLength="1" style={{ '--d': '240ms', '--t': '400ms' }} x="300" y="154" width="50" height="26" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '300ms', '--t': '250ms' }} d="M308 180V188L316 180" strokeLinejoin="round" />
+      </g>
+      <g fill="rgba(11,18,16,.55)" textAnchor="middle">
+        <text className="a-fade" x="325" y="57" style={{ '--d': '200ms', fontSize: '9px' }}>app 1</text>
+        <text className="a-fade" x="325" y="95" style={{ '--d': '280ms', fontSize: '9px' }}>app 2</text>
+        <text className="a-fade" x="325" y="133" style={{ '--d': '360ms', fontSize: '9px' }}>app 3</text>
+        <text className="a-fade" x="325" y="171" style={{ '--d': '440ms', fontSize: '9px' }}>“…”</text>
+      </g>
+      <g fill="none" stroke="rgba(102,195,255,.8)" strokeWidth="1">
+        <path className="a-draw d" pathLength="1" style={{ '--d': '400ms', '--t': '500ms' }} d="M350 53C380 53 378 110 404 110" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '440ms', '--t': '500ms' }} d="M350 91C376 91 380 110 404 110" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '480ms', '--t': '500ms' }} d="M350 129C376 129 380 110 404 110" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '520ms', '--t': '500ms' }} d="M350 167C380 167 378 110 404 110" />
+      </g>
+      <rect className="a-draw d" pathLength="1" style={{ '--d': '500ms', '--t': '600ms' }} x="404" y="44" width="136" height="132" fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.5" />
+      <path className="a-draw d" pathLength="1" style={{ '--d': '800ms', '--t': '400ms' }} d="M404 60H540" fill="none" stroke="#66c3ff" strokeWidth="1" />
+      <text className="a-fade" x="410" y="55" fill="rgba(11,18,16,.5)" style={{ '--d': '900ms', fontSize: '9px' }}>one view</text>
+      <g fill="#66c3ff" fillOpacity=".55">
+        <rect className="a-growy" x="416" y="134" width="12" height="30" style={{ '--d': '1000ms' }} />
+        <rect className="a-growy" x="436" y="128" width="12" height="36" style={{ '--d': '1050ms' }} />
+        <rect className="a-growy" x="456" y="136" width="12" height="28" style={{ '--d': '1100ms' }} />
+        <rect className="a-growy" x="476" y="78" width="12" height="86" style={{ '--d': '1150ms' }} />
+        <rect className="a-growy" x="496" y="130" width="12" height="34" style={{ '--d': '1200ms' }} />
+        <rect className="a-growy" x="516" y="132" width="12" height="32" style={{ '--d': '1250ms' }} />
+      </g>
+      <rect className="a-pop" x="476" y="78" width="12" height="86" fill="#0b6bb0" style={{ '--d': '1450ms' }} />
+      <circle className="a-ring" cx="482" cy="72" r="9" fill="none" stroke="#0b6bb0" strokeWidth="1.5" style={{ '--d': '1550ms' }} />
+      <circle className="a-pulse" cx="482" cy="72" r="9" fill="none" stroke="#66c3ff" strokeWidth="1.5" style={{ '--d': '2100ms' }} />
+      <text className="a-fade" x="540" y="198" textAnchor="end" fill="#0b6bb0" style={{ '--d': '1700ms' }}>over-customization</text>
+      <text className="a-fade" x="300" y="214" fill="rgba(11,18,16,.5)" style={{ '--d': '600ms' }}>3 apps + interviews</text>
+    </>),
     visual: {
       eyebrow: 'Root Cause Analysis',
       flow: ['3 apps + interviews', 'One Power BI view', 'Action plan'],
@@ -374,6 +488,41 @@ const projects = [
     image: null,
     slot: 'case-review-cycle.png',
     tags: ['Google Forms', 'Power BI', 'Power Query'],
+    art: (<>
+      <rect className="a-draw d" pathLength="1" style={{ '--t': '600ms' }} x="300" y="40" width="96" height="124" fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.5" />
+      <g fill="#ffffff" stroke="#66c3ff" strokeWidth="1.25">
+        <rect className="a-pop" x="310" y="54" width="10" height="10" style={{ '--d': '300ms' }} />
+        <rect className="a-pop" x="310" y="80" width="10" height="10" style={{ '--d': '360ms' }} />
+        <rect className="a-pop" x="310" y="106" width="10" height="10" style={{ '--d': '420ms' }} />
+        <rect className="a-pop" x="310" y="132" width="10" height="10" style={{ '--d': '480ms' }} />
+      </g>
+      <g fill="#66c3ff" fillOpacity=".6">
+        <rect className="a-grow" x="328" y="57" width="56" height="5" style={{ '--d': '350ms' }} />
+        <rect className="a-grow" x="328" y="83" width="44" height="5" style={{ '--d': '410ms' }} />
+        <rect className="a-grow" x="328" y="109" width="52" height="5" style={{ '--d': '470ms' }} />
+        <rect className="a-grow" x="328" y="135" width="40" height="5" style={{ '--d': '530ms' }} />
+      </g>
+      <g fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path className="a-draw d" pathLength="1" style={{ '--d': '700ms', '--t': '250ms' }} d="M312 59l2.5 2.5 5-6" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '800ms', '--t': '250ms' }} d="M312 85l2.5 2.5 5-6" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '900ms', '--t': '250ms' }} d="M312 111l2.5 2.5 5-6" />
+        <path className="a-draw d" pathLength="1" style={{ '--d': '1000ms', '--t': '250ms' }} d="M312 137l2.5 2.5 5-6" />
+      </g>
+      <text className="a-fade" x="300" y="184" fill="rgba(11,18,16,.5)" style={{ '--d': '200ms' }}>standard Qs</text>
+      <text className="a-fade" x="420" y="72" fill="rgba(11,18,16,.5)" style={{ '--d': '300ms' }}>before</text>
+      <g className="a-dim" style={{ '--d': '1300ms' }}>
+        <rect className="a-grow" x="420" y="80" width="120" height="8" fill="#66c3ff" fillOpacity=".45" style={{ '--d': '400ms', '--t': '700ms' }} />
+        <text className="a-fade" x="540" y="72" textAnchor="end" fill="rgba(11,18,16,.5)" style={{ '--d': '700ms' }}>2 mo</text>
+      </g>
+      <path className="a-draw d" pathLength="1" style={{ '--d': '1200ms', '--t': '400ms' }} d="M414 84H546" fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" />
+      <text className="a-fade" x="420" y="118" fill="rgba(11,18,16,.5)" style={{ '--d': '1400ms' }}>after</text>
+      <rect className="a-grow" x="420" y="126" width="84" height="8" fill="#0b6bb0" style={{ '--d': '1500ms' }} />
+      <text className="a-fade" x="510" y="134" fill="#0b6bb0" style={{ '--d': '1800ms' }}>6 wk</text>
+      <path className="a-draw d" pathLength="1" style={{ '--d': '1900ms', '--t': '600ms' }} d="M420 194L448 186L476 188L504 176L532 166" fill="none" stroke="#66c3ff" strokeWidth="1.5" strokeLinejoin="round" />
+      <circle className="a-pop" cx="532" cy="166" r="3.5" fill="#0b6bb0" style={{ '--d': '2350ms' }} />
+      <circle className="a-pulse" cx="532" cy="166" r="6" fill="none" stroke="#66c3ff" strokeWidth="1.5" style={{ '--d': '2500ms' }} />
+      <text className="a-fade" x="540" y="214" textAnchor="end" fill="#0b6bb0" style={{ '--d': '2400ms' }}>year over year</text>
+    </>),
     visual: {
       eyebrow: 'HR Process Redesign',
       flow: ['Structured intake', 'Standard questions', 'Board-ready report'],
@@ -397,6 +546,42 @@ const projects = [
     canary: true,
     tags: ['Next.js', 'Supabase', 'Stripe', 'Resend', 'Claude Code/Design'],
     link: 'https://budgetcanary.com/waitlist',
+    art: (<>
+      <path className="a-draw d" pathLength="1" style={{ '--t': '600ms' }} d="M300 50H346L356 60V122H300Z" fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.5" strokeLinejoin="round" />
+      <path className="a-draw d" pathLength="1" style={{ '--d': '300ms', '--t': '250ms' }} d="M346 50V60H356" fill="none" stroke="#66c3ff" strokeWidth="1.25" />
+      <g fill="#66c3ff" fillOpacity=".6">
+        <rect className="a-grow" x="308" y="68" width="38" height="4" style={{ '--d': '350ms' }} />
+        <rect className="a-grow" x="308" y="78" width="30" height="4" style={{ '--d': '400ms' }} />
+        <rect className="a-grow" x="308" y="88" width="36" height="4" style={{ '--d': '450ms' }} />
+        <rect className="a-grow" x="308" y="98" width="26" height="4" style={{ '--d': '500ms' }} />
+        <rect className="a-grow" x="308" y="108" width="32" height="4" style={{ '--d': '550ms' }} />
+      </g>
+      <path className="a-draw d" pathLength="1" style={{ '--d': '650ms', '--t': '300ms' }} d="M356 86H380" fill="none" stroke="#66c3ff" strokeWidth="1.5" />
+      <g fill="#ffffff" stroke="#66c3ff" strokeWidth="1.25">
+        <rect className="a-pop" x="380" y="50" width="76" height="20" style={{ '--d': '750ms' }} />
+        <rect className="a-pop" x="380" y="76" width="76" height="20" style={{ '--d': '900ms' }} />
+        <rect className="a-pop" x="380" y="102" width="76" height="20" style={{ '--d': '1050ms' }} />
+      </g>
+      <g fill="rgba(11,18,16,.6)" textAnchor="middle">
+        <text className="a-fade" x="418" y="64" style={{ '--d': '850ms', fontSize: '10px' }}>next.js</text>
+        <text className="a-fade" x="418" y="90" style={{ '--d': '1000ms', fontSize: '10px' }}>supabase</text>
+        <text className="a-fade" x="418" y="116" style={{ '--d': '1150ms', fontSize: '10px' }}>stripe</text>
+      </g>
+      <path className="a-draw d" pathLength="1" style={{ '--d': '1200ms', '--t': '300ms' }} d="M456 86H480" fill="none" stroke="#66c3ff" strokeWidth="1.5" />
+      <rect className="a-draw d" pathLength="1" style={{ '--d': '1300ms', '--t': '500ms' }} x="480" y="70" width="52" height="34" fill="#ffffff" fillOpacity=".7" stroke="#0b6bb0" strokeWidth="1.5" />
+      <path className="a-draw d" pathLength="1" style={{ '--d': '1500ms', '--t': '350ms' }} d="M480 70L506 90L532 70" fill="none" stroke="#0b6bb0" strokeWidth="1.5" strokeLinejoin="round" />
+      <circle className="a-travel" cx="360" cy="86" r="4" fill="#0b6bb0" style={{ '--tx': '118px', '--d': '2000ms' }} />
+      <path className="a-draw d" pathLength="1" style={{ '--d': '1800ms', '--t': '400ms' }} d="M497 120l4 4 9-9" fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <text className="a-pop" x="536" y="66" fill="#0b6bb0" style={{ '--d': '2000ms', fontFamily: 'Georgia,serif', fontSize: '13px' }}>♪</text>
+      <text className="a-pop" x="544" y="54" fill="#0b6bb0" style={{ '--d': '2150ms', fontFamily: 'Georgia,serif', fontSize: '11px' }}>♫</text>
+      <text className="a-fade" x="300" y="160" fill="rgba(11,18,16,.5)" style={{ '--d': '300ms' }}>prd.md</text>
+      <text className="a-fade" x="380" y="160" fill="rgba(11,18,16,.5)" style={{ '--d': '900ms' }}>→ stack</text>
+      <text className="a-fade" x="540" y="160" textAnchor="end" fill="#0b6bb0" style={{ '--d': '1900ms' }}>→ report</text>
+      <path className="a-draw d" pathLength="1" style={{ '--d': '1600ms', '--t': '700ms' }} d="M300 186H540" fill="none" stroke="rgba(102,195,255,.6)" strokeWidth="1" />
+      <rect className="a-grow" x="300" y="183" width="240" height="6" fill="#0b6bb0" style={{ '--d': '1900ms', '--t': '700ms' }} />
+      <text className="a-fade" x="300" y="212" fill="rgba(11,18,16,.5)" style={{ '--d': '2100ms' }}>built solo</text>
+      <text className="a-fade" x="540" y="212" textAnchor="end" fill="#0b6bb0" style={{ '--d': '2300ms' }}>demo-ready</text>
+    </>),
     visual: {
       eyebrow: 'Product Build',
       flow: ['PRD', 'Architecture', 'Shipped'],
@@ -1105,13 +1290,17 @@ function WorkSection() {
       <div className="border-b border-line">
         {shown.map((p) => (
           <Reveal key={p.n}>
-            <article className="grid md:grid-cols-2 gap-x-12 gap-y-8 py-10 border-t border-line">
+            <article className="wk grid md:grid-cols-2 gap-x-12 gap-y-8 py-10 px-6 -mx-6 border-t border-line">
               <div className="flex flex-col gap-2 min-w-0">
                 <span className={`${mono12} text-ink/60`}>{p.n} / {total}</span>
                 <h2 className="font-display font-bold text-2xl leading-[1.15] tracking-tight">
-                  <a href={`#/project/${p.n}`} className="hover:text-emerald-deep transition-colors">{p.title}</a>
+                  <a href={`#/project/${p.n}`} className="wk-ttl transition-colors">{p.title}</a>
                 </h2>
                 <span className={`${mono12} text-ink/60`}>{p.subtitle}</span>
+                {/* Hover/focus plays the case study as a small diagram (index.css: .art). Desktop only: no room when stacked. */}
+                <div className="relative hidden md:block flex-auto min-h-[150px] mt-4">
+                  <svg className="art" viewBox="290 26 260 200" preserveAspectRatio="xMinYMax meet" aria-hidden="true" focusable="false">{p.art}</svg>
+                </div>
               </div>
               <div className="flex flex-col gap-5 min-w-0">
                 <p className="text-ink/60 leading-relaxed max-w-[560px]">{p.desc}</p>
