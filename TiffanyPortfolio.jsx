@@ -106,7 +106,7 @@ const services = [
   {
     n: '01',
     title: 'Operations & Process Design',
-    desc: 'The informal, inconsistent, lives-in-someone’s-head process — rebuilt as a repeatable system anyone on the team can run.',
+    desc: 'The informal, inconsistent, lives-in-someone’s-head process, rebuilt as a repeatable system anyone on the team can run.',
     art: (<>
       <g className="stroke-emerald" fill="none" strokeWidth="1.5" strokeLinecap="round">
         <path className="a-draw d" pathLength="1" style={{ '--d': '750ms', '--t': '300ms' }} d="M313 180H342" />
@@ -167,7 +167,7 @@ const services = [
   {
     n: '03',
     title: 'Diagnostics & Analysis',
-    desc: 'Data scattered across apps, plus what people actually tell you, pulled into one view — so you fix the root cause, not the symptom.',
+    desc: 'Data scattered across apps, plus what people actually tell you, pulled into one view, so you fix the root cause, not the symptom.',
     art: (<>
       <path className="a-draw d" pathLength="1" style={{ '--t': '700ms' }} d="M300 36V204H548" fill="none" stroke="rgba(102,195,255,.7)" strokeWidth="1" />
       <line className="a-scan stroke-emerald" x1="300" y1="36" x2="300" y2="204" strokeWidth="1.5" />
@@ -193,7 +193,7 @@ const services = [
   {
     n: '04',
     title: 'Product & Internal Tooling',
-    desc: 'When the fix is a tool that doesn’t exist yet: PRD, stack decision, and a working build — not a recommendation deck.',
+    desc: 'When the fix is a tool that doesn’t exist yet: PRD, stack decision, and a working build, not a recommendation deck.',
     art: (<>
       <rect className="a-draw d fill-paper stroke-emerald" pathLength="1" style={{ '--t': '700ms' }} x="330" y="34" width="210" height="150" fillOpacity=".6" strokeWidth="1.5" />
       <path className="a-draw d stroke-emerald" pathLength="1" style={{ '--d': '400ms', '--t': '400ms' }} d="M330 52H540" fill="none" strokeWidth="1" />
@@ -341,7 +341,7 @@ const projects = [
     star: {
       situation: 'A cross-functional team of 5–8 geographically dispersed developers needed consistent delivery and clear ownership.',
       task: 'Manage throughput while building a team that did not bottleneck on me.',
-      action: 'Ran daily scrum and kanban ticketing in Azure DevOps, and mentored senior developers to lead and teach the juniors — pushing ownership down instead of routing it through me.',
+      action: 'Ran daily scrum and kanban ticketing in Azure DevOps, and mentored senior developers to lead and teach the juniors, pushing ownership down instead of routing it through me.',
       result: 'Increased throughput 15% and removed myself as the review bottleneck.',
     },
   },
@@ -391,7 +391,7 @@ const projects = [
     n: '05',
     title: 'Built Budget Canary as a Solo Founder',
     subtitle: 'Builder & technical range',
-    desc: 'Took an unserved need for small accounting firms from PRD to a working product — stack choice, OAuth, payments, and automated reporting, built solo.',
+    desc: 'Took an unserved need for small accounting firms from PRD to a working product: stack choice, OAuth, payments, and automated reporting, built solo.',
     image: null,
     slot: 'case-budget-canary.png',
     canary: true,
@@ -405,7 +405,7 @@ const projects = [
     },
     star: {
       situation: 'Small accounting firms and bookkeepers lack affordable tooling for budget variance monitoring.',
-      task: 'Design and ship a working product solo — from PRD to architecture to build.',
+      task: 'Design and ship a working product solo: from PRD to architecture to build.',
       action: 'Scoped the PRD, evaluated and chose the stack (Next.js and Supabase), then built the OAuth integrations, payments, and automated reporting.',
       result: 'Demo-ready product covering the full loop from connected books to delivered report.',
     },
@@ -833,8 +833,8 @@ function Hero() {
         <div className="w-full max-w-6xl min-w-0 flex flex-col gap-5">
           <div className="flex items-baseline justify-between gap-4 font-mono text-xs leading-[1.4] text-ink/60">
             <div className="relative flex-auto min-w-0 h-[17px]">
-              <span className="absolute left-0 top-0 whitespace-nowrap" style={{ opacity: 1 - f.eyebrow }}>fig 1. — the stack, before</span>
-              <span className="absolute left-0 top-0 whitespace-nowrap" style={{ opacity: f.eyebrow }}>fig 2. — the stack, after</span>
+              <span className="absolute left-0 top-0 whitespace-nowrap" style={{ opacity: 1 - f.eyebrow }}>fig 1: the stack, before</span>
+              <span className="absolute left-0 top-0 whitespace-nowrap" style={{ opacity: f.eyebrow }}>fig 2: the stack, after</span>
             </div>
             <span className="whitespace-nowrap" style={{ opacity: f.hint }}>// scroll to reconcile</span>
           </div>
@@ -847,7 +847,7 @@ function Hero() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <p className="flex-[1_1_360px] max-w-[560px] text-lg leading-relaxed text-ink/60">
               I rebuild the spreadsheets, inboxes and one-off exports your team runs on into
-              workflows that reconcile — plain English in, board-ready out.
+              workflows that reconcile: plain English in, board-ready out.
             </p>
             <FramedCta>
               <a href="#/work" className={`${btn} gap-2 h-12 px-6 text-sm font-semibold`}>
@@ -945,7 +945,7 @@ function ProjectDetail({ project, prev, next }) {
           </a>
           <a href="#/" className="inline-flex items-center gap-2 font-mono text-sm font-medium tracking-tight">
             <img src="graphics/logo.svg" alt="" className="w-6 h-6" />
-            <span>tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40"> — CPA</span></span>
+            <span>tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40">, CPA</span></span>
           </a>
         </div>
       </header>
@@ -953,7 +953,7 @@ function ProjectDetail({ project, prev, next }) {
       <main className="flex-1">
         <div className="max-w-4xl mx-auto px-6 py-16">
           <p className="font-mono text-xs font-bold tracking-widest uppercase text-emerald-deep mb-4">
-            {project.n} / {String(projects.length).padStart(2, '0')} — Selected Work
+            {project.n} / {String(projects.length).padStart(2, '0')}: Selected Work
           </p>
           <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight mb-2">{project.title}</h1>
           {project.subtitle && <p className="font-mono text-sm text-ink/40 mb-8">{project.subtitle}</p>}
@@ -988,13 +988,13 @@ function ProjectDetail({ project, prev, next }) {
       <nav className="border-t border-line grid sm:grid-cols-2">
         <a href={`#/project/${prev.n}`} className="group p-6 sm:p-8 border-b sm:border-b-0 sm:border-r border-line hover:bg-mist active:bg-mist transition-colors">
           <div className="font-mono text-xs font-bold text-emerald-deep mb-2 flex items-center gap-2">
-            <ArrowLeft size={13} className="transition-transform duration-200 group-hover:-translate-x-1 motion-reduce:group-hover:translate-x-0" /> PREV — {prev.n}
+            <ArrowLeft size={13} className="transition-transform duration-200 group-hover:-translate-x-1 motion-reduce:group-hover:translate-x-0" /> PREV: {prev.n}
           </div>
           <div className="font-display font-bold tracking-tight group-hover:text-emerald-deep transition-colors">{prev.title}</div>
         </a>
         <a href={`#/project/${next.n}`} className="group p-6 sm:p-8 text-right hover:bg-mist active:bg-mist transition-colors">
           <div className="font-mono text-xs font-bold text-emerald-deep mb-2 flex items-center justify-end gap-2">
-            NEXT — {next.n} <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
+            NEXT: {next.n} <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
           </div>
           <div className="font-display font-bold tracking-tight group-hover:text-emerald-deep transition-colors">{next.title}</div>
         </a>
@@ -1021,7 +1021,7 @@ function SiteHeader({ route }) {
       <div className={`${container} h-16 flex items-center justify-between gap-6`}>
         <a href="#/" className="inline-flex items-center gap-2 font-mono text-sm font-medium whitespace-nowrap">
           <img src="graphics/logo.svg" alt="" className="w-6 h-6" />
-          <span>tiffany<span className="text-emerald">.</span>tay<span className="hidden sm:inline"> — CPA</span></span>
+          <span>tiffany<span className="text-emerald">.</span>tay<span className="hidden sm:inline">, CPA</span></span>
         </a>
         {/* Every link stays visible on phones: "where can I go?" needs an answer at 375px too. */}
         <nav aria-label="Primary" className="flex items-center gap-4 sm:gap-8 text-xs sm:text-sm text-ink/60">
@@ -1045,8 +1045,8 @@ function SiteFooter() {
   return (
     <footer id="site-footer" className="bg-pine text-paper/50 border-t border-paper/20">
       <div className={`${container} py-8 flex flex-wrap items-center justify-between gap-4 ${mono12}`}>
-        <span>tiffany.tay — operations, process &amp; product</span>
-        <span>&copy; 2026 — built and maintained in-house</span>
+        <span>tiffany.tay: operations, process &amp; product</span>
+        <span>&copy; 2026, built and maintained in-house</span>
       </div>
     </footer>
   );
@@ -1056,7 +1056,7 @@ function SiteFooter() {
 function PageHeader({ index, label, title, dark = false, as: Heading = 'h1' }) {
   return (
     <Reveal className="mb-14 flex flex-col gap-4">
-      <span className={`${eyebrow} ${dark ? 'text-paper/50' : 'text-ink/60'}`}>{index} — {label}</span>
+      <span className={`${eyebrow} ${dark ? 'text-paper/50' : 'text-ink/60'}`}>{index}: {label}</span>
       <Heading className={`font-display font-bold text-[clamp(32px,4.4vw,48px)] leading-[1.15] tracking-tight ${dark ? 'text-paper' : 'text-ink'}`}>
         {title}
       </Heading>
@@ -1082,7 +1082,7 @@ function WorkSection() {
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search skills, tools, experience — e.g. Power BI, team, Stripe"
+          placeholder="Search skills, tools, experience (e.g. Power BI, team, Stripe)"
           aria-label="Search work by skill, tool, or experience"
           className="flex-1 min-w-0 bg-transparent text-base sm:text-lg focus:outline-none placeholder:text-ink/40 [&::-webkit-search-cancel-button]:hidden"
         />
@@ -1099,7 +1099,7 @@ function WorkSection() {
       )}
       {shown.length === 0 && (
         <p className="py-10 border-t border-line text-ink/60">
-          Nothing matches yet — try a tool like <button type="button" onClick={() => setQuery('Power BI')} className="underline hover:text-emerald-deep">Power BI</button> or a skill like <button type="button" onClick={() => setQuery('team')} className="underline hover:text-emerald-deep">team</button>.
+          Nothing matches yet. Try a tool like <button type="button" onClick={() => setQuery('Power BI')} className="underline hover:text-emerald-deep">Power BI</button> or a skill like <button type="button" onClick={() => setQuery('team')} className="underline hover:text-emerald-deep">team</button>.
         </p>
       )}
       <div className="border-b border-line">
@@ -1117,7 +1117,7 @@ function WorkSection() {
                 <p className="text-ink/60 leading-relaxed max-w-[560px]">{p.desc}</p>
                 {/* The case study's flow, then its headline number. */}
                 <ul className="flex flex-col gap-2 text-sm leading-normal text-ink/70">
-                  {[...p.visual.flow, `${p.visual.stat} — ${p.visual.statLabel}`].map((h) => (
+                  {[...p.visual.flow, `${p.visual.stat} ${p.visual.statLabel}`].map((h) => (
                     <li key={h} className="flex gap-3"><span className="font-mono text-ink/60">+</span><span>{h}</span></li>
                   ))}
                 </ul>
@@ -1157,7 +1157,7 @@ function ServicesSection() {
       </div>
       <div className="flex flex-wrap items-center justify-between gap-6 mt-14">
         <p className="flex-[1_1_320px] max-w-[560px] text-lg leading-relaxed text-ink/60">
-          Tell me what&rsquo;s running on heroics and good intentions — I reply within two business days.
+          Tell me what&rsquo;s running on heroics and good intentions. I reply within two business days.
         </p>
         <FramedCta kind="envelopes">
           <a href="#/contact" className={cta}>Get in touch <ArrowRight size={16} className="fc-arrow" /></a>
@@ -1187,14 +1187,14 @@ function AboutSection() {
         <Reveal className="flex flex-col gap-6 max-w-2xl text-lg leading-relaxed">
           <p>
             For the past decade I&rsquo;ve led operations, finance, and delivery for
-            venture-backed SaaS companies and mission-driven nonprofits — usually arriving at the
+            venture-backed SaaS companies and mission-driven nonprofits, usually arriving at the
             point where something important has no owner and everyone has quietly worked around
             it for months.
           </p>
           <p>
             My work sits at the intersection of accounting rigor and building things: audited
             financials and spend controls on one side, Power BI, Azure DevOps, and a shipped
-            product on the other. The pattern is the same either way — take the ambiguous,
+            product on the other. The pattern is the same either way: take the ambiguous,
             under-owned thing, find what the numbers say is actually wrong, and turn it into a
             process someone else can run.
           </p>
@@ -1204,7 +1204,7 @@ function AboutSection() {
         </Reveal>
         <Reveal delay={0.1} className="relative max-w-sm lg:max-w-none border border-paper/20">
           <img src="graphics/6.jpeg" alt="Tiffany Tay" loading="lazy" className="w-full object-cover object-top" />
-          <span className={`absolute bottom-0 left-0 bg-paper text-ink px-3 py-2 ${mono12}`}>fig 1. — the person behind the systems</span>
+          <span className={`absolute bottom-0 left-0 bg-paper text-ink px-3 py-2 ${mono12}`}>fig 1: the person behind the systems</span>
         </Reveal>
         </div>
         <div className="grid md:grid-cols-2 gap-x-12 gap-y-10 mt-16 pt-10 border-t border-paper/20">
@@ -1363,7 +1363,7 @@ function usePassport(rootRef) {
       </div>
       <div className={`pp-banner absolute top-6 left-6 z-30 max-w-[calc(100%-152px)] pointer-events-none flex flex-wrap items-center gap-x-5 gap-y-2 px-4 py-3 bg-paper border border-line font-mono text-xs${mode === 'leaving' ? ' is-leaving' : ''}`}>
         <span className="flex items-center gap-2"><span className="pp-dot w-2 h-2 rounded-full bg-emerald" />passport_mode: on</span>
-        <span className="text-ink/60">next_stamp: {String(next + 1).padStart(2, '0')} / {STAMPS.length} — {nxt.country}</span>
+        <span className="text-ink/60">next_stamp: {String(next + 1).padStart(2, '0')} / {STAMPS.length}, {nxt.country}</span>
         <span className="text-ink/60">{'// click anywhere to stamp'}</span>
       </div>
       <div className="absolute top-6 right-6 z-30 flex flex-col items-center gap-2">
@@ -1408,7 +1408,7 @@ function OffTheClockSection() {
                 ) : item.passport ? (
                   <button
                     type="button"
-                    aria-label={`${item.title} — start passport stamp mode`}
+                    aria-label={`${item.title}: start passport stamp mode`}
                     onClick={passport.enter}
                     className="pp-tile relative overflow-hidden w-full aspect-square border border-line hover:border-ink transition-colors bg-paper flex items-center justify-center p-3 cursor-pointer focus-visible:outline-2 focus-visible:outline-emerald focus-visible:outline-offset-3"
                   >
@@ -1477,12 +1477,12 @@ function ContactSection() {
   return (
     <section className={`${container} py-20 grid lg:grid-cols-2 gap-x-24 gap-y-14`}>
       <Reveal className="flex flex-col gap-6 min-w-0">
-        <span className={`${eyebrow} text-ink/60`}>05 — Contact</span>
+        <span className={`${eyebrow} text-ink/60`}>05: Contact</span>
         <h1 className="font-display font-bold text-[clamp(32px,4.4vw,48px)] leading-[1.15] tracking-tight">
           Tell me where the process breaks down.
         </h1>
         <p className="max-w-md text-ink/60 leading-relaxed">
-          Tell me what&rsquo;s running on heroics and good intentions — I reply within two business days.
+          Tell me what&rsquo;s running on heroics and good intentions. I reply within two business days.
         </p>
         <div className="flex flex-col mt-2">
           <a href="mailto:tnt@poweredbytnt.com" className={contactLink}><Mail size={16} /> tnt@poweredbytnt.com</a>
@@ -1528,7 +1528,7 @@ function ContactSection() {
             <div className="flex flex-col gap-3">
               <h2 className="ok-up font-display font-bold text-4xl leading-[1.15] tracking-tight" style={{ '--d': '1400ms' }}>Sent.</h2>
               <p className="ok-up max-w-md text-ink/60 leading-relaxed" style={{ '--d': '1550ms' }}>
-                It&rsquo;s in my inbox. I&rsquo;ll write back myself — usually faster than that animation took.
+                It&rsquo;s in my inbox. I&rsquo;ll write back myself, usually faster than that animation took.
               </p>
             </div>
 
@@ -1547,15 +1547,15 @@ function ContactSection() {
             <input type="hidden" name="access_key" value="d5b0b07d-d2c0-4a93-acf3-259cf4caee86" />
             <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
             <div className="flex flex-col gap-1">
-              <label htmlFor="name" className={fieldLabel}>01 — Your name</label>
+              <label htmlFor="name" className={fieldLabel}>01: Your name</label>
               <input id="name" name="name" type="text" autoComplete="name" required className={field} />
             </div>
             <div className="flex flex-col gap-1">
-              <label htmlFor="email" className={fieldLabel}>02 — Your email</label>
+              <label htmlFor="email" className={fieldLabel}>02: Your email</label>
               <input id="email" name="email" type="email" autoComplete="email" required className={field} />
             </div>
             <div className="flex flex-col gap-1">
-              <label htmlFor="message" className={fieldLabel}>03 — What&rsquo;s messy?</label>
+              <label htmlFor="message" className={fieldLabel}>03: What&rsquo;s messy?</label>
               <textarea id="message" name="message" rows={3} required className={field} />
             </div>
             <div className="mt-10">
@@ -1566,7 +1566,7 @@ function ContactSection() {
               </FramedCta>
             </div>
             {status === 'error' && (
-              <p className="text-sm text-red-600 font-mono">error: submission failed — please email me directly.</p>
+              <p className="text-sm text-red-600 font-mono">error: submission failed. Please email me directly.</p>
             )}
           </form>
         )}
