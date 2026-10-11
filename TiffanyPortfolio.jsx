@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Mail, ArrowRight, ArrowLeft, ArrowUpRight, CheckCircle2, Search, X } from 'lucide-react';
+import { Mail, ArrowRight, ArrowLeft, ArrowUpRight, Search, X } from 'lucide-react';
 import dogRunUrl from './assets/dog-run.png';
 
 // ponytail: lucide-react dropped brand/logo glyphs; inline the two marks we need instead of adding a dependency.
@@ -108,21 +108,21 @@ const services = [
     title: 'Operations & Process Design',
     desc: 'The informal, inconsistent, lives-in-someone’s-head process, rebuilt as a repeatable system anyone on the team can run.',
     art: (<>
-      <g fill="none" stroke="#66c3ff" strokeWidth="1.5" strokeLinecap="round">
+      <g className="stroke-emerald" fill="none" strokeWidth="1.5" strokeLinecap="round">
         <path className="a-draw d" pathLength="1" style={{ '--d': '750ms', '--t': '300ms' }} d="M313 180H342" />
         <path className="a-draw d" pathLength="1" style={{ '--d': '850ms', '--t': '300ms' }} d="M368 180H397" />
         <path className="a-draw d" pathLength="1" style={{ '--d': '950ms', '--t': '300ms' }} d="M423 180H452" />
         <path className="a-draw d" pathLength="1" style={{ '--d': '1050ms', '--t': '300ms' }} d="M478 180H507" />
       </g>
-      <g fill="#ffffff" stroke="#66c3ff" strokeWidth="1.5">
+      <g className="fill-paper stroke-emerald" strokeWidth="1.5">
         <rect className="a-fly" x="287" y="167" width="26" height="26" style={{ '--dx': '-70px', '--dy': '-120px', '--r': '-22deg', '--d': '0ms' }} />
         <rect className="a-fly" x="342" y="167" width="26" height="26" style={{ '--dx': '40px', '--dy': '-140px', '--r': '35deg', '--d': '50ms' }} />
         <rect className="a-fly" x="397" y="167" width="26" height="26" style={{ '--dx': '-95px', '--dy': '-50px', '--r': '18deg', '--d': '100ms' }} />
         <rect className="a-fly" x="452" y="167" width="26" height="26" style={{ '--dx': '15px', '--dy': '-100px', '--r': '-40deg', '--d': '150ms' }} />
         <rect className="a-fly" x="507" y="167" width="26" height="26" style={{ '--dx': '-30px', '--dy': '-150px', '--r': '26deg', '--d': '200ms' }} />
       </g>
-      <circle className="a-travel" cx="300" cy="180" r="4" fill="#0b6bb0" />
-      <path className="a-draw d" pathLength="1" style={{ '--d': '1300ms', '--t': '400ms' }} d="M513 180l4 4 9-9" fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <circle className="a-travel fill-emerald-deep" cx="300" cy="180" r="4" />
+      <path className="a-draw d stroke-emerald-deep" pathLength="1" style={{ '--d': '1300ms', '--t': '400ms' }} d="M513 180l4 4 9-9" fill="none" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
       <text className="a-fade" x="533" y="218" textAnchor="end" fill="rgba(11,18,16,.45)" style={{ '--d': '1450ms' }}>runbook v1</text>
     </>),
   },
@@ -137,7 +137,7 @@ const services = [
         <path className="a-draw d" pathLength="1" style={{ '--d': '140ms' }} d="M300 126H540" />
         <path className="a-draw d" pathLength="1" style={{ '--d': '210ms' }} d="M300 154H540" />
       </g>
-      <g fill="#66c3ff">
+      <g className="fill-emerald">
         <rect className="a-grow" x="300" y="56" width="92" height="6" fillOpacity=".45" style={{ '--d': '200ms' }} />
         <rect className="a-grow from-r" x="462" y="56" width="46" height="6" style={{ '--d': '300ms' }} />
         <rect className="a-grow" x="300" y="84" width="70" height="6" fillOpacity=".45" style={{ '--d': '270ms' }} />
@@ -149,19 +149,19 @@ const services = [
         <rect className="a-grow" x="300" y="140" width="82" height="6" fillOpacity=".45" style={{ '--d': '410ms' }} />
         <rect className="a-grow from-r" x="462" y="140" width="46" height="6" style={{ '--d': '510ms' }} />
       </g>
-      <g fill="none" stroke="#0b6bb0" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <g className="stroke-emerald-deep" fill="none" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <path className="a-draw d" pathLength="1" style={{ '--d': '800ms', '--t': '300ms' }} d="M520 59l4 4 8-9" />
         <path className="a-draw d" pathLength="1" style={{ '--d': '960ms', '--t': '300ms' }} d="M520 87l4 4 8-9" />
         <path className="a-draw d" pathLength="1" style={{ '--d': '1250ms', '--t': '400ms' }} d="M294 115H514" />
         <path className="a-draw d" pathLength="1" style={{ '--d': '1120ms', '--t': '300ms' }} d="M520 143l4 4 8-9" />
       </g>
-      <text className="a-fade" x="540" y="119" textAnchor="end" fill="#0b6bb0" style={{ '--d': '1550ms' }}>cut</text>
-      <g fill="none" stroke="#0b1210" strokeOpacity=".5" strokeWidth="1">
+      <text className="a-fade fill-emerald-deep" x="540" y="119" textAnchor="end" style={{ '--d': '1550ms' }}>cut</text>
+      <g className="stroke-ink" fill="none" strokeOpacity=".5" strokeWidth="1">
         <path className="a-draw d" pathLength="1" style={{ '--d': '1500ms', '--t': '400ms' }} d="M440 172H540" />
         <path className="a-draw d" pathLength="1" style={{ '--d': '1580ms', '--t': '400ms' }} d="M440 177H540" />
       </g>
       <text className="a-fade" x="300" y="193" fill="rgba(11,18,16,.45)" style={{ '--d': '1650ms' }}>total</text>
-      <rect className="a-grow from-r" x="462" y="186" width="46" height="7" fill="#0b6bb0" style={{ '--d': '1700ms' }} />
+      <rect className="a-grow from-r fill-emerald-deep" x="462" y="186" width="46" height="7" style={{ '--d': '1700ms' }} />
     </>),
   },
   {
@@ -170,8 +170,8 @@ const services = [
     desc: 'Data scattered across apps, plus what people actually tell you, pulled into one view, so you fix the root cause, not the symptom.',
     art: (<>
       <path className="a-draw d" pathLength="1" style={{ '--t': '700ms' }} d="M300 36V204H548" fill="none" stroke="rgba(102,195,255,.7)" strokeWidth="1" />
-      <line className="a-scan" x1="300" y1="36" x2="300" y2="204" stroke="#66c3ff" strokeWidth="1.5" />
-      <g fill="#66c3ff">
+      <line className="a-scan stroke-emerald" x1="300" y1="36" x2="300" y2="204" strokeWidth="1.5" />
+      <g className="fill-emerald">
         <circle className="a-fly" cx="320" cy="184" r="4" style={{ '--dx': '-120px', '--dy': '-130px', '--d': '150ms' }} />
         <circle className="a-fly" cx="345" cy="174" r="4" style={{ '--dx': '180px', '--dy': '-150px', '--d': '190ms' }} />
         <circle className="a-fly" cx="370" cy="168" r="4" style={{ '--dx': '-90px', '--dy': '40px', '--d': '230ms' }} />
@@ -182,12 +182,12 @@ const services = [
         <circle className="a-fly" cx="495" cy="114" r="4" style={{ '--dx': '60px', '--dy': '110px', '--d': '430ms' }} />
         <circle className="a-fly" cx="520" cy="104" r="4" style={{ '--dx': '-200px', '--dy': '20px', '--d': '470ms' }} />
       </g>
-      <path className="a-draw d" pathLength="1" style={{ '--d': '900ms', '--t': '600ms' }} d="M312 190L532 98" fill="none" stroke="#66c3ff" strokeOpacity=".6" strokeWidth="1" />
-      <circle className="a-fly" cx="452" cy="66" r="4.5" fill="#0b6bb0" style={{ '--dx': '110px', '--dy': '-40px', '--d': '510ms' }} />
-      <circle className="a-ring" cx="452" cy="66" r="13" fill="none" stroke="#0b6bb0" strokeWidth="1.5" style={{ '--d': '1300ms' }} />
-      <circle className="a-pulse" cx="452" cy="66" r="13" fill="none" stroke="#66c3ff" strokeWidth="1.5" style={{ '--d': '1900ms' }} />
-      <path className="a-fade" style={{ '--d': '1450ms' }} d="M452 44V52M452 80V88M430 66H438M466 66H474" fill="none" stroke="#0b6bb0" strokeWidth="1.5" strokeLinecap="round" />
-      <text className="a-fade" x="480" y="62" fill="#0b6bb0" style={{ '--d': '1650ms' }}>root cause</text>
+      <path className="a-draw d stroke-emerald" pathLength="1" style={{ '--d': '900ms', '--t': '600ms' }} d="M312 190L532 98" fill="none" strokeOpacity=".6" strokeWidth="1" />
+      <circle className="a-fly fill-emerald-deep" cx="452" cy="66" r="4.5" style={{ '--dx': '110px', '--dy': '-40px', '--d': '510ms' }} />
+      <circle className="a-ring stroke-emerald-deep" cx="452" cy="66" r="13" fill="none" strokeWidth="1.5" style={{ '--d': '1300ms' }} />
+      <circle className="a-pulse stroke-emerald" cx="452" cy="66" r="13" fill="none" strokeWidth="1.5" style={{ '--d': '1900ms' }} />
+      <path className="a-fade stroke-emerald-deep" style={{ '--d': '1450ms' }} d="M452 44V52M452 80V88M430 66H438M466 66H474" fill="none" strokeWidth="1.5" strokeLinecap="round" />
+      <text className="a-fade fill-emerald-deep" x="480" y="62" style={{ '--d': '1650ms' }}>root cause</text>
     </>),
   },
   {
@@ -195,9 +195,9 @@ const services = [
     title: 'Product & Internal Tooling',
     desc: 'When the fix is a tool that doesn’t exist yet: PRD, stack decision, and a working build, not a recommendation deck.',
     art: (<>
-      <rect className="a-draw d" pathLength="1" style={{ '--t': '700ms' }} x="330" y="34" width="210" height="150" fill="#ffffff" fillOpacity=".6" stroke="#66c3ff" strokeWidth="1.5" />
-      <path className="a-draw d" pathLength="1" style={{ '--d': '400ms', '--t': '400ms' }} d="M330 52H540" fill="none" stroke="#66c3ff" strokeWidth="1" />
-      <g fill="#66c3ff">
+      <rect className="a-draw d fill-paper stroke-emerald" pathLength="1" style={{ '--t': '700ms' }} x="330" y="34" width="210" height="150" fillOpacity=".6" strokeWidth="1.5" />
+      <path className="a-draw d stroke-emerald" pathLength="1" style={{ '--d': '400ms', '--t': '400ms' }} d="M330 52H540" fill="none" strokeWidth="1" />
+      <g className="fill-emerald">
         <circle className="a-pop" cx="340" cy="43" r="2.5" style={{ '--d': '500ms' }} />
         <circle className="a-pop" cx="348" cy="43" r="2.5" style={{ '--d': '550ms' }} />
         <circle className="a-pop" cx="356" cy="43" r="2.5" style={{ '--d': '600ms' }} />
@@ -209,9 +209,9 @@ const services = [
         <rect className="a-grow" x="386" y="80" width="86" height="6" style={{ '--d': '1150ms', '--t': '300ms', '--ease': 'steps(7,end)' }} />
         <rect className="a-grow" x="386" y="94" width="136" height="6" style={{ '--d': '1450ms', '--t': '400ms', '--ease': 'steps(10,end)' }} />
       </g>
-      <g className="a-fade" style={{ '--d': '1850ms' }}><rect className="a-blink" x="525" y="92" width="2" height="10" fill="#0b6bb0" /></g>
-      <rect className="a-draw d" pathLength="1" style={{ '--d': '1000ms', '--t': '500ms' }} x="386" y="112" width="140" height="44" fill="none" stroke="#66c3ff" strokeWidth="1" />
-      <g fill="#66c3ff" fillOpacity=".55">
+      <g className="a-fade" style={{ '--d': '1850ms' }}><rect className="a-blink fill-emerald-deep" x="525" y="92" width="2" height="10" /></g>
+      <rect className="a-draw d stroke-emerald" pathLength="1" style={{ '--d': '1000ms', '--t': '500ms' }} x="386" y="112" width="140" height="44" fill="none" strokeWidth="1" />
+      <g className="fill-emerald" fillOpacity=".55">
         <rect className="a-growy" x="396" y="138" width="12" height="14" style={{ '--d': '1250ms' }} />
         <rect className="a-growy" x="416" y="130" width="12" height="22" style={{ '--d': '1300ms' }} />
         <rect className="a-growy" x="436" y="134" width="12" height="18" style={{ '--d': '1350ms' }} />
@@ -219,11 +219,11 @@ const services = [
         <rect className="a-growy" x="476" y="126" width="12" height="26" style={{ '--d': '1450ms' }} />
         <rect className="a-growy" x="496" y="118" width="12" height="34" style={{ '--d': '1500ms' }} />
       </g>
-      <rect className="a-pop" x="470" y="164" width="56" height="12" fill="#0b6bb0" style={{ '--d': '2000ms' }} />
+      <rect className="a-pop fill-emerald-deep" x="470" y="164" width="56" height="12" style={{ '--d': '2000ms' }} />
       <text className="a-fade" x="330" y="208" fill="rgba(11,18,16,.5)" style={{ '--d': '300ms' }}>prd.md</text>
       <text className="a-fade" x="376" y="208" fill="rgba(11,18,16,.5)" style={{ '--d': '900ms' }}>→ stack</text>
       <text className="a-fade" x="430" y="208" fill="rgba(11,18,16,.5)" style={{ '--d': '1500ms' }}>→ build</text>
-      <text className="a-fade" x="540" y="208" textAnchor="end" fill="#0b6bb0" style={{ '--d': '2100ms' }}>shipped</text>
+      <text className="a-fade fill-emerald-deep" x="540" y="208" textAnchor="end" style={{ '--d': '2100ms' }}>shipped</text>
     </>),
   },
 ];
@@ -1446,6 +1446,9 @@ const field = 'w-full pt-2 pb-3 bg-transparent border-b border-line rounded-none
 const fieldLabel = `${eyebrow} text-ink/60`;
 const contactLink = 'inline-flex items-center gap-3 min-h-11 font-mono text-sm hover:text-emerald-deep transition-colors';
 
+// Success burst: [dx, dy, rotate] per tick, fanned out around the check.
+const OK_BURST = [[72, 0, 90], [94, 45, -120], [45, 56, 200], [23, 101, -70], [-16, 70, 160], [-65, 81, -200], [-65, 31, 110], [-104, 0, -90], [-65, -31, 220], [-65, -81, -150], [-16, -70, 75], [23, -101, -210], [45, -56, 130], [94, -45, -60]];
+
 function ContactSection() {
   const [status, setStatus] = useState('idle');
 
@@ -1498,11 +1501,46 @@ function ContactSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="border border-line h-full flex flex-col items-center justify-center text-center p-10"
+            role="status"
+            className="border border-line h-full min-h-[520px] flex flex-col gap-6 p-8"
           >
-            <CheckCircle2 className="text-emerald mb-4" size={36} />
-            <h2 className="font-display text-xl font-bold mb-2">Message sent</h2>
-            <p className="text-ink/60 text-sm">Thanks for reaching out! I&rsquo;ll be in touch soon.</p>
+            {/* the message flies from you to my inbox */}
+            <div aria-hidden="true" className={`flex items-center gap-3 ${mono12} uppercase tracking-widest text-ink/60`}>
+              <span>you</span>
+              <div className="relative w-60 max-w-full h-2.5 shrink">
+                <div className="absolute inset-x-0 top-1/2 border-t border-dotted border-ink/25" />
+                <div className="ok-sq" />
+              </div>
+              <span className="ok-end text-ink">inbox</span>
+            </div>
+
+            <div aria-hidden="true" className="relative w-22 h-22">
+              <div className="ok-ring absolute inset-0" />
+              {OK_BURST.map(([dx, dy, r], i) => (
+                <span key={i} className="ok-tk" style={{ '--dx': `${dx}px`, '--dy': `${dy}px`, '--r': `${r}deg` }} />
+              ))}
+              <svg width="88" height="88" viewBox="0 0 24 24" className="absolute inset-0">
+                <path className="ok-circle" pathLength="1" d="M21.801 10A10 10 0 1 1 17 3.335" />
+                <path className="ok-check" pathLength="1" d="m9 11 3 3L22 4" />
+              </svg>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <h2 className="ok-up font-display font-bold text-4xl leading-[1.15] tracking-tight" style={{ '--d': '1400ms' }}>Sent.</h2>
+              <p className="ok-up max-w-md text-ink/60 leading-relaxed" style={{ '--d': '1550ms' }}>
+                It&rsquo;s in my inbox. I&rsquo;ll write back myself, usually faster than that animation took.
+              </p>
+            </div>
+
+            <div className="ok-up mt-auto pt-4 border-t border-line" style={{ '--d': '1900ms' }}>
+              <button
+                type="button"
+                onClick={() => setStatus('idle')}
+                className={`${eyebrow} min-h-11 border-b-2 border-emerald hover:text-emerald-deep transition-colors`}
+              >
+                Send another →
+              </button>
+            </div>
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-8">
