@@ -311,6 +311,7 @@ const projects = [
     image: null,
     slot: 'case-nonprofit-ops.png',
     tags: ['QuickBooks', 'BILL.com', 'Google Sheets'],
+    logo: { src: 'graphics/dvs-logo.png', alt: 'Data Visualization Society' },
     featured: true,
     art: (<>
       <g className="a-dim" style={{ '--d': '800ms' }}>
@@ -370,6 +371,7 @@ const projects = [
     image: null,
     slot: 'case-nonprofit-ops-tech.png',
     tags: ['Jira', 'Slack', 'Claude'],
+    logo: { src: 'graphics/rlc-logo.png', alt: 'Rescuing Leftover Cuisine' },
     art: (<>
       <g fill="rgba(11,18,16,.5)">
         <text className="a-fade" x="300" y="40" style={{ '--d': '0ms' }}>todo</text>
@@ -431,6 +433,7 @@ const projects = [
     image: null,
     slot: 'case-engagement-dashboard.png',
     tags: ['Power BI', 'Power Query', 'Stakeholder interviews'],
+    logo: { src: 'graphics/pwc-logo.svg', alt: 'PwC' },
     art: (<>
       <g fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.25">
         <rect className="a-draw d" pathLength="1" style={{ '--d': '0ms', '--t': '400ms' }} x="300" y="40" width="50" height="26" />
@@ -489,6 +492,7 @@ const projects = [
     image: null,
     slot: 'case-review-cycle.png',
     tags: ['Google Forms', 'Power BI', 'Power Query'],
+    logo: { src: 'graphics/a4-logo.svg', alt: 'Asian American Arts Alliance' },
     art: (<>
       <rect className="a-draw d" pathLength="1" style={{ '--t': '600ms' }} x="300" y="40" width="96" height="124" fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.5" />
       <g fill="#ffffff" stroke="#66c3ff" strokeWidth="1.25">
@@ -1145,6 +1149,10 @@ function ProjectDetail({ project, prev, next }) {
           {project.subtitle && <p className="font-mono text-sm text-ink/40 mb-8">{project.subtitle}</p>}
           {project.image ? (
             <img src={project.image} alt={project.title} className="w-full border border-line my-8" />
+          ) : project.logo ? (
+            <div className="w-full h-64 sm:h-72 border border-line my-8 bg-white flex items-center justify-center p-10">
+              <img src={project.logo.src} alt={project.logo.alt} className="w-full h-full max-w-md object-contain" />
+            </div>
           ) : project.canary ? (
             <CanaryVisual className="w-full h-64 sm:h-72 border border-line my-8" />
           ) : (
