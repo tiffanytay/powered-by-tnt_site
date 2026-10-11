@@ -181,3 +181,22 @@
 .fc:is(:hover, :has(:focus-visible)) .fc-bloom { transform: scale(1) rotate(0deg); transition: transform 560ms cubic-bezier(.34,1.56,.64,1) var(--d); }
 .fc:is(:hover, :has(:focus-visible)) .fc-letter { transform: translateY(0); transition: transform 420ms cubic-bezier(.19,1,.22,1) 1000ms; }
 @media (prefers-reduced-motion: reduce) { .fc-vine, .fc-leaf, .fc-bloom, .fc-letter, .fc-arrow { transition-duration: 1ms !important; transition-delay: 0ms !important; } }
+
+/* Contact success: message flies to the inbox, the check draws, a burst fires, copy rises.
+   Everything is laid out in its finished state; animations only run "from" hidden. */
+.ok-circle, .ok-check { stroke-dasharray: 1; stroke-dashoffset: 0; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ok-circle { stroke: var(--color-emerald); animation: ok-draw 600ms cubic-bezier(.19,1,.22,1) 900ms both; }
+.ok-check { stroke: var(--color-ink); animation: ok-draw 450ms cubic-bezier(.19,1,.22,1) 1350ms both; }
+.ok-sq { position: absolute; left: 0; top: 50%; width: 10px; height: 10px; margin-top: -5px; opacity: 0; background: var(--color-ink); animation: ok-fly 800ms cubic-bezier(.4,0,.2,1) 150ms both; }
+.ok-end { animation: ok-end 400ms cubic-bezier(.19,1,.22,1) 850ms both; }
+.ok-ring { opacity: 0; border: 2px solid var(--color-emerald); border-radius: 9999px; animation: ok-ring 900ms cubic-bezier(.19,1,.22,1) 1300ms both; }
+.ok-tk { position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; opacity: 0; background: var(--color-ink); animation: ok-tick 1000ms cubic-bezier(.19,1,.22,1) 1300ms both; }
+.ok-tk:nth-child(even) { background: var(--color-emerald); }
+.ok-up { animation: ok-up 500ms cubic-bezier(.19,1,.22,1) var(--d, 0ms) both; }
+@keyframes ok-draw { from { stroke-dashoffset: 1 } to { stroke-dashoffset: 0 } }
+@keyframes ok-fly { 0% { transform: translateX(0); opacity: 0 } 15% { opacity: 1 } 85% { opacity: 1 } 100% { transform: translateX(230px); opacity: 0 } }
+@keyframes ok-end { from { opacity: .35 } to { opacity: 1 } }
+@keyframes ok-ring { 0% { opacity: .9; transform: scale(.9) } 100% { opacity: 0; transform: scale(2.4) } }
+@keyframes ok-tick { 0% { opacity: 0; transform: translate(0,0) rotate(0) scale(.5) } 15% { opacity: 1 } 100% { opacity: 0; transform: translate(var(--dx),var(--dy)) rotate(var(--r)) scale(1) } }
+@keyframes ok-up { from { opacity: 0; transform: translateY(20px) } to { opacity: 1; transform: none } }
+@media (prefers-reduced-motion: reduce) { :is(.ok-circle, .ok-check, .ok-sq, .ok-end, .ok-ring, .ok-tk, .ok-up) { animation: none !important; } }
