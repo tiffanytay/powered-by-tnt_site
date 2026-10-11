@@ -312,6 +312,7 @@ const projects = [
     image: null,
     slot: 'case-nonprofit-ops.png',
     tags: ['QuickBooks', 'BILL.com', 'Google Sheets'],
+    logo: { src: 'graphics/dvs-logo.png', alt: 'Data Visualization Society' },
     featured: true,
     art: (<>
       <g className="a-dim" style={{ '--d': '800ms' }}>
@@ -367,11 +368,12 @@ const projects = [
     n: '02',
     title: 'Ran Operations & Technology for a Lean Nonprofit',
     subtitle: 'Cross-functional ownership',
-    desc: 'Took over a $200k department mid-project: launched a stalled mobile app, owned budget and roadmap, automated intake, and led 3 staff plus contractors.',
+    desc: 'Joined mid-project to launch a stalled mobile app, then led the $200k Technology Department: owned budget and roadmap, automated intake, and managed 2 staff plus contractors.',
     skills: ['Team leadership', 'Budget ownership', 'Project recovery', 'Process automation', 'Roadmap planning'],
     image: null,
     slot: 'case-nonprofit-ops-tech.png',
     tags: ['Jira', 'Slack', 'Claude'],
+    logo: { src: 'graphics/rlc-logo.png', alt: 'Rescuing Leftover Cuisine' },
     art: (<>
       <g fill="rgba(11,18,16,.5)">
         <text className="a-fade" x="300" y="40" style={{ '--d': '0ms' }}>todo</text>
@@ -410,19 +412,19 @@ const projects = [
         <path className="a-draw d" pathLength="1" style={{ '--d': '1400ms', '--t': '400ms' }} d="M336 202Q344 190 352 202" />
         <path className="a-draw d" pathLength="1" style={{ '--d': '1500ms', '--t': '400ms' }} d="M368 202Q376 190 384 202" />
       </g>
-      <text className="a-fade" x="540" y="212" textAnchor="end" fill="rgba(11,18,16,.5)" style={{ '--d': '1700ms' }}>team of 3+</text>
+      <text className="a-fade" x="540" y="212" textAnchor="end" fill="rgba(11,18,16,.5)" style={{ '--d': '1700ms' }}>team of 2+</text>
     </>),
     visual: {
       eyebrow: 'Operations & Technology',
-      flow: ['Inherited stalled project', 'Owned budget & roadmap', 'Built intake automation', 'Led team of 3+'],
-      stat: '3 staff + contractors',
+      flow: ['Inherited stalled project', 'Owned budget & roadmap', 'Built intake automation', 'Led team of 2+'],
+      stat: '2 staff + contractors',
       statLabel: 'managed across a $200k department',
     },
     star: {
-      situation: 'A lean nonprofit had a mobile app project stalled mid-build and a technology department without clear ownership.',
-      task: 'Join mid-project, get the app to launch, then take on the department’s budget, roadmap and staff.',
-      action: 'Brought the stalled app to launch, owned the budget and roadmap, built intake automation, and led a team of 3+ staff and contractors, picking up whatever else the organization needed.',
-      result: 'Launched the app and ran a $200k department with 3 staff plus contractors.',
+      situation: 'A lean nonprofit had a mobile app project stalled mid-build.',
+      task: 'Join mid-project, get the app to launch, then transition into leading the Technology Department, including its budget, roadmap and staff.',
+      action: 'Brought the stalled app to launch, owned the budget and roadmap, built intake automation, and led a team of 2+ staff and contractors, picking up whatever else the organization needed.',
+      result: 'Launched the app and ran a $200k department with 2 staff plus contractors.',
     },
   },
   {
@@ -434,6 +436,7 @@ const projects = [
     image: null,
     slot: 'case-review-cycle.png',
     tags: ['Google Forms', 'Power BI', 'Power Query'],
+    logo: { src: 'graphics/a4-logo.svg', alt: 'Asian American Arts Alliance' },
     art: (<>
       <rect className="a-draw d" pathLength="1" style={{ '--t': '600ms' }} x="300" y="40" width="96" height="124" fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.5" />
       <g fill="#ffffff" stroke="#66c3ff" strokeWidth="1.25">
@@ -491,6 +494,7 @@ const projects = [
     image: null,
     slot: 'case-engagement-dashboard.png',
     tags: ['Power BI', 'Power Query', 'Stakeholder interviews'],
+    logo: { src: 'graphics/pwc-logo.svg', alt: 'PwC' },
     art: (<>
       <g fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.25">
         <rect className="a-draw d" pathLength="1" style={{ '--d': '0ms', '--t': '400ms' }} x="300" y="40" width="50" height="26" />
@@ -1150,6 +1154,10 @@ function ProjectDetail({ project, prev, next }) {
           {project.subtitle && <p className="font-mono text-sm text-ink/40 mb-8">{project.subtitle}</p>}
           {project.image ? (
             <img src={project.image} alt={project.title} className="w-full border border-line my-8" />
+          ) : project.logo ? (
+            <div className="w-full h-64 sm:h-72 border border-line my-8 bg-white flex items-center justify-center p-10">
+              <img src={project.logo.src} alt={project.logo.alt} className="w-full h-full max-w-md object-contain" />
+            </div>
           ) : project.canary ? (
             <CanaryVisual className="w-full h-64 sm:h-72 border border-line my-8" />
           ) : (
