@@ -372,6 +372,7 @@ const projects = [
     image: null,
     slot: 'case-nonprofit-ops-tech.png',
     tags: ['Jira', 'Slack', 'Claude'],
+    brand: { logo: 'graphics/rlc-logo.png', name: 'Rescuing Leftover Cuisine', href: 'https://www.rescuingleftovercuisine.org', wordmark: true },
     art: (<>
       <g fill="rgba(11,18,16,.5)">
         <text className="a-fade" x="300" y="40" style={{ '--d': '0ms' }}>todo</text>
