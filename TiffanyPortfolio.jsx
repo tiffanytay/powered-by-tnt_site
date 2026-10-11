@@ -433,6 +433,7 @@ const projects = [
     image: null,
     slot: 'case-engagement-dashboard.png',
     tags: ['Power BI', 'Power Query', 'Stakeholder interviews'],
+    brand: { logo: 'graphics/pwc-logo.svg', name: 'PwC', href: 'https://www.pwc.com', wordmark: true },
     art: (<>
       <g fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.25">
         <rect className="a-draw d" pathLength="1" style={{ '--d': '0ms', '--t': '400ms' }} x="300" y="40" width="50" height="26" />
