@@ -151,6 +151,19 @@
 @keyframes pp-pulse { 0%, 100% { opacity: 1 } 50% { opacity: .35 } }
 @media (prefers-reduced-motion: reduce) { .pp-stamp, .pp-banner, .pp-dot { animation: none !important; } .pp-face::after { display: none; } }
 
+/* Budget Canary mascot (project 05 hero), lifted from budgetcanary.com/waitlist: bob, beak chirp, notes drift up. */
+@keyframes bc-bob { 0%, 60%, 100% { transform: translateY(0) } 74% { transform: translateY(-.5px) } }
+@keyframes bc-beak { 0%, 64%, 100% { transform: rotate(0) } 72% { transform: rotate(-15deg) } 80% { transform: rotate(-3deg) } 88% { transform: rotate(-11deg) } }
+@keyframes bc-note { 0% { opacity: 0; transform: translate(0) scale(.7) } 18% { opacity: 1 } 100% { opacity: 0; transform: translate(5px, -11px) scale(1.05) } }
+.bc-body { transform-box: fill-box; transform-origin: 50% 90%; }
+.bc-beak { transform-box: fill-box; transform-origin: 0 55%; }
+.bc-note { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .bc-body { animation: bc-bob 2.8s ease-in-out infinite; }
+  .bc-beak { animation: bc-beak 2.8s ease-in-out infinite; }
+  .bc-note { animation: bc-note 2.8s ease-out infinite; }
+}
+
 /* CTA frames (see FramedCta): vines draw, leaves pop, blooms spin open / envelopes tumble in on hover/keyboard focus. */
 .fc { position: relative; display: inline-flex; }
 .fc > :not(.fc-garden) { position: relative; z-index: 2; }
