@@ -468,6 +468,228 @@ function figFrame(p) {
   };
 }
 
+// Floral frame for the landing CTA, ported from the "CTA floral frame" design canvas.
+// Seeded, so the garden is identical every load; built once at module scope. `d` = enter delay in ms.
+function buildGarden() {
+  let seed = 33;
+  const rnd = () => {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+  const r1 = (n) => Math.round(n * 10) / 10;
+  const dl = (ms) => Math.max(0, Math.min(800, Math.round(ms / 40) * 40));
+  const rot = (x, y, deg) => { const a = deg * Math.PI / 180, c = Math.cos(a), s = Math.sin(a); return [x * c - y * s, x * s + y * c]; };
+  const ell = (cx, cy, rx, ry, deg) => {
+    const u = rot(0, ry, deg), p1 = [cx - u[0], cy - u[1]], p2 = [cx + u[0], cy + u[1]];
+    const A = ` A${r1(rx)} ${r1(ry)} ${r1(deg)} 1 0 `;
+    return `M${r1(p1[0])} ${r1(p1[1])}${A}${r1(p2[0])} ${r1(p2[1])}${A}${r1(p1[0])} ${r1(p1[1])}Z`;
+  };
+  const circ = (cx, cy, r) => ell(cx, cy, r, r, 0);
+  const fillS = (d, fill) => ({ d, fill, stroke: 'none', sw: 0, op: 1 });
+  const lineS = (d, stroke, sw, op) => ({ d, fill: 'none', stroke, sw, op });
+  const pick = (arr) => arr[Math.floor(rnd() * arr.length)];
+  const pt = (p) => `${r1(p[0])} ${r1(p[1])}`;
+  const bez = (P, t) => {
+    const u = 1 - t;
+    return [0, 1].map((k) => u*u*u*P[0][k] + 3*u*u*t*P[1][k] + 3*u*t*t*P[2][k] + t*t*t*P[3][k]);
+  };
+  const bezA = (P, t) => {
+    const u = 1 - t;
+    const [dx, dy] = [0, 1].map((k) => 3*u*u*(P[1][k]-P[0][k]) + 6*u*t*(P[2][k]-P[1][k]) + 3*t*t*(P[3][k]-P[2][k]));
+    return Math.atan2(dy, dx) * 180 / Math.PI;
+  };
+  const pathOf = (P) => `M${pt(P[0])} C${pt(P[1])} ${pt(P[2])} ${pt(P[3])}`;
+
+  const CREAM = '#fff4ea', PLUM = '#3a2033';
+  const greens = ['#2e5a46', '#2e5a46', '#2e5a46', '#4f8062', '#4f8062', '#4f8062', '#86ab8f', '#86ab8f', '#b5d3c0', '#6f8f4a'];
+  const vines = [], leaves = [], flowers = [];
+
+  function addLeaf(x, y, ang, delay, kind) {
+    const round = kind === 'round';
+    const len = round ? 11 + rnd() * 4 : 16 + rnd() * 11;
+    const w = len * (round ? 0.48 : 0.3);
+    leaves.push({
+      t: `translate(${r1(x)} ${r1(y)}) rotate(${r1(ang)})`,
+      d: `M0 0 C${r1(len*0.25)} ${r1(-w)} ${r1(len*0.72)} ${r1(-w*1.05)} ${r1(len)} 0 C${r1(len*0.72)} ${r1(w*1.05)} ${r1(len*0.25)} ${r1(w)} 0 0Z`,
+      rib: `M${r1(len*0.12)} 0 Q${r1(len*0.5)} ${r1(-w*0.12)} ${r1(len*0.82)} 0`,
+      fill: round ? pick(['#86ab8f', '#b5d3c0', '#4f8062']) : pick(greens),
+      d0: dl(delay),
+    });
+  }
+
+  // Button perimeter: half-size 92 x 26, walked clockwise from top-left.
+  const HW = 92, HH = 26, PER = 2 * (2 * HW + 2 * HH);
+  function edgeAt(s) {
+    s = ((s % PER) + PER) % PER;
+    if (s < 2*HW) return { p: [-HW + s, -HH], n: [0, -1] };
+    s -= 2*HW;
+    if (s < 2*HH) return { p: [HW, -HH + s], n: [1, 0] };
+    s -= 2*HH;
+    if (s < 2*HW) return { p: [HW - s, HH], n: [0, 1] };
+    s -= 2*HW;
+    return { p: [-HW, HH - s], n: [-1, 0] };
+  }
+
+  // Filler stems: dense, short, hugging the button.
+  const STEMS = 36;
+  for (let i = 0; i < STEMS; i++) {
+    const s = (i + rnd() * 0.6) * PER / STEMS;
+    const e = edgeAt(s);
+    let n = e.n, tg = [-n[1], n[0]];
+    if (Math.abs(e.p[0]) > HW - 14 && Math.abs(e.p[1]) > HH - 8) { n = [Math.sign(e.p[0]) * 0.7, Math.sign(e.p[1]) * 0.7]; tg = [-n[1], n[0]]; }
+    const sw = i % 2 === 0 ? 1 : -1;
+    const out = 24 + rnd() * 14, drift = (14 + rnd() * 14) * sw;
+    const P0 = [e.p[0] - n[0] * 4, e.p[1] - n[1] * 4];
+    const P = [P0,
+      [P0[0] + n[0] * 14, P0[1] + n[1] * 14],
+      [P0[0] + n[0] * out * 0.8 + tg[0] * drift * 0.4, P0[1] + n[1] * out * 0.8 + tg[1] * drift * 0.4],
+      [P0[0] + n[0] * out + tg[0] * drift, P0[1] + n[1] * out + tg[1] * drift]];
+    const vd = (s / PER) * 120;
+    vines.push({ d: pathOf(P), d0: dl(vd), w: r1(1.6 + rnd() * 0.6) });
+    const a0 = bezA(P, 0.12);
+    addLeaf(...bez(P, 0.1), a0 - 78, vd + 20, 'long');
+    addLeaf(...bez(P, 0.14), a0 + 78, vd + 40, rnd() < 0.3 ? 'round' : 'long');
+    [0.4, 0.65, 0.85].forEach((t, j) => {
+      addLeaf(...bez(P, t), bezA(P, t) + (j % 2 === 0 ? -48 : 48), vd + t * 260, rnd() < 0.25 ? 'round' : 'long');
+    });
+    addLeaf(P[3][0], P[3][1], bezA(P, 1), vd + 300, 'long');
+  }
+
+  const peonyCols = [
+    ['#ee6f57', '#f6a08a', '#d84f45'],
+    ['#e45f84', '#f39ab2', '#c43c66'],
+    ['#c9333d', '#e0626a', '#9e1f2e'],
+    ['#f5a9a0', '#fbd0c6', '#e57f78'],
+  ];
+  const bloomCols = ['#f39a3d', '#ec7f9b', '#d23f45', '#f8b98a', '#ee6f57'];
+  function peony(r, cols) {
+    const out = [], a0 = rnd() * 360;
+    for (let j = 0; j < 8; j++) { const c = rot(0, -0.62 * r, a0 + j * 45); out.push(fillS(circ(c[0], c[1], 0.45 * r), cols[0])); }
+    for (let j = 0; j < 8; j += 2) {
+      const ah = a0 + j * 45;
+      out.push(lineS(`M${pt(rot(0, -0.86 * r, ah - 16))} Q${pt(rot(0, -0.98 * r, ah))} ${pt(rot(0, -0.86 * r, ah + 16))}`, CREAM, 1.1, 0.75));
+    }
+    for (let j = 0; j < 6; j++) { const c = rot(0, -0.36 * r, a0 + 30 + j * 60); out.push(fillS(circ(c[0], c[1], 0.36 * r), cols[1])); }
+    for (let j = 0; j < 4; j++) { const c = rot(0, -0.15 * r, a0 + j * 90); out.push(fillS(circ(c[0], c[1], 0.24 * r), cols[2])); }
+    out.push(fillS(circ(0, 0, 0.13 * r), cols[2]));
+    out.push(lineS(`M${pt(rot(0, -0.3 * r, a0 + 200))} Q${pt(rot(0, -0.34 * r, a0 + 250))} ${pt(rot(0, -0.3 * r, a0 + 300))}`, CREAM, 0.9, 0.6));
+    return out;
+  }
+  function bloom(r, col) {
+    const out = [], a0 = rnd() * 360;
+    for (let j = 0; j < 6; j++) {
+      const a = a0 + j * 60, c = rot(0, -0.5 * r, a);
+      out.push(fillS(ell(c[0], c[1], 0.36 * r, 0.52 * r, a), col));
+      out.push(lineS(`M${pt(rot(0, -0.36 * r, a))} L${pt(rot(0, -0.78 * r, a))}`, CREAM, 0.8, 0.6));
+    }
+    out.push(fillS(circ(0, 0, 0.3 * r), PLUM));
+    for (let j = 0; j < 7; j++) { const d = rot(0, -0.42 * r, a0 + j * 51); out.push(fillS(circ(d[0], d[1], 0.06 * r + 0.4), CREAM)); }
+    return out;
+  }
+  function bud(r, col, ang) {
+    const tipP = rot(0, -1.2 * r, ang), lA = rot(-0.7 * r, 0, ang), rA = rot(0.7 * r, 0, ang), bt = rot(0, 0.4 * r, ang);
+    const s1 = rot(-0.55 * r, -0.2 * r, ang), s2 = rot(0.55 * r, -0.2 * r, ang), sb = rot(0, 0.5 * r, ang);
+    return [
+      fillS(`M${pt(bt)} Q${pt(lA)} ${pt(tipP)} Q${pt(rA)} ${pt(bt)}Z`, col),
+      fillS(`M${pt(sb)} Q${r1(s1[0] - 0.1)} ${r1(s1[1])} ${r1(s1[0])} ${r1(s1[1] - 0.2 * r)} Q${r1(s1[0] * 0.3)} ${r1(s1[1] * 0.3)} ${pt(sb)}Z`, '#2e5a46'),
+      fillS(`M${pt(sb)} Q${r1(s2[0] + 0.1)} ${r1(s2[1])} ${r1(s2[0])} ${r1(s2[1] - 0.2 * r)} Q${r1(s2[0] * 0.3)} ${r1(s2[1] * 0.3)} ${pt(sb)}Z`, '#4f8062'),
+      lineS(`M${pt(rot(-0.15 * r, -0.2 * r, ang))} L${pt(rot(-0.05 * r, -0.85 * r, ang))}`, CREAM, 0.9, 0.6),
+    ];
+  }
+  function berries(col) {
+    const out = [], a0 = rnd() * 360;
+    for (let j = 0; j < 3; j++) {
+      const c = rot(0, -6.5, a0 + j * 120);
+      out.push(lineS(`M0 0 L${pt(c)}`, '#3f6b4f', 1, 0.9));
+      out.push(fillS(circ(c[0], c[1], 3.6), col));
+      out.push(fillS(circ(c[0] - 1.1, c[1] - 1.1, 0.9), CREAM));
+    }
+    return out;
+  }
+
+  const specs = [
+    { x: -124, y: -4, k: 'peony', r: 24, c: 0 }, { x: -28, y: -52, k: 'peony', r: 23, c: 2 },
+    { x: 126, y: 10, k: 'peony', r: 24, c: 1 }, { x: 42, y: 52, k: 'peony', r: 23, c: 3 },
+    { x: -78, y: -46, k: 'bloom', r: 14 }, { x: 14, y: -56, k: 'bloom', r: 13 }, { x: 72, y: -50, k: 'bloom', r: 14 },
+    { x: 112, y: -44, k: 'bloom', r: 13 }, { x: 118, y: 56, k: 'bloom', r: 14 }, { x: -72, y: 50, k: 'bloom', r: 14 },
+    { x: -126, y: 44, k: 'bloom', r: 13 },
+    { x: -158, y: -30, k: 'bud', r: 9 }, { x: 160, y: -20, k: 'bud', r: 9 }, { x: -12, y: 58, k: 'bud', r: 9 }, { x: 165, y: 34, k: 'bud', r: 8 },
+    { x: -104, y: -48, k: 'berry' }, { x: 98, y: -62, k: 'berry' }, { x: -36, y: 62, k: 'berry' }, { x: 82, y: 40, k: 'berry' },
+    { x: 150, y: -46, k: 'berry' },
+  ];
+  specs.forEach((f) => { f.ang = Math.atan2(f.y, f.x); });
+  specs.sort((a, b) => a.ang - b.ang);
+  specs.forEach((f, idx) => {
+    const nx = Math.max(-HW, Math.min(HW, f.x)), ny = Math.max(-HH, Math.min(HH, f.y));
+    const dx = f.x - nx, dy = f.y - ny, len = Math.sqrt(dx*dx + dy*dy) || 1;
+    const ux = dx / len, uy = dy / len;
+    const P0 = [nx - ux * 4, ny - uy * 4];
+    const side = idx % 2 === 0 ? 1 : -1;
+    const P = [P0,
+      [P0[0] + ux * len * 0.35 - uy * 6 * side, P0[1] + uy * len * 0.35 + ux * 6 * side],
+      [f.x - ux * len * 0.3 + uy * 4 * side, f.y - uy * len * 0.3 - ux * 4 * side],
+      [f.x, f.y]];
+    const vd = 30 + (idx / specs.length) * 120;
+    vines.push({ d: pathOf(P), d0: dl(vd), w: f.k === 'peony' ? 2.4 : 1.8 });
+    addLeaf(...bez(P, 0.5), bezA(P, 0.5) + (side > 0 ? -50 : 50), vd + 140, 'long');
+    const deg = Math.atan2(uy, ux) * 180 / Math.PI;
+    const shapes =
+      f.k === 'peony' ? peony(f.r, peonyCols[f.c])
+      : f.k === 'bloom' ? bloom(f.r, bloomCols[idx % bloomCols.length])
+      : f.k === 'bud' ? bud(f.r, pick(['#ee6f57', '#e45f84', '#f5a9a0']), deg + 90)
+      : berries(pick(['#d13b3f', '#f07a5a', '#c43c66']));
+    flowers.push({ t: `translate(${f.x} ${f.y})`, d0: dl(380 + idx * 24), shapes });
+  });
+  return { vines, leaves, flowers };
+}
+const GARDEN = buildGarden();
+
+// Wraps a CTA link; the garden blooms on hover or keyboard focus (pure CSS, see .fc in index.css).
+function FloralCta({ children }) {
+  return (
+    <span className="fc">
+      <svg className="fc-garden" viewBox="-200 -110 400 220" aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="fc-gouache" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="3" result="warp" />
+            <feDisplacementMap in="SourceGraphic" in2="warp" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="wobble" />
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="8" result="grain" />
+            <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.55 1.18" result="grainAlpha" />
+            <feComposite in="wobble" in2="grainAlpha" operator="in" />
+          </filter>
+        </defs>
+        <g filter="url(#fc-gouache)">
+          {GARDEN.vines.map((v, i) => (
+            <path key={i} className="fc-vine" style={{ '--d': `${v.d0}ms` }} d={v.d} pathLength="1" stroke="#3f6b4f" strokeWidth={v.w} strokeLinecap="round" />
+          ))}
+          {GARDEN.leaves.map((l, i) => (
+            <g key={i} transform={l.t}>
+              <g className="fc-leaf" style={{ '--d': `${l.d0}ms` }}>
+                <path d={l.d} fill={l.fill} />
+                <path d={l.rib} fill="none" stroke="#eef5e8" strokeWidth="0.8" strokeLinecap="round" opacity="0.55" />
+              </g>
+            </g>
+          ))}
+        </g>
+        <g filter="url(#fc-gouache)">
+          {GARDEN.flowers.map((f, i) => (
+            <g key={i} transform={f.t}>
+              <g className="fc-bloom" style={{ '--d': `${f.d0}ms` }}>
+                {f.shapes.map((p, j) => (
+                  <path key={j} d={p.d} fill={p.fill} stroke={p.stroke} strokeWidth={p.sw} strokeLinecap="round" opacity={p.op} />
+                ))}
+              </g>
+            </g>
+          ))}
+        </g>
+      </svg>
+      {children}
+    </span>
+  );
+}
+
 const HERO_SCRUB_PX = 1400;
 const NAV_H = 64; // matches the h-16 sticky header
 
@@ -530,9 +752,11 @@ function Hero() {
               I rebuild the spreadsheets, inboxes and one-off exports your team runs on into
               workflows that reconcile — plain English in, board-ready out.
             </p>
-            <a href="#/work" className={`${btn} gap-2 h-12 px-6 text-sm font-semibold`}>
-              See selected work <ArrowRight size={16} />
-            </a>
+            <FloralCta>
+              <a href="#/work" className={`${btn} gap-2 h-12 px-6 text-sm font-semibold`}>
+                See selected work <ArrowRight size={16} className="fc-arrow" />
+              </a>
+            </FloralCta>
           </div>
 
           <div className="relative w-full mt-2 aspect-[342/300] sm:aspect-[1152/400]">
