@@ -242,6 +242,7 @@ const offTheClock = [
     desc: 'Fifteen minutes from the theater district and fully taking advantage of it.',
     image: 'graphics/personal-broadway.jpg',
     slot: 'personal-broadway.jpg',
+    broadway: true,
   },
   {
     title: 'Travel & Food',
@@ -1585,7 +1586,7 @@ function OffTheClockSection() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {offTheClock.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.05} className="flex flex-col gap-2">
-              <div className={item.jigsaw ? 'jig relative mb-2' : 'mb-2'}>
+              <div className={item.jigsaw ? 'jig relative mb-2' : item.broadway ? 'bw relative overflow-hidden mb-2' : 'mb-2'}>
                 {item.passport ? (
                   <button
                     type="button"
@@ -1622,6 +1623,10 @@ function OffTheClockSection() {
                   </div>
                 )}
                 {item.jigsaw && <JigsawShatter image={item.image} />}
+                {item.broadway && (<>
+                  <img src="graphics/broadway-curtain.webp" alt="" aria-hidden="true" className="bw-layer bw-curtain inset-0 h-full" />
+                  <img src="graphics/broadway-seats.webp" alt="" aria-hidden="true" className="bw-layer bw-seats bottom-0 h-1/4" />
+                </>)}
               </div>
               <h3 className="font-display font-bold text-lg tracking-tight">{item.title}</h3>
               <p className="text-sm text-ink/60 leading-relaxed">{item.desc}</p>
