@@ -306,7 +306,7 @@ const projects = [
     n: '01',
     title: 'Rebuilt Nonprofit Finance Ops as Operations Director',
     subtitle: 'Ownership under ambiguity',
-    desc: 'Nominated and voted into a role that had sat vacant for months, then set the bookkeeping standard and audited every recurring expense.',
+    desc: 'Nominated and voted into a role that had sat vacant for months, then set the bookkeeping standard, stood up a budget process for a $250k budget, oversaw the 990 filing, streamlined vendor onboarding, and audited every recurring expense.',
     image: null,
     slot: 'case-nonprofit-ops.png',
     tags: ['QuickBooks', 'BILL.com', 'Google Sheets'],
@@ -350,25 +350,25 @@ const projects = [
     </>),
     visual: {
       eyebrow: 'Finance Operations',
-      flow: ['Elected to vacant role', 'Standards set', 'Expenses cut'],
+      flow: ['Elected to vacant role', 'Standards set', '$250k budget managed', '990 filing overseen', 'Vendor onboarding streamlined', 'Expenses cut'],
       stat: '5%',
       statLabel: 'of recurring spend eliminated',
     },
     star: {
       situation: 'A nonprofit had gone months without an Operations Director, leaving bookkeeping and expense oversight unmanaged.',
-      task: 'Nominated and voted into the role, bring structure back to financial operations across staff and the external bookkeeper.',
-      action: 'Directed staff and the external bookkeeper on how the books should be kept, down to which lines to break out, and reviewed every recurring expense for necessity and cost.',
-      result: 'Cut 5% of recurring expenses that were unnecessary or had cheaper alternatives.',
+      task: 'Nominated and voted into the role, bring structure back to financial operations, compliance and vendor management across staff and the external bookkeeper.',
+      action: 'Directed staff and the external bookkeeper on how the books should be kept, down to which lines to break out; stood up a budget process and managed the $250k budget; oversaw the annual 990 filing; streamlined onboarding for new vendors; and reviewed every recurring expense for necessity and cost.',
+      result: 'Cut 5% of recurring expenses that were unnecessary or had cheaper alternatives, with a $250k budget under a working budget process, a filed 990, and a simpler path for onboarding new vendors.',
     },
   },
   {
     n: '02',
-    title: 'Led a Distributed Dev Team on Kanban',
-    subtitle: 'People management style',
-    desc: 'Managed 5–8 developers across time zones while deliberately building a team that did not bottleneck on me.',
+    title: 'Run Operations & Technology for a Lean Nonprofit',
+    subtitle: 'Cross-functional ownership',
+    desc: 'Joined mid-project and brought a stalled mobile app to launch, then took on the department’s budget, roadmap and staff — plus whatever else the organization needed.',
     image: null,
-    slot: 'case-kanban-team.png',
-    tags: ['Azure DevOps', 'Kanban', 'Daily Scrum'],
+    slot: 'case-nonprofit-ops-tech.png',
+    tags: ['Jira', 'Slack', 'Claude'],
     art: (<>
       <g fill="rgba(11,18,16,.5)">
         <text className="a-fade" x="300" y="40" style={{ '--d': '0ms' }}>todo</text>
@@ -390,10 +390,10 @@ const projects = [
         <rect className="a-fly" x="468" y="78" width="72" height="14" style={{ '--dx': '100px', '--dy': '30px', '--r': '-14deg', '--d': '550ms' }} />
       </g>
       <rect className="a-travel" x="300" y="118" width="72" height="14" fill="#0b6bb0" style={{ '--tx': '168px', '--d': '1300ms' }} />
-      <text className="a-fade" x="300" y="160" fill="rgba(11,18,16,.5)" style={{ '--d': '600ms' }}>throughput</text>
+      <text className="a-fade" x="300" y="160" fill="rgba(11,18,16,.5)" style={{ '--d': '600ms' }}>budget</text>
       <rect className="a-grow" x="300" y="168" width="200" height="8" fill="#66c3ff" fillOpacity=".45" style={{ '--d': '700ms', '--t': '700ms' }} />
       <rect className="a-grow" x="500" y="168" width="30" height="8" fill="#0b6bb0" style={{ '--d': '1500ms' }} />
-      <text className="a-fade" x="540" y="160" textAnchor="end" fill="#0b6bb0" style={{ '--d': '1700ms' }}>+15%</text>
+      <text className="a-fade" x="540" y="160" textAnchor="end" fill="#0b6bb0" style={{ '--d': '1700ms' }}>$200k</text>
       <g fill="#66c3ff">
         <circle className="a-pop" cx="304" cy="208" r="4" style={{ '--d': '900ms' }} />
         <circle className="a-pop" cx="320" cy="208" r="4" style={{ '--d': '950ms' }} />
@@ -407,19 +407,19 @@ const projects = [
         <path className="a-draw d" pathLength="1" style={{ '--d': '1400ms', '--t': '400ms' }} d="M336 202Q344 190 352 202" />
         <path className="a-draw d" pathLength="1" style={{ '--d': '1500ms', '--t': '400ms' }} d="M368 202Q376 190 384 202" />
       </g>
-      <text className="a-fade" x="540" y="212" textAnchor="end" fill="rgba(11,18,16,.5)" style={{ '--d': '1700ms' }}>peer-led</text>
+      <text className="a-fade" x="540" y="212" textAnchor="end" fill="rgba(11,18,16,.5)" style={{ '--d': '1700ms' }}>team of 3+</text>
     </>),
     visual: {
-      eyebrow: 'Team Management',
-      flow: ['Daily scrum', 'Seniors mentor juniors', 'Ownership pushed down'],
-      stat: '+15%',
-      statLabel: 'team throughput',
+      eyebrow: 'Operations & Technology',
+      flow: ['Inherited stalled project', 'Owned budget & roadmap', 'Built intake automation', 'Led team of 3+'],
+      stat: '3 staff + contractors',
+      statLabel: 'managed across a $200k department',
     },
     star: {
-      situation: 'A cross-functional team of 5–8 geographically dispersed developers needed consistent delivery and clear ownership.',
-      task: 'Manage throughput while building a team that did not bottleneck on me.',
-      action: 'Ran daily scrum and kanban ticketing in Azure DevOps, and mentored senior developers to lead and teach the juniors, pushing ownership down instead of routing it through me.',
-      result: 'Increased throughput 15% and removed myself as the review bottleneck.',
+      situation: 'A lean nonprofit had a mobile app project stalled mid-build and a technology department without clear ownership.',
+      task: 'Join mid-project, get the app to launch, then take on the department’s budget, roadmap and staff.',
+      action: 'Brought the stalled app to launch, owned the budget and roadmap, built intake automation, and led a team of 3+ staff and contractors, picking up whatever else the organization needed.',
+      result: 'Launched the app and ran a $200k department with 3 staff plus contractors.',
     },
   },
   {
