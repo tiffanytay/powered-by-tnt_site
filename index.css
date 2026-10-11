@@ -94,6 +94,19 @@
 }
 @media (prefers-reduced-motion: reduce) { .jig-pieces path { transform: none !important; } }
 
+/* Broadway tile hover: the house lights go down. Seats rise from the bottom edge, then the curtain drops over the photo.
+   On leave the curtain lifts first and the seats sink after it. */
+.bw-layer { position: absolute; left: 0; width: 100%; object-fit: cover; pointer-events: none; }
+.bw-curtain { z-index: 1; clip-path: inset(0 0 100% 0); transform: translateY(-4.5%);
+  transition: clip-path 650ms cubic-bezier(.65,0,.35,1), transform 650ms cubic-bezier(.65,0,.35,1); }
+.bw-seats { z-index: 2; clip-path: inset(100% 0 0 0); transform: translateY(14%);
+  transition: clip-path 450ms cubic-bezier(.65,0,.35,1) 300ms, transform 450ms cubic-bezier(.65,0,.35,1) 300ms; }
+:is(.bw:hover, .bw:active) .bw-seats { clip-path: inset(0); transform: none;
+  transition: clip-path 900ms cubic-bezier(.19,1,.22,1), transform 900ms cubic-bezier(.19,1,.22,1); }
+:is(.bw:hover, .bw:active) .bw-curtain { clip-path: inset(0); transform: none;
+  transition: clip-path 1300ms cubic-bezier(.19,1,.22,1) 360ms, transform 1300ms cubic-bezier(.19,1,.22,1) 360ms; }
+@media (prefers-reduced-motion: reduce) { .bw-layer { transition-duration: 0ms !important; transition-delay: 0ms !important; } }
+
 /* Dogs photo hover: the dog runs left to right along the top of the footer (see useDogRun). */
 .dog-run { position: fixed; left: 0; z-index: 40; width: 260px; height: 136px; pointer-events: none; animation: dog-dash 2.2s linear both; will-change: transform; }
 .dog-sprite { width: 100%; height: 100%; background-size: 1200% 100%; background-repeat: no-repeat; animation: dog-frames .55s steps(12) infinite; }
