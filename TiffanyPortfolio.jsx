@@ -311,8 +311,6 @@ const projects = [
     image: null,
     slot: 'case-nonprofit-ops.png',
     tags: ['QuickBooks', 'BILL.com', 'Google Sheets'],
-    // wordmark: the logo already spells out the name, so the text label is skipped.
-    brand: { logo: 'graphics/dvs-logo.png', name: 'Data Visualization Society', href: 'https://www.datavisualizationsociety.org', wordmark: true },
     featured: true,
     art: (<>
       <g className="a-dim" style={{ '--d': '800ms' }}>
@@ -372,7 +370,6 @@ const projects = [
     image: null,
     slot: 'case-nonprofit-ops-tech.png',
     tags: ['Jira', 'Slack', 'Claude'],
-    brand: { logo: 'graphics/rlc-logo.png', name: 'Rescuing Leftover Cuisine', href: 'https://www.rescuingleftovercuisine.org', wordmark: true },
     art: (<>
       <g fill="rgba(11,18,16,.5)">
         <text className="a-fade" x="300" y="40" style={{ '--d': '0ms' }}>todo</text>
@@ -434,7 +431,6 @@ const projects = [
     image: null,
     slot: 'case-engagement-dashboard.png',
     tags: ['Power BI', 'Power Query', 'Stakeholder interviews'],
-    brand: { logo: 'graphics/pwc-logo.svg', name: 'PwC', href: 'https://www.pwc.com', wordmark: true },
     art: (<>
       <g fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.25">
         <rect className="a-draw d" pathLength="1" style={{ '--d': '0ms', '--t': '400ms' }} x="300" y="40" width="50" height="26" />
@@ -493,7 +489,6 @@ const projects = [
     image: null,
     slot: 'case-review-cycle.png',
     tags: ['Google Forms', 'Power BI', 'Power Query'],
-    brand: { logo: 'graphics/a4-logo.svg', name: 'Asian American Arts Alliance', href: 'https://www.aaartsalliance.org' },
     art: (<>
       <rect className="a-draw d" pathLength="1" style={{ '--t': '600ms' }} x="300" y="40" width="96" height="124" fill="#ffffff" fillOpacity=".7" stroke="#66c3ff" strokeWidth="1.5" />
       <g fill="#ffffff" stroke="#66c3ff" strokeWidth="1.25">
@@ -1134,17 +1129,10 @@ function ProjectDetail({ project, prev, next }) {
           <a href="#/work" className={`group inline-flex items-center gap-2 font-mono text-sm hover:text-emerald-deep transition-colors ${press}`}>
             <ArrowLeft size={15} className="transition-transform duration-200 group-hover:-translate-x-1 motion-reduce:group-hover:translate-x-0" /> all work
           </a>
-          {project.brand ? (
-            <a href={project.brand.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-mono text-sm font-medium tracking-tight">
-              <img src={project.brand.logo} alt={project.brand.name} className={project.brand.wordmark ? 'h-10 w-auto' : 'h-5 w-auto'} />
-              {!project.brand.wordmark && <span className="hidden sm:inline" aria-hidden="true">{project.brand.name}</span>}
-            </a>
-          ) : (
-            <a href="#/" className="inline-flex items-center gap-2 font-mono text-sm font-medium tracking-tight">
-              <img src="graphics/logo.svg" alt="" className="w-6 h-6" />
-              <span>tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40">, CPA</span></span>
-            </a>
-          )}
+          <a href="#/" className="inline-flex items-center gap-2 font-mono text-sm font-medium tracking-tight">
+            <img src="graphics/logo.svg" alt="" className="w-6 h-6" />
+            <span>tiffany<span className="text-emerald">.</span>tay<span className="text-ink/40">, CPA</span></span>
+          </a>
         </div>
       </header>
 
