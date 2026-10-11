@@ -68,6 +68,40 @@ function DataVisual({ eyebrow, flow, stat, statLabel, className = '' }) {
   );
 }
 
+// The Budget Canary mascot from budgetcanary.com/waitlist, in that site's own colors. Motion lives in index.css (.bc-*).
+const BC_NOTES = [
+  ['♪', 37.5, 9, 4.2, 1.95],
+  ['♫', 39.5, 12, 3.2, 2.15],
+  ['♪', 38, 15.5, 2.6, 2.4],
+  ['$', 41.5, 7.5, 3.6, 2.05],
+  ['#', 42, 14, 3, 2.28],
+];
+
+function CanaryVisual({ className = '' }) {
+  return (
+    <div className={`bg-[#f5f3f4] flex items-center justify-center overflow-hidden ${className}`}>
+      <svg viewBox="2 2 40 40" className="h-[85%] w-auto overflow-visible" fill="none" stroke="#091426" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label="The Budget Canary, chirping">
+        <g className="bc-body">
+          <path d="M25 9c-7 0-12 5-12 12 0 5 3 8 3 11h10c0-4 6-7 6-13 0-3-1-5-2-6" fill="#fadfb8" />
+          <path d="M17 22c3 1 6 0 8-2" />
+          <path d="M31 13l5-2-4 4" className="bc-beak" />
+          <circle cx="28" cy="14" r="1.1" fill="#091426" stroke="none" />
+          <path d="M19 32v4M24 32v4" />
+        </g>
+        <path d="M11 37.4h22" stroke="#c5c6cd" strokeWidth="0.5" />
+        <g fill="#091426" stroke="none" fontFamily="Georgia, serif">
+          {BC_NOTES.map(([ch, x, y, size, delay]) => (
+            <text key={x} x={x} y={y} fontSize={size} className="bc-note" style={{ animationDelay: `${delay}s` }}
+              {...(ch === '$' || ch === '#' ? { fontFamily: 'var(--font-display), sans-serif', fontWeight: 700 } : {})}>
+              {ch}
+            </text>
+          ))}
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 const services = [
   {
     n: '01',
@@ -360,6 +394,7 @@ const projects = [
     desc: 'Took an unserved need for small accounting firms from PRD to a working product — stack choice, OAuth, payments, and automated reporting, built solo.',
     image: null,
     slot: 'case-budget-canary.png',
+    canary: true,
     tags: ['Next.js', 'Supabase', 'Stripe', 'Resend'],
     visual: {
       eyebrow: 'Product Build',
@@ -638,6 +673,8 @@ function ProjectDetail({ project, prev, next }) {
           {project.subtitle && <p className="font-mono text-sm text-ink/40 mb-8">{project.subtitle}</p>}
           {project.image ? (
             <img src={project.image} alt={project.title} className="w-full border border-line my-8" />
+          ) : project.canary ? (
+            <CanaryVisual className="w-full h-64 sm:h-72 border border-line my-8" />
           ) : (
             <DataVisual {...project.visual} className="w-full h-64 sm:h-72 border border-line my-8" />
           )}
