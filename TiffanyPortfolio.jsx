@@ -240,13 +240,13 @@ const offTheClock = [
   {
     title: 'Broadway',
     desc: 'Fifteen minutes from the theater district and fully taking advantage of it.',
-    image: null,
+    image: 'graphics/personal-broadway.jpg',
     slot: 'personal-broadway.jpg',
   },
   {
     title: 'Travel & Food',
     desc: 'New cities, and eating my way through them one unfamiliar menu at a time.',
-    image: null,
+    image: 'graphics/pasta.jpg',
     slot: 'personal-travel.jpg',
     passport: true,
   },
@@ -1586,22 +1586,16 @@ function OffTheClockSection() {
           {offTheClock.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.05} className="flex flex-col gap-2">
               <div className={item.jigsaw ? 'jig relative mb-2' : 'mb-2'}>
-                {item.image ? (
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                    className="jig-base block w-full aspect-square object-cover border border-line"
-                    {...(item.runner ? { onPointerEnter: dog.start } : {})}
-                  />
-                ) : item.passport ? (
+                {item.passport ? (
                   <button
                     type="button"
                     aria-label={`${item.title}: start passport stamp mode`}
                     onClick={passport.enter}
                     className="pp-tile relative overflow-hidden w-full aspect-square border border-line hover:border-ink transition-colors bg-paper flex items-center justify-center p-3 cursor-pointer focus-visible:outline-2 focus-visible:outline-emerald focus-visible:outline-offset-3"
                   >
-                    {import.meta.env.DEV && (
+                    {item.image ? (
+                      <img src={item.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                    ) : import.meta.env.DEV && (
                       <span className="font-mono text-[10px] text-ink/30 text-center break-all">{item.slot}</span>
                     )}
                     {/* Hover/focus hint previews the next stamp; touch screens get a standing badge instead. */}
@@ -1611,6 +1605,14 @@ function OffTheClockSection() {
                     </span>
                     <span className="pp-badge" aria-hidden="true">Tap to stamp</span>
                   </button>
+                ) : item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    loading="lazy"
+                    className="jig-base block w-full aspect-square object-cover border border-line"
+                    {...(item.runner ? { onPointerEnter: dog.start } : {})}
+                  />
                 ) : (
                   <div className="jig-base w-full aspect-square border border-line bg-paper flex items-center justify-center p-3">
                     {/* The slot filename is an authoring hint; visitors never see an internal path. */}
