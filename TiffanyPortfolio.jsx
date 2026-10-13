@@ -307,10 +307,11 @@ const projects = [
     n: '01',
     title: 'Rebuilt Nonprofit Finance Operations as Operations Director',
     subtitle: 'Ownership under ambiguity',
-    desc: 'Elected to a long-vacant Operations Director seat; rebuilt budgeting, bookkeeping standards, Form 990 compliance and vendor management for a $250k budget.',
+    desc: 'Elected to a long-vacant Operations Director seat; rebuilt budgeting, bookkeeping standards, Form 990 compliance and vendor management for a $200k budget.',
     skills: ['Budget management', 'Financial oversight', 'Form 990 compliance', 'Vendor management', 'Cost reduction'],
     image: null,
     slot: 'case-nonprofit-ops.png',
+    role: { title: 'Operations Director', org: 'Data Visualization Society', dates: '2026–present', scope: '$200k budget', type: 'Nonprofit board role' },
     tags: ['QuickBooks', 'BILL.com', 'Google Sheets'],
     logo: { src: 'graphics/dvs-logo.png', alt: 'Data Visualization Society' },
     featured: true,
@@ -353,15 +354,15 @@ const projects = [
     </>),
     visual: {
       eyebrow: 'Finance Operations',
-      flow: ['Elected to vacant role', 'Standards set', '$250k budget managed', '990 filing overseen', 'Vendor onboarding streamlined', 'Expenses cut'],
+      flow: ['Elected to vacant role', 'Standards set', '$200k budget managed', '990 filing overseen', 'Vendor onboarding streamlined', 'Expenses cut'],
       stat: '5%',
       statLabel: 'of recurring spend eliminated',
     },
     star: {
       situation: 'A nonprofit had gone months without an Operations Director, leaving bookkeeping and expense oversight unmanaged.',
       task: 'Nominated and voted into the role, bring structure back to financial operations, compliance and vendor management across staff and the external bookkeeper.',
-      action: 'Directed staff and the external bookkeeper on how the books should be kept, down to which lines to break out; stood up a budget process and managed the $250k budget; oversaw the annual 990 filing; streamlined onboarding for new vendors; and reviewed every recurring expense for necessity and cost.',
-      result: 'Cut 5% of recurring expenses that were unnecessary or had cheaper alternatives, with a $250k budget under a working budget process, a filed 990, and a simpler path for onboarding new vendors.',
+      action: 'Directed staff and the external bookkeeper on how the books should be kept, down to which lines to break out; stood up a budget process and managed the $200k budget; oversaw the annual 990 filing; streamlined onboarding for new vendors; and reviewed every recurring expense for necessity and cost.',
+      result: 'Cut 5% of recurring expenses that were unnecessary or had cheaper alternatives, with a $200k budget under a working budget process, a filed 990, and a simpler path for onboarding new vendors.',
     },
   },
   {
@@ -372,6 +373,7 @@ const projects = [
     skills: ['Team leadership', 'Budget ownership', 'Project recovery', 'Process automation', 'Roadmap planning'],
     image: null,
     slot: 'case-nonprofit-ops-tech.png',
+    role: { title: 'Director of Technology', org: 'Rescuing Leftover Cuisine', dates: '2026–present', reportsTo: 'CEO', scope: '2 staff + 2–4 contractors/interns', type: 'Part-time, remote' },
     tags: ['Jira', 'Slack', 'Claude'],
     logo: { src: 'graphics/rlc-logo.png', alt: 'Rescuing Leftover Cuisine' },
     art: (<>
@@ -435,6 +437,7 @@ const projects = [
     skills: ['Performance management', 'HR process design', 'Executive reporting', 'Process improvement'],
     image: null,
     slot: 'case-review-cycle.png',
+    role: { title: 'Board Director', org: 'Asian American Arts Alliance', dates: '2020–2023', reportsTo: 'Board', scope: '4-person staff', type: 'Nonprofit board role' },
     tags: ['Google Forms', 'Power BI', 'Power Query'],
     logo: { src: 'graphics/a4-logo.svg', alt: 'Asian American Arts Alliance' },
     art: (<>
@@ -493,6 +496,7 @@ const projects = [
     skills: ['Root cause analysis', 'Data analysis', 'Stakeholder engagement', 'Process standardization'],
     image: null,
     slot: 'case-engagement-dashboard.png',
+    role: { title: 'Tax Technology Manager', org: 'PwC', dates: '2021–2025', reportsTo: 'Partners', scope: 'Team of 5–8', type: 'Full-time, remote' },
     tags: ['Power BI', 'Power Query', 'Stakeholder interviews'],
     logo: { src: 'graphics/pwc-logo.svg', alt: 'PwC' },
     art: (<>
@@ -553,6 +557,7 @@ const projects = [
     skills: ['Needs assessment', 'Technology evaluation', 'Systems implementation', 'Automated reporting'],
     image: null,
     slot: 'case-budget-canary.png',
+    role: { title: 'Founder', org: 'Budget Canary', dates: '2026–present', reportsTo: 'Self', scope: 'Solo', type: 'Founder role' },
     canary: true,
     tags: ['Next.js', 'Supabase', 'Stripe', 'Resend', 'Claude Code/Design'],
     link: 'https://budgetcanary.com/waitlist',
@@ -1123,6 +1128,15 @@ const STAR = [
   ['result', 'Result'],
 ];
 
+const ROLE = [
+  ['title', 'Role'],
+  ['org', 'Organization'],
+  ['dates', 'Dates'],
+  ['reportsTo', 'Reports to'],
+  ['scope', 'Scope'],
+  ['type', 'Role type'],
+];
+
 function ProjectDetail({ project, prev, next }) {
   return (
     // Keyed by project so prev/next re-runs the fade; under reduced motion only the opacity cross-fade remains.
@@ -1152,6 +1166,14 @@ function ProjectDetail({ project, prev, next }) {
           </p>
           <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight mb-2">{project.title}</h1>
           {project.subtitle && <p className="font-mono text-sm text-ink/40 mb-8">{project.subtitle}</p>}
+          <dl className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-4 py-6 border-y border-line">
+            {ROLE.filter(([key]) => project.role[key]).map(([key, label]) => (
+              <div key={key} className="min-w-0">
+                <dt className="font-mono text-xs tracking-widest uppercase text-ink/50">{label}</dt>
+                <dd className="mt-1 text-sm text-ink/80">{project.role[key]}</dd>
+              </div>
+            ))}
+          </dl>
           {project.image ? (
             <img src={project.image} alt={project.title} className="w-full border border-line my-8" />
           ) : project.logo ? (
@@ -1266,7 +1288,7 @@ function PageHeader({ index, label, title, dark = false, as: Heading = 'h1' }) {
 }
 
 // Everything searchable about a project, flattened to one lowercase string.
-const projectText = (p) => JSON.stringify([p.title, p.subtitle, p.desc, p.skills, p.tags, p.visual, p.star]).toLowerCase();
+const projectText = (p) => JSON.stringify([p.title, p.subtitle, p.role, p.desc, p.skills, p.tags, p.visual, p.star]).toLowerCase();
 
 function WorkSection() {
   const total = String(projects.length).padStart(2, '0');
@@ -1322,6 +1344,7 @@ function WorkSection() {
                 <h2 className="font-display font-bold text-2xl leading-[1.15] tracking-tight">
                   <a href={`#/project/${p.n}`} className="wk-ttl transition-colors">{p.title}</a>
                 </h2>
+                <span className={`${mono12} text-ink/60`}>{p.role.title}, {p.role.org} · {p.role.dates}</span>
                 {/* Competency keywords, the words a hiring manager scans and searches for. */}
                 <p className="text-sm leading-relaxed text-ink/70">
                   {p.skills.map((k, i) => (
