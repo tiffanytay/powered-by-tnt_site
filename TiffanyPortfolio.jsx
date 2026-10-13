@@ -1372,9 +1372,9 @@ function WorkSection() {
                       <button key={t} type="button" onClick={() => setQuery(t)} title={`Show work using ${t}`} className="hover:text-emerald-deep transition-colors">[{t}]</button>
                     ))}
                   </span>
-                  <a href={`#/project/${p.n}`} className="group inline-flex items-center gap-2 text-ink hover:text-emerald-deep transition-colors">
-                    read the case study
-                    <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
+                  <a href={`#/project/${p.n}`} className={`group ${btn} gap-2 h-10 px-4 font-sans text-sm font-semibold`}>
+                    Read the case study
+                    <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
                   </a>
                 </div>
               </div>
