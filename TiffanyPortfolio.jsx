@@ -1366,17 +1366,16 @@ function WorkSection() {
                   <div className="font-display text-3xl font-bold text-emerald-deep">{p.visual.stat}</div>
                   <div className={`${mono12} text-ink/60 mt-1`}>{p.visual.statLabel}</div>
                 </div>
-                <div className={`flex flex-wrap items-center justify-between gap-x-4 gap-y-2 ${mono12} text-ink/60`}>
-                  <span className="flex flex-wrap gap-x-4 gap-y-2">
-                    {p.tags.map((t) => (
-                      <button key={t} type="button" onClick={() => setQuery(t)} title={`Show work using ${t}`} className="hover:text-emerald-deep transition-colors">[{t}]</button>
-                    ))}
-                  </span>
-                  <a href={`#/project/${p.n}`} className={`group ${btn} gap-2 h-10 px-4 font-sans text-sm font-semibold`}>
-                    Read the case study
-                    <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
-                  </a>
+                <div className={`flex flex-wrap gap-x-4 gap-y-2 ${mono12} text-ink/60`}>
+                  {p.tags.map((t) => (
+                    <button key={t} type="button" onClick={() => setQuery(t)} title={`Show work using ${t}`} className="hover:text-emerald-deep transition-colors">[{t}]</button>
+                  ))}
                 </div>
+                {/* mt-auto + self-end pins the CTA to the section's bottom-right corner. */}
+                <a href={`#/project/${p.n}`} className={`group ${btn} self-end mt-auto gap-2 h-10 px-4 font-sans text-sm font-semibold`}>
+                  Read the case study
+                  <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
+                </a>
               </div>
             </motion.article>
           </Reveal>
